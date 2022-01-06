@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="Sdk.targets" Sdk="DotNet.ArcadeLight.Sdk" />
+  <Target Name="VSTestIfTestProject">
+    <CallTarget Targets="VSTest" Condition="'$(IsTestProject)' == 'true'" />
+  </Target>
+
+  <Target Name="DeleteCleanCacheFile" BeforeTargets="CoreBuild">
+    <ItemGroup>
+      <CacheFile Include="$(IntermediateOutputPath)\$(MSBuildProjectFile).FileListAbsolute.txt" />
+    </ItemGroup>
+    <Delete
+      Condition="Exists('@(CacheFile)')"
+      Files="@(CacheFile)"
+      TreatErrorsAsWarnings="true">
+      <Output TaskParameter="DeletedFiles" ItemName="_CleanOrphanFilesDeleted"/>
+    </Delete>
+    <Message Importance="high" Text="Previousbuildcachefiledeleted : '@(CacheFile)'" />
+  </Target>
+
+  <Target Name = "XMLDocMessage" AfterTargets="BeforeBuild" >
+    <PropertyGroup>
+      <DocumentationFile Condition=" '$(GenerateDocumentationFile)' == 'true' and '$(DocumentationFile)' == '' ">$(OutputPath)/$(AssemblyName).xml</DocumentationFile>
+    </PropertyGroup>
+    <Message Text="XML DocFile: $(DocumentationFile)"/>
+  </Target>
+
+</Project>
