@@ -1,0 +1,57 @@
+parameters:
+ # Which publishing infra should be used. THIS SHOULD MATCH THE VERSION ON THE BUILD MANIFEST.
+  # Publishing V2 accepts optionally outlining the publishing stages - default is inline.
+  # Publishing V3 DOES NOT accept inlining the publishing stages.
+  publishingInfraVersion: 2
+  # When set to true the publishing templates from the repo will be used
+  # otherwise Darc add-build-to-channel will be used to trigger the promotion pipeline
+  inline: true
+
+  # Only used if inline==false. When set to true will stall the current build until
+  # the Promotion Pipeline build finishes. Otherwise, the current build will continue 
+  # execution concurrently with the promotion build.
+  waitPublishingFinish: true
+
+  BARBuildId: ''
+  PromoteToChannelIds: ''
+
+  enableSourceLinkValidation: false
+  enableSigningValidation: true
+  enableSymbolValidation: false
+  enableNugetValidation: true
+  publishInstallersAndChecksums: true
+  SDLValidationParameters:
+    enable: false
+    continueOnError: false
+    params: ''
+    artifactNames: ''
+    downloadArtifacts: true
+
+  # These parameters let the user customize the call to sdk-task.ps1 for publishing
+  # symbols & general artifacts as well as for signing validation
+  symbolPublishingAdditionalParameters: ''
+  artifactsPublishingAdditionalParameters: ''
+  signingValidationAdditionalParameters: ''
+
+  # Which stages should finish execution before post-build stages start
+  validateDependsOn:
+  - build
+  publishDependsOn: 
+  - Validate
+
+stages:
+- ${{ if or(and(le(parameters.publishingInfraVersion, 2), eq(parameters.inline, 'true')), eq( parameters.enableNugetValidation, 'true'), eq(parameters.enableSigningValidation, 'true'), eq(parameters.enableSourceLinkValidation, 'true'), eq(parameters.SDLValidationParameters.enable, 'true')) }}:
+  - stage: Validate
+    dependsOn: ${{ parameters.validateDependsOn }}
+    displayName: Validate Build Assets
+    variables:
+      - template: common-variables.yml
+    jobs:
+    - job: check_nuget_status'
+      displayName: 'check nuget package status'
+      steps:
+      - template: CheckNugetStatus.yml@templates
+        parameters:
+          sourcePath: '$(Build.SourcesDirectory)/src'
+          nugetConfig: '$(Build.SourcesDirectory)/nuget.config'
+          breakBuild: true

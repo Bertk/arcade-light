@@ -3,17 +3,111 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+# File: azure-pipelines.yml
+resources:
+  repositories:
+  - repository: self
+    clean: true
+  containers:
+  - container: LinuxContainer
+    image: mcr.microsoft.com/dotnet-buildtools-prereqs:ubuntu-16.04-cross-cfdd435-20190312152303
+
+parameters:
+  - name: 'Deploy_Dev_Stage'
+    displayName: Deploy DEV
+    type: boolean
+    default: 'true'
+  - name: 'Deploy_Prepare_Stage'
+    displayName: Deploy Prepare Release
+    type: boolean
+    default: 'false'
+  - name: 'Deploy_Release_Stage'
+    displayName: Deploy Release
+    type: boolean
+    default: 'false'
+
+variables:
+  # Cannot use key:value syntax in root defined variables
+  - name: _TeamName
+    value: 'arcade-light'
+  - name: _PublishUsingPipelines
+    value: true
+  - name: ProductVersion
+    value: '1.0.0-beta'
+  - name: SQKey
+    value: 'arcade-light'
+  - name: SolutionPath
+    value: 'arcade-light.sln'
+  - name: SQName
+    value: 'arcade-light'
+  - name: Deploy_Dev
+    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Dev_Stage }}', true))
+  - name: Deploy_Prepare
+    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Prepare_Stage }}', true))
+  - name: Deploy_Release
+    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Release_Stage }}', true))
+  - name: Deploy_Pre_Prod
+    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), startsWith(variables['Build.SourceBranch'], 'refs/heads/releases'))
+  #- name: DOTNET_CLI_TELEMETRY_OPTOUT
+  #  value: 1
+  - name: Build.Repository.Clean
+    value: true
+
+# Only run against main
 trigger:
-- main
+  branches:
+    include:
+      - main
+  paths:
+    exclude:
+    - /*.md
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+- stage: build_test_package
+  jobs:
+  # Windows legs
+  - template: /eng/azuredevops/pipelines/windows.yml
+    parameters:
+      isOfficialBuild: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
+      fullMatrix: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
+  # Linux legs
+  #- template: /eng/pipelines/linux.yml
+  #  parameters:
+  #    isOfficialBuild: ${{ and(ne(variables['System.TeamProject'], 'public'), notIn(variables['Build.Reason'], 'PullRequest')) }}
+  #    fullMatrix: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- stage: Dev_Deployment
+  displayName: 'Deploy Development'
+  dependsOn:
+  - build_test_package
+  condition: ${{variables.Deploy_Dev}}
+  jobs:
+    - template: /eng/azuredevops/pipelines/stage_dev.yml
+      parameters:
+        isOfficialBuild: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
+        testScope: 'innerloop'
+        targetOS: Linux
+
+- stage: Prepare_Release
+  displayName: 'Deploy Prepare Release'
+  dependsOn: Dev_Deployment
+  condition: ${{variables.Deploy_Prepare}}
+  jobs:
+    - template: /eng/azuredevops/pipelines/stage_prepare.yml
+      parameters:
+        isOfficialBuild: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
+        testScope: 'innerloop'
+        targetOS: Linux
+
+- stage: Create_Release
+  displayName: 'Create Release'
+  dependsOn: Prepare_Release
+  jobs:
+  - job: create_release
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: echo create release branch
+
+

@@ -1,0 +1,55 @@
+# Linux legs
+parameters:
+  # Required: value to specify if the job is comming from an official build to run extra steps and sign binaries
+  #   Default: false
+  isOfficialBuild: false
+  # Required: value to specify if the full test matrix should be tested
+  #   Default: false
+  fullMatrix: false
+  # Optional: value to scope the tests.
+  #   Default: empty
+  testScope: ''
+
+jobs:
+- template: tp-base.yml
+  parameters:
+    isOfficialBuild: ${{ parameters.isOfficialBuild }}
+    testScope: ${{ parameters.testScope }}
+    targetOS: Linux
+    jobs:
+
+    # Legs with Helix testing
+    - job: LinuxTest
+      displayName: Linux
+      strategy:
+        matrix:
+          ${{ if eq(parameters.fullMatrix, 'false') }}:
+            x64_Debug:
+              _BuildConfig: Debug
+              _architecture: x64
+              _framework: netcoreapp
+              _dockerContainer: rhel7_container
+              _buildScriptPrefix: ''
+              _buildExtraArguments: ''
+
+          ${{ if eq(parameters.fullMatrix, 'true') }}:
+            x64_Release:
+              _BuildConfig: Release
+              _architecture: x64
+              _framework: netcoreapp
+              _dockerContainer: rhel7_container
+              _buildScriptPrefix: ''
+              _buildExtraArguments: ''
+              _publishTests: true
+
+      pool:
+        vmImage: 'ubuntu-latest'
+
+      container: $[ variables['_dockerContainer'] ]
+      buildScriptPrefix: $(_buildScriptPrefix)
+      buildExtraArguments: $(_buildExtraArguments)
+      submitToHelix: false
+      # Temporary till we reduced workloads on ARM64
+      timeoutInMinutes: 180
+
+      variables:

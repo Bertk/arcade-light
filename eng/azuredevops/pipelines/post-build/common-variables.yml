@@ -1,0 +1,26 @@
+variables:
+  - group: AzureDevOps-Artifact-Feeds-Pats
+  - group: DotNet-Blob-Feed
+  - group: DotNet-DotNetCli-Storage
+  - group: DotNet-MSRC-Storage
+  - group: Publish-Build-Assets
+    
+  # Whether the build is internal or not
+  - name: IsInternalBuild
+    value: ${{ and(ne(variables['System.TeamProject'], 'public'), contains(variables['Build.SourceBranch'], 'internal')) }}
+
+
+  - name: SourceLinkCLIVersion
+    value: 3.0.0
+  - name: SymbolToolVersion
+    value: 1.0.1
+
+  # Feed Configurations
+  # These should include the suffix "/index.json"
+
+  # Skip component governance and codesign validation for SDL. These jobs
+  # create no content.
+  - name: skipComponentGovernanceDetection
+    value: true
+  - name: runCodesignValidationInjection
+    value: false
