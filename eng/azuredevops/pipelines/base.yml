@@ -141,32 +141,32 @@ jobs:
 #                verbosityRestore: 'normal'
 #                externalFeedCredentials: 'dotnet-core-internal-tooling'
 
-          - ${{ if eq(job.customBuildSteps[0], '') }}:
-            - task: SonarQubePrepare@5
-              displayName: Prepare SonarQube
-              inputs:
-                SonarQube: 'sonarqube-cloud'
-                scannerMode: 'MSBuild'
-                projectKey: '$(SQKey)'
-                projectName: '$(SQName)'
-                projectVersion: '$(ProductVersion)'
-                extraProperties: |
-                  sonar.cs.vscoveragexml.reportsPaths=**/TestResults/**/*.coveragexml
+#          - ${{ if eq(job.customBuildSteps[0], '') }}:
+#            - task: SonarQubePrepare@5
+#              displayName: Prepare SonarQube
+#              inputs:
+#                SonarQube: 'sonarqube-cloud'
+#                scannerMode: 'MSBuild'
+#                projectKey: '$(SQKey)'
+#                projectName: '$(SQName)'
+#                projectVersion: '$(ProductVersion)'
+#                extraProperties: |
+#                  sonar.cs.vscoveragexml.reportsPaths=**/TestResults/**/*.coveragexml
 
-          - ${{ if eq(job.customBuildSteps[0], '') }}:
-            - task: npmAuthenticate@0
-              inputs:
-                workingFile: '$(npmWorkingDir)/.npmrc'
+#          - ${{ if eq(job.customBuildSteps[0], '') }}:
+#            - task: npmAuthenticate@0
+#              inputs:
+#                workingFile: '$(npmWorkingDir)/.npmrc'
 
-          - ${{ if eq(job.customBuildSteps[0], '') }}:
-            - task: Npm@1
-              displayName: Install npm packages
-              inputs:
-                command: 'custom'
-                customCommand: 'install'
-                workingDir: '$(npmWorkingDir)'
-                customRegistry: 'useNpmrc'
-                verbose: true
+#          - ${{ if eq(job.customBuildSteps[0], '') }}:
+#            - task: Npm@1
+#              displayName: Install npm packages
+#              inputs:
+#                command: 'custom'
+#                customCommand: 'install'
+#                workingDir: '$(npmWorkingDir)'
+#                customRegistry: 'useNpmrc'
+#                verbose: true
 
           - ${{ if eq(job.customBuildSteps[0], '') }}:
             - script: $(_buildScript)
@@ -177,13 +177,13 @@ jobs:
                     $(_msbuildCommonParameters)
               displayName: Build Sources and Tests
 
-          - ${{ if eq(job.customBuildSteps[0], '') }}:
-            - task: SonarQubeAnalyze@5
-              displayName: Execute SonarQube Analysis
+ #         - ${{ if eq(job.customBuildSteps[0], '') }}:
+ #           - task: SonarQubeAnalyze@5
+ #             displayName: Execute SonarQube Analysis
 
-          - ${{ if eq(job.customBuildSteps[0], '') }}:
-            - task: SonarQubePublish@5
-              displayName: Publish SonarQube Results
+ #         - ${{ if eq(job.customBuildSteps[0], '') }}:
+ #           - task: SonarQubePublish@5
+ #             displayName: Publish SonarQube Results
 
 #          - ${{ if eq(parameters.isOfficialBuild, 'true') }}:
 #            - task: PublishBuildArtifacts@1
