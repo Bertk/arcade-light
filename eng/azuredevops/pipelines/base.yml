@@ -52,7 +52,7 @@ parameters:
 
 jobs:
   - ${{ each job in parameters.jobs }}:
-    - template: ../azuredevops/pipelines/job/job.yml
+    - template: job/job.yml
       parameters:
         variables:
 
