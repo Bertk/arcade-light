@@ -185,12 +185,6 @@ jobs:
             - task: SonarQubePublish@5
               displayName: Publish SonarQube Results
 
-          - ${{ if eq(job.customBuildSteps[0], '') }}:
-            - template: ../../../pipelines/SecurityScan.yml
-              parameters:
-                projects: '$(SolutionPath)'
-                enableQualitySteps: false
-
 #          - ${{ if eq(parameters.isOfficialBuild, 'true') }}:
 #            - task: PublishBuildArtifacts@1
 #              displayName: Publish packages to artifacts container
