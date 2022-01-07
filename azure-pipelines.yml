@@ -13,7 +13,7 @@ resources:
     image: mcr.microsoft.com/dotnet-buildtools-prereqs:ubuntu-16.04-cross-cfdd435-20190312152303
 
 parameters:
-  - name: 'Deploy_Dev_Stage'
+  - name: 'Deploy_Development_Stage'
     displayName: Deploy DEV
     type: boolean
     default: 'true'
@@ -40,8 +40,8 @@ variables:
     value: 'arcade-light.sln'
   - name: SQName
     value: 'arcade-light'
-  - name: Deploy_Dev
-    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Dev_Stage }}', true))
+  - name: Deploy_Development
+    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Development_Stage }}', true))
   - name: Deploy_Prepare
     value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Prepare_Stage }}', true))
   - name: Deploy_Release
@@ -81,7 +81,7 @@ stages:
   displayName: 'Deploy Development'
   dependsOn:
   - build_test_package
-  condition: ${{variables.Deploy_Dev}}
+  condition: ${{variables.Deploy_Development}}
   jobs:
     - template: /eng/azuredevops/pipelines/stage_dev.yml
       parameters:
