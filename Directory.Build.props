@@ -29,10 +29,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Build.Artifacts" Version="4.0.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <PropertyGroup Condition="$(BUILD_REASON) == ''">
@@ -41,7 +37,7 @@
 
   <ItemGroup>
     <!-- lightweight GitVersioning tool - not depended on tags or branches -->
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -56,7 +52,7 @@
     <SignAssembly>false</SignAssembly>
     <!-- see https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
     <Company>Some Name</Company>
-    <GravityCopyright>&#xa9; $(Company). All rights reserved.</GravityCopyright>
+    <MyCopyright>&#xa9; $(Company). All rights reserved.</MyCopyright>
     <Authors>Bert</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

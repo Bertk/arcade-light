@@ -25,4 +25,10 @@
     <Message Text="XML DocFile: $(DocumentationFile)"/>
   </Target>
 
+  <Target Name = "SetCopyright" AfterTargets="GetBuildVersion" DependsOnTargets="GetBuildVersion">
+    <Message Importance="low" Text="MyCopyright: $(MyCopyright)"/>
+    <PropertyGroup>
+      <Copyright>$(MyCopyright)</Copyright>
+    </PropertyGroup>
+  </Target>
 </Project>

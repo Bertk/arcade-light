@@ -1,0 +1,12 @@
+variables:
+  # Cannot use key:value syntax in root defined variables
+  - name: _TeamName
+    value: arcade-light
+  - name: _RunAsPublic
+    value: True
+  - name: _RunAsInternal
+    value: False
+  - name: _InternalBuildArgs
+    value: ''
+  - name: skipComponentGovernanceDetection
+    value: true

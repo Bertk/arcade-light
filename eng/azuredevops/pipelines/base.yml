@@ -120,7 +120,7 @@ jobs:
           timeoutInMinutes: 150
 
         steps:
-          - script: echo Build (gravity-base.yml)
+          - script: echo Build (base.yml)
 
           - ${{ if ne(job.preBuildSteps[0], '') }}:
             - ${{ job.preBuildSteps }}

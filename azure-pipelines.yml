@@ -1,113 +1,164 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-# File: azure-pipelines.yml
-resources:
-  repositories:
-  - repository: self
-    clean: true
-  containers:
-  - container: LinuxContainer
-    image: mcr.microsoft.com/dotnet-buildtools-prereqs:ubuntu-16.04-cross-cfdd435-20190312152303
-
-parameters:
-  - name: 'Deploy_Development_Stage'
-    displayName: Deploy DEV
-    type: boolean
-    default: 'true'
-  - name: 'Deploy_Prepare_Stage'
-    displayName: Deploy Prepare Release
-    type: boolean
-    default: 'false'
-  - name: 'Deploy_Release_Stage'
-    displayName: Deploy Release
-    type: boolean
-    default: 'false'
-
-variables:
-  # Cannot use key:value syntax in root defined variables
-  - name: _TeamName
-    value: 'arcade-light'
-  - name: _PublishUsingPipelines
-    value: true
-  - name: ProductVersion
-    value: '1.0.0-beta'
-  - name: SQKey
-    value: 'arcade-light'
-  - name: SolutionPath
-    value: 'arcade-light.sln'
-  - name: SQName
-    value: 'arcade-light'
-  - name: Deploy_Development
-    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Development_Stage }}', true))
-  - name: Deploy_Prepare
-    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Prepare_Stage }}', true))
-  - name: Deploy_Release
-    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), eq('${{ parameters.Deploy_Release_Stage }}', true))
-  - name: Deploy_Pre_Prod
-    value: and(succeeded(), eq(in(variables['Build.Reason'], 'PullRequest', 'IndividualCI'), false), startsWith(variables['Build.SourceBranch'], 'refs/heads/releases'))
-  #- name: DOTNET_CLI_TELEMETRY_OPTOUT
-  #  value: 1
-  - name: Build.Repository.Clean
-    value: true
-
-# Only run against main
 trigger:
+  batch: true
   branches:
     include:
-      - main
-  paths:
-    exclude:
-    - /*.md
+    - main
+    - release/3.x
+    - release/5.0
+
+pr:
+  branches:
+    include:
+    - main
+    - release/3.x
+    - release/5.0
+    - templates
+
+variables:
+- template: eng/common-variables.yml
+
+resources:
+  containers:
+  - container: LinuxContainer
+    image: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-14.04-cross-0cd4667-20170319080304
 
 stages:
-- stage: build_test_package
+- stage: build
+  displayName: Build
   jobs:
-  # Windows legs
-  - template: /eng/azuredevops/pipelines/windows.yml
+  - template: /eng/azuredevops/pipelines/jobs/jobs.yml
     parameters:
-      isOfficialBuild: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
-      fullMatrix: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
-  # Linux legs
-  #- template: /eng/pipelines/linux.yml
-  #  parameters:
-  #    isOfficialBuild: ${{ and(ne(variables['System.TeamProject'], 'public'), notIn(variables['Build.Reason'], 'PullRequest')) }}
-  #    fullMatrix: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
+      artifacts:
+        publish:
+          artifacts: true
+          logs: true
+          manifests: true
+      enableMicrobuild: true
+      enablePublishUsingPipelines: true
+      enableSourceIndex: true
+      enableSourceBuild: true
+      workspace:
+        clean: all
+      jobs:
+      - job: Windows_NT
+        timeoutInMinutes: 90
+        pool:
+          vmImage: windows-latest
+        strategy:
+          matrix:
+            Build_Release:
+              _BuildConfig: Release
+            ${{ if eq(variables._RunAsPublic, True) }}:
+              Build_Debug:
+                _BuildConfig: Debug
+        preSteps:
+        - checkout: self
+          clean: true
+        steps:
+        - script: eng\commonlight\cibuild.cmd
+            -configuration $(_BuildConfig)
+            -prepareMachine
+            $(_InternalBuildArgs)
+            /p:Test=false
+          displayName: Windows Build / Publish
+      - ${{ if eq(variables._RunAsPublic, True) }}:
+        - job: Linux
+          container: LinuxContainer
+          pool:
+            vmImage: ubuntu-latest
+          strategy:
+            matrix:
+              Build_Debug:
+                _BuildConfig: Debug
+              Build_Release:
+                _BuildConfig: Release
+          preSteps:
+          - checkout: self
+            clean: true
+          steps:
+          - script: eng/commonlight/cibuild.sh
+              --configuration $(_BuildConfig)
+              --prepareMachine
+              /p:Test=false
+            displayName: Unix Build / Publish
 
-
-- stage: Dev_Deployment
-  displayName: 'Deploy Development'
-  dependsOn:
-  - build_test_package
-  condition: ${{variables.Deploy_Development}}
-  jobs:
-    - template: /eng/azuredevops/pipelines/stage_dev.yml
+- ${{ if eq(variables._RunAsPublic, True) }}:
+  - stage: Test
+    dependsOn: build
+    jobs:
+    - template: /eng/azuredevops/pipelines/jobs/jobs.yml
       parameters:
-        isOfficialBuild: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
-        testScope: 'innerloop'
-        targetOS: Linux
-
-- stage: Prepare_Release
-  displayName: 'Deploy Prepare Release'
-  dependsOn: Dev_Deployment
-  condition: ${{variables.Deploy_Prepare}}
-  jobs:
-    - template: /eng/azuredevops/pipelines/stage_prepare.yml
-      parameters:
-        isOfficialBuild: ${{ notIn(variables['Build.Reason'], 'PullRequest') }}
-        testScope: 'innerloop'
-        targetOS: Linux
-
-- stage: Create_Release
-  displayName: 'Create Release'
-  dependsOn: Prepare_Release
-  jobs:
-  - job: create_release
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - script: echo create release branch
-
+        artifacts:
+          publish:
+            logs: 
+              name: Logs_Test_$(Agent.OS)_$(_BuildConfig)_$(_Testing)
+          download: true
+        workspace:
+          clean: all
+        jobs:
+        - job: Windows_NT
+          timeoutInMinutes: 90
+          pool:
+            vmimage: windows-latest
+          strategy:
+            matrix:
+              Build_Release:
+                _BuildConfig: Release
+              Build_Debug:
+                _BuildConfig: Debug
+          preSteps:
+          - checkout: self
+            clean: true
+          steps:
+          - task: PowerShell@2
+            displayName: sdk-task verification
+            inputs:
+              filePath: eng\commonlight\sdk-task.ps1
+              arguments: -task PublishToSymbolServers /p:DryRun="true" -restore -msbuildEngine dotnet
+                /p:DotNetSymbolServerTokenMsdl=DryRunPTA
+                /p:DotNetSymbolServerTokenSymWeb=DryRunPTA
+                /p:PDBArtifactsDirectory='$(Build.ArtifactStagingDirectory)/PDBArtifacts/'
+                /p:BlobBasePath='$(Build.ArtifactStagingDirectory)/BlobArtifacts/'
+                /p:SymbolPublishingExclusionsFile='$(Build.SourcesDirectory)/eng/SymbolPublishingExclusionsFile.txt'
+                /p:Configuration=Release
+                /p:PublishToMSDL=false
+          - powershell: eng\commonlight\build.ps1
+              -configuration $(_BuildConfig) 
+              -prepareMachine
+              -ci
+              -restore
+              -test
+              -projects $(Build.SourcesDirectory)\tests\UnitTests.proj
+              /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
+              /p:RestoreUsingNuGetTargets=false
+            displayName: Run Tests
+            env:
+              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        - job: Linux
+          timeoutInMinutes: 90
+          container: LinuxContainer
+          pool:
+            vmimage: ubuntu-latest
+          strategy:
+            matrix:
+              Build_Debug:
+                _BuildConfig: Debug
+              Build_Release:
+                _BuildConfig: Release
+          preSteps:
+          - checkout: self
+            clean: true
+          steps:
+          - script: eng/commonlight/build.sh
+              --configuration $(_BuildConfig)
+              --prepareMachine
+              --ci
+              --restore
+              --test
+              --projects $(Build.SourcesDirectory)/tests/UnitTests.proj
+              /bl:$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)/test-linux.binlog
+              /p:RestoreUsingNuGetTargets=false
+            displayName: Run Tests
+            env:
+              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
