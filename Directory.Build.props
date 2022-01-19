@@ -51,8 +51,8 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
     <!-- see https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
-    <Company>Some Name</Company>
-    <MyCopyright>&#xa9; $(Company). All rights reserved.</MyCopyright>
+    <Company>arcade-light authors</Company>
+    <MyCopyright>$(Company).</MyCopyright>
     <Authors>Bert</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
