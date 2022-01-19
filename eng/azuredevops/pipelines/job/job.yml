@@ -94,18 +94,18 @@ jobs:
     - ${{ each preStep in parameters.preSteps }}:
       - ${{ preStep }}
 
-  - ${{ if and(eq(parameters.runAsPublic, 'false'), ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-    - ${{ if eq(parameters.enableMicrobuild, 'true') }}:
-      - task: MicroBuildSigningPlugin@3
-        displayName: Install MicroBuild plugin
-        inputs:
-          signType: $(_SignType)
-          zipSources: false
-          feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
-        env:
-          TeamName: $(_TeamName)
-        continueOnError: ${{ parameters.continueOnError }}
-        condition: and(succeeded(), in(variables['_SignType'], 'real', 'test'), eq(variables['Agent.Os'], 'Windows_NT'))
+  # - ${{ if and(eq(parameters.runAsPublic, 'false'), ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+  #   - ${{ if eq(parameters.enableMicrobuild, 'true') }}:
+  #     - task: MicroBuildSigningPlugin@3
+  #       displayName: Install MicroBuild plugin
+  #       inputs:
+  #         signType: $(_SignType)
+  #         zipSources: false
+  #         feedSource: https://dnceng.pkgs.visualstudio.com/_packaging/MicroBuildToolset/nuget/v3/index.json
+  #       env:
+  #         TeamName: $(_TeamName)
+  #       continueOnError: ${{ parameters.continueOnError }}
+  #       condition: and(succeeded(), in(variables['_SignType'], 'real', 'test'), eq(variables['Agent.Os'], 'Windows_NT'))
 
   - ${{ if or(eq(parameters.artifacts.download, 'true'), ne(parameters.artifacts.download, '')) }}:
     - task: DownloadPipelineArtifact@2
@@ -127,14 +127,14 @@ jobs:
         richNavLogOutputDirectory: $(Build.SourcesDirectory)/artifacts/bin
       continueOnError: true
 
-  - ${{ if eq(parameters.enableMicrobuild, 'true') }}:
-    - ${{ if and(eq(parameters.runAsPublic, 'false'), ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-      - task: MicroBuildCleanup@1
-        displayName: Execute Microbuild cleanup tasks  
-        condition: and(always(), in(variables['_SignType'], 'real', 'test'), eq(variables['Agent.Os'], 'Windows_NT'))
-        continueOnError: ${{ parameters.continueOnError }}
-        env:
-          TeamName: $(_TeamName)
+  # - ${{ if eq(parameters.enableMicrobuild, 'true') }}:
+  #   - ${{ if and(eq(parameters.runAsPublic, 'false'), ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
+  #     - task: MicroBuildCleanup@1
+  #       displayName: Execute Microbuild cleanup tasks  
+  #       condition: and(always(), in(variables['_SignType'], 'real', 'test'), eq(variables['Agent.Os'], 'Windows_NT'))
+  #       continueOnError: ${{ parameters.continueOnError }}
+  #       env:
+  #         TeamName: $(_TeamName)
 
   - ${{ if ne(parameters.artifacts.publish, '') }}:
     - ${{ if or(eq(parameters.artifacts.publish.artifacts, 'true'), ne(parameters.artifacts.publish.artifacts, '')) }}:
