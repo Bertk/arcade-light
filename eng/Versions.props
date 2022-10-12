@@ -20,14 +20,7 @@
     <MicrosoftExtensionsLoggingConsoleVersion>6.0.0</MicrosoftExtensionsLoggingConsoleVersion>
     <MicrosoftNETCorePlatformsVersion>6.0.1</MicrosoftNETCorePlatformsVersion>
     <MicrosoftNetCompilersToolsetVersion>4.1.0-1.final</MicrosoftNetCompilersToolsetVersion>
-    <MicrosoftNetTestSdkVersion>17.0.0</MicrosoftNetTestSdkVersion>
-    <MoqVersion>4.16.1</MoqVersion>
-    <NewtonsoftJsonVersion>13.0.1</NewtonsoftJsonVersion>
-    <SystemTextJsonVersion>6.0.1</SystemTextJsonVersion>
-    <NuGetVersioningVersion>6.0.0</NuGetVersioningVersion>
     <DotNetSleetLibVersion>2.2.143</DotNetSleetLibVersion>
-    <SystemBuffersVersion>4.5.1</SystemBuffersVersion>
-    <SystemCollectionsImmutableVersion>6.0.0</SystemCollectionsImmutableVersion>
     <SystemDiagnosticsTraceSourceVersion>4.3.0</SystemDiagnosticsTraceSourceVersion>
     <SystemIOCompressionVersion>4.3.0</SystemIOCompressionVersion>
     <SystemIOPackagingVersion>6.0.0</SystemIOPackagingVersion>
@@ -39,12 +32,11 @@
     <SystemRuntimeInteropServicesRuntimeInformation>4.3.0</SystemRuntimeInteropServicesRuntimeInformation>
     <SystemTextEncodingsWebVersion>6.0.0</SystemTextEncodingsWebVersion>
     <SystemThreadingTasksExtensionVersion>4.5.4</SystemThreadingTasksExtensionVersion>
-    <XUnitVersion>2.4.1</XUnitVersion>
-    <XUnitAbstractionsVersion>2.0.3</XUnitAbstractionsVersion>
+    <XUnitVersion>2.4.2</XUnitVersion>
     <MicrosoftDotNetBuildTasksFeedVersion>7.0.0-beta.21629.1</MicrosoftDotNetBuildTasksFeedVersion>
     <MicrosoftDotNetSignToolVersion>7.0.0-beta.21629.1</MicrosoftDotNetSignToolVersion>
     <MicrosoftDiaSymReaderPdb2PdbVersion>1.1.0-beta2-19575-01</MicrosoftDiaSymReaderPdb2PdbVersion>
-    <MicrosoftSourceLinkGitHubVersion>1.2.0-beta-21629-02</MicrosoftSourceLinkGitHubVersion>
+    <!--<MicrosoftSourceLinkGitHubVersion>1.2.0-beta-21629-02</MicrosoftSourceLinkGitHubVersion>-->
     <MicrosoftSourceLinkAzureReposGitVersion>1.2.0-beta-21629-02</MicrosoftSourceLinkAzureReposGitVersion>
     <MicrosoftDotNetSwaggerGeneratorMSBuildVersion>7.0.0-beta.21629.1</MicrosoftDotNetSwaggerGeneratorMSBuildVersion>
     <MicrosoftDotNetXliffTasksVersion>1.0.0-beta.21629.1</MicrosoftDotNetXliffTasksVersion>

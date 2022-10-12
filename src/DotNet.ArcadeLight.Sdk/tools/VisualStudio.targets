@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsVsixProject)' == 'true' or '$(GeneratePkgDefFile)' == 'true'">
-    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="$(MicrosoftVSSDKBuildToolsVersion)" PrivateAssets="all" IsImplicitlyDefined="true" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" PrivateAssets="all" IsImplicitlyDefined="true" />
   </ItemGroup>
 
   <!-- Returns the current build version. Used in .vsixmanifests to substitute our build version into them -->
