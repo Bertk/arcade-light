@@ -18,14 +18,17 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
     <LangVersion>9.0</LangVersion>
+
+    <TargetFrameworkForNETSDK>net6.0</TargetFrameworkForNETSDK>
+    
   </PropertyGroup>
 
   <ItemGroup Condition="$(BUILD_REASON) == ''">
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.33.0.40503">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.47.0.55603">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="AsyncFixer" Version="1.5.1">
+    <PackageReference Include="AsyncFixer" Version="1.6.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -37,7 +40,7 @@
 
   <ItemGroup>
     <!-- lightweight GitVersioning tool - not depended on tags or branches -->
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.255">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.5.113">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

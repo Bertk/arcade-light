@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit" Version="$(XUnitVersion)" IsImplicitlyDefined="true" PrivateAssets="all" Publish="true"/>
-    <PackageReference Include="xunit.runner.visualstudio" Version="$(XUnitRunnerVisualStudioVersion)" IsImplicitlyDefined="true" PrivateAssets="all" Publish="true"/>
+    <PackageReference Include="xunit" Version="$(XUnitVersion)" PrivateAssets="all" Publish="true"/>
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XUnitRunnerVisualStudioVersion)" PrivateAssets="all" Publish="true"/>
   </ItemGroup>
 
   <!-- Workaround for https://github.com/xunit/xunit/issues/1651 -->
