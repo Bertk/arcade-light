@@ -87,14 +87,14 @@
     <!--<MicrosoftVSSDKBuildToolsVersion Condition="'$(MicrosoftVSSDKBuildToolsVersion)' == ''">16.9.1050</MicrosoftVSSDKBuildToolsVersion>-->
     <MicrosoftDotnetNuGetRepackTasksVersion Condition="'$(MicrosoftDotnetNuGetRepackTasksVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotnetNuGetRepackTasksVersion>
     <MicrosoftDotNetSignToolVersion Condition="'$(MicrosoftDotNetSignToolVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotNetSignToolVersion>
-    <!--<MicrosoftTestPlatformVersion Condition="'$(MicrosoftTestPlatformVersion)' == ''">16.5.0</MicrosoftTestPlatformVersion>-->
-    <!--<XUnitVersion Condition="'$(XUnitVersion)' == ''">2.4.2-pre.9</XUnitVersion>-->
-    <!--<XUnitRunnerConsoleVersion Condition="'$(XUnitRunnerConsoleVersion)' == ''">$(XUnitVersion)</XUnitRunnerConsoleVersion>-->
+    <MicrosoftTestPlatformVersion Condition="'$(MicrosoftTestPlatformVersion)' == ''">16.5.0</MicrosoftTestPlatformVersion>
+    <XUnitVersion Condition="'$(XUnitVersion)' == ''">2.4.2</XUnitVersion>
+    <XUnitRunnerConsoleVersion Condition="'$(XUnitRunnerConsoleVersion)' == ''">$(XUnitVersion)</XUnitRunnerConsoleVersion>
     <!-- Version 2.4.3 of xunit.runner.visualstudio was released to fix testing of net5 projects without updating any other xunit packages -->
-    <!--<XUnitRunnerVisualStudioVersion Condition="'$(XUnitRunnerVisualStudioVersion)' == ''">2.4.3</XUnitRunnerVisualStudioVersion>-->
-    <!--<MSTestVersion Condition="'$(MSTestVersion)' == ''">2.0.0</MSTestVersion>-->
-    <!--<MSTestTestAdapterVersion Condition="'$(MSTestTestAdapterVersion)' == ''">$(MSTestVersion)</MSTestTestAdapterVersion>-->
-    <!--<MSTestTestFrameworkVersion Condition="'$(MSTestTestFrameworkVersion)' == ''">$(MSTestVersion)</MSTestTestFrameworkVersion>-->
+    <XUnitRunnerVisualStudioVersion Condition="'$(XUnitRunnerVisualStudioVersion)' == ''">2.4.5</XUnitRunnerVisualStudioVersion>
+    <MSTestVersion Condition="'$(MSTestVersion)' == ''">2.0.0</MSTestVersion>
+    <MSTestTestAdapterVersion Condition="'$(MSTestTestAdapterVersion)' == ''">$(MSTestVersion)</MSTestTestAdapterVersion>
+    <MSTestTestFrameworkVersion Condition="'$(MSTestTestFrameworkVersion)' == ''">$(MSTestVersion)</MSTestTestFrameworkVersion>
     <MicrosoftDotNetBuildTasksFeedVersion Condition="'$(MicrosoftDotNetBuildTasksFeedVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotNetBuildTasksFeedVersion>
     <MicrosoftDotNetBuildTasksInstallersVersion Condition="'$(MicrosoftDotNetBuildTasksInstallersVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotNetBuildTasksInstallersVersion>
     <!--<NUnitVersion Condition="'$(NUnitVersion)' == ''">3.12.0</NUnitVersion>-->
