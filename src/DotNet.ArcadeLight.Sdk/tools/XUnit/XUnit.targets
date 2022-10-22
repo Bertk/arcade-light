@@ -11,9 +11,9 @@
   </ItemGroup>
 
   <!-- Workaround for https://github.com/xunit/xunit/issues/1651 -->
-  <ItemGroup>
+  <!--<ItemGroup>
     <None Remove="$(NuGetPackageRoot)xunit.runner.visualstudio\$(XUnitRunnerVisualStudioVersion)\build\net20\..\_common\xunit.abstractions.dll" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <PropertyGroup>
     <XUnitDesktopSettingsFile Condition="'$(XUnitDesktopSettingsFile)' == ''">$(MSBuildThisFileDirectory)xunit.runner.json</XUnitDesktopSettingsFile>

@@ -111,6 +111,6 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SymbolUploader.Build.Task" Version="$(MicrosoftSymbolUploaderBuildTaskVersion)" />
+    <PackageReference Include="Microsoft.SymbolUploader.Build.Task" />
   </ItemGroup>
 </Project>

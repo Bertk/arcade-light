@@ -24,7 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.Maestro.Tasks" Version="$(MicrosoftDotNetMaestroTasksVersion)" />
+    <PackageReference Include="Microsoft.DotNet.Maestro.Tasks" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -18,7 +18,6 @@
     <LangVersion>9.0</LangVersion>
 
     <TargetFrameworkForNETSDK>net6.0</TargetFrameworkForNETSDK>
-    
 
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>

@@ -4,11 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
+
+    <!--<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>-->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" />
-    <PackageReference Include="Moq" />
+      <PackageReference Include="FluentAssertions" />
+      <PackageReference Include="Moq" />
+      <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
 
   <ItemGroup>

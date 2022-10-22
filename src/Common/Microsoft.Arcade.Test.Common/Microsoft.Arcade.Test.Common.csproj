@@ -4,11 +4,15 @@
     <TargetFrameworks>net6.0;net472</TargetFrameworks>
     <IsTestProject>true</IsTestProject>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
+      
+    <!--<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>-->
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="Microsoft.Build.Tasks.Core" />
+    <PackageReference Include="Microsoft.Build.Framework" />
+    <PackageReference Include="System.Collections.Immutable" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net472'">

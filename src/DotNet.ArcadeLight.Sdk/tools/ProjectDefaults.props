@@ -124,6 +124,6 @@
   </Choose>
 
   <ItemGroup Condition="'$(EnableRichCodeNavigation)' == 'true'">
-    <PackageReference Include="RichCodeNav.EnvVarDump" Version="$(RichCodeNavPackageVersion)" PrivateAssets="all" />
+    <PackageReference Include="RichCodeNav.EnvVarDump" PrivateAssets="all" />
   </ItemGroup>
 </Project>

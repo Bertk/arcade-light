@@ -1,8 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <DefaultItemExcludes>$(DefaultItemExcludes);testassets\**\*</DefaultItemExcludes>
+
+    <!--<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>-->
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,12 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentAssertions"/>
-    <PackageReference Include="Moq" />
+    <PackageReference Include="FluentAssertions" />
     <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="Microsoft.Build.Tasks.Core" />
-    <PackageReference Include="System.Reflection.Metadata" />
-    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="Moq" />
+    <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
   
   <ItemGroup>
