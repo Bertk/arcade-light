@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Microsoft.Arcade.Common\Microsoft.Arcade.Common.csproj" />
-    <ProjectReference Include="..\Common\Microsoft.Arcade.Test.Common\Microsoft.Arcade.Test.Common.csproj" />
+    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
+    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Test.Common\DotNet.ArcadeLight.Test.Common.csproj" />
     <ProjectReference Include="..\DotNet.ArcadeLight.Sdk\DotNet.ArcadeLight.Sdk.csproj" />
-    <ProjectReference Include="..\Microsoft.DotNet.Internal.DependencyInjection.Testing\Microsoft.DotNet.Internal.DependencyInjection.Testing.csproj" />
+    <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +21,7 @@
     <PackageReference Include="Moq" />
     <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Content Include="testassets\**\*" CopyToOutputDirectory="PreserveNewest" />
     <Content Include="$(RepoRoot)eng\common\**\*" LinkBase="testassets\boilerplate\eng\common\" CopyToOutputDirectory="PreserveNewest" />

@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Arcade.Common\Microsoft.Arcade.Common.csproj" />
+    <ProjectReference Include="..\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
   </ItemGroup>
 
 </Project>
