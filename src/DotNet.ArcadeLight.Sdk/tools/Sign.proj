@@ -47,20 +47,20 @@
       <_DesktopMSBuildPath Condition="!Exists('$(_DesktopMSBuildPath)')">$(_VSInstallDir)\MSBuild\15.0\Bin\msbuild.exe</_DesktopMSBuildPath>
     </PropertyGroup>
 
-    <Microsoft.DotNet.SignTool.SignToolTask
-        DryRun="$(_DryRun)"
-        TestSign="$(_TestSign)"
-        DoStrongNameCheck="$(DoStrongNameCheck)"
-        AllowEmptySignList="$(AllowEmptySignList)"
-        CertificatesSignInfo="@(CertificatesSignInfo)"
-        ItemsToSign="@(ItemsToSign)"
-        StrongNameSignInfo="@(StrongNameSignInfo)"
-        FileSignInfo="@(FileSignInfo)"
-        FileExtensionSignInfo="@(FileExtensionSignInfo)"
-        TempDir="$(ArtifactsTmpDir)"
-        LogDir="$(ArtifactsLogDir)"
-        MSBuildPath="$(_DesktopMSBuildPath)"
-        SNBinaryPath="$(NuGetPackageRoot)sn\$(SNVersion)\sn.exe"
-        MicroBuildCorePath="$(NuGetPackageRoot)microbuild.core\$(MicroBuildCoreVersion)"/>
-  </Target>
+    <!-- <Microsoft.DotNet.SignTool.SignToolTask -->
+        <!-- DryRun="$(_DryRun)" -->
+        <!-- TestSign="$(_TestSign)" -->
+        <!-- DoStrongNameCheck="$(DoStrongNameCheck)" -->
+        <!-- AllowEmptySignList="$(AllowEmptySignList)" -->
+        <!-- CertificatesSignInfo="@(CertificatesSignInfo)" -->
+        <!-- ItemsToSign="@(ItemsToSign)" -->
+        <!-- StrongNameSignInfo="@(StrongNameSignInfo)" -->
+        <!-- FileSignInfo="@(FileSignInfo)" -->
+        <!-- FileExtensionSignInfo="@(FileExtensionSignInfo)" -->
+        <!-- TempDir="$(ArtifactsTmpDir)" -->
+        <!-- LogDir="$(ArtifactsLogDir)" -->
+        <!-- MSBuildPath="$(_DesktopMSBuildPath)" -->
+        <!-- SNBinaryPath="$(NuGetPackageRoot)sn\$(SNVersion)\sn.exe" -->
+        <!-- MicroBuildCorePath="$(NuGetPackageRoot)microbuild.core\$(MicroBuildCoreVersion)"/> -->
+  <!-- </Target> -->
 </Project>

@@ -45,6 +45,8 @@
     <_BuildNumber>$(OfficialBuildId)</_BuildNumber>
     <_BuildNumber Condition="'$(OfficialBuildId)' == ''">$([System.DateTime]::Now.ToString(yyyyMMdd)).1</_BuildNumber>
 
+    <!-- use nbgv tool instead  (Bert) -->
+    
     <!--
       OfficialBuildId is assumed to have format "20yymmdd.r" (the assumption is checked later in a target).
     -->

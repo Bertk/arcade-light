@@ -2,16 +2,16 @@
 <Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Execute">
   <!--
     The target in this file initially calls `SetupTargetFeeds.proj` to create the list of
-    target feed descriptors for the artifacts and then calls the `PublishArtifactsInManifest` 
+    target feed descriptors for the artifacts and then calls the `PublishArtifactsInManifest`
     task (from Tasks.Feed) to publish the artifacts described in the informed build manifest.
-    
+
     Parameters:
       - PublishingInfraVersion                  : Which version of the publishing infra should be used.
       - TargetChannels                          : Comma-separated list of Maestro++ Channel IDs to which the build should
                                                   be assigned to once the assets are published.
       - ManifestsBasePath                       : Full path to place where build manifests are stored.
       - BlobBasePath                            : Full path to place where all packages/blobs, from all manifests, are stored.
-      - PackageBasePath                         
+      - PackageBasePath
       - BARBuildId                              : BAR ID of the build being published.
       - MaestroApiEndpoint                      : Maestro API/Token. Used for updating asset locations.
       - BuildAssetRegistryToken
@@ -21,10 +21,10 @@
       - PublishSpecialClrFiles                  : If true, the special coreclr module indexed files like DBI, DAC and SOS are published
       - MsdlToken                               : Token used to publish symbol blobs, dll and pdb to Msdl
       - SymWebToken                             : Token used to publish symbol blobs, dll and pdb to Symweb
-      - SymbolPublishingExclusionsFile          : Files that have to be excluded from symbol publishing 
+      - SymbolPublishingExclusionsFile          : Files that have to be excluded from symbol publishing
       - PdbArtifactsBasePath                    : Path to dlls and pdbs
       - AzdoApiToken                            : Token used to call the Azure Api to download artifacts and symbols
-      - ArtifactsBasePath                       : Staging directory 
+      - ArtifactsBasePath                       : Staging directory
       - UseStreamingPublishing                  : When set to true it will use Azure Api to download the artifacts and symbols using streaming,
                                                   else all the artifacts and symbols are downloaded before publishing.
 
@@ -57,13 +57,13 @@
 
     Optional parameters for SetupTargetFeeds.proj
       - PublishInstallersAndChecksums   : This control whether installers & checksums should be published to public feeds on public builds
-     
+
       Parameters for public builds:
           - InstallersTargetStaticFeed
           - InstallersAzureAccountKey
           - ChecksumsTargetStaticFeed
           - ChecksumsAzureAccountKey
-        
+
       Parameters for internal builds:
           - InternalInstallersTargetStaticFeed
           - InternalInstallersTargetStaticFeedKey
@@ -74,8 +74,8 @@
   -->
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <NETCORE_ENGINEERING_TELEMETRY>Publish</NETCORE_ENGINEERING_TELEMETRY>
+    <TargetFramework>net6.0</TargetFramework>
+    <!--<NETCORE_ENGINEERING_TELEMETRY>Publish</NETCORE_ENGINEERING_TELEMETRY>-->
 
     <!-- Default publishing infra target is 3. -->
     <PublishingInfraVersion Condition="'$(PublishingInfraVersion)' == ''">3</PublishingInfraVersion>
@@ -138,7 +138,7 @@
       Condition="'@(ManifestFiles)' == ''"
       Text="No manifest file was found in the provided path: $(ManifestsBasePath)" />
 
-    <!-- 
+    <!--
       Publish artifacts from all manifests.
     -->
     <PublishArtifactsInManifest
@@ -158,7 +158,7 @@
       AkaMSTenant="$(AkaMSTenant)"
       AkaMSOwners="$(AkaMSOwners)"
       AkaMSGroupOwner="$(AkaMSGroupOwner)"
-      AkaMSCreatedBy="$(AkaMSCreatedBy)" 
+      AkaMSCreatedBy="$(AkaMSCreatedBy)"
       MsdlToken="$(MsdlToken)"
       SymWebToken="$(SymWebToken)"
       SymbolPublishingExclusionsFile="$(SymbolPublishingExclusionsFile)"

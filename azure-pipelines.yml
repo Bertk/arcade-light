@@ -3,15 +3,11 @@ trigger:
   branches:
     include:
     - main
-    - release/3.x
-    - release/5.0
 
 pr:
   branches:
     include:
     - main
-    - release/3.x
-    - release/5.0
     - templates
 
 variables:
@@ -33,7 +29,7 @@ stages:
           artifacts: true
           logs: true
           manifests: true
-      enableMicrobuild: true
+      enableMicrobuild: false
       enablePublishUsingPipelines: true
       enableSourceIndex: true
       enableSourceBuild: true

@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Execute">
 
   <PropertyGroup>
-    <NETCORE_ENGINEERING_TELEMETRY>Publish</NETCORE_ENGINEERING_TELEMETRY>
+    <!--<NETCORE_ENGINEERING_TELEMETRY>Publish</NETCORE_ENGINEERING_TELEMETRY>-->
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   
