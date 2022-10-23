@@ -28,7 +28,7 @@
     <!-- <PackageReference Include="sn" /> -->
     <!-- <PackageReference Include="MicroBuild.Core" /> -->
     <!-- <PackageReference Include="MicroBuild.Core.Sentinel" /> -->
-    <PackageReference Include="vswhere" />
+    <!-- <PackageReference Include="vswhere" /> -->
     <!-- <PackageReference Include="Microsoft.DotNet.Build.Tasks.Feed" /> -->
     <!-- <PackageReference Include="Microsoft.DotNet.NuGetRepack.Tasks" Condition="'$(UsingToolNuGetRepack)' == 'true'" /> -->
     <!-- <PackageReference Include="Microsoft.DotNet.SignTool" /> -->
