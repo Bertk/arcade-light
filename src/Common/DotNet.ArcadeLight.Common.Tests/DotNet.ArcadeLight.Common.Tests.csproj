@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
+
+    <!--<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+      <PackageReference Include="FluentAssertions" />
+      <PackageReference Include="Moq" />
+      <PackageReference Include="Newtonsoft.Json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
+  </ItemGroup>
+
+</Project>

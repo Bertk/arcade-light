@@ -3,8 +3,6 @@
   <Import Project="Sdk.props" Sdk="DotNet.ArcadeLight.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)TargetFrameworkDefaults.props" />
   <PropertyGroup>
-    <!-- MSBuild Reserved and Well-Known Properties https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-reserved-and-well-known-properties -->
-    <BaseArtifactsPath>$(MSBuildThisFileDirectory)artifacts</BaseArtifactsPath>
 
     <!-- Do not consider items from obj or bin folder within the project folder -->
     <DefaultItemExcludes>$(DefaultItemExcludes);$(MSBuildProjectDirectory)/obj/**/*</DefaultItemExcludes>
@@ -18,18 +16,18 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
     <LangVersion>9.0</LangVersion>
+
+    <TargetFrameworkForNETSDK>net6.0</TargetFrameworkForNETSDK>
+
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 
   <ItemGroup Condition="$(BUILD_REASON) == ''">
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.33.0.40503">
+    <PackageReference Include="SonarAnalyzer.CSharp">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="AsyncFixer" Version="1.5.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Build.Artifacts" Version="4.0.4">
+    <PackageReference Include="AsyncFixer">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -41,7 +39,7 @@
 
   <ItemGroup>
     <!-- lightweight GitVersioning tool - not depended on tags or branches -->
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.244">
+    <PackageReference Include="Nerdbank.GitVersioning">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -55,8 +53,8 @@
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
     <!-- see https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
-    <Company>Some Name</Company>
-    <GravityCopyright>&#xa9; $(Company). All rights reserved.</GravityCopyright>
+    <Company>arcade-light authors</Company>
+    <MyCopyright>$(Company).</MyCopyright>
     <Authors>Bert</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

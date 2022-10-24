@@ -360,13 +360,13 @@ function InitializeVisualStudioMSBuild([bool]$install, [object]$vsRequirements =
   }
 
   # Minimum VS version to require.
-  $vsMinVersionReqdStr = '16.8'
+  $vsMinVersionReqdStr = '17.3'
   $vsMinVersionReqd = [Version]::new($vsMinVersionReqdStr)
 
   # If the version of msbuild is going to be xcopied,
   # use this version. Version matches a package here:
   # https://dev.azure.com/dnceng/public/_packaging?_a=package&feed=dotnet-eng&package=RoslynTools.MSBuild&protocolType=NuGet&version=16.10.0-preview2&view=overview
-  $defaultXCopyMSBuildVersion = '16.10.0-preview2'
+  $defaultXCopyMSBuildVersion = '17.3.1'
 
   if (!$vsRequirements) { $vsRequirements = $GlobalJson.tools.vs }
   $vsMinVersionStr = if ($vsRequirements.version) { $vsRequirements.version } else { $vsMinVersionReqdStr }
@@ -430,7 +430,7 @@ function InitializeVisualStudioMSBuild([bool]$install, [object]$vsRequirements =
     }
   }
 
-  $msbuildVersionDir = if ([int]$vsMajorVersion -lt 16) { "$vsMajorVersion.0" } else { "Current" }
+  $msbuildVersionDir = if ([int]$vsMajorVersion -lt 17) { "$vsMajorVersion.0" } else { "Current" }
 
   $local:BinFolder = Join-Path $vsInstallDir "MSBuild\$msbuildVersionDir\Bin"
   $local:Prefer64bit = if (Get-Member -InputObject $vsRequirements -Name 'Prefer64bit') { $vsRequirements.Prefer64bit } else { $false }
@@ -503,7 +503,7 @@ function LocateVisualStudio([object]$vsRequirements = $null){
   if (Get-Member -InputObject $GlobalJson.tools -Name 'vswhere') {
     $vswhereVersion = $GlobalJson.tools.vswhere
   } else {
-    $vswhereVersion = '2.5.2'
+    $vswhereVersion = '3.0.3'
   }
 
   $vsWhereDir = Join-Path $ToolsDir "vswhere\$vswhereVersion"
@@ -573,7 +573,7 @@ function InitializeBuildTool() {
       ExitWithExitCode 1
     }
     $dotnetPath = Join-Path $dotnetRoot (GetExecutableFileName 'dotnet')
-    $buildTool = @{ Path = $dotnetPath; Command = 'msbuild'; Tool = 'dotnet'; Framework = 'netcoreapp3.1' }
+    $buildTool = @{ Path = $dotnetPath; Command = 'msbuild'; Tool = 'dotnet'; Framework = 'net6.0' }
   } elseif ($msbuildEngine -eq "vs") {
     try {
       $msbuildPath = InitializeVisualStudioMSBuild -install:$restore
@@ -725,12 +725,10 @@ function MSBuild() {
     $basePath = Split-Path -parent $toolsetBuildProject
     $possiblePaths = @(
       # new scripts need to work with old packages, so we need to look for the old names/versions
-      (Join-Path $basePath (Join-Path $buildTool.Framework 'Microsoft.DotNet.ArcadeLogging.dll')),
-      (Join-Path $basePath (Join-Path $buildTool.Framework 'Microsoft.DotNet.Arcade.Sdk.dll')),
-      (Join-Path $basePath (Join-Path netcoreapp2.1 'Microsoft.DotNet.ArcadeLogging.dll')),
-      (Join-Path $basePath (Join-Path netcoreapp2.1 'Microsoft.DotNet.Arcade.Sdk.dll'))
-      (Join-Path $basePath (Join-Path netcoreapp3.1 'Microsoft.DotNet.ArcadeLogging.dll')),
-      (Join-Path $basePath (Join-Path netcoreapp3.1 'Microsoft.DotNet.Arcade.Sdk.dll'))
+      (Join-Path $basePath (Join-Path $buildTool.Framework 'DotNet.ArcadeLight.Logging.dll')),
+      (Join-Path $basePath (Join-Path $buildTool.Framework 'DotNet.ArcadeLight.Sdk.dll')),
+      (Join-Path $basePath (Join-Path net6.0 'DotNet.ArcadeLight.Logging.dll')),
+      (Join-Path $basePath (Join-Path net6.0 'DotNet.ArcadeLight.Sdk.dll'))
     )
     $selectedPath = $null
     foreach ($path in $possiblePaths) {
