@@ -4,8 +4,8 @@
     <TargetFrameworks>net6.0;net472</TargetFrameworks>
     <IsTestProject>true</IsTestProject>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
-      
-    <!--<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>-->
+
+    <NoWarn>NU1507</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

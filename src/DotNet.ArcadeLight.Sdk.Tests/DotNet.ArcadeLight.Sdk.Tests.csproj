@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <DefaultItemExcludes>$(DefaultItemExcludes);testassets\**\*</DefaultItemExcludes>
 
-    <!--<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>-->
+    <NoWarn>NU1507</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
