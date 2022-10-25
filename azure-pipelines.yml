@@ -84,85 +84,86 @@ stages:
             env:
               SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
-- ${{ if eq(variables._RunAsPublic, True) }}:
-  - stage: Test
-    dependsOn: build
-    jobs:
-    - template: /eng/azuredevops/pipelines/jobs/jobs.yml
-      parameters:
-        artifacts:
-          publish:
-            logs: 
-              name: Logs_Test_$(Agent.OS)_$(_BuildConfig)_$(_Testing)
-          download: true
-        workspace:
-          clean: all
-        jobs:
-        - job: Windows_NT
-          timeoutInMinutes: 90
-          pool:
-            vmimage: windows-latest
-          strategy:
-            matrix:
-              Build_Release:
-                _BuildConfig: Release
-              Build_Debug:
-                _BuildConfig: Debug
-          preSteps:
-          - checkout: self
-            clean: true
-          steps:
-          - task: NuGetAuthenticate@1
-          #- task: PowerShell@2
-          #  displayName: sdk-task verification
-          #  inputs:
-          #    filePath: eng\commonlight\sdk-task.ps1
-          #    arguments: -task PublishToSymbolServers /p:DryRun="true" -restore -msbuildEngine dotnet
-          #      /p:DotNetSymbolServerTokenMsdl=DryRunPTA
-          #      /p:DotNetSymbolServerTokenSymWeb=DryRunPTA
-          #      /p:PDBArtifactsDirectory='$(Build.ArtifactStagingDirectory)/PDBArtifacts/'
-          #      /p:BlobBasePath='$(Build.ArtifactStagingDirectory)/BlobArtifacts/'
-          #      /p:SymbolPublishingExclusionsFile='$(Build.SourcesDirectory)/eng/SymbolPublishingExclusionsFile.txt'
-          #      /p:Configuration=Release
-          #      /p:PublishToMSDL=false
-          - powershell: eng\commonlight\build.ps1
-              -configuration $(_BuildConfig) 
-              -prepareMachine
-              -ci
-              -restore
-              -test
-              -projects $(Build.SourcesDirectory)\tests\UnitTests.proj
-              /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
-              /p:RestoreUsingNuGetTargets=false
-            displayName: Run Tests
-            env:
-              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-        - job: Linux
-          timeoutInMinutes: 90
-          container: LinuxContainer
-          pool:
-            vmimage: ubuntu-latest
-          strategy:
-            matrix:
-              Build_Debug:
-                _BuildConfig: Debug
-              Build_Release:
-                _BuildConfig: Release
-          preSteps:
-          - checkout: self
-            clean: true
-          steps:
-          - task: NuGetAuthenticate@1
-          - script: eng/commonlight/build.sh
-              --configuration $(_BuildConfig)
-              --prepareMachine
-              --ci
-              --restore
-              --test
-              --projects $(Build.SourcesDirectory)/tests/UnitTests.proj
-              /bl:$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)/test-linux.binlog
-              /p:RestoreUsingNuGetTargets=false
-            displayName: Run Tests
-            env:
-              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+- stage: Test
+  dependsOn: build
+  jobs:
+  - template: /eng/azuredevops/pipelines/jobs/jobs.yml
+    parameters:
+      artifacts:
+        publish:
+          artifacts:
+            name: Artifacts_Test_$(Agent.OS)_$(_BuildConfig)
+          logs: 
+            name: Logs_Test_$(Agent.OS)_$(_BuildConfig)
+        download: true
+      workspace:
+        clean: all
+      jobs:
+      - job: Windows_NT
+        timeoutInMinutes: 90
+        pool:
+          vmimage: windows-latest
+        strategy:
+          matrix:
+            Build_Release:
+              _BuildConfig: Release
+            Build_Debug:
+              _BuildConfig: Debug
+        preSteps:
+        - checkout: self
+          clean: true
+        steps:
+        - task: NuGetAuthenticate@1
+        #- task: PowerShell@2
+        #  displayName: sdk-task verification
+        #  inputs:
+        #    filePath: eng\commonlight\sdk-task.ps1
+        #    arguments: -task PublishToSymbolServers /p:DryRun="true" -restore -msbuildEngine dotnet
+        #      /p:DotNetSymbolServerTokenMsdl=DryRunPTA
+        #      /p:DotNetSymbolServerTokenSymWeb=DryRunPTA
+        #      /p:PDBArtifactsDirectory='$(Build.ArtifactStagingDirectory)/PDBArtifacts/'
+        #      /p:BlobBasePath='$(Build.ArtifactStagingDirectory)/BlobArtifacts/'
+        #      /p:SymbolPublishingExclusionsFile='$(Build.SourcesDirectory)/eng/SymbolPublishingExclusionsFile.txt'
+        #      /p:Configuration=Release
+        #      /p:PublishToMSDL=false
+        - powershell: eng\commonlight\build.ps1
+            -configuration $(_BuildConfig) 
+            -prepareMachine
+            -ci
+            -restore
+            -test
+            -projects $(Build.SourcesDirectory)\tests\UnitTests.proj
+            /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
+            /p:RestoreUsingNuGetTargets=false
+          displayName: Run Tests
+          env:
+            SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+      - job: Linux
+        timeoutInMinutes: 90
+        container: LinuxContainer
+        pool:
+          vmimage: ubuntu-latest
+        strategy:
+          matrix:
+            Build_Debug:
+              _BuildConfig: Debug
+            Build_Release:
+              _BuildConfig: Release
+        preSteps:
+        - checkout: self
+          clean: true
+        steps:
+        - task: NuGetAuthenticate@1
+        - script: eng/commonlight/build.sh
+            --configuration $(_BuildConfig)
+            --prepareMachine
+            --ci
+            --restore
+            --test
+            --projects $(Build.SourcesDirectory)/tests/UnitTests.proj
+            /bl:$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)/test-linux.binlog
+            /p:RestoreUsingNuGetTargets=false
+          displayName: Run Tests
+          env:
+            SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
