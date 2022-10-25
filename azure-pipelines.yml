@@ -51,12 +51,15 @@ stages:
         - checkout: self
           clean: true
         steps:
+        - task: NuGetAuthenticate@1
         - script: eng\commonlight\cibuild.cmd
             -configuration $(_BuildConfig)
             -prepareMachine
             $(_InternalBuildArgs)
             /p:Test=false
           displayName: Windows Build / Publish
+          env:
+            SYSTEM_ACCESSTOKEN: $(System.AccessToken)
       - ${{ if eq(variables._RunAsPublic, True) }}:
         - job: Linux
           container: LinuxContainer
@@ -72,11 +75,14 @@ stages:
           - checkout: self
             clean: true
           steps:
+          - task: NuGetAuthenticate@1
           - script: eng/commonlight/cibuild.sh
               --configuration $(_BuildConfig)
               --prepareMachine
               /p:Test=false
             displayName: Unix Build / Publish
+            env:
+              SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
 - ${{ if eq(variables._RunAsPublic, True) }}:
   - stage: Test
@@ -106,18 +112,19 @@ stages:
           - checkout: self
             clean: true
           steps:
-          - task: PowerShell@2
-            displayName: sdk-task verification
-            inputs:
-              filePath: eng\commonlight\sdk-task.ps1
-              arguments: -task PublishToSymbolServers /p:DryRun="true" -restore -msbuildEngine dotnet
-                /p:DotNetSymbolServerTokenMsdl=DryRunPTA
-                /p:DotNetSymbolServerTokenSymWeb=DryRunPTA
-                /p:PDBArtifactsDirectory='$(Build.ArtifactStagingDirectory)/PDBArtifacts/'
-                /p:BlobBasePath='$(Build.ArtifactStagingDirectory)/BlobArtifacts/'
-                /p:SymbolPublishingExclusionsFile='$(Build.SourcesDirectory)/eng/SymbolPublishingExclusionsFile.txt'
-                /p:Configuration=Release
-                /p:PublishToMSDL=false
+          - task: NuGetAuthenticate@1
+          #- task: PowerShell@2
+          #  displayName: sdk-task verification
+          #  inputs:
+          #    filePath: eng\commonlight\sdk-task.ps1
+          #    arguments: -task PublishToSymbolServers /p:DryRun="true" -restore -msbuildEngine dotnet
+          #      /p:DotNetSymbolServerTokenMsdl=DryRunPTA
+          #      /p:DotNetSymbolServerTokenSymWeb=DryRunPTA
+          #      /p:PDBArtifactsDirectory='$(Build.ArtifactStagingDirectory)/PDBArtifacts/'
+          #      /p:BlobBasePath='$(Build.ArtifactStagingDirectory)/BlobArtifacts/'
+          #      /p:SymbolPublishingExclusionsFile='$(Build.SourcesDirectory)/eng/SymbolPublishingExclusionsFile.txt'
+          #      /p:Configuration=Release
+          #      /p:PublishToMSDL=false
           - powershell: eng\commonlight\build.ps1
               -configuration $(_BuildConfig) 
               -prepareMachine
@@ -145,6 +152,7 @@ stages:
           - checkout: self
             clean: true
           steps:
+          - task: NuGetAuthenticate@1
           - script: eng/commonlight/build.sh
               --configuration $(_BuildConfig)
               --prepareMachine

@@ -35,7 +35,7 @@
            Text="List of files to sign is empty. Make sure that ItemsToSign is configured correctly." />
 
     <!-- We only need this if we are going to use the executable version. -->
-    <Exec Command='"$(NuGetPackageRoot)vswhere\$(VSWhereVersion)\tools\vswhere.exe" -latest -prerelease -property installationPath -requires Microsoft.Component.MSBuild'
+    <!--<Exec Command='"$(NuGetPackageRoot)vswhere\$(VSWhereVersion)\tools\vswhere.exe" -latest -prerelease -property installationPath -requires Microsoft.Component.MSBuild'
           ConsoleToMsBuild="true"
           StandardErrorImportance="high"
           Condition="$(_DesktopMSBuildRequired)">
@@ -45,7 +45,7 @@
     <PropertyGroup Condition="$(_DesktopMSBuildRequired)">
       <_DesktopMSBuildPath>$(_VSInstallDir)\MSBuild\Current\Bin\msbuild.exe</_DesktopMSBuildPath>
       <_DesktopMSBuildPath Condition="!Exists('$(_DesktopMSBuildPath)')">$(_VSInstallDir)\MSBuild\15.0\Bin\msbuild.exe</_DesktopMSBuildPath>
-    </PropertyGroup>
+    </PropertyGroup>-->
 
     <!-- <Microsoft.DotNet.SignTool.SignToolTask -->
         <!-- DryRun="$(_DryRun)" -->
@@ -62,5 +62,5 @@
         <!-- MSBuildPath="$(_DesktopMSBuildPath)" -->
         <!-- SNBinaryPath="$(NuGetPackageRoot)sn\$(SNVersion)\sn.exe" -->
         <!-- MicroBuildCorePath="$(NuGetPackageRoot)microbuild.core\$(MicroBuildCoreVersion)"/> -->
-  <!-- </Target> -->
+  </Target>
 </Project>
