@@ -233,7 +233,7 @@
 
     <!-- Symbol Uploader: MSDL -->
     <Message Importance="High" Text="Publishing symbol packages to MSDL ..." Condition="$(PublishToSymbolServer)" />
-    <PublishSymbols PackagesToPublish="@(PackagesToPublishToSymbolServer)"
+    <!--<PublishSymbols PackagesToPublish="@(PackagesToPublishToSymbolServer)"
                     FilesToPublish="@(FilesToPublishToSymbolServer)"
                     PersonalAccessToken="$(DotNetSymbolServerTokenMsdl)"
                     SymbolServerPath="https://microsoftpublicsymbols.artifacts.visualstudio.com/DefaultCollection"
@@ -242,7 +242,7 @@
                     DryRun="$(DryRun)"
                     ConvertPortablePdbsToWindowsPdbs="false"
                     PdbConversionTreatAsWarning=""
-                    Condition="$(PublishToSymbolServer)"/>
+                    Condition="$(PublishToSymbolServer)"/>-->
 
     <!-- 
       Symbol Uploader: SymWeb 
@@ -250,7 +250,7 @@
       Currently we need to call the task twice (https://github.com/dotnet/core-eng/issues/3489).
     -->
     <Message Importance="High" Text="Publishing symbol packages to SymWeb ..." Condition="$(PublishToSymbolServer)" />
-    <PublishSymbols PackagesToPublish="@(PackagesToPublishToSymbolServer)"
+    <!--<PublishSymbols PackagesToPublish="@(PackagesToPublishToSymbolServer)"
                     FilesToPublish="@(FilesToPublishToSymbolServer)"
                     PersonalAccessToken="$(DotNetSymbolServerTokenSymWeb)"
                     SymbolServerPath="https://microsoft.artifacts.visualstudio.com/DefaultCollection"
@@ -259,7 +259,7 @@
                     DryRun="$(DryRun)"
                     ConvertPortablePdbsToWindowsPdbs="false"
                     PdbConversionTreatAsWarning=""
-                    Condition="$(PublishToSymbolServer)"/>
+                    Condition="$(PublishToSymbolServer)"/>-->
   </Target>
 
   <Import Project="Sign.props" />
