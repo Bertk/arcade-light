@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
     public class GenerateChecksums : Microsoft.Build.Utilities.Task
     {

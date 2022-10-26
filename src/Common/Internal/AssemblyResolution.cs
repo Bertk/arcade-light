@@ -10,7 +10,7 @@ using System.Reflection;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.DotNet
+namespace DotNet.ArcadeLight
 {
     internal static class AssemblyResolution
     {

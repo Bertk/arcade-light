@@ -3,8 +3,8 @@
 
   <Import Project="SourceBuildArcade.targets" />
 
-  <UsingTask TaskName="Microsoft.DotNet.Arcade.Sdk.SourceBuild.AddSourceToNuGetConfig" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
-  <UsingTask TaskName="Microsoft.DotNet.Arcade.Sdk.SourceBuild.ReadSourceBuildIntermediateNupkgDependencies" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.SourceBuild.AddSourceToNuGetConfig" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.SourceBuild.ReadSourceBuildIntermediateNupkgDependencies" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
 
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.SourceBuild.Tasks" />

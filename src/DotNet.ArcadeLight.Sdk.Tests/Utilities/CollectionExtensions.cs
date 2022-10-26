@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     public static class CollectionExtensions
     {

@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Microsoft.DotNet.Arcade.Sdk.SourceBuild
+namespace DotNet.ArcadeLight.Sdk.SourceBuild
 {
     /// <summary>
     /// This task adds a source to a well-formed NuGet.Config file with highest

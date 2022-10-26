@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.Arcade.Common;
 using Xunit;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     public class ArgumentEscaperTests
     {

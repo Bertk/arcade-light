@@ -3,7 +3,7 @@
 
   <Import Project="..\BuildStep.props" />
 
-  <UsingTask TaskName="Microsoft.DotNet.Arcade.Sdk.GetLicenseFilePath" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.GetLicenseFilePath" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
 
   <PropertyGroup>
     <MicrosoftDotNetSourceBuildTasksBuildDir>$(NuGetPackageRoot)microsoft.dotnet.sourcebuild.tasks\$(MicrosoftDotNetSourceBuildTasksVersion)\build\</MicrosoftDotNetSourceBuildTasksBuildDir>
@@ -98,9 +98,9 @@
   <Target Name="GetLicenseFileForIntermediateNupkgPack"
           Condition="'$(DetectSourceBuildIntermediateNupkgLicense)' == 'true'">
     <!-- Find the repository's global LICENSE file to apply. -->
-    <Microsoft.DotNet.Arcade.Sdk.GetLicenseFilePath Directory="$(RepoRoot)">
+    <DotNet.ArcadeLight.Sdk.GetLicenseFilePath Directory="$(RepoRoot)">
       <Output TaskParameter="Path" PropertyName="DetectedLicenseFile"/>
-    </Microsoft.DotNet.Arcade.Sdk.GetLicenseFilePath>
+    </DotNet.ArcadeLight.Sdk.GetLicenseFilePath>
 
     <!-- Copy it to a file with '.txt' extension to avoid running into this NuGet problem: https://github.com/NuGet/Home/issues/7601 -->
     <PropertyGroup>
@@ -110,7 +110,8 @@
     <Copy
       SourceFiles="$(DetectedLicenseFile)"
       DestinationFiles="$(SourceBuildIntermediateNupkgLicenseFile)" />
-  </Target>
+  
+</Target>
 
   <!--
     Create source-build intermediate NuGet package and supplemental intermediate NuGet packages (if

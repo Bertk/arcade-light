@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 using Microsoft.Build.Utilities;
-using Microsoft.Arcade.Test.Common;
+using DotNet.ArcadeLight.Test.Common;
 using Xunit;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     public sealed class GenerateSourcePackageSourceLinkTargetsFileTests 
     {

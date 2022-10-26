@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Arcade.Test.Common
+namespace DotNet.ArcadeLight.Test.Common
 {
     public static class FakeHttpClient
     {

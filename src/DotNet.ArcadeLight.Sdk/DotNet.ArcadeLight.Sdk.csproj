@@ -27,6 +27,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="Microsoft.Build.Tasks.Core" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" />
     <PackageReference Include="NuGet.Versioning" />
     <PackageReference Include="System.Net.Http" />
     <PackageReference Include="System.Collections.Immutable" />
@@ -85,7 +86,6 @@
     <MicrosoftSourceLinkVersion>$(MicrosoftSourceLinkVersion)</MicrosoftSourceLinkVersion>
     <MicrosoftDiaSymReaderPdb2PdbVersion>$(MicrosoftDiaSymReaderPdb2PdbVersion)</MicrosoftDiaSymReaderPdb2PdbVersion>
     <MicrosoftDotNetXliffTasksVersion>$(MicrosoftDotNetXliffTasksVersion)</MicrosoftDotNetXliffTasksVersion>
-    <MicrosoftDotNetMaestroTasksVersion>$(MicrosoftDotNetMaestroTasksVersion)</MicrosoftDotNetMaestroTasksVersion>
     <MicrosoftSymbolUploaderBuildTaskVersion>$(MicrosoftSymbolUploaderBuildTaskVersion)</MicrosoftSymbolUploaderBuildTaskVersion>
     <MicrosoftTemplateEngineTasksVersion>$(MicrosoftTemplateEngineTasksVersion)</MicrosoftTemplateEngineTasksVersion>
   </PropertyGroup>

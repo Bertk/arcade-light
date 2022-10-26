@@ -10,7 +10,7 @@ using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
     public sealed class GenerateSourcePackageSourceLinkTargetsFile : Microsoft.Build.Utilities.Task
     {

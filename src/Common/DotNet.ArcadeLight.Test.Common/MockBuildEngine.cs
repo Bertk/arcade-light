@@ -6,7 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Microsoft.Arcade.Test.Common
+namespace DotNet.ArcadeLight.Test.Common
 {
     public class MockBuildEngine : IBuildEngine
     {

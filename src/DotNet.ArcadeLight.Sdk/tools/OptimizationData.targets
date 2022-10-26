@@ -14,9 +14,9 @@
       OptimizeAssembly                   Set of assemblies to apply Partial NGEN optimization data to.
   -->
 
-  <UsingTask TaskName="Microsoft.DotNet.Arcade.Sdk.Unsign" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
-  <UsingTask TaskName="Microsoft.DotNet.Arcade.Sdk.GroupItemsBy" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
-  <UsingTask TaskName="Microsoft.DotNet.Arcade.Sdk.ExtractNgenMethodList" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.Unsign" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.GroupItemsBy" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.ExtractNgenMethodList" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
 
   <PropertyGroup>
     <PostCompileBinaryModificationSentinelFile>$(IntermediateOutputPath)$(TargetFileName).pcbm</PostCompileBinaryModificationSentinelFile>
@@ -111,9 +111,9 @@
     <Error Text="No optimization data found for assemblies: @(_AssemblyWithoutRawIbcData, ', ')"
            Condition="'@(_AssemblyWithoutRawIbcData)' != ''" />
 
-    <Microsoft.DotNet.Arcade.Sdk.GroupItemsBy Items="@(_IbcFileByAssemblyName)" GroupMetadata="IbcFiles">
+    <DotNet.ArcadeLight.GroupItemsBy Items="@(_IbcFileByAssemblyName)" GroupMetadata="IbcFiles">
       <Output TaskParameter="GroupedItems" ItemName="_AssemblyWithRawIbcData" />
-    </Microsoft.DotNet.Arcade.Sdk.GroupItemsBy>
+    </DotNet.ArcadeLight.GroupItemsBy>
 
     <PropertyGroup>
       <_PartialNgenArg/>
@@ -192,9 +192,9 @@
            Condition="'$(_RunIbcMerge)' == 'true' and '$(_IbcMergeErrorCode)' != '0'" />
 
     <!-- Remove Authenticode signing record if present. -->
-    <Microsoft.DotNet.Arcade.Sdk.Unsign FilePath="%(_IbcMergeInvocation.UnsignFile)" Condition="'%(_IbcMergeInvocation.UnsignFile)' != ''" />
+    <DotNet.ArcadeLight.Sdk.Unsign FilePath="%(_IbcMergeInvocation.UnsignFile)" Condition="'%(_IbcMergeInvocation.UnsignFile)' != ''" />
 
-    <Microsoft.DotNet.Arcade.Sdk.ExtractNgenMethodList
+    <DotNet.ArcadeLight.Sdk.ExtractNgenMethodList
       IbcXmlFilePath="%(_IbcMergeInvocation.XmlOutputPath)" 
       AssemblyFilePath="%(_IbcMergeInvocation.UnsignFile)"
       AssemblyTargetFramework="%(_IbcMergeInvocation.TargetFramework)"

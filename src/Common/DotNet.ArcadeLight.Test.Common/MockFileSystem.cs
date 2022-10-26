@@ -6,7 +6,7 @@ using System.IO;
 using Microsoft.Arcade.Common;
 
 #nullable enable
-namespace Microsoft.Arcade.Test.Common
+namespace DotNet.ArcadeLight.Test.Common
 {
     public class MockFileSystem : IFileSystem
     {

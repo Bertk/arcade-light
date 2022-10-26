@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Microsoft.DotNet.Arcade.Sdk.SourceBuild
+namespace DotNet.ArcadeLight.Sdk.SourceBuild
 {
     /// <summary>
     /// Reads entries in a Version.Details.xml file to find intermediate nupkg dependencies. For

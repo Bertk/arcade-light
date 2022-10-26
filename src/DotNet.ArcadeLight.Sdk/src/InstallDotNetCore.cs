@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
 #if NET472
     [LoadInSeparateAppDomain]
@@ -83,7 +83,7 @@ namespace Microsoft.DotNet.Arcade.Sdk
                                 }
                                 else
                                 {
-                                    var proj = Project.FromFile(VersionsPropsPath, new Build.Definition.ProjectOptions());
+                                    var proj = Project.FromFile(VersionsPropsPath, new Microsoft.Build.Definition.ProjectOptions());
                                     properties = proj.AllEvaluatedProperties.ToLookup(p => p.Name, StringComparer.OrdinalIgnoreCase);
                                 }
                             }

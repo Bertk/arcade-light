@@ -4,10 +4,10 @@
 using Microsoft.Build.Utilities;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Arcade.Test.Common;
+using DotNet.ArcadeLight.Test.Common;
 using Xunit;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     public class GetAssemblyFullNameTests
     {

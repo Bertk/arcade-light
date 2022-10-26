@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     [CollectionDefinition(Name)]
     public class TestProjectCollection : ICollectionFixture<TestProjectFixture>
@@ -25,7 +25,7 @@ namespace Microsoft.DotNet.Arcade.Sdk.Tests
 
         private static readonly string[] _packagesToClear =
         {
-            "Microsoft.DotNet.Arcade.Sdk",
+            "DotNet.ArcadeLight.Sdk",
         };
 
         public TestProjectFixture()

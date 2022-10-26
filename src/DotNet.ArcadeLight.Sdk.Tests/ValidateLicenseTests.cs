@@ -3,7 +3,7 @@
 
 using Xunit;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     public class ValidateLicenseTests
     {

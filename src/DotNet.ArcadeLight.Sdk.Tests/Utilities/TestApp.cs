@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
 
     public class TestApp : IDisposable
@@ -123,7 +123,7 @@ namespace Microsoft.DotNet.Arcade.Sdk.Tests
             }
             catch
             {
-                // Sometimes antivirus scanning locks files and they can't be deleted. Retring after 500ms seems to get around this most of the time
+                // Sometimes antivirus scanning locks files and they can't be deleted. Retrying after 500ms seems to get around this most of the time
                 Thread.Sleep(500);
                 Directory.Delete(WorkingDirectory, recursive: true);
             }

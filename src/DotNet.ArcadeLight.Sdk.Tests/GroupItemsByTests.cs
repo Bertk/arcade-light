@@ -4,10 +4,10 @@
 using Xunit;
 using Microsoft.Build.Utilities;
 using System.Collections.Generic;
-using Microsoft.Arcade.Test.Common;
+using DotNet.ArcadeLight.Test.Common;
 using System.Linq;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     public class GroupItemsByTests
     {

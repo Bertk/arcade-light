@@ -3,11 +3,11 @@
 
 using System;
 using System.IO;
-using Microsoft.Arcade.Test.Common;
+using DotNet.ArcadeLight.Test.Common;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     public class GenerateResxSourceTests
     {

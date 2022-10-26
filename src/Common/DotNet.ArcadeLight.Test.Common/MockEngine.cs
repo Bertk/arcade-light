@@ -6,7 +6,7 @@ using Microsoft.Build.Framework;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace Microsoft.Arcade.Test.Common
+namespace DotNet.ArcadeLight.Test.Common
 {
     public class MockEngine : IBuildEngine5
     {

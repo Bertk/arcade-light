@@ -10,7 +10,7 @@ using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Threading;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
 #if NET472
     [LoadInSeparateAppDomain]

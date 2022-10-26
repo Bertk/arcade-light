@@ -8,7 +8,7 @@
     See https://github.com/dotnet/sdk/issues/94 that tracks productization of this code.
   -->
 
-  <UsingTask TaskName="Microsoft.DotNet.Arcade.Sdk.GenerateResxSource" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.GenerateResxSource" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
   
   <!-- Set the Generator metadata so that VS triggers design-time build whenever the .resx file is saved -->
   <ItemGroup>
@@ -46,7 +46,7 @@
           Inputs="@(EmbeddedResourceSGResx)"
           Outputs="%(EmbeddedResourceSGResx.SourceOutputPath)">
 
-    <Microsoft.DotNet.Arcade.Sdk.GenerateResxSource
+    <DotNet.ArcadeLight.Sdk.GenerateResxSource
       Language="$(Language)"
       ResourceFile="%(EmbeddedResourceSGResx.FullPath)"
       ResourceName="%(EmbeddedResourceSGResx.ManifestResourceName)"

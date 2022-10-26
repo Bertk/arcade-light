@@ -11,7 +11,7 @@ using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Xml.Linq;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
     /// <summary>
     /// Used to convert a raw XML dump from IBCMerge into the set of methods which will be NGEN'd when 

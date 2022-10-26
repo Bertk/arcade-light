@@ -5,7 +5,7 @@ using System.Reflection;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
     public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
     {

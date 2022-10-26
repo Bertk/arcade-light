@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
     /// <summary>
     /// This task writes msbuild Items with their metadata to a props file.

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Microsoft.Arcade.Test.Common
+namespace DotNet.ArcadeLight.Test.Common
 {
     public class DiffUtil
     {

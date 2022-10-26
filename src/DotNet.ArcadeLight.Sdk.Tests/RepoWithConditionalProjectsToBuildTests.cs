@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Microsoft.DotNet.Arcade.Sdk.Tests
+namespace DotNet.ArcadeLight.Sdk.Tests
 {
     [Collection(TestProjectCollection.Name)]
     public class RepoWithConditionalProjectsToBuildTests

@@ -5,7 +5,7 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using NuGet.Versioning;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
     public class CompareVersions : Microsoft.Build.Utilities.Task
     {

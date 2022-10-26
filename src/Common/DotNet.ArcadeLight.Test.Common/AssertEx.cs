@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Xunit;
 
-namespace Microsoft.Arcade.Test.Common
+namespace DotNet.ArcadeLight.Test.Common
 {
     /// <summary>
     /// Assert style type to deal with the lack of features in xUnit's Assert type

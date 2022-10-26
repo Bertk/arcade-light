@@ -11,7 +11,7 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Tasks = System.Threading.Tasks;
 
-namespace Microsoft.DotNet.Arcade.Sdk
+namespace DotNet.ArcadeLight.Sdk
 {
     public class DownloadFile : Microsoft.Build.Utilities.Task, ICancelableTask
     {
