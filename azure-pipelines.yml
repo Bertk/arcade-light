@@ -93,7 +93,7 @@ stages:
         publish:
           artifacts:
             name: Artifacts_Test_$(Agent.OS)_$(_BuildConfig)
-          logs: 
+          logs:
             name: Logs_Test_$(Agent.OS)_$(_BuildConfig)
         download: true
       workspace:
@@ -127,17 +127,22 @@ stages:
         #      /p:Configuration=Release
         #      /p:PublishToMSDL=false
         - powershell: eng\commonlight\build.ps1
-            -configuration $(_BuildConfig) 
+            -configuration $(_BuildConfig)
             -prepareMachine
             -ci
             -restore
             -test
-            -projects $(Build.SourcesDirectory)\tests\UnitTests.proj
+            -projects $(Build.SourcesDirectory)\**\*Tests.proj
             /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
             /p:RestoreUsingNuGetTargets=false
           displayName: Run Tests
           env:
             SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        - task: PublishTestResults@2
+          condition: succeededOrFailed()
+          inputs:
+            testRunner: VSTest
+            testResultsFiles: '**/*.trx'
       - job: Linux
         timeoutInMinutes: 90
         container: LinuxContainer
@@ -160,10 +165,15 @@ stages:
             --ci
             --restore
             --test
-            --projects $(Build.SourcesDirectory)/tests/UnitTests.proj
+            --projects $(Build.SourcesDirectory)/**/*Tests.proj
             /bl:$(Build.SourcesDirectory)/artifacts/log/$(_BuildConfig)/test-linux.binlog
             /p:RestoreUsingNuGetTargets=false
           displayName: Run Tests
           env:
             SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        - task: PublishTestResults@2
+          condition: succeededOrFailed()
+          inputs:
+            testRunner: VSTest
+            testResultsFiles: '**/*.trx'
 
