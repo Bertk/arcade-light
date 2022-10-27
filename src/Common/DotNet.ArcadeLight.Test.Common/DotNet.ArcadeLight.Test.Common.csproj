@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net472</TargetFrameworks>
+    <IsTestProject>true</IsTestProject>
+    <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
+
+    <NoWarn>NU1507</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" />
+    <PackageReference Include="Microsoft.Build.Framework" />
+    <PackageReference Include="System.Collections.Immutable" />
+    <PackageReference Include="xunit" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -351,7 +351,7 @@ function InitializeToolset {
 
   GetNuGetPackageCachePath
 
-  ReadGlobalVersion "Microsoft.DotNet.Arcade.Sdk"
+  ReadGlobalVersion "DotNet.ArcadeLight.Sdk"
 
   local toolset_version=$_ReadGlobalVersion
   local toolset_location_file="$toolset_dir/$toolset_version.txt"
@@ -377,7 +377,7 @@ function InitializeToolset {
     bl="/bl:$log_dir/ToolsetRestore.binlog"
   fi
 
-  echo '<Project Sdk="Microsoft.DotNet.Arcade.Sdk"/>' > "$proj"
+  echo '<Project Sdk="DotNet.ArcadeLight.Sdk"/>' > "$proj"
   MSBuild-Core "$proj" $bl /t:__WriteToolsetLocation /clp:ErrorsOnly\;NoSummary /p:__ToolsetLocationOutputFile="$toolset_location_file"
 
   local toolset_build_proj=`cat "$toolset_location_file"`
@@ -429,12 +429,14 @@ function MSBuild {
     # new scripts need to work with old packages, so we need to look for the old names/versions
     local selectedPath=
     local possiblePaths=()
-    possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/Microsoft.DotNet.ArcadeLogging.dll" )
-    possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/Microsoft.DotNet.Arcade.Sdk.dll" )
-    possiblePaths+=( "$toolset_dir/netcoreapp2.1/Microsoft.DotNet.ArcadeLogging.dll" )
-    possiblePaths+=( "$toolset_dir/netcoreapp2.1/Microsoft.DotNet.Arcade.Sdk.dll" )
-    possiblePaths+=( "$toolset_dir/netcoreapp3.1/Microsoft.DotNet.ArcadeLogging.dll" )
-    possiblePaths+=( "$toolset_dir/netcoreapp3.1/Microsoft.DotNet.Arcade.Sdk.dll" )
+    possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/DotNet.ArcadeLight.Logging.dll" )
+    possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/DotNet.ArcadeLight.Sdk.dll" )
+    possiblePaths+=( "$toolset_dir/netcoreapp2.1/DotNet.ArcadeLight.Logging.dll" )
+    possiblePaths+=( "$toolset_dir/netcoreapp2.1/DotNet.ArcadeLight.Sdk.dll" )
+    possiblePaths+=( "$toolset_dir/netcoreapp3.1/DotNet.ArcadeLight.Logging.dll" )
+    possiblePaths+=( "$toolset_dir/netcoreapp3.1/DotNet.ArcadeLight.Sdk.dll" )
+    possiblePaths+=( "$toolset_dir/net6.0/DotNet.ArcadeLight.Logging.dll" )
+    possiblePaths+=( "$toolset_dir/net6.0/DotNet.ArcadeLight.Sdk.dll" )
     for path in "${possiblePaths[@]}"; do
       if [[ -f $path ]]; then
         selectedPath=$path

@@ -20,7 +20,7 @@ parameters:
     enabled: false
     # Optional: Include toolset dependencies in the generated graph files
     includeToolset: false
-    
+
   # Required: A collection of jobs to run - https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=vsts&tabs=schema#job
   jobs: []
 
@@ -40,7 +40,7 @@ parameters:
 jobs:
 - ${{ each job in parameters.jobs }}:
   - template: ../job/job.yml
-    parameters: 
+    parameters:
       # pass along parameters
       ${{ each parameter in parameters }}:
         ${{ if ne(parameter.key, 'jobs') }}:
@@ -52,38 +52,3 @@ jobs:
           ${{ property.key }}: ${{ property.value }}
 
       name: ${{ job.job }}
-
-- ${{ if eq(parameters.enableSourceBuild, true) }}:
-  - template: /eng/azuredevops/pipelines/jobs/source-build.yml
-    parameters:
-      allCompletedJobId: Source_Build_Complete
-      ${{ each parameter in parameters.sourceBuildParameters }}:
-        ${{ parameter.key }}: ${{ parameter.value }}
-
-- ${{ if eq(parameters.enableSourceIndex, 'true') }}:
-  - template: ../job/source-index-stage1.yml
-    parameters:
-      runAsPublic: ${{ parameters.runAsPublic }}
-      ${{ each parameter in parameters.sourceIndexParams }}:
-        ${{ parameter.key }}: ${{ parameter.value }}
-
-- ${{ if and(eq(parameters.runAsPublic, 'false'), ne(variables['System.TeamProject'], 'public'), notin(variables['Build.Reason'], 'PullRequest')) }}:
-  
-  - ${{ if or(eq(parameters.enablePublishBuildAssets, true), eq(parameters.artifacts.publish.manifests, 'true'), ne(parameters.artifacts.publish.manifests, '')) }}:
-    - template: ../job/publish-build-assets.yml
-      parameters:
-        continueOnError: ${{ parameters.continueOnError }}
-        dependsOn:
-        - ${{ if ne(parameters.publishBuildAssetsDependsOn, '') }}:
-          - ${{ each job in parameters.publishBuildAssetsDependsOn }}:
-            - ${{ job.job }}
-        - ${{ if eq(parameters.publishBuildAssetsDependsOn, '') }}:
-          - ${{ each job in parameters.jobs }}:
-            - ${{ job.job }}
-        - ${{ if eq(parameters.enableSourceBuild, true) }}:
-          - Source_Build_Complete
-        pool:
-          vmImage: 'windows-2019'
-        runAsPublic: ${{ parameters.runAsPublic }}
-        publishUsingPipelines: ${{ parameters.enablePublishUsingPipelines }}
-        enablePublishBuildArtifacts: ${{ parameters.enablePublishBuildArtifacts }}
