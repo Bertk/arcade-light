@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.Arcade.Common
+namespace DotNet.ArcadeLight.Common
 {
     public class ZipArchiveManager : IZipArchiveManager
     {

@@ -4,7 +4,7 @@
 using System.IO;
 
 #nullable enable
-namespace Microsoft.Arcade.Common
+namespace DotNet.ArcadeLight.Common
 {
     public interface IFileSystem
     {

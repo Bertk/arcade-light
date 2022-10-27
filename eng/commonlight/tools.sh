@@ -429,13 +429,13 @@ function MSBuild {
     # new scripts need to work with old packages, so we need to look for the old names/versions
     local selectedPath=
     local possiblePaths=()
-    possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/Microsoft.DotNet.ArcadeLogging.dll" )
+    possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/DotNet.ArcadeLight.Logging.dll" )
     possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/DotNet.ArcadeLight.Sdk.dll" )
-    possiblePaths+=( "$toolset_dir/netcoreapp2.1/Microsoft.DotNet.ArcadeLogging.dll" )
+    possiblePaths+=( "$toolset_dir/netcoreapp2.1/DotNet.ArcadeLight.Logging.dll" )
     possiblePaths+=( "$toolset_dir/netcoreapp2.1/DotNet.ArcadeLight.Sdk.dll" )
-    possiblePaths+=( "$toolset_dir/netcoreapp3.1/Microsoft.DotNet.ArcadeLogging.dll" )
+    possiblePaths+=( "$toolset_dir/netcoreapp3.1/DotNet.ArcadeLight.Logging.dll" )
     possiblePaths+=( "$toolset_dir/netcoreapp3.1/DotNet.ArcadeLight.Sdk.dll" )
-    possiblePaths+=( "$toolset_dir/net6.0/Microsoft.DotNet.ArcadeLogging.dll" )
+    possiblePaths+=( "$toolset_dir/net6.0/DotNet.ArcadeLight.Logging.dll" )
     possiblePaths+=( "$toolset_dir/net6.0/DotNet.ArcadeLight.Sdk.dll" )
     for path in "${possiblePaths[@]}"; do
       if [[ -f $path ]]; then

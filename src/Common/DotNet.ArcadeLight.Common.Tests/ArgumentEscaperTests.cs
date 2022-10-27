@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using FluentAssertions;
-using Microsoft.Arcade.Common;
+using DotNet.ArcadeLight.Common;
 using Xunit;
 
 namespace DotNet.ArcadeLight.Sdk.Tests

@@ -8,7 +8,7 @@ using System;
 using System.Reflection;
 using System.Linq;
 
-namespace Microsoft.Arcade.Common
+namespace DotNet.ArcadeLight.Common
 {
     public abstract partial class MSBuildTaskBase : MSBuild.Task
     {

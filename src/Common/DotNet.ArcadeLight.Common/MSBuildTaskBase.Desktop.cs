@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-using Microsoft.Arcade.Common.Desktop;
+using DotNet.ArcadeLight.Common.Desktop;
 
-namespace Microsoft.Arcade.Common
+namespace DotNet.ArcadeLight.Common
 {
     public partial class MSBuildTaskBase
     {

@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 
-namespace Microsoft.Arcade.Common
+namespace DotNet.ArcadeLight.Common
 {
     public class CommandFactory : ICommandFactory
     {

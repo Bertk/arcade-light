@@ -5,7 +5,7 @@ using System.Linq;
 using System.IO;
 using System.Collections;
 
-namespace Microsoft.DotNet.ArcadeLogging
+namespace DotNet.ArcadeLight.Logging
 {
     /// <summary>
     /// Logger for converting MSBuild error messages to the Azure Pipelines Tasks format

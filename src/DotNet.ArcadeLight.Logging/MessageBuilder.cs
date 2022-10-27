@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.DotNet.ArcadeLogging
+namespace DotNet.ArcadeLight.Logging
 {
     public sealed class MessageBuilder
     {

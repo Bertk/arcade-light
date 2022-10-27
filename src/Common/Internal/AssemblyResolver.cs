@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
-namespace Microsoft.Arcade.Common.Desktop
+namespace DotNet.ArcadeLight.Common.Desktop
 {
     /// <summary>
     /// Used to enable app-local assembly unification.

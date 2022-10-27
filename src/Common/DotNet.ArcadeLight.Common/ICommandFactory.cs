@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace Microsoft.Arcade.Common
+namespace DotNet.ArcadeLight.Common
 {
     public interface ICommandFactory
     {

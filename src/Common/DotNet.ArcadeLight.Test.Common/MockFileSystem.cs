@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.Arcade.Common;
+using DotNet.ArcadeLight.Common;
 
 #nullable enable
 namespace DotNet.ArcadeLight.Test.Common

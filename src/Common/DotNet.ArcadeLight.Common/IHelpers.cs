@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Microsoft.Arcade.Common
+namespace DotNet.ArcadeLight.Common
 {
     public interface IHelpers
     {

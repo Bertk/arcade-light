@@ -4,7 +4,7 @@
 using System;
 using System.IO;
 
-namespace Microsoft.Arcade.Common
+namespace DotNet.ArcadeLight.Common
 {
     public interface ICommand
     {
