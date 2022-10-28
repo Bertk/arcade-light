@@ -62,6 +62,7 @@ stages:
             SYSTEM_ACCESSTOKEN: $(System.AccessToken)
       - ${{ if eq(variables._RunAsPublic, True) }}:
         - job: Linux
+          timeoutInMinutes: 90
           container: LinuxContainer
           pool:
             vmImage: ubuntu-latest
