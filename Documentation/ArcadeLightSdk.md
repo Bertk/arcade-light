@@ -71,20 +71,18 @@ artifacts
   toolset
 ```
 
-Having a common output directory structure makes it possible to unify MicroBuild definitions.
+Having a common output directory structure makes it possible to definitions.
 
 | directory         | description |
 |-------------------|-------------|
 | bin               | Build output of each project. |
 | obj               | Intermediate directory for each project. |
 | packages          | NuGet packages produced by all projects in the repo. |
-| VSSetup           | Packages produced by VSIX projects in the repo. These packages are experimental and can be used for dogfooding.
-| VSSetup/Insertion | Willow manifests and VSIXes to be inserted into VS.
-| VSSetup.obj       | Temp files produced by VSIX build. |
 | SymStore          | Storage for converted Windows PDBs |
 | log               | Build binary log and other logs. |
 | tmp               | Temp files generated during build. |
 | toolset           | Files generated during toolset restore. |
+| TestResults       | Test result files. |
 
 ## Build scripts and extensibility points
 
