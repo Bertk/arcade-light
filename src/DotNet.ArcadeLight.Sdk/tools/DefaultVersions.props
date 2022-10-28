@@ -15,11 +15,6 @@
   <Import Project="DefaultVersions.Generated.props"/>
   <Import Project="$(VersionsPropsPath)" Condition="Exists('$(VersionsPropsPath)')"/>
 
-  <!-- TODO: remove once all repos remove RestoreSources from their Version.props files -->
-  <PropertyGroup>
-    <RestoreSources/>
-  </PropertyGroup>
-
   <!-- 
     Prevent NuGet from using cached packages 
     Workaround for https://github.com/NuGet/Home/issues/3116
@@ -32,9 +27,10 @@
     Arcade SDK features.
   -->
   <PropertyGroup>
+    <!-- eliminate property group (bert) -->
     <!-- Opt-out features -->
-    <UsingToolXliff Condition="'$(UsingToolXliff)' == ''">true</UsingToolXliff>
-    <UsingToolPdbConverter Condition="'$(UsingToolPdbConverter)' == ''">true</UsingToolPdbConverter>
+    <UsingToolXliff Condition="'$(UsingToolXliff)' == ''">false</UsingToolXliff>
+    <UsingToolPdbConverter Condition="'$(UsingToolPdbConverter)' == ''">false</UsingToolPdbConverter>
 
     <!-- Opt-in features -->
     <UsingToolVSSDK Condition="'$(UsingToolVSSDK)' == ''">false</UsingToolVSSDK>
