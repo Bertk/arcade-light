@@ -6,6 +6,9 @@
     <IsPackable>true</IsPackable>
     <LangVersion>9.0</LangVersion>
     <NoWarn>NU1507</NoWarn>
+    <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
+    <DebugType>embedded</DebugType>
+
   </PropertyGroup>
 
   <ItemGroup>

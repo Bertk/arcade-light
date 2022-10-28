@@ -22,6 +22,8 @@
     <EnableGeneratedPackageContent>false</EnableGeneratedPackageContent>
     <_GeneratedVersionFilePath>$(IntermediateOutputPath)DefaultVersions.Generated.props</_GeneratedVersionFilePath>
     <NoWarn>3021;NU5105;NU1507;SYSLIB0013</NoWarn>
+    <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
