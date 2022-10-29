@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
 
-    <NoWarn>$(NoWarn);NU1507</NoWarn>
+    <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
