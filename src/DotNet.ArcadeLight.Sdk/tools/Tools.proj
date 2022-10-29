@@ -39,5 +39,4 @@
 
   <Import Project="InstallDotNetCore.targets" Condition="'$(DotNetBuildFromSource)' != 'true'" />
 
-  <Import Project="VisualStudio.AcquireOptimizationData.targets" Condition="'$(UsingToolVisualStudioIbcTraining)' == 'true'" />
 </Project>

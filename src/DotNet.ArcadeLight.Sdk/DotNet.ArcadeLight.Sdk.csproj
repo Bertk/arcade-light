@@ -81,10 +81,6 @@
 <Project>
   <PropertyGroup>
     <ArcadeSdkVersion>$(PackageVersion)</ArcadeSdkVersion>
-    <MicrosoftNetCompilersToolsetVersion>$(MicrosoftNetCompilersToolsetVersion)</MicrosoftNetCompilersToolsetVersion>
-    <MicrosoftNetILLinkTasksVersion>$(MicrosoftNetILLinkTasksVersion)</MicrosoftNetILLinkTasksVersion>
-    <MicrosoftSourceLinkVersion>$(MicrosoftSourceLinkVersion)</MicrosoftSourceLinkVersion>
-    <MicrosoftTemplateEngineTasksVersion>$(MicrosoftTemplateEngineTasksVersion)</MicrosoftTemplateEngineTasksVersion>
   </PropertyGroup>
 </Project>]]>
   </_SdkVersionPropsContent>

@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <PackageReference Include="xunit.runner.console" PrivateAssets="all" Publish="true"/>
+    <PackageReference Include="xunit.runner.console" IsImplicitlyDefined="true" PrivateAssets="all" Publish="true"/>
   </ItemGroup>
 
   <Target Name="RunTests"

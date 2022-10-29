@@ -367,3 +367,5 @@ babel-webpack/
 .angular/
 
 .dotnet/
+
+/nuget.config
