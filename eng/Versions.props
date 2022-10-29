@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <!-- Opt-out repo features -->
-    <UsingToolXliff>false</UsingToolXliff>
     <!-- Libs -->
     <MicrosoftNetCompilersToolsetVersion>4.1.0-1.final</MicrosoftNetCompilersToolsetVersion>
     <XUnitVersion>2.4.2</XUnitVersion>

@@ -22,54 +22,6 @@
   <PropertyGroup>
     <RestoreNoCache Condition="'$(ContinuousIntegrationBuild)' == 'true'">true</RestoreNoCache>
   </PropertyGroup>
-  
-  <!--
-    Arcade SDK features.
-  -->
-  <PropertyGroup>
-    <!-- eliminate property group (bert) -->
-    <!-- Opt-out features -->
-    <UsingToolXliff Condition="'$(UsingToolXliff)' == ''">false</UsingToolXliff>
-    <UsingToolPdbConverter Condition="'$(UsingToolPdbConverter)' == ''">false</UsingToolPdbConverter>
-
-    <!-- Opt-in features -->
-    <UsingToolVSSDK Condition="'$(UsingToolVSSDK)' == ''">false</UsingToolVSSDK>
-    <UsingToolIbcOptimization Condition="'$(UsingToolIbcOptimization)' == ''">false</UsingToolIbcOptimization>
-    <UsingToolVisualStudioIbcTraining Condition="'$(UsingToolVisualStudioIbcTraining)' == ''">false</UsingToolVisualStudioIbcTraining>
-    <UsingToolNuGetRepack Condition="'$(UsingToolNuGetRepack)' == ''">false</UsingToolNuGetRepack>
-    <UsingToolSymbolUploader Condition="'$(UsingToolSymbolUploader)' == ''">false</UsingToolSymbolUploader>
-
-    <!-- Deprecated features -->
-    <!--
-      The UsingToolXUnit property is deprecated,
-      use the TestRunnerName property to choose which test runner to use.
-    -->
-    <UsingToolXUnit Condition="'$(UsingToolXUnit)' == ''">true</UsingToolXUnit>
-
-    <!--
-      Use compilers from the Microsoft.Net.Compilers/Microsoft.NETCore.Compilers package.
-      Repo can set this property to true if it needs to use a different version of the compiler than the one in the dotnet SDK.
-    -->
-    <UsingToolMicrosoftNetCompilers Condition="'$(UsingToolMicrosoftNetCompilers)' == ''">false</UsingToolMicrosoftNetCompilers>
-
-    <!--
-      Use IL linker from the Microsoft.NET.ILLink.Tasks package.
-      Repo can set this property to true if it needs to use a different version of the IL linker than the one in the dotnet SDK.
-    -->
-    <UsingToolMicrosoftNetILLinkTasks Condition="'$(UsingToolMicrosoftNetILLinkTasks)' == ''">false</UsingToolMicrosoftNetILLinkTasks>
-  </PropertyGroup>
-
-  <!--
-    Disable features when building from source.
-  -->
-  <PropertyGroup Condition="'$(ArcadeBuildFromSource)' == 'true'">
-    <UsingToolPdbConverter>false</UsingToolPdbConverter>
-    <UsingToolVSSDK>false</UsingToolVSSDK>
-    <UsingToolIbcOptimization>false</UsingToolIbcOptimization>
-    <UsingToolVisualStudioIbcTraining>false</UsingToolVisualStudioIbcTraining>
-    <UsingToolSymbolUploader>false</UsingToolSymbolUploader>
-    <UsingToolNuGetRepack>false</UsingToolNuGetRepack>
-  </PropertyGroup>
 
   <!--
     Default versions
@@ -78,20 +30,13 @@
     <DropAppVersion Condition="'$(DropAppVersion)' == ''">18.165.29912-buildid11693003</DropAppVersion>
     <MicroBuildPluginsSwixBuildVersion Condition="'$(MicroBuildPluginsSwixBuildVersion)' == ''">1.0.422</MicroBuildPluginsSwixBuildVersion>
     <MicrosoftDotNetIBCMergeVersion Condition="'$(MicrosoftDotNetIBCMergeVersion)' == ''">5.1.0-beta.21356.1</MicrosoftDotNetIBCMergeVersion>
-    <MicrosoftDotnetNuGetRepackTasksVersion Condition="'$(MicrosoftDotnetNuGetRepackTasksVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotnetNuGetRepackTasksVersion>
-    <MicrosoftDotNetSignToolVersion Condition="'$(MicrosoftDotNetSignToolVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotNetSignToolVersion>
-    <MicrosoftTestPlatformVersion Condition="'$(MicrosoftTestPlatformVersion)' == ''">16.5.0</MicrosoftTestPlatformVersion>
+    <MicrosoftTestPlatformVersion Condition="'$(MicrosoftTestPlatformVersion)' == ''">16.7.3</MicrosoftTestPlatformVersion>
     <XUnitVersion Condition="'$(XUnitVersion)' == ''">2.4.2</XUnitVersion>
     <XUnitRunnerConsoleVersion Condition="'$(XUnitRunnerConsoleVersion)' == ''">$(XUnitVersion)</XUnitRunnerConsoleVersion>
     <XUnitRunnerVisualStudioVersion Condition="'$(XUnitRunnerVisualStudioVersion)' == ''">2.4.5</XUnitRunnerVisualStudioVersion>
     <MSTestVersion Condition="'$(MSTestVersion)' == ''">2.0.0</MSTestVersion>
     <MSTestTestAdapterVersion Condition="'$(MSTestTestAdapterVersion)' == ''">$(MSTestVersion)</MSTestTestAdapterVersion>
     <MSTestTestFrameworkVersion Condition="'$(MSTestTestFrameworkVersion)' == ''">$(MSTestVersion)</MSTestTestFrameworkVersion>
-    <MicrosoftDotNetBuildTasksFeedVersion Condition="'$(MicrosoftDotNetBuildTasksFeedVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotNetBuildTasksFeedVersion>
-    <MicrosoftDotNetBuildTasksInstallersVersion Condition="'$(MicrosoftDotNetBuildTasksInstallersVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotNetBuildTasksInstallersVersion>
-    <SNVersion Condition="'$(SNVersion)' == ''">1.0.0</SNVersion>
-    <MicrosoftDotNetBuildTasksVisualStudioVersion Condition="'$(MicrosoftDotNetBuildTasksVisualStudioVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotNetBuildTasksVisualStudioVersion>
-    <MicrosoftDotNetSourceBuildTasksVersion Condition="'$(MicrosoftDotNetSourceBuildTasksVersion)' == ''">$(ArcadeSdkVersion)</MicrosoftDotNetSourceBuildTasksVersion>
     <RichCodeNavPackageVersion Condition="'$(RichCodeNavPackageVersion)' == ''">0.1.1832-alpha</RichCodeNavPackageVersion>
   </PropertyGroup>
 
@@ -100,7 +45,5 @@
   <!-- 
     Defaults for properties that need to be available to all CI build steps and are dependent on settings specified in eng/Versions.props.
   -->
-  <PropertyGroup>
-    <IbcOptimizationDataDir Condition="'$(UsingToolVisualStudioIbcTraining)' == 'true'">$(ArtifactsDir)ibc\</IbcOptimizationDataDir>
-  </PropertyGroup>
+ 
 </Project>
