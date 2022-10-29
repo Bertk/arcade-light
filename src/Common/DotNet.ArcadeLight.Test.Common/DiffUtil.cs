@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace DotNet.ArcadeLight.Test.Common
 {
-    public class DiffUtil
+    public static class DiffUtil
     {
         private enum EditKind
         {

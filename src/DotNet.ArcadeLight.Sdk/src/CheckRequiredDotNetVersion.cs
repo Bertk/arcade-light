@@ -13,7 +13,7 @@ namespace DotNet.ArcadeLight.Sdk
 {
     public class CheckRequiredDotNetVersion : Microsoft.Build.Utilities.Task
     {
-        private static readonly string s_cacheKey = "CheckRequiredDotNetVersion-6ED0A075-A4B3-46B1-97D4-448558D515D3";
+        private const string s_cacheKey = "CheckRequiredDotNetVersion-6ED0A075-A4B3-46B1-97D4-448558D515D3";
 
         private sealed class CacheEntry
         {

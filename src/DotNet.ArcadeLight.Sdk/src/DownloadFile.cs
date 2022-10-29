@@ -63,7 +63,7 @@ namespace DotNet.ArcadeLight.Sdk
                 return true;
             }
 
-            if (string.IsNullOrWhiteSpace(Uri) && (Uris == null || Uris.Count() == 0)) {
+            if (string.IsNullOrWhiteSpace(Uri) && (Uris == null || Uris.Length == 0)) {
                 Log.LogError($"Invalid task parameter value: {nameof(Uri)} and {nameof(Uris)} are empty.");
                 return false;
             }

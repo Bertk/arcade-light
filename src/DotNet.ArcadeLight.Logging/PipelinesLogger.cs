@@ -23,7 +23,7 @@ namespace DotNet.ArcadeLight.Logging
         private string _solutionDirectory;
         public LoggerVerbosity Verbosity { get; set; }
         public string Parameters { get; set; }
-        private static readonly string s_TelemetryMarker = "NETCORE_ENGINEERING_TELEMETRY";
+        private const string s_TelemetryMarker = "NETCORE_ENGINEERING_TELEMETRY";
 
         public void Initialize(IEventSource eventSource)
         {
@@ -196,7 +196,7 @@ namespace DotNet.ArcadeLight.Logging
 
         private void OnTelemetryLogged(object sender, TelemetryEventArgs e)
         {
-            if (e.EventName.Equals(s_TelemetryMarker))
+            if (e.EventName.Equals(s_TelemetryMarker, StringComparison.Ordinal))
             {
                 if (!e.Properties.TryGetValue("Category", out string telemetryCategory))
                     return;
@@ -239,10 +239,10 @@ namespace DotNet.ArcadeLight.Logging
                 return;
             }
 
-            string propertyCategory = e.Properties?.Cast<DictionaryEntry>().LastOrDefault(p => p.Key.ToString().Equals(s_TelemetryMarker)).Value?.ToString();
+            string propertyCategory = e.Properties?.Cast<DictionaryEntry>().LastOrDefault(p => p.Key.ToString().Equals(s_TelemetryMarker, StringComparison.Ordinal)).Value?.ToString();
             if(string.IsNullOrWhiteSpace(propertyCategory))
             {
-                propertyCategory = e.GlobalProperties?.LastOrDefault(p => p.Key.ToString().Equals($"_{s_TelemetryMarker}")).Value;
+                propertyCategory = e.GlobalProperties?.LastOrDefault(p => p.Key.ToString().Equals($"_{s_TelemetryMarker}", StringComparison.Ordinal)).Value;
             }
             var parentId = _buildEventContextMap.TryGetValue(e.ParentProjectBuildEventContext, out var guid)
             ? (Guid?)guid

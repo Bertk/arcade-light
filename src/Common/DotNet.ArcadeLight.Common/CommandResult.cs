@@ -9,7 +9,7 @@ namespace DotNet.ArcadeLight.Common
 {
     public struct CommandResult
     {
-        public static readonly CommandResult Empty = new CommandResult();
+        public static readonly CommandResult Empty;
 
         public ProcessStartInfo StartInfo { get; }
         public int ExitCode { get; }

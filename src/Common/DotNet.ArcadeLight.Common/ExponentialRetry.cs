@@ -10,7 +10,7 @@ namespace DotNet.ArcadeLight.Common
 {
     public class ExponentialRetry : IRetryHandler
     {
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
 
         public int MaxAttempts { get; set; } = 10;
 

@@ -41,7 +41,7 @@ namespace DotNet.ArcadeLight.Logging
         public void Finish(string message = null)
         {
             Debug.Assert(_state == State.Properties);
-            _builder.Append("]");
+            _builder.Append(']');
             if (!string.IsNullOrEmpty(message))
             {
                 _builder.Append(Escape(message));
