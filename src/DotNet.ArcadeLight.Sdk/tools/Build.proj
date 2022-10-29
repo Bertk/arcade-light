@@ -262,18 +262,5 @@
              Targets="@(_SolutionBuildTargets)"
              Condition="'@(_SolutionBuildTargets)' != ''" />
 
-    <!--
-      Sign artifacts.
-    -->
-    <MSBuild Projects="Sign.proj"
-             Properties="@(_CommonProps)"
-             Targets="Sign"
-             Condition="'$(Sign)' == 'true'"/>
-
-    <MSBuild Projects="AfterSigning.proj"
-             Properties="@(_CommonProps);_NETCORE_ENGINEERING_TELEMETRY=Sign"
-             Targets="@(_SolutionBuildTargets)"
-             Condition="'@(_SolutionBuildTargets)' != ''"/>
-
   </Target>
 </Project>
