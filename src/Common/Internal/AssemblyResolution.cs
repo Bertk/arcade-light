@@ -35,7 +35,7 @@ namespace DotNet.ArcadeLight
             Assembly sci;
             try
             {
-                sci = Assembly.LoadFile(fullPath);
+                sci = Assembly.Load(fullPath);
             }
             catch (Exception e)
             {

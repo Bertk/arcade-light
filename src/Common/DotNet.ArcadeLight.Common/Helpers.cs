@@ -11,6 +11,8 @@ namespace DotNet.ArcadeLight.Common
     {
         public string RemoveTrailingSlash(string directoryPath)
         {
+            if (string.IsNullOrWhiteSpace(directoryPath))
+                throw new ArgumentException(directoryPath + "Cannot be null, empty or be whitespace");
             return directoryPath.TrimEnd('/', '\\');
         }
 

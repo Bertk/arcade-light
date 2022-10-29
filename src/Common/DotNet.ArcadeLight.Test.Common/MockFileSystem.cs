@@ -24,7 +24,7 @@ namespace DotNet.ArcadeLight.Test.Common
             Dictionary<string, string>? files = null,
             IEnumerable<string>? directories = null)
         {
-            Directories = new(directories ?? new string[0]);
+            Directories = new(directories ?? System.Array.Empty<string>());
             Files = files ?? new();
         }
 

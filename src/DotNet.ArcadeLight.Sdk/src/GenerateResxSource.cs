@@ -119,7 +119,7 @@ namespace DotNet.ArcadeLight.Sdk
                     return false;
                 }
 
-                if (name == "")
+                if (string.IsNullOrEmpty(name))
                 {
                     Log.LogError($"Empty resource name");
                     return false;
@@ -446,7 +446,7 @@ Imports System.Reflection
                 // duplicate '"' for VB and C#
                 if (original[i] == '\"')
                 {
-                    stringLiteral.Append("\"");
+                    stringLiteral.Append('\"');
                 }
                 stringLiteral.Append(original[i]);
             }

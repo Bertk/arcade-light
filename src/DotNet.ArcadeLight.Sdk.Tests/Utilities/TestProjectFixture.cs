@@ -62,7 +62,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
         public void Dispose()
         {
-            while (_disposables.Count > 0)
+            while (!_disposables.IsEmpty)
             {
                 if (_disposables.TryDequeue(out var disposable))
                 {
