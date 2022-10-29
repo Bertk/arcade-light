@@ -11,7 +11,6 @@
   -->
   <PropertyGroup>
     <_SuppressAllTargets>false</_SuppressAllTargets>
-    <_SuppressAllTargets Condition="'$(DotNetBuildFromSource)' == 'true' and '$(ExcludeFromSourceBuild)' == 'true'">true</_SuppressAllTargets>
     <_SuppressAllTargets Condition="'$(ExcludeFromBuild)' == 'true'">true</_SuppressAllTargets>
   </PropertyGroup>
 

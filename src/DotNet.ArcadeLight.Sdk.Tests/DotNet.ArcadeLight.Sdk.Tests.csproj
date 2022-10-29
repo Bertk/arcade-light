@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <DefaultItemExcludes>$(DefaultItemExcludes);testassets\**\*</DefaultItemExcludes>
 
-    <NoWarn>NU1507</NoWarn>
+    <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

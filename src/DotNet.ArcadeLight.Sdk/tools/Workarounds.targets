@@ -23,26 +23,6 @@
     </PropertyGroup>
   </Target>
 
-  <!--
-    WPF temp project sets OutDir, which makes the SDK create an empty directory for it,
-    polluting the output dir. Avoid creating these directories.
-    https://github.com/dotnet/sdk/issues/1367
-  -->
-  <PropertyGroup Condition="'$(IsWpfTempProject)' == 'true'">
-    <OutDir/>
-  </PropertyGroup>
-
-  <!--
-    Workaround to fix that Visual Studio sometimes uses a special MSBuild evaluation
-    mode where all common conditions (e.g., inside ItemGroup) are ignored.
-  -->
-  <Choose>
-    <When Condition=" '$(IsWpfTempProject)' == 'true' and '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-      <ItemGroup>
-        <Reference Include="mscorlib" Pack="false" />
-      </ItemGroup>
-    </When>
-  </Choose>
 
   <!--
     Workaround for a race condition https://github.com/Microsoft/msbuild/issues/1479.

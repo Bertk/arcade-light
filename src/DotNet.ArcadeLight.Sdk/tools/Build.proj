@@ -9,7 +9,6 @@
   Optional parameters:
     Configuration                   Build configuration: "Debug", "Release", etc.
 
-    DotNetBuildFromSource           Building the entire stack from source with no external dependencies.
     DotNetOutputBlobFeedDir         Directory to publish Source Build assets to (packages, symbol packages, installers, etc.).
     DotNetPublishUsingPipelines     Publish assets to Build Asset Registry.
     DotNetSymbolServerTokenMsdl     Personal access token for MSDL symbol server. Available from variable group DotNet-Symbol-Server-Pats.	
@@ -44,8 +43,6 @@
   </ItemDefinitionGroup>
 
   <Import Project="RepoLayout.props"/>
-
-  <Import Project="SourceBuild/SourceBuildArcadeBuild.targets" Condition="'$(ArcadeBuildFromSource)' == 'true'" />
 
   <!-- Allow for repo specific Build properties such as the list of Projects to build -->
   <Import Project="$(RepositoryEngineeringDir)Build.props" Condition="Exists('$(RepositoryEngineeringDir)Build.props')" />
@@ -119,12 +116,6 @@
       <_CommonProps Include="VersionsPropsPath=$(VersionsPropsPath)"/>
 
       <!--
-        When building from source we suppress restore for projects that set ExcludeFromSourceBuild=true.
-        NuGet Restore task reports a warning for such projects, which we suppress here.
-      -->
-      <_CommonProps Include="DisableWarnForInvalidRestoreProjects=true" Condition="'$(DotNetBuildFromSource)' == 'true'"/>
-
-      <!--
         C++ projects expect VCTargetsPath property to be set. MSBuild generates this property to solution
         metaproject when solution is build directly, but doesn't do so when the solution is built using MSBuild task.
       -->
@@ -162,9 +153,6 @@
 
       <!-- Used in a few places in the stack to decide if publishing was enabled or not. -->
       <_PublishProps Include="Publish=$(Publish)"/>
-
-      <!-- Used in the SDK (Publish.proj) to control whether in-build symbol publishing should be performed. -->
-      <_PublishProps Include="PublishToSymbolServer=$(PublishToSymbolServer)"/>
 
       <!-- Forward this property because we can't assume it will be available globally. -->
       <_PublishProps Include="DotNetPublishUsingPipelines=$(DotNetPublishUsingPipelines)"/>
@@ -274,33 +262,5 @@
              Targets="@(_SolutionBuildTargets)"
              Condition="'@(_SolutionBuildTargets)' != ''" />
 
-    <!--
-      Sign artifacts.
-    -->
-    <MSBuild Projects="Sign.proj"
-             Properties="@(_CommonProps)"
-             Targets="Sign"
-             Condition="'$(Sign)' == 'true'"/>
-
-    <MSBuild Projects="AfterSigning.proj"
-             Properties="@(_CommonProps);_NETCORE_ENGINEERING_TELEMETRY=Sign"
-             Targets="@(_SolutionBuildTargets)"
-             Condition="'@(_SolutionBuildTargets)' != ''"/>
-
-    <!--
-      Perform post-source-build tasks. Validate source-build requirements, such as the prebuilt
-      usage baseline, and generate the source-build intermediate nupkg.
-    -->
-    <MSBuild Projects="SourceBuild\AfterSourceBuild.proj"
-             Properties="@(_CommonProps);_NETCORE_ENGINEERING_TELEMETRY=AfterSourceBuild"
-             Condition="'$(ArcadeBuildFromSource)' == 'true'"/>
-
-    <!--
-      Publish artifacts.
-    -->
-    <MSBuild Projects="Publish.proj"
-             Properties="@(_PublishProps);_NETCORE_ENGINEERING_TELEMETRY=Publish"
-             Targets="Publish"
-             Condition="'$(Publish)' == 'true' and '$(DotNetBuildFromSource)' != 'true'"/>
   </Target>
 </Project>

@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <!-- Opt-out repo features -->
-    <UsingToolXliff>false</UsingToolXliff>
     <!-- Libs -->
     <MicrosoftNetCompilersToolsetVersion>4.1.0-1.final</MicrosoftNetCompilersToolsetVersion>
     <XUnitVersion>2.4.2</XUnitVersion>
-    <MicrosoftDotNetBuildTasksFeedVersion>7.0.0-beta.21629.1</MicrosoftDotNetBuildTasksFeedVersion>
-    <MicrosoftDotNetSignToolVersion>7.0.0-beta.21629.1</MicrosoftDotNetSignToolVersion>
     <MicrosoftDiaSymReaderPdb2PdbVersion>1.1.0-beta2-19575-01</MicrosoftDiaSymReaderPdb2PdbVersion>
     <MicrosoftSourceLinkGitHubVersion>1.1.1</MicrosoftSourceLinkGitHubVersion>
-    <MicrosoftDotNetXliffTasksVersion>1.0.0-beta.21629.1</MicrosoftDotNetXliffTasksVersion>
-    <MicrosoftDotNetXHarnessCLIVersion>1.0.0-prerelease.21622.1</MicrosoftDotNetXHarnessCLIVersion>
-    <MicrosoftSymbolUploaderBuildTaskVersion>2.0.0-preview.1.21526.15</MicrosoftSymbolUploaderBuildTaskVersion>
-    <MicrosoftSymbolUploaderVersion>2.0.0-preview.1.21526.15</MicrosoftSymbolUploaderVersion>
     <MicrosoftNetSdkWorkloadManifestReaderVersion>6.0.100-rtm.21515.10</MicrosoftNetSdkWorkloadManifestReaderVersion>
     <MicrosoftDeploymentDotNetReleasesVersion>1.0.0-preview1.1.21116.1</MicrosoftDeploymentDotNetReleasesVersion>
     <!-- Used to flow Source Link version through Arcade SDK -->

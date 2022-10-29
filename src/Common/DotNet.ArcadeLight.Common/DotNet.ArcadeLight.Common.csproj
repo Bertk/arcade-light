@@ -2,10 +2,9 @@
 
   <PropertyGroup>
     <TargetFrameworks>net472;netstandard2.0</TargetFrameworks>
-    <TargetFrameworks Condition="'$(DotNetBuildFromSource)' == 'true'">netstandard2.0</TargetFrameworks>
     <IsPackable>true</IsPackable>
     <LangVersion>9.0</LangVersion>
-    <NoWarn>NU1507</NoWarn>
+    <NoWarn>$(NoWarn);NU1507</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
     <DebugType>embedded</DebugType>
 

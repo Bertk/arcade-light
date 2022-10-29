@@ -2,7 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
-    <TargetFrameworks Condition="'$(DotNetBuildFromSource)' == 'true'">$(TargetFrameworkForNETSDK)</TargetFrameworks>
     <LangVersion>preview</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ExcludeFromSourceBuild>false</ExcludeFromSourceBuild>
@@ -21,7 +20,7 @@
     <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
     <EnableGeneratedPackageContent>false</EnableGeneratedPackageContent>
     <_GeneratedVersionFilePath>$(IntermediateOutputPath)DefaultVersions.Generated.props</_GeneratedVersionFilePath>
-    <NoWarn>3021;NU5105;NU1507;SYSLIB0013</NoWarn>
+    <NoWarn>$(NoWarn);3021;NU5105;NU1507;SYSLIB0013</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
     <DebugType>embedded</DebugType>
   </PropertyGroup>
@@ -67,7 +66,6 @@
 
   <ItemGroup>
     <Compile Include="..\Common\Internal\AssemblyResolution.cs" Link="src\AssemblyResolution.cs" />
-    <Compile Remove="src\InstallDotNetCore.cs" Condition="'$(DotNetBuildFromSource)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,13 +81,6 @@
 <Project>
   <PropertyGroup>
     <ArcadeSdkVersion>$(PackageVersion)</ArcadeSdkVersion>
-    <MicrosoftNetCompilersToolsetVersion>$(MicrosoftNetCompilersToolsetVersion)</MicrosoftNetCompilersToolsetVersion>
-    <MicrosoftNetILLinkTasksVersion>$(MicrosoftNetILLinkTasksVersion)</MicrosoftNetILLinkTasksVersion>
-    <MicrosoftSourceLinkVersion>$(MicrosoftSourceLinkVersion)</MicrosoftSourceLinkVersion>
-    <MicrosoftDiaSymReaderPdb2PdbVersion>$(MicrosoftDiaSymReaderPdb2PdbVersion)</MicrosoftDiaSymReaderPdb2PdbVersion>
-    <MicrosoftDotNetXliffTasksVersion>$(MicrosoftDotNetXliffTasksVersion)</MicrosoftDotNetXliffTasksVersion>
-    <MicrosoftSymbolUploaderBuildTaskVersion>$(MicrosoftSymbolUploaderBuildTaskVersion)</MicrosoftSymbolUploaderBuildTaskVersion>
-    <MicrosoftTemplateEngineTasksVersion>$(MicrosoftTemplateEngineTasksVersion)</MicrosoftTemplateEngineTasksVersion>
   </PropertyGroup>
 </Project>]]>
   </_SdkVersionPropsContent>

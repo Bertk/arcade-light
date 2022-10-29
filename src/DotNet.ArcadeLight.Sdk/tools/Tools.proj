@@ -23,19 +23,6 @@
 
   <Import Project="$(_NuGetRestoreTargets)" />
 
-  <ItemGroup Condition="'$(DotNetBuildFromSource)' != 'true'">
-    <!-- Copy of 'sn.exe' in form of NuGet package. -->
-    <!-- <PackageReference Include="sn" /> -->
-    <!-- <PackageReference Include="MicroBuild.Core" /> -->
-    <!-- <PackageReference Include="MicroBuild.Core.Sentinel" /> -->
-    <!-- <PackageReference Include="vswhere" /> -->
-    <!-- <PackageReference Include="Microsoft.DotNet.Build.Tasks.Feed" /> -->
-    <!-- <PackageReference Include="Microsoft.DotNet.NuGetRepack.Tasks" Condition="'$(UsingToolNuGetRepack)' == 'true'" /> -->
-    <!-- <PackageReference Include="Microsoft.DotNet.SignTool" /> -->
-    <!-- <PackageReference Include="Microsoft.SymbolUploader.Build.Task" Condition="'$(PublishToSymbolServer)' == 'true'" /> -->
-    <!-- <PackageReference Include="Microsoft.DotNet.Build.Tasks.VisualStudio" Condition="'$(UsingToolVSSDK)' == 'true'" /> -->
-  </ItemGroup>
-
   <PropertyGroup>
     <_RepoToolManifest>$([MSBuild]::NormalizePath('$(RepoRoot)', '.config', 'dotnet-tools.json'))</_RepoToolManifest>
   </PropertyGroup>
@@ -47,12 +34,9 @@
     <Exec Command='"$(DotNetTool)" tool restore' WorkingDirectory="$(RepoRoot)" />
   </Target>
 
-  <!-- <Import Project="SourceBuild/SourceBuildArcadeTools.targets" Condition="'$(ArcadeBuildFromSource)' == 'true'" /> -->
-
   <!-- Repository extensibility point -->
   <Import Project="$(RepositoryEngineeringDir)Tools.props" Condition="Exists('$(RepositoryEngineeringDir)Tools.props')" />
 
   <Import Project="InstallDotNetCore.targets" Condition="'$(DotNetBuildFromSource)' != 'true'" />
 
-  <Import Project="VisualStudio.AcquireOptimizationData.targets" Condition="'$(UsingToolVisualStudioIbcTraining)' == 'true'" />
 </Project>

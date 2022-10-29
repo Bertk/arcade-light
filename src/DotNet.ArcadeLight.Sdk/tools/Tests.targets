@@ -14,7 +14,6 @@
     <TestRuntime Condition="'$(TestRuntime)' == '' and '$(OS)' == 'Windows_NT'">Full</TestRuntime>
 
     <TestRunnerName Condition="'$(TestRunnerName)' == ''">XUnit</TestRunnerName>
-    <TestRunnerName Condition="'$(UsingToolXUnit)' == 'false'"></TestRunnerName>
 
     <TestRunnerTargets>$(MSBuildThisFileDirectory)$(TestRunnerName)\$(TestRunnerName).targets</TestRunnerTargets>
   </PropertyGroup>

@@ -8,18 +8,13 @@
   <Import Project="BeforeCommonTargets.targets" Condition="'$(_ArcadeBeforeCommonTargetsImported)' != 'true' and '$(IsCrossTargetingBuild)' != 'true'"/>
 
   <Import Project="ProjectDefaults.targets"/>
-  <Import Project="StrongName.targets"/>
   <Import Project="GenerateChecksums.targets" />
   <Import Project="GenerateInternalsVisibleTo.targets" />
   <Import Project="GenerateResxSource.targets" />
   <Import Project="Workarounds.targets"/>
   <Import Project="RepositoryInfo.targets"/>
-  <!--<Import Project="Version.targets"/>-->
   <Import Project="Tests.targets" />
 
   <Import Project="Performance.targets" />
-  <Import Project="Localization.targets" />
-  <Import Project="VisualStudio.targets" Condition="'$(UsingToolVSSDK)' == 'true' and ('$(IsVsixProject)' == 'true' or '$(IsSwixProject)' == 'true' or '$(GeneratePkgDefFile)' == 'true') and '$(MSBuildRuntimeType)' != 'Core'"/>
-  <Import Project="OptimizationData.targets" Condition="'$(UsingToolIbcOptimization)' == 'true'"/>
 
 </Project>
