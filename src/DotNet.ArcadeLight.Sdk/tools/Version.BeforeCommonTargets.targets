@@ -106,17 +106,13 @@
       Instead, repos should use preview.1, preview.2, etc. if using SemVer2. NuGet will properly preference preview.10
       over preview.9.
 
-      If PreReleaseVersionIteration is set and SemanticVersioningV1 is not set to true, then the prerelease version
-      number is appended with a '.' to PreReleaseVersionLabel to create the final prerelease label.
     -->
     <_PreReleaseLabel>$(PreReleaseVersionLabel)</_PreReleaseLabel>
-    <_PreReleaseLabel Condition="'$(SemanticVersioningV1)' != 'true' and '$(PreReleaseVersionIteration)' != ''">$(PreReleaseVersionLabel).$(PreReleaseVersionIteration)</_PreReleaseLabel>
-    <_PreReleaseLabel Condition="'$(SemanticVersioningV1)' == 'true'">$(PreReleaseVersionLabel)$(PreReleaseVersionIteration)</_PreReleaseLabel>
+    <_PreReleaseLabel Condition="'$(PreReleaseVersionIteration)' != ''">$(PreReleaseVersionLabel).$(PreReleaseVersionIteration)</_PreReleaseLabel>
     <_PreReleaseLabel Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(OfficialBuild)' != 'true'">ci</_PreReleaseLabel>
     <_PreReleaseLabel Condition="'$(ContinuousIntegrationBuild)' != 'true'">dev</_PreReleaseLabel>
 
-    <_BuildNumberLabels Condition="'$(VersionSuffixDateStamp)' != '' and '$(SemanticVersioningV1)' != 'true'">.$(VersionSuffixDateStamp).$(VersionSuffixBuildOfTheDay)</_BuildNumberLabels>
-    <_BuildNumberLabels Condition="'$(VersionSuffixDateStamp)' != '' and '$(SemanticVersioningV1)' == 'true'">-$(VersionSuffixDateStamp)-$(VersionSuffixBuildOfTheDayPadded)</_BuildNumberLabels>
+    <_BuildNumberLabels Condition="'$(VersionSuffixDateStamp)' != ''">.$(VersionSuffixDateStamp).$(VersionSuffixBuildOfTheDay)</_BuildNumberLabels>
 
     <!--
       If DotNetFinalVersionKind is specified, overrides the package version produced by the build like so:
@@ -125,8 +121,7 @@
         "release"    1.2.3
     -->
     <VersionSuffix Condition="'$(DotNetFinalVersionKind)' == 'release'"/>
-    <VersionSuffix Condition="'$(DotNetFinalVersionKind)' == 'prerelease' and '$(SemanticVersioningV1)' != 'true'">$(_PreReleaseLabel).final</VersionSuffix>
-    <VersionSuffix Condition="'$(DotNetFinalVersionKind)' == 'prerelease' and '$(SemanticVersioningV1)' == 'true'">$(_PreReleaseLabel)-final</VersionSuffix>
+    <VersionSuffix Condition="'$(DotNetFinalVersionKind)' == 'prerelease'">$(_PreReleaseLabel).final</VersionSuffix>
     <VersionSuffix Condition="'$(DotNetFinalVersionKind)' == ''">$(_PreReleaseLabel)$(_BuildNumberLabels)</VersionSuffix>
 
     <!--
@@ -146,7 +141,7 @@
       Disable NuGet Pack warning that the version is SemVer 2.0.
       SemVer 2.0 is supported by NuGet since 3.0.0 (July 2015) in some capacity, and fully since 3.5.0 (October 2016).
     -->
-    <NoWarn Condition="'$(SemanticVersioningV1)' != 'true'">$(NoWarn);NU5105</NoWarn>
+    <NoWarn>$(NoWarn);NU5105</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(VersionSuffixDateStamp)' == ''">
