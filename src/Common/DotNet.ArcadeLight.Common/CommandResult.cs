@@ -24,7 +24,12 @@ namespace DotNet.ArcadeLight.Common
             StdErr = stdErr;
         }
 
-        public void EnsureSuccessful(bool suppressOutput = false)
+        public void EnsureSuccessful()
+        {
+            EnsureSuccessful(false);
+        }
+
+            public void EnsureSuccessful(bool suppressOutput)
         {
             if (ExitCode != 0)
             {
