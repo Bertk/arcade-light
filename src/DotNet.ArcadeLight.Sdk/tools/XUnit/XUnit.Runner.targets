@@ -31,6 +31,7 @@
 
       <!--<_TestRunnerArgs>exec depsfile "$(_CoreDepsPath)" runtimeconfig "$(_CoreRuntimeConfigPath)" $(TestRuntimeAdditionalArguments) "$(NuGetPackageRoot)xunit.runner.console/$(XUnitVersion)/tools/$(_TestRunnerTargetFramework)/xunit.console.dll" "$(_TestAssembly)" -xml "%(TestToRun.ResultsXmlPath)" -html "%(TestToRun.ResultsHtmlPath)" $(_TestRunnerAdditionalArguments)</_TestRunnerArgs>-->
       <_TestRunnerArgs>vstest "$(_TestAssembly)" /logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" /logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)"</_TestRunnerArgs>
+      <_TestRunnerArgs Condition="$(BUILD_REASON) == ''">$(_TestRunnerArgs) /logger:"console"</_TestRunnerArgs>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
