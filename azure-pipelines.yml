@@ -49,6 +49,7 @@ stages:
                 _BuildConfig: Debug
         preSteps:
         - checkout: self
+          fetchDepth: 0
           clean: true
         steps:
         - task: NuGetAuthenticate@1
@@ -74,6 +75,7 @@ stages:
                 _BuildConfig: Release
           preSteps:
           - checkout: self
+            fetchDepth: 0
             clean: true
           steps:
           - task: NuGetAuthenticate@1
@@ -112,6 +114,7 @@ stages:
               _BuildConfig: Debug
         preSteps:
         - checkout: self
+          fetchDepth: 0
           clean: true
         steps:
         - task: NuGetAuthenticate@1
@@ -157,6 +160,7 @@ stages:
               _BuildConfig: Release
         preSteps:
         - checkout: self
+          fetchDepth: 0
           clean: true
         steps:
         - task: NuGetAuthenticate@1
