@@ -60,8 +60,6 @@ jobs:
         - ${{ if eq(parameters.publishBuildAssetsDependsOn, '') }}:
           - ${{ each job in parameters.jobs }}:
             - ${{ job.job }}
-        - ${{ if eq(parameters.enableSourceBuild, true) }}:
-          - Source_Build_Complete
         pool:
           vmImage: ubuntu-latest
 
