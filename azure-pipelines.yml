@@ -31,8 +31,8 @@ stages:
           manifests: true
       enableMicrobuild: false
       enablePublishUsingPipelines: true
-      enableSourceIndex: true
-      enableSourceBuild: true
+      enableSourceIndex: false
+      enableSourceBuild: false
       workspace:
         clean: all
       jobs:
@@ -49,6 +49,7 @@ stages:
                 _BuildConfig: Debug
         preSteps:
         - checkout: self
+          fetchDepth: 0
           clean: true
         steps:
         - task: NuGetAuthenticate@1
@@ -74,6 +75,7 @@ stages:
                 _BuildConfig: Release
           preSteps:
           - checkout: self
+            fetchDepth: 0
             clean: true
           steps:
           - task: NuGetAuthenticate@1
@@ -92,8 +94,6 @@ stages:
     parameters:
       artifacts:
         publish:
-          artifacts:
-            name: Artifacts_Test_$(Agent.OS)_$(_BuildConfig)
           logs:
             name: Logs_Test_$(Agent.OS)_$(_BuildConfig)
         download: true
@@ -112,6 +112,7 @@ stages:
               _BuildConfig: Debug
         preSteps:
         - checkout: self
+          fetchDepth: 0
           clean: true
         steps:
         - task: NuGetAuthenticate@1
@@ -157,6 +158,7 @@ stages:
               _BuildConfig: Release
         preSteps:
         - checkout: self
+          fetchDepth: 0
           clean: true
         steps:
         - task: NuGetAuthenticate@1
@@ -178,3 +180,36 @@ stages:
             testRunner: VSTest
             testResultsFiles: '**/*.trx'
 
+- stage: Push
+  dependsOn: test
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  jobs:
+  - job: Windows_NT
+    timeoutInMinutes: 90
+    pool:
+      vmimage: windows-latest
+    variables:
+    - name: _BuildConfig
+      value: Debug
+    steps:
+    - pwsh: |
+        # Set Variables:
+        $artifactName = "Artifacts_$(Agent.Os)_${{variables._BuildConfig}}"
+        Write-Host "##vso[task.setvariable variable=artifactName]$artifactName"
+      displayName: "Set $artifactName variable"
+
+    - task: NuGetAuthenticate@1
+
+    - task: DownloadBuildArtifacts@1
+      displayName: 'download $(artifactName)'
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: '$(artifactName)'
+        downloadPath: '$(System.ArtifactsDirectory)'
+
+    - task: CmdLine@2
+      displayName: 'dotnet push to feed public'
+      inputs:
+        script: 'dotnet.exe nuget push --source "public" --api-key az --skip-duplicate $(System.ArtifactsDirectory)\**\*.nupkg'
+      condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'))

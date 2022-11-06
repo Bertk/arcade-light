@@ -8,13 +8,6 @@ parameters:
   # Optional: Enable publishing using release pipelines
   enablePublishUsingPipelines: false
 
-  # Optional: Enable running the source-build jobs to build repo from source
-  enableSourceBuild: false
-
-  # Optional: Parameters for source-build template.
-  #           See /eng/common/templates/jobs/source-build.yml for options
-  sourceBuildParameters: []
-
   graphFileGeneration:
     # Optional: Enable generating the graph files at the end of the build
     enabled: false
@@ -52,3 +45,4 @@ jobs:
           ${{ property.key }}: ${{ property.value }}
 
       name: ${{ job.job }}
+
