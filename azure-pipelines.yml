@@ -94,8 +94,6 @@ stages:
     parameters:
       artifacts:
         publish:
-          artifacts:
-            name: Artifacts_Test_$(Agent.OS)_$(_BuildConfig)
           logs:
             name: Logs_Test_$(Agent.OS)_$(_BuildConfig)
         download: true
