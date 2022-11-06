@@ -46,23 +46,3 @@ jobs:
 
       name: ${{ job.job }}
 
-
-- ${{ if notin(variables['Build.Reason'], 'PullRequest') }}:
-
-  - ${{ if or(eq(parameters.enablePublishBuildAssets, true), eq(parameters.artifacts.publish.manifests, 'true'), ne(parameters.artifacts.publish.manifests, '')) }}:
-    - template: ../job/publish-build-assets.yml
-      parameters:
-        continueOnError: ${{ parameters.continueOnError }}
-        dependsOn:
-        - ${{ if ne(parameters.publishBuildAssetsDependsOn, '') }}:
-          - ${{ each job in parameters.publishBuildAssetsDependsOn }}:
-            - ${{ job.job }}
-        - ${{ if eq(parameters.publishBuildAssetsDependsOn, '') }}:
-          - ${{ each job in parameters.jobs }}:
-            - ${{ job.job }}
-        pool:
-          vmImage: ubuntu-latest
-
-        runAsPublic: ${{ parameters.runAsPublic }}
-        publishUsingPipelines: ${{ parameters.enablePublishUsingPipelines }}
-        enablePublishBuildArtifacts: ${{ parameters.enablePublishBuildArtifacts }}

@@ -16,9 +16,9 @@
     <GenerateChecksums Items="@(GenerateChecksumItems)" />
 
     <!-- Automatically include generated checksums in the asset manifest -->
-    <ItemGroup>
-      <ItemsToPushToBlobFeed Include="@(GenerateChecksumItems -> '%(DestinationPath)')" />
-    </ItemGroup>
+    <!-- <ItemGroup> -->
+      <!-- <ItemsToPushToBlobFeed Include="@(GenerateChecksumItems -> '%(DestinationPath)')" /> -->
+    <!-- </ItemGroup> -->
   </Target>
 
 </Project>
