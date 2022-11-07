@@ -20,12 +20,6 @@ parameters:
   enableSymbolValidation: false
   enableNugetValidation: true
   publishInstallersAndChecksums: true
-  SDLValidationParameters:
-    enable: false
-    continueOnError: false
-    params: ''
-    artifactNames: ''
-    downloadArtifacts: true
 
   # These parameters let the user customize the call to sdk-task.ps1 for publishing
   # symbols & general artifacts as well as for signing validation
@@ -40,7 +34,7 @@ parameters:
   - Validate
 
 stages:
-- ${{ if or(and(le(parameters.publishingInfraVersion, 2), eq(parameters.inline, 'true')), eq( parameters.enableNugetValidation, 'true'), eq(parameters.enableSigningValidation, 'true'), eq(parameters.enableSourceLinkValidation, 'true'), eq(parameters.SDLValidationParameters.enable, 'true')) }}:
+- ${{ if or(and(le(parameters.publishingInfraVersion, 2), eq(parameters.inline, 'true')), eq( parameters.enableNugetValidation, 'true'), eq(parameters.enableSigningValidation, 'true'), eq(parameters.enableSourceLinkValidation, 'true')) }}:
   - stage: Validate
     dependsOn: ${{ parameters.validateDependsOn }}
     displayName: Validate Build Assets

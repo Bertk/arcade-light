@@ -27,17 +27,9 @@
     Default versions
   -->
   <PropertyGroup>
-    <DropAppVersion Condition="'$(DropAppVersion)' == ''">18.165.29912-buildid11693003</DropAppVersion>
-    <MicroBuildPluginsSwixBuildVersion Condition="'$(MicroBuildPluginsSwixBuildVersion)' == ''">1.0.422</MicroBuildPluginsSwixBuildVersion>
-    <MicrosoftDotNetIBCMergeVersion Condition="'$(MicrosoftDotNetIBCMergeVersion)' == ''">5.1.0-beta.21356.1</MicrosoftDotNetIBCMergeVersion>
-    <MicrosoftTestPlatformVersion Condition="'$(MicrosoftTestPlatformVersion)' == ''">16.7.3</MicrosoftTestPlatformVersion>
     <XUnitVersion Condition="'$(XUnitVersion)' == ''">2.4.2</XUnitVersion>
     <XUnitRunnerConsoleVersion Condition="'$(XUnitRunnerConsoleVersion)' == ''">$(XUnitVersion)</XUnitRunnerConsoleVersion>
     <XUnitRunnerVisualStudioVersion Condition="'$(XUnitRunnerVisualStudioVersion)' == ''">2.4.5</XUnitRunnerVisualStudioVersion>
-    <MSTestVersion Condition="'$(MSTestVersion)' == ''">2.0.0</MSTestVersion>
-    <MSTestTestAdapterVersion Condition="'$(MSTestTestAdapterVersion)' == ''">$(MSTestVersion)</MSTestTestAdapterVersion>
-    <MSTestTestFrameworkVersion Condition="'$(MSTestTestFrameworkVersion)' == ''">$(MSTestVersion)</MSTestTestFrameworkVersion>
-    <RichCodeNavPackageVersion Condition="'$(RichCodeNavPackageVersion)' == ''">0.1.1832-alpha</RichCodeNavPackageVersion>
   </PropertyGroup>
 
   <!-- RestoreSources overrides - defines DotNetRestoreSources variable if available -->
