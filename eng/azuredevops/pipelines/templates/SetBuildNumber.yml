@@ -1,0 +1,48 @@
+# File: SetBuildNumber.yml
+
+# nbgv --help
+# usage: nbgv <command> [<args>]
+
+#     install          Prepares a project to have version stamps applied
+#                      using Nerdbank.GitVersioning.
+#     get-version      Gets the version information for a project.
+#     set-version      Updates the version stamp that is applied to a
+#                      project.
+#     tag              Creates a git tag to mark a version.
+#     get-commits      Gets the commit(s) that match a given version.
+#     cloud            Communicates with the ambient cloud build to set the
+#                      build number and/or other cloud build variables.
+#     prepare-release  Prepares a release by creating a release branch for
+#                      the current version and adjusting the version on the
+#                      current branch.
+
+parameters:
+  condition: 'succeeded()'
+
+steps:
+- task: NuGetAuthenticate@0
+
+- task: PowerShell@2
+  displayName: Set build number (nbgv tool)
+  condition: ${{parameters.condition}}
+  inputs:
+    targetType: inline
+    pwsh: true
+    script: |
+      if (Test-Path "./version.json") {
+        $Env:PublicRelease = $true
+        dotnet tool restore
+        dotnet nbgv cloud
+        $versionnbgv =  dotnet nbgv get-version -f json | ConvertFrom-Json
+        Write-Host "nbgv version : $versionnbgv"
+        Write-Host "nbgv simple version : $($versionnbgv.SimpleVersion)"
+        Write-Host "Env Variable : $Env:BUILD_BUILDNUMBER"
+        $version = [string]::Format('{0}-{1}',$($versionnbgv.SimpleVersion),$($Env:BUILD_BUILDNUMBER))
+        Write-Host "version : $version"
+        Write-Host "##vso[build.updatebuildnumber]$version"
+      } else {
+        Write-Host "Configuration file './version.json' does not exist"
+      }
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
