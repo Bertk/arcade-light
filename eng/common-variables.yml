@@ -10,3 +10,5 @@ variables:
     value: ''
   - name: skipComponentGovernanceDetection
     value: true
+  - name: _SolutionFile
+    value: 'Arcade-light.sln'
