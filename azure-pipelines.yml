@@ -198,7 +198,6 @@ stages:
     - script: eng\commonlight\cibuild.cmd
         -configuration $(_BuildConfig)
         -prepareMachine
-        --ci
         --restore
         $(_InternalBuildArgs)
         /p:Test=false
