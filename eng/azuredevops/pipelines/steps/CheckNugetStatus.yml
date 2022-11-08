@@ -48,7 +48,7 @@ steps:
             } else {
                 $deprecatedList[4]
             }
-            $vulnerableList = dotnet list $project package --vulnerable --include-transitive --source https://api.nuget.org/v3/index.json
+            $vulnerableList = dotnet list $project package --vulnerable --source https://api.nuget.org/v3/index.json
             if ($vulnerableList.Length -gt 5) {
                 $vulnerableList
                 $existsVulnerablePackage = $true
@@ -61,7 +61,7 @@ steps:
             Write-Host "##vso[task.LogIssue type=error;]Detected nuget package: Deprecated = $existsDeprecatedPackage, Vulnerable =  $existsVulnerablePackage"
             if ("${{parameters.breakBuild}}" -eq "true") {
                 exit 42
-            } 
+            }
         } else {
             Write-Information -MessageData "Did not detected deprecated or vulnerable nuget package." -InformationAction Continue
         }
