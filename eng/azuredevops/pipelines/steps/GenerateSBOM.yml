@@ -1,0 +1,58 @@
+# generate Software Bill of Materials
+
+parameters:
+  projects: ''
+  workingDir: ''
+  targetFolder: 'SBOM'
+  outputPath: ''
+  publishSBOM: false
+
+
+# tool source code repositories:
+# - https://github.com/CycloneDX/cyclonedx-dotnet (.Net Core)
+# - https://github.com/CycloneDX/cyclonedx-node-module (should be triggered after 'npm install')
+#
+# - CycloneDX XML Reference v1.2 https://cyclonedx.org/docs/1.2/
+
+steps:
+- task: PowerShell@2
+  displayName: 'SBOM: Run dotnet-cyclonedx'
+  inputs:
+    targetType: 'inline'
+    pwsh: true
+    script: |
+      dotnet tool restore
+      dotnet tool list
+      # build additional parameters
+      $targetPath = "$(Build.SourcesDirectory)/${{parameters.targetFolder}}"
+      if ("${{parameters.outputPath}}" -ne ""){
+        Write-Verbose -Message "outputPath: '${{parameters.outputPath}}'" -Verbose
+        $outputPath = "-biop ${{parameters.outputPath}}"
+        $targetPath = "${{parameters.outputPath}}/${{parameters.targetFolder}}"
+        if ( ! ( Test-Path -Path $targetPath -PathType Container )) {
+          New-Item -Path "${{parameters.outputPath}}" -Name "${{parameters.targetFolder}}" -ItemType "directory"
+          }
+      } else {
+        if ( ! ( Test-Path -Path $targetPath -PathType Container )) {
+            New-Item -Path "$(Build.SourcesDirectory)" -Name "${{parameters.targetFolder}}" -ItemType "directory"
+            }
+      }
+      Write-Verbose -Message "run CycloneDX: 'dotnet dotnet-CycloneDX --exclude-test-projects --exclude-dev -dpr -o $($targetPath) $($outputPath) ${{parameters.projects}}'" -Verbose
+      dotnet dotnet-CycloneDX --exclude-test-projects --exclude-dev -dpr -o "$($targetPath)" $($outputPath) ${{parameters.projects}}
+      $projectFile = Split-Path ${{parameters.projects}} -Leaf
+      # eliminate file extensions
+      $projectName = "$projectFile".Replace(".sln", "").Replace(".csproj", "")
+      # rename it to the project's name
+      Rename-Item "$($targetPath)/bom.xml" "$($projectName).bom.xml"
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+- publish: '${{parameters.outputPath}}/${{parameters.targetFolder}}'
+  displayName: 'SBOM: Publish Artifact'
+  artifact: SBOM
+  condition: and(succeeded(), ${{parameters.publishSBOM}}, ne('${{parameters.outputPath}}',''))
+
+- publish: '$(Build.SourcesDirectory)/${{parameters.targetFolder}}'
+  displayName: 'SBOM: Publish Artifact'
+  artifact: SBOM
+  condition: and(succeeded(), ${{parameters.publishSBOM}}, eq('${{parameters.outputPath}}',''))

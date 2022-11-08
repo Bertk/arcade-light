@@ -28,11 +28,6 @@ stages:
         publish:
           artifacts: true
           logs: true
-          manifests: true
-      enableMicrobuild: false
-      enablePublishUsingPipelines: true
-      enableSourceIndex: false
-      enableSourceBuild: false
       workspace:
         clean: all
       jobs:
@@ -184,8 +179,47 @@ stages:
   dependsOn: test
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   jobs:
+  - job: Validate
+    timeoutInMinutes: 90
+    pool:
+      vmimage: windows-latest
+    variables:
+    - name: _BuildConfig
+      value: Debug
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Use dotnet SDK (global)'
+      inputs:
+        packageType: 'sdk'
+        useGlobalJson: true
+
+    - script: eng\commonlight\cibuild.cmd
+        -configuration $(_BuildConfig)
+        -prepareMachine
+        --ci
+        --restore
+        $(_InternalBuildArgs)
+        /p:Test=false
+      displayName: Windows Build / Publish
+      env:
+        SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+    - template: eng/azuredevops/pipelines/steps/CheckNugetStatus.yml
+      parameters:
+        sourcePath: '$(Build.SourcesDirectory)/src'
+        nugetConfig: '$(Build.SourcesDirectory)/nuget.config'
+        breakBuild: true
+
+    - template: eng/azuredevops/pipelines/steps/GenerateSBOM.yml
+      parameters:
+        projects: '$(Build.SourcesDirectory)\**\*.proj'
+        outputPath: '$(Build.SourcesDirectory)\artifacts'
+        publishSBOM: true
+
+      
   - job: Windows_NT
     timeoutInMinutes: 90
+    dependsOn: Validate
     pool:
       vmimage: windows-latest
     variables:
