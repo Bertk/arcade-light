@@ -28,11 +28,6 @@ stages:
         publish:
           artifacts: true
           logs: true
-          manifests: true
-      enableMicrobuild: false
-      enablePublishUsingPipelines: true
-      enableSourceIndex: false
-      enableSourceBuild: false
       workspace:
         clean: all
       jobs:
