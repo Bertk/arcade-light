@@ -193,6 +193,8 @@ stages:
         packageType: 'sdk'
         useGlobalJson: true
 
+    - task: NuGetAuthenticate@1
+
     - script: eng\commonlight\cibuild.cmd
         -configuration $(_BuildConfig)
         -prepareMachine
