@@ -209,13 +209,13 @@ stages:
       env:
         SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
-    - template: eng/azuredevops/pipelines/templates/CheckNugetStatus.yml
+    - template: eng/azuredevops/pipelines/steps/CheckNugetStatus.yml
       parameters:
         sourcePath: '$(Build.SourcesDirectory)/src'
         nugetConfig: '$(Build.SourcesDirectory)/nuget.config'
         breakBuild: true
 
-    - template: eng/azuredevops/pipelines/templates/GenerateSBOM.yml
+    - template: eng/azuredevops/pipelines/steps/GenerateSBOM.yml
       parameters:
         projects: '$(Build.SourcesDirectory)\**\*.proj'
         outputPath: '$(Build.SourcesDirectory)\artifacts'

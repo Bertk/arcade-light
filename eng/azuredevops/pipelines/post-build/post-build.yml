@@ -44,7 +44,7 @@ stages:
     - job: check_nuget_status'
       displayName: 'check nuget package status'
       steps:
-      - template: CheckNugetStatus.yml@templates
+      - template: ../steps/CheckNugetStatus.yml
         parameters:
           sourcePath: '$(Build.SourcesDirectory)/src'
           nugetConfig: '$(Build.SourcesDirectory)/nuget.config'
