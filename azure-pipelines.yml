@@ -213,11 +213,11 @@ stages:
 
     - template: eng/azuredevops/pipelines/steps/GenerateSBOM.yml
       parameters:
-        projects: '$(Build.SourcesDirectory)\**\*.proj'
+        projects: '$(Build.SourcesDirectory)\$(_SolutionFile)'
         outputPath: '$(Build.SourcesDirectory)\artifacts'
         publishSBOM: true
 
-      
+
   - job: Windows_NT
     timeoutInMinutes: 90
     dependsOn: Validate
