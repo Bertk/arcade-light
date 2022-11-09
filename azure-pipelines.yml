@@ -140,6 +140,17 @@ stages:
           inputs:
             testRunner: VSTest
             testResultsFiles: '**/*.trx'
+        - task: reportgenerator@5
+          displayName: 'Create Cobertura report'
+          inputs:
+            reports: '$(Build.SourcesDirectory)/artifacts/**/coverage.opencover.xml'
+            reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
+            targetdir: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
+        - task: PublishCodeCoverageResults@1
+          displayName: 'Publish code coverage'
+          inputs:
+            codeCoverageTool: Cobertura
+            summaryFileLocation: '$(Build.SourcesDirectory)artifacts/CoverageResults/Cobertura.xml'
       - job: Linux
         timeoutInMinutes: 90
         container: LinuxContainer
