@@ -1,6 +1,7 @@
 <Project>
   <ItemGroup>
     <PackageReference Include="xunit.runner.console" PrivateAssets="all" Publish="true"/>
+    <PackageReference Include="coverlet.collector" PrivateAssets="all" Publish="true"/>
   </ItemGroup>
 
   <Target Name="RunTests"
@@ -30,7 +31,7 @@
       <_TestRunner Condition="'$(_TestRunner)'==''">$(DotNetTool)</_TestRunner>
 
       <!--<_TestRunnerArgs>exec depsfile "$(_CoreDepsPath)" runtimeconfig "$(_CoreRuntimeConfigPath)" $(TestRuntimeAdditionalArguments) "$(NuGetPackageRoot)xunit.runner.console/$(XUnitVersion)/tools/$(_TestRunnerTargetFramework)/xunit.console.dll" "$(_TestAssembly)" -xml "%(TestToRun.ResultsXmlPath)" -html "%(TestToRun.ResultsHtmlPath)" $(_TestRunnerAdditionalArguments)</_TestRunnerArgs>-->
-      <_TestRunnerArgs>vstest "$(_TestAssembly)" /logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" /logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" /logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
+      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" /logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" /logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" /logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
@@ -44,7 +45,14 @@
       <_TestRunner Condition="'$(_TestRuntime)' == 'Mono'">$(MonoTool)</_TestRunner>
       <_TestRunner Condition="'$(_TestRuntime)' != 'Mono'">$(_XUnitConsoleExePath)</_TestRunner>
     </PropertyGroup>
-
+    
+    <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" -->
+    <ItemGroup>
+        <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
+        <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
+    
     <PropertyGroup>
       <_TestRunnerCommand>"$(_TestRunner)" $(_TestRunnerArgs)</_TestRunnerCommand>
 

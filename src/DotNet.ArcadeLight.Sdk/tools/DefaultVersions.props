@@ -27,6 +27,7 @@
     Default versions
   -->
   <PropertyGroup>
+    <CoverletCollectorVersion Condition="'$(CoverletCollectorVersion)' == ''">3.2.0</CoverletCollectorVersion>
     <XUnitVersion Condition="'$(XUnitVersion)' == ''">2.4.2</XUnitVersion>
     <XUnitRunnerConsoleVersion Condition="'$(XUnitRunnerConsoleVersion)' == ''">$(XUnitVersion)</XUnitRunnerConsoleVersion>
     <XUnitRunnerVisualStudioVersion Condition="'$(XUnitRunnerVisualStudioVersion)' == ''">2.4.5</XUnitRunnerVisualStudioVersion>
