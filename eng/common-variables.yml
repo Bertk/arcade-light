@@ -12,3 +12,5 @@ variables:
     value: true
   - name: _SolutionFile
     value: 'Arcade-light.sln'
+  - name: _EnableCoverage
+    value: True

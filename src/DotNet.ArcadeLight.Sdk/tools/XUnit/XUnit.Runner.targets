@@ -47,11 +47,11 @@
     </PropertyGroup>
     
     <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" -->
-    <ItemGroup>
+    <ItemGroup Condition="'$(_EnableCoverage)' == 'True'">
         <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
         <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
     </ItemGroup>
-    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
+    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir) Condition="'$(_EnableCoverage)' == 'True'" />
     
     <PropertyGroup>
       <_TestRunnerCommand>"$(_TestRunner)" $(_TestRunnerArgs)</_TestRunnerCommand>
