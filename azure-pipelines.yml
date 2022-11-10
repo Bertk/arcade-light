@@ -142,14 +142,14 @@ stages:
             testResultsFiles: '**/*.trx'
         - task: reportgenerator@5
           displayName: 'Create Cobertura report'
-          enable: false
+          enabled: false
           inputs:
             reports: '$(Build.SourcesDirectory)/artifacts/**/coverage.opencover.xml'
             reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
             targetdir: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
         - task: PublishCodeCoverageResults@1
           displayName: 'Publish code coverage'
-          enable: false
+          enabled: false
           inputs:
             codeCoverageTool: Cobertura
             summaryFileLocation: '$(Build.SourcesDirectory)artifacts/CoverageResults/Cobertura.xml'
