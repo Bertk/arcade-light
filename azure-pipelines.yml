@@ -150,7 +150,7 @@ stages:
           displayName: 'Publish code coverage'
           inputs:
             codeCoverageTool: Cobertura
-            summaryFileLocation: '$(Build.SourcesDirectory)artifacts/CoverageResults/Cobertura.xml'
+            summaryFileLocation: '$(Build.SourcesDirectory)/artifacts/CoverageResults/Cobertura.xml'
       - job: Linux
         timeoutInMinutes: 90
         container: LinuxContainer
