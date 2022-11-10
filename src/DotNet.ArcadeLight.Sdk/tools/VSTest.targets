@@ -11,7 +11,7 @@
 
       <!-- Always use net472 for desktop to enable displaying source location from Portable PDBs in stack traces -->
       <_TestRunnerTargetFramework>net472</_TestRunnerTargetFramework>
-      <_TestRunnerTargetFramework Condition="'$(_TestRuntime)' == 'Core'">netcoreapp2.0</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework Condition="'$(_TestRuntime)' == 'Core'">net6.0</_TestRunnerTargetFramework>
       <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == 'netcoreapp1.1' or %(TestToRun.TargetFramework) == 'netcoreapp1.0'">netcoreapp1.0</_TestRunnerTargetFramework>
 
       <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
