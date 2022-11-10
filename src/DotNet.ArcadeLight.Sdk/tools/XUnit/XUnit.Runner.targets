@@ -31,7 +31,7 @@
       <_TestRunner Condition="'$(_TestRunner)'==''">$(DotNetTool)</_TestRunner>
 
       <!--<_TestRunnerArgs>exec depsfile "$(_CoreDepsPath)" runtimeconfig "$(_CoreRuntimeConfigPath)" $(TestRuntimeAdditionalArguments) "$(NuGetPackageRoot)xunit.runner.console/$(XUnitVersion)/tools/$(_TestRunnerTargetFramework)/xunit.console.dll" "$(_TestAssembly)" -xml "%(TestToRun.ResultsXmlPath)" -html "%(TestToRun.ResultsHtmlPath)" $(_TestRunnerAdditionalArguments)</_TestRunnerArgs>-->
-      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" /logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" /logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" /logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
+      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" /logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" /logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" /logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath) /ResultsDirectory:$(ArtifactsTestResultsDir)"</_TestRunnerArgs>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
