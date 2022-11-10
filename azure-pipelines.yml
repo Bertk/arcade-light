@@ -142,15 +142,21 @@ stages:
             testResultsFiles: '**/*.trx'
         - task: reportgenerator@5
           displayName: 'Create Cobertura report'
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
           inputs:
             reports: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
             reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
             targetdir: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
         - task: PublishCodeCoverageResults@1
           displayName: 'Publish code coverage'
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
           inputs:
             codeCoverageTool: Cobertura
             summaryFileLocation: '$(Build.SourcesDirectory)/artifacts/CoverageResults/Cobertura.xml'
+        - publish: '$(Build.SourcesDirectory)//artifacts/CoverageResults'
+          displayName: 'Publish CoverageResults Artifact'
+          artifact: CoverageResults
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
       - job: Linux
         timeoutInMinutes: 90
         container: LinuxContainer
