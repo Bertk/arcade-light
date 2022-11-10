@@ -143,14 +143,14 @@ stages:
             testRunner: VSTest
             testResultsFiles: '**/*.trx'
         - task: reportgenerator@5
-          displayName: 'Create Cobertura report'
+          displayName: ReportGenerator
           condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
           inputs:
-            reports: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
-            reporttypes: 'HtmlInline_AzurePipelines_Dark;Cobertura'
-            sourcedirs: 'src'
-            classfilters: '-DotNet.ArcadeLight.Test.Common'
-            targetdir: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
+            reports: $(Build.SourcesDirectory)/**/coverage.cobertura.xml
+            targetdir: $(Build.SourcesDirectory)/artifacts/CoverageResults
+            reporttypes: Html;HtmlInline_AzurePipelines_Dark;Cobertura
+            sourcedirs: $(Build.SourcesDirectory)/src
+            classfilters: -DotNet.ArcadeLight.Test.Common;+DotNet.ArcadeLight.Common;+DotNet.ArcadeLight.Sdk;-DotNet.Internal.DependencyInjection.Testing
         - task: PublishCodeCoverageResults@1
           displayName: 'Publish code coverage'
           condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
