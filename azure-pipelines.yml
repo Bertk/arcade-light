@@ -153,7 +153,7 @@ stages:
           inputs:
             codeCoverageTool: Cobertura
             summaryFileLocation: '$(Build.SourcesDirectory)/artifacts/CoverageResults/Cobertura.xml'
-        - publish: '$(Build.SourcesDirectory)//artifacts/CoverageResults'
+        - publish: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
           displayName: 'Publish CoverageResults Artifact'
           artifact: CoverageResults
           condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
