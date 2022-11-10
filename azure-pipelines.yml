@@ -12,6 +12,8 @@ pr:
 
 variables:
 - template: eng/common-variables.yml
+- name: disable.coverage.autogenerate
+  value: 'true'
 
 resources:
   containers:
@@ -145,7 +147,9 @@ stages:
           condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
           inputs:
             reports: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
-            reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
+            reporttypes: 'HtmlInline_AzurePipelines_Dark;Cobertura'
+            sourcedirs: 'src'
+            classfilters: '-DotNet.ArcadeLight.Test.Common'
             targetdir: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
         - task: PublishCodeCoverageResults@1
           displayName: 'Publish code coverage'
