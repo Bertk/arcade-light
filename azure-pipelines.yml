@@ -143,7 +143,7 @@ stages:
         - task: reportgenerator@5
           displayName: 'Create Cobertura report'
           inputs:
-            reports: '$(Build.SourcesDirectory)/artifacts/**/coverage.opencover.xml'
+            reports: '$(Build.SourcesDirectory)/**/coverage.opencover.xml'
             reporttypes: 'HtmlInline_AzurePipelines;Cobertura'
             targetdir: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
         - task: PublishCodeCoverageResults@1
