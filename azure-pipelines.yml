@@ -233,6 +233,12 @@ stages:
         Write-Host "##vso[task.setvariable variable=artifactName]$artifactName"
       displayName: "Set $artifactName variable"
 
+    - task: UseDotNet@2
+      displayName: 'Use dotnet SDK (global)'
+      inputs:
+        packageType: 'sdk'
+        useGlobalJson: true
+
     - task: NuGetAuthenticate@1
 
     - task: DownloadBuildArtifacts@1

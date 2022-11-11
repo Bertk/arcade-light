@@ -16,10 +16,6 @@
     <PackageReference Include="xunit" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
-    <Reference Include="System.Net.Http" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
   </ItemGroup>
