@@ -4,7 +4,13 @@ variables:
     value: arcade-light
   - name: _RunAsPublic
     value: True
+  - name: _RunAsInternal
+    value: False
   - name: _InternalBuildArgs
     value: ''
+  - name: skipComponentGovernanceDetection
+    value: true
   - name: _SolutionFile
     value: 'Arcade-light.sln'
+  - name: _EnableCoverage
+    value: True
