@@ -150,6 +150,7 @@ stages:
             targetdir: $(Build.SourcesDirectory)/artifacts/CoverageResults
             reporttypes: Html;HtmlInline_AzurePipelines_Dark;Cobertura
             sourcedirs: $(Build.SourcesDirectory)/src
+            assemblyfilters: '-xunit*'
             classfilters: -DotNet.ArcadeLight.Test.Common;+DotNet.ArcadeLight.Common;+DotNet.ArcadeLight.Sdk;-DotNet.Internal.DependencyInjection.Testing
         - task: PublishCodeCoverageResults@1
           displayName: 'Publish code coverage'
