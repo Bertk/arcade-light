@@ -12,9 +12,9 @@
     "^refs/tags/v\\d+\\.\\d+"
   ],
   "nugetPackageVersion": {
-    "semVer": 2 
+    "semVer": 2
  },
-    "version": "0.1-beta",
+    "version": "0.2-beta",
     "release" : {
       "branchName" : "v{version}",
       "versionIncrement" : "minor",
