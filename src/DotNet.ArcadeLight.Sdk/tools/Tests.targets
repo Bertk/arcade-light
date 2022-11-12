@@ -59,6 +59,7 @@
         <ResultsFilePathWithoutExtension>$(_ResultFileNameNoExt)</ResultsFilePathWithoutExtension>
         <ResultsXmlPath>$(ArtifactsTestResultsDir)$(_ResultFileNameNoExt).xml</ResultsXmlPath>
         <ResultsTrxPath>$(ArtifactsTestResultsDir)$(_ResultFileNameNoExt).trx</ResultsTrxPath>
+        <ResultsCoverletCoveragePath>$(ArtifactsTestResultsDir)$(_ResultFileNameNoExt).coverage.cobertura.xml</ResultsCoverletCoveragePath>
         <ResultsHtmlPath>$(ArtifactsTestResultsDir)$(_ResultFileNameNoExt).html</ResultsHtmlPath>
         <ResultsStdOutPath>$(ArtifactsLogDir)$(_ResultFileNameNoExt).log</ResultsStdOutPath>
         <TestRunnerAdditionalArguments>$(TestRunnerAdditionalArguments)</TestRunnerAdditionalArguments>
