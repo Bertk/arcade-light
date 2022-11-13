@@ -37,7 +37,7 @@
       <IncludeTestAssembly>true</IncludeTestAssembly>
 
       <!--<_TestRunnerArgs>exec depsfile "$(_CoreDepsPath)" runtimeconfig "$(_CoreRuntimeConfigPath)" $(TestRuntimeAdditionalArguments) "$(NuGetPackageRoot)xunit.runner.console/$(XUnitVersion)/tools/$(_TestRunnerTargetFramework)/xunit.console.dll" "$(_TestAssembly)" -xml "%(TestToRun.ResultsXmlPath)" -html "%(TestToRun.ResultsHtmlPath)" $(_TestRunnerAdditionalArguments)</_TestRunnerArgs>-->
-      <_TestRunnerArgs>test "$(MSBuildProjectFullPath)" --no-restore --no-build /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" --logger "trx;LogFileName=%(TestToRun.ResultsTrxPath)" --logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" --logger "console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
+      <_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" --logger "trx;LogFileName=%(TestToRun.ResultsTrxPath)" --logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" --logger "console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
