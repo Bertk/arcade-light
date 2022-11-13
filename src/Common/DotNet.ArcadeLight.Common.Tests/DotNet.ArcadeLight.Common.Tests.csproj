@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
-
+    <EnableSourceLink>false</EnableSourceLink>
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
   </PropertyGroup>
 

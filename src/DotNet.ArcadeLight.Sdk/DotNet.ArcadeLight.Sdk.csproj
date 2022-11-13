@@ -1,7 +1,7 @@
 <!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. -->
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
+    <TargetFrameworks>net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
     <LangVersion>preview</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ExcludeFromSourceBuild>false</ExcludeFromSourceBuild>
@@ -23,6 +23,9 @@
     <NoWarn>$(NoWarn);3021;NU5105;NU1507;SYSLIB0013</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
     <DebugType>embedded</DebugType>
+    <IncludeSymbols>false</IncludeSymbols>
+    <!--coverlet workaround -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
@@ -64,15 +67,15 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="..\Common\Internal\AssemblyResolution.cs" Link="src\AssemblyResolution.cs" />
-  </ItemGroup>
+  <!-- <ItemGroup> -->
+    <!-- <Compile Include="..\Common\Internal\AssemblyResolution.cs" Link="src\AssemblyResolution.cs" /> -->
+  <!-- </ItemGroup> -->
 
   <ItemGroup>
     <ProjectReference Include="..\Common\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
     <ProjectReference Include="..\DotNet.ArcadeLight.Logging\DotNet.ArcadeLight.Logging.csproj" />
   </ItemGroup>
-  
+
   <Target Name="_GenerateSdkVersionFile" Inputs="$(MSBuildAllProjects)" Outputs="$(_GeneratedVersionFilePath)" BeforeTargets="GenerateNuSpec">
 
     <PropertyGroup>
@@ -85,7 +88,7 @@
 </Project>]]>
   </_SdkVersionPropsContent>
     </PropertyGroup>
-    
+
     <WriteLinesToFile File="$(_GeneratedVersionFilePath)" Lines="$(_SdkVersionPropsContent)" Overwrite="true" />
 
     <ItemGroup>
