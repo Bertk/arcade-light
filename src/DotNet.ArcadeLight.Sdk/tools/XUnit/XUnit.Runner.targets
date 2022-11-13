@@ -30,12 +30,6 @@
       <_TestRunner Condition="'%(TestToRun.Architecture)'=='x86' And Exists('$(DotNetRoot)x86\dotnet.exe')">$(DotNetRoot)x86\dotnet.exe</_TestRunner>
       <_TestRunner Condition="'$(_TestRunner)'==''">$(DotNetTool)</_TestRunner>
 
-      <CollectCoverage>true</CollectCoverage>
-      <UseSourceLink>true</UseSourceLink>
-      <CoverletOutputFormat>cobertura</CoverletOutputFormat>
-      <CoverletOutput>%(TestToRun.ResultsCoverletCoveragePath)</CoverletOutput>
-      <IncludeTestAssembly>true</IncludeTestAssembly>
-
       <!--<_TestRunnerArgs>exec depsfile "$(_CoreDepsPath)" runtimeconfig "$(_CoreRuntimeConfigPath)" $(TestRuntimeAdditionalArguments) "$(NuGetPackageRoot)xunit.runner.console/$(XUnitVersion)/tools/$(_TestRunnerTargetFramework)/xunit.console.dll" "$(_TestAssembly)" -xml "%(TestToRun.ResultsXmlPath)" -html "%(TestToRun.ResultsHtmlPath)" $(_TestRunnerAdditionalArguments)</_TestRunnerArgs>-->
       <_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" --logger "trx;LogFileName=%(TestToRun.ResultsTrxPath)" --logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" --logger "console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
     </PropertyGroup>
@@ -64,6 +58,7 @@
 
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
+      <_OutputFiles Include="%(TestToRun.ResultsCoverletCoveragePath)" />
       <_OutputFiles Include="%(TestToRun.ResultsXmlPath)" />
       <_OutputFiles Include="%(TestToRun.ResultsHtmlPath)" />
       <_OutputFiles Include="%(TestToRun.ResultsStdOutPath)" />

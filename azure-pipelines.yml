@@ -12,6 +12,10 @@ pr:
 
 variables:
 - template: eng/common-variables.yml
+- name: disable.coverage.autogenerate
+  value: 'true'
+- name: DOTNET_CLI_TELEMETRY_OPTOUT
+  value: 0
 
 resources:
   containers:
@@ -100,6 +104,7 @@ stages:
         pool:
           vmimage: windows-latest
         strategy:
+          maxParallel: 1
           matrix:
             Build_Release:
               _BuildConfig: Release
@@ -129,7 +134,7 @@ stages:
             -ci
             -restore
             -test
-            -projects $(Build.SourcesDirectory)\**\*Tests.proj
+            -projects $(Build.SourcesDirectory)\**\*Tests.csproj
             /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
             /p:RestoreUsingNuGetTargets=false
           displayName: Run Tests
@@ -140,6 +145,29 @@ stages:
           inputs:
             testRunner: VSTest
             testResultsFiles: '**/*.trx'
+        # publish code coverage (begin)
+        - task: reportgenerator@5
+          displayName: ReportGenerator
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
+          inputs:
+            reports: $(Build.SourcesDirectory)/**/*.coverage.cobertura.xml
+            targetdir: $(Build.SourcesDirectory)/artifacts/CoverageResults
+            reporttypes: Html;HtmlInline_AzurePipelines_Dark;Cobertura
+            sourcedirs: $(Build.SourcesDirectory)/src
+            assemblyfilters: '-xunit*'
+            classfilters: -DotNet.ArcadeLight.Test.Common;+DotNet.ArcadeLight.Common;+DotNet.ArcadeLight.Sdk;-DotNet.Internal.DependencyInjection.Testing
+        - publish: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
+          displayName: 'Publish CoverageResults Artifact'
+          artifact: CoverageResults_$(Agent.Os)_$(_BuildConfig)
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
+        - task: PublishCodeCoverageResults@1
+          displayName: 'Publish code coverage'
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
+          inputs:
+            codeCoverageTool: Cobertura
+            summaryFileLocation: '$(Build.SourcesDirectory)/artifacts/CoverageResults/Cobertura.xml'
+            failIfCoverageEmpty: true
+        # publish code coverage (end)
       - job: Linux
         timeoutInMinutes: 90
         container: LinuxContainer
