@@ -12,8 +12,8 @@ pr:
 
 variables:
 - template: eng/common-variables.yml
-- name: disable.coverage.autogenerate
-  value: 'true'
+#- name: disable.coverage.autogenerate
+#  value: 'true'
 - name: DOTNET_CLI_TELEMETRY_OPTOUT
   value: 0
 

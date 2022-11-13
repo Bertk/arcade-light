@@ -51,12 +51,17 @@
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
 
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
     <!-- see https://docs.microsoft.com/en-us/dotnet/core/tools/csproj -->
     <Company>arcade-light authors</Company>
     <MyCopyright>$(Company).</MyCopyright>
+    <Copyright>$(MyCompany).</Copyright>
     <Authors>Bert</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
