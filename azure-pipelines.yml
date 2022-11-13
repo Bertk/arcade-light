@@ -153,6 +153,7 @@ stages:
             reports: $(Build.SourcesDirectory)/**/*.coverage.cobertura.xml
             targetdir: $(Build.SourcesDirectory)/artifacts/CoverageReport
             reporttypes: Html;HtmlInline_AzurePipelines_Dark;Cobertura
+            verbosity: 'Verbose'
            # assemblyfilters: '-xunit*'
            # classfilters: -DotNet.ArcadeLight.Test.Common;+DotNet.ArcadeLight.Common;+DotNet.ArcadeLight.Sdk;-DotNet.Internal.DependencyInjection.Testing
         - publish: '$(Build.SourcesDirectory)/artifacts/TestResults'
