@@ -156,6 +156,10 @@ stages:
             sourcedirs: $(Build.SourcesDirectory)/src
             assemblyfilters: '-xunit*'
             classfilters: -DotNet.ArcadeLight.Test.Common;+DotNet.ArcadeLight.Common;+DotNet.ArcadeLight.Sdk;-DotNet.Internal.DependencyInjection.Testing
+        - publish: '$(Build.SourcesDirectory)/artifacts/TestResults'
+          displayName: 'Publish TestResults Artifacts'
+          artifact: TestResults_$(Agent.Os)_$(_BuildConfig)
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
         - publish: '$(Build.SourcesDirectory)/artifacts/CoverageResults'
           displayName: 'Publish CoverageResults Artifact'
           artifact: CoverageResults_$(Agent.Os)_$(_BuildConfig)

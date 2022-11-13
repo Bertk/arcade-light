@@ -10,3 +10,7 @@ Removed features:
 - remove Maestro channel support
 - remove Darc support
 - remove micro build (microsoft internal)
+
+=> add test code coverage using coverlet.msbuild
+    - successful for local builds
+    - issues with CI execution (see [coverlet known issues](https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/KnownIssues.md))
