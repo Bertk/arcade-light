@@ -12,23 +12,16 @@ using System.Threading;
 
 namespace DotNet.ArcadeLight.Sdk
 {
-#if NET472
-    [LoadInSeparateAppDomain]
-    public sealed class Unsign : AppDomainIsolatedTask
-    {
-        static Unsign() => AssemblyResolution.Initialize();
-#else
+
     public class Unsign : Microsoft.Build.Utilities.Task
     {
-#endif
+
         [Required]
         public string FilePath { get; set; }
 
         public override bool Execute()
         {
-#if NET472
-            AssemblyResolution.Log = Log;
-#endif
+
             try
             {
                 ExecuteImpl();
@@ -36,9 +29,7 @@ namespace DotNet.ArcadeLight.Sdk
             }
             finally
             {
-#if NET472
-                AssemblyResolution.Log = null;
-#endif
+                // empty block
             }
         }
 

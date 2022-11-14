@@ -13,15 +13,9 @@ using System.Text.Json;
 
 namespace DotNet.ArcadeLight.Sdk
 {
-#if NET472
-    [LoadInSeparateAppDomain]
-    public class InstallDotNetCore : AppDomainIsolatedTask
-    {
-        static InstallDotNetCore() => AssemblyResolution.Initialize();
-#else
+
     public class InstallDotNetCore : Microsoft.Build.Utilities.Task
     {
-#endif
         public string VersionsPropsPath { get; set; }
 
         [Required]
