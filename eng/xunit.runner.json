@@ -1,4 +1,4 @@
 {
   "shadowCopy": false,
-  "parallelizeAssembly": true  
+  "parallelizeAssembly": false  
 }

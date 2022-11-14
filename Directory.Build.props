@@ -21,7 +21,7 @@
 
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
-    <XUnitCoreSettingsFile>$(MSBuildThisFileDirectory)eng/xunit.runner.json</XUnitCoreSettingsFile>
+    <!--<XUnitCoreSettingsFile>$(MSBuildThisFileDirectory)eng/xunit.runner.json</XUnitCoreSettingsFile>-->
   </PropertyGroup>
 
   <ItemGroup Condition="$(BUILD_REASON) == ''">

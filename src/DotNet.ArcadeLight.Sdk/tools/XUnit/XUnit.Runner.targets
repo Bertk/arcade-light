@@ -33,7 +33,7 @@
       <!--<_TestRunnerArgs>exec depsfile "$(_CoreDepsPath)" runtimeconfig "$(_CoreRuntimeConfigPath)" $(TestRuntimeAdditionalArguments) "$(NuGetPackageRoot)xunit.runner.console/$(XUnitVersion)/tools/$(_TestRunnerTargetFramework)/xunit.console.dll" "$(_TestAssembly)" -xml "%(TestToRun.ResultsXmlPath)" -html "%(TestToRun.ResultsHtmlPath)" $(_TestRunnerAdditionalArguments)</_TestRunnerArgs>-->
       <!-- coverlet known issue "no-build" symptom (see https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/KnownIssues.md) -->
       <!-- ToDo: check other solution and avoid unnecessary build -->
-      <_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" --logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" --logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" --logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
+      <_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" --no-restore --logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" --logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" --logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
