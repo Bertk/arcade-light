@@ -152,8 +152,8 @@ stages:
             targetdir: $(Build.SourcesDirectory)/artifacts/CoverageReport
             reporttypes: Html;HtmlInline_AzurePipelines_Dark;Cobertura
             verbosity: 'Verbose'
-           # assemblyfilters: '-xunit*'
-           # classfilters: -DotNet.ArcadeLight.Test.Common;+DotNet.ArcadeLight.Common;+DotNet.ArcadeLight.Sdk;-DotNet.Internal.DependencyInjection.Testing
+            assemblyfilters: '-xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing'
+            #classfilters: -DotNet.ArcadeLight.Test.Common.*;+DotNet.ArcadeLight.Common;+DotNet.ArcadeLight.Sdk;-DotNet.Internal.DependencyInjection.Testing.*
         - publish: '$(Build.SourcesDirectory)/artifacts/TestResults'
           displayName: 'Publish TestResults Artifacts'
           artifact: TestResults_$(Agent.Os)_$(_BuildConfig)
