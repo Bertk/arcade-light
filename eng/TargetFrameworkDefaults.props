@@ -6,7 +6,6 @@
   -->
   <PropertyGroup>
     <TargetFrameworkForNETSDK>net6.0</TargetFrameworkForNETSDK>
-    <TargetFrameworkForNETSDK Condition="'$(DotNetBuildFromSource)' == 'true'">net6.0</TargetFrameworkForNETSDK>
   </PropertyGroup>
 
 </Project>
