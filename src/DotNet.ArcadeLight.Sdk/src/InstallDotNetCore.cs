@@ -47,98 +47,95 @@ namespace DotNet.ArcadeLight.Sdk
 
             using (JsonDocument jsonDocument = JsonDocument.Parse(bytes))
             {
-                if (jsonDocument.RootElement.TryGetProperty("tools", out JsonElement toolsElement))
+                if (jsonDocument.RootElement.TryGetProperty("tools", out JsonElement toolsElement) && toolsElement.TryGetProperty("runtimes", out JsonElement dotnetLocalElement))
                 {
-                    if (toolsElement.TryGetProperty("runtimes", out JsonElement dotnetLocalElement))
+                    var runtimeItems = new Dictionary<string, IEnumerable<KeyValuePair<string, string>>>();
+                    foreach (var runtime in dotnetLocalElement.EnumerateObject())
                     {
-                        var runtimeItems = new Dictionary<string, IEnumerable<KeyValuePair<string, string>>>();
-                        foreach (var runtime in dotnetLocalElement.EnumerateObject())
+                        var items = GetItemsFromJsonElementArray(runtime, out string runtimeName);
+                        if (runtimeItems.ContainsKey(runtimeName))
                         {
-                            var items = GetItemsFromJsonElementArray(runtime, out string runtimeName);
-                            if (runtimeItems.ContainsKey(runtimeName))
+                            runtimeItems[runtimeName] = runtimeItems[runtimeName].Concat(items);
+                        }
+                        else
+                        {
+                            runtimeItems.Add(runtimeName, items);
+                        }
+                    }
+                    if (runtimeItems.Count > 0)
+                    {
+                        System.Linq.ILookup<string, ProjectProperty> properties = null;
+                        // Only load Versions.props if there's a need to look for a version identifier (ie, there's a value listed that's not a parsable version).
+                        if (runtimeItems.SelectMany(r => r.Value).Select(r => r.Key).FirstOrDefault(f => !SemanticVersion.TryParse(f, out SemanticVersion version)) != null)
+                        {
+                            if (!File.Exists(VersionsPropsPath))
                             {
-                                runtimeItems[runtimeName] = runtimeItems[runtimeName].Concat(items);
+                                Log.LogError($"Unable to find translation file {VersionsPropsPath}");
+                                return !Log.HasLoggedErrors;
                             }
                             else
                             {
-                                runtimeItems.Add(runtimeName, items);
+                                var proj = Project.FromFile(VersionsPropsPath, new Microsoft.Build.Definition.ProjectOptions());
+                                properties = proj.AllEvaluatedProperties.ToLookup(p => p.Name, StringComparer.OrdinalIgnoreCase);
                             }
                         }
-                        if (runtimeItems.Count > 0)
+
+                        foreach (var runtimeItem in runtimeItems)
                         {
-                            System.Linq.ILookup<string, ProjectProperty> properties = null;
-                            // Only load Versions.props if there's a need to look for a version identifier (ie, there's a value listed that's not a parsable version).
-                            if (runtimeItems.SelectMany(r => r.Value).Select(r => r.Key).FirstOrDefault(f => !SemanticVersion.TryParse(f, out SemanticVersion version)) != null)
+                            foreach (var item in runtimeItem.Value)
                             {
-                                if (!File.Exists(VersionsPropsPath))
-                                {
-                                    Log.LogError($"Unable to find translation file {VersionsPropsPath}");
-                                    return !Log.HasLoggedErrors;
-                                }
-                                else
-                                {
-                                    var proj = Project.FromFile(VersionsPropsPath, new Microsoft.Build.Definition.ProjectOptions());
-                                    properties = proj.AllEvaluatedProperties.ToLookup(p => p.Name, StringComparer.OrdinalIgnoreCase);
-                                }
-                            }
+                                string architecture = GetArchitecture(item.Value);
 
-                            foreach (var runtimeItem in runtimeItems)
-                            {
-                                foreach (var item in runtimeItem.Value)
+                                if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && string.Equals("x86", architecture, StringComparison.OrdinalIgnoreCase))
                                 {
-                                    string architecture = GetArchitecture(item.Value);
+                                    Log.LogMessage(MessageImportance.Low, "Skipping installing x86 runtimes because this is a non-Windows platform and .NET Core x86 is not currently supported on any non-Windows platform.");
+                                    continue;
+                                }
 
-                                    if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && string.Equals("x86", architecture, StringComparison.OrdinalIgnoreCase))
+                                SemanticVersion version = null;
+                                // Try to parse version
+                                if (!SemanticVersion.TryParse(item.Key, out version))
+                                {
+                                    var propertyName = item.Key.Trim('$', '(', ')');
+
+                                    // Unable to parse version, try to find the corresponding identifier from the MSBuild loaded MSBuild properties
+                                    string evaluatedValue = properties[propertyName].First().EvaluatedValue;
+                                    if (!SemanticVersion.TryParse(evaluatedValue, out version))
                                     {
-                                        Log.LogMessage(MessageImportance.Low, "Skipping installing x86 runtimes because this is a non-Windows platform and .NET Core x86 is not currently supported on any non-Windows platform.");
-                                        continue;
+                                        Log.LogError($"Unable to parse '{item.Key}' from properties defined in '{VersionsPropsPath}'");
+                                    }
+                                }
+
+                                if (version != null)
+                                {
+                                    string arguments = $"-runtime \"{runtimeItem.Key}\" -version \"{version.ToNormalizedString()}\"";
+                                    if (!string.IsNullOrEmpty(architecture))
+                                    {
+                                        arguments += $" -architecture {architecture}";
                                     }
 
-                                    SemanticVersion version = null;
-                                    // Try to parse version
-                                    if (!SemanticVersion.TryParse(item.Key, out version))
+                                    if (!string.IsNullOrWhiteSpace(RuntimeSourceFeed))
                                     {
-                                        var propertyName = item.Key.Trim('$', '(', ')');
-
-                                        // Unable to parse version, try to find the corresponding identifier from the MSBuild loaded MSBuild properties
-                                        string evaluatedValue = properties[propertyName].First().EvaluatedValue;
-                                        if (!SemanticVersion.TryParse(evaluatedValue, out version))
-                                        {
-                                            Log.LogError($"Unable to parse '{item.Key}' from properties defined in '{VersionsPropsPath}'");
-                                        }
+                                        arguments += $" -runtimeSourceFeed {RuntimeSourceFeed}";
                                     }
 
-                                    if (version != null)
+                                    // The default RuntimeSourceFeed doesn't need a key
+                                    if (!string.IsNullOrWhiteSpace(RuntimeSourceFeed) && !string.IsNullOrWhiteSpace(RuntimeSourceFeedKey))
                                     {
-                                        string arguments = $"-runtime \"{runtimeItem.Key}\" -version \"{version.ToNormalizedString()}\"";
-                                        if (!string.IsNullOrEmpty(architecture))
-                                        {
-                                            arguments += $" -architecture {architecture}";
-                                        }
+                                        arguments += $" -runtimeSourceFeedKey {RuntimeSourceFeedKey}";
+                                    }
 
-                                        if (!string.IsNullOrWhiteSpace(RuntimeSourceFeed))
-                                        {
-                                            arguments += $" -runtimeSourceFeed {RuntimeSourceFeed}";
-                                        }
-
-                                        // The default RuntimeSourceFeed doesn't need a key
-                                        if (!string.IsNullOrWhiteSpace(RuntimeSourceFeed) && !string.IsNullOrWhiteSpace(RuntimeSourceFeedKey))
-                                        {
-                                            arguments += $" -runtimeSourceFeedKey {RuntimeSourceFeedKey}";
-                                        }
-
-                                        Log.LogMessage(MessageImportance.Low, $"Executing: {DotNetInstallScript} {arguments}");
-                                        var process = Process.Start(new ProcessStartInfo()
-                                        {
-                                            FileName = DotNetInstallScript,
-                                            Arguments = arguments,
-                                            UseShellExecute = false
-                                        });
-                                        process.WaitForExit();
-                                        if (process.ExitCode != 0)
-                                        {
-                                            Log.LogError("dotnet-install failed");
-                                        }
+                                    Log.LogMessage(MessageImportance.Low, $"Executing: {DotNetInstallScript} {arguments}");
+                                    var process = Process.Start(new ProcessStartInfo()
+                                    {
+                                        FileName = DotNetInstallScript,
+                                        Arguments = arguments,
+                                        UseShellExecute = false
+                                    });
+                                    process.WaitForExit();
+                                    if (process.ExitCode != 0)
+                                    {
+                                        Log.LogError("dotnet-install failed");
                                     }
                                 }
                             }

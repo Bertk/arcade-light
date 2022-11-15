@@ -116,13 +116,13 @@ namespace DotNet.ArcadeLight.Sdk
                 httpClient.Timeout = TimeSpan.FromSeconds(TimeoutInSeconds);
                 try
                 {
-                    return await DownloadWithRetriesAsync(httpClient, uri);
+                    return await DownloadWithRetriesAsync(httpClient, uri).ConfigureAwait(false);
                 }
                 catch (AggregateException e)
                 {
                     if (e.InnerException is OperationCanceledException)
                     {
-                        Log.LogMessage($"Download of '{uri}' to '{DestinationPath}' has been cancelled.");
+                        Log.LogMessage($"Download of '{uri}' to '{DestinationPath}' has been canceled.");
                         return false;
                     }
 
@@ -131,7 +131,7 @@ namespace DotNet.ArcadeLight.Sdk
             }
         }
 
-        private async Tasks.Task<bool> DownloadWithRetriesAsync(HttpClient httpClient, string uri)
+        private async Tasks.Task<bool> DownloadWithRetriesAsync(HttpClient httpClient, String uri)
         {            
             int attempt = 0;
 

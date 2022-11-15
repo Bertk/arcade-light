@@ -88,12 +88,9 @@ namespace DotNet.ArcadeLight.Logging
                 {
                     telemetryCategory = telemetryInfo.Category;
                 }
-                if (string.IsNullOrEmpty(telemetryCategory))
+                if (string.IsNullOrEmpty(telemetryCategory) && _projectInfoMap.TryGetValue(parentId.Value, out ProjectInfo projectInfo))
                 {
-                    if (_projectInfoMap.TryGetValue(parentId.Value, out ProjectInfo projectInfo))
-                    {
-                        telemetryCategory = projectInfo.PropertiesCategory;
-                    }
+                    telemetryCategory = projectInfo.PropertiesCategory;
                 }
             }
             _builder.Start("logissue");
@@ -288,6 +285,7 @@ namespace DotNet.ArcadeLight.Logging
                     }
                     catch (Exception)
                     {
+                        // empty
                     }
                 }
 
