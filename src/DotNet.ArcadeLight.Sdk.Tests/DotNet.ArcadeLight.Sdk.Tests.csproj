@@ -6,6 +6,8 @@
     <EnableSourceLink>false</EnableSourceLink>
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
     <Copyright>$(MyCopyright)</Copyright>
+    <!--coverlet workaround -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
