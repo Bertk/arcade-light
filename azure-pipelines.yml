@@ -13,12 +13,7 @@ pr:
 variables:
 - template: eng/common-variables.yml
 - name: DOTNET_CLI_TELEMETRY_OPTOUT
-  value: 0
-
-resources:
-  containers:
-  - container: LinuxContainer
-    image: mcr.microsoft.com/dotnet-buildtools/prereqs:ubuntu-14.04-cross-0cd4667-20170319080304
+  value: 1
 
 stages:
 - stage: build
@@ -61,7 +56,6 @@ stages:
       - ${{ if eq(variables._RunAsPublic, True) }}:
         - job: Linux
           timeoutInMinutes: 90
-          container: LinuxContainer
           pool:
             vmImage: ubuntu-latest
           strategy:
@@ -153,7 +147,6 @@ stages:
 
       - job: Linux
         timeoutInMinutes: 90
-        container: LinuxContainer
         pool:
           vmimage: ubuntu-latest
         strategy:
