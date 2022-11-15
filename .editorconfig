@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 
 # Visual Studio XML Project Files
 [*.{csproj,vbproj,vcxproj.filters,proj,projitems,shproj}]
-indent_size = 2
+indent_size = 4
 
 # XML Configuration Files
 [*.{xml,config,props,targets,nuspec,resx,ruleset,vsixmanifest,vsct}]
@@ -94,6 +94,8 @@ dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 2
 end_of_line = crlf
 dotnet_style_namespace_match_folder = true:suggestion
+dotnet_diagnostic.CA1307.severity = silent
+dotnet_diagnostic.CA1310.severity = warning
 ###############################
 # C# Coding Conventions       #
 ###############################
