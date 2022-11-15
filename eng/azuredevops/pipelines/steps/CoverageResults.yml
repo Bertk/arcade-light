@@ -3,13 +3,12 @@
 # Precondition: execute unit tests using [test.cmd | test.ps1 | test.sh]
 
 parameters:
+  condition: 'succeeded()'
   reports: ''
   assemblyfilters: '-xunit*'
-  condition: 'succeeded()'
   breakBuild: false
 
 steps:
-# publish test code coverage (begin)
 - task: reportgenerator@5
   displayName: ReportGenerator
   condition: ${{parameters.condition}}
@@ -37,4 +36,3 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/artifacts/CoverageReport/Cobertura.xml'
     failIfCoverageEmpty: ${{parameters.breakBuild}}
-# publish test code coverage (end)

@@ -143,12 +143,14 @@ stages:
           inputs:
             testRunner: VSTest
             testResultsFiles: '**/*.trx'
-        - template: eng/azuredevops/pipelines/steps/PublishCoverageResults.yml
+
+        - template: ../steps/CoverageResults.yml
           parameters:
             reports: '$(Build.SourcesDirectory)/**/*.coverage.cobertura.xml'
             condition: "and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))"
             assemblyfilters: '-xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing'
             breakBuild: true
+
       - job: Linux
         timeoutInMinutes: 90
         container: LinuxContainer
