@@ -6,6 +6,8 @@
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
     <EnableSourceLink>false</EnableSourceLink>
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
+    <!--coverlet workaround -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
