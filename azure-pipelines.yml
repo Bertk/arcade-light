@@ -25,6 +25,7 @@ stages:
         publish:
           artifacts: true
           logs: true
+          packages: true
       workspace:
         clean: all
       jobs:
