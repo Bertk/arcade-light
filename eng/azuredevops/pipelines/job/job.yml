@@ -117,6 +117,13 @@ jobs:
           SourceFolder: 'artifacts/bin'
           Contents: '**'
           TargetFolder: '$(Build.ArtifactStagingDirectory)/artifacts/bin'
+      - ${{ if or(eq(parameters.artifacts.publish.packages, 'true'), ne(parameters.artifacts.publish.packages, '')) }}:
+        - task: CopyFiles@2
+          displayName: Gather packages for publish to artifacts
+          inputs:
+            SourceFolder: 'artifacts/packages'
+            Contents: '**'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)/artifacts/packages'
       - task: PublishBuildArtifacts@1
         displayName: Publish pipeline artifacts
         inputs:
@@ -125,13 +132,7 @@ jobs:
           ArtifactName: ${{ coalesce(parameters.artifacts.publish.artifacts.name , 'Artifacts_$(Agent.Os)_$(_BuildConfig)') }}
         continueOnError: true
         condition: always()
-    - ${{ if or(eq(parameters.artifacts.publish.packages, 'true'), ne(parameters.artifacts.publish.packages, '')) }}:
-      - task: CopyFiles@2
-        displayName: Gather packages for publish to artifacts
-        inputs:
-          SourceFolder: 'artifacts/packages'
-          Contents: '**'
-          TargetFolder: '$(Build.ArtifactStagingDirectory)/artifacts/packages'
+
     - ${{ if or(eq(parameters.artifacts.publish.logs, 'true'), ne(parameters.artifacts.publish.logs, '')) }}:
       - publish: artifacts/log
         artifact: ${{ coalesce(parameters.artifacts.publish.logs.name, 'Logs_Build_$(Agent.Os)_$(_BuildConfig)') }}
