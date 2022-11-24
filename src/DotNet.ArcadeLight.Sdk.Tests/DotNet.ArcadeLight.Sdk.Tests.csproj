@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
     <DefaultItemExcludes>$(DefaultItemExcludes);testassets\**\*</DefaultItemExcludes>
     <EnableSourceLink>false</EnableSourceLink>
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
@@ -17,11 +17,20 @@
     <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+    <PackageReference Include="Microsoft.Build" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" />
+  </ItemGroup>
+
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="FluentAssertions" />
-    <PackageReference Include="Microsoft.Build" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" />
     <PackageReference Include="Moq" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="xunit" />

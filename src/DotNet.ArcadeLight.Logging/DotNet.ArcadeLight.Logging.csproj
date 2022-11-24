@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
     <IsPackable>true</IsPackable>
     <NoWarn>$(NoWarn);NU1507</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
@@ -9,7 +9,11 @@
 
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
     <PackageReference Include="Microsoft.Build" />
   </ItemGroup>
 
