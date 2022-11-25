@@ -109,6 +109,8 @@ artifacts:
 
 ### PublishArtifact schema
 
+_note: publish `packages` depends on `artifacts`_
+
 ```yaml
 artifacts:
   publish:
