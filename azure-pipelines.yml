@@ -129,7 +129,7 @@ stages:
 
         - template: ../steps/CoverageResults.yml
           parameters:
-            reports: $(Build.SourcesDirectory)/**/*.coverage.cobertura.xml
+            reports: $(Build.SourcesDirectory)/**/coverage.cobertura.xml
             condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
             assemblyfilters: '-xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing'
             breakBuild: true
