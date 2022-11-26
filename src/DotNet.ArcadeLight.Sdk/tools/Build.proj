@@ -62,7 +62,7 @@
   <!--
     Default values.
   -->
-  <!-- If Projects is unspecified and ProjectToBuild was not set via Build.props, fallback to building .sln files in the repo root. -->
+  <!-- If Projects is unspecified and ProjectToBuild was not set via Build.props, fall-back to building .sln files in the repo root. -->
   <ItemGroup Condition="'@(ProjectToBuild)' == ''">
     <ProjectToBuild Include="$(RepoRoot)*.sln" />
   </ItemGroup>

@@ -15,9 +15,8 @@
       <_TestTimeout>%(TestToRun.TestTimeout)</_TestTimeout>
       <_TestRunnerAdditionalArguments>%(TestToRun.TestRunnerAdditionalArguments)</_TestRunnerAdditionalArguments>
 
-      <!-- Always use net472 for desktop to enable displaying source location from Portable PDBs in stack traces -->
-      <_TestRunnerTargetFramework>net472</_TestRunnerTargetFramework>
-      <_TestRunnerTargetFramework Condition="'$(_TestRuntime)' == 'Core'">net6.0</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework>net6.0</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework Condition="'$(TargetFrameworkForNETSDK)' != ''">$(TargetFrameworkForNETSDK)</_TestRunnerTargetFramework>
       <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == 'netcoreapp1.1' or %(TestToRun.TargetFramework) == 'netcoreapp1.0'">netcoreapp1.0</_TestRunnerTargetFramework>
     </PropertyGroup>
 
@@ -33,7 +32,10 @@
       <!--<_TestRunnerArgs>exec depsfile "$(_CoreDepsPath)" runtimeconfig "$(_CoreRuntimeConfigPath)" $(TestRuntimeAdditionalArguments) "$(NuGetPackageRoot)xunit.runner.console/$(XUnitVersion)/tools/$(_TestRunnerTargetFramework)/xunit.console.dll" "$(_TestAssembly)" -xml "%(TestToRun.ResultsXmlPath)" -html "%(TestToRun.ResultsHtmlPath)" $(_TestRunnerAdditionalArguments)</_TestRunnerArgs>-->
       <!-- coverlet known issue "no-build" symptom (see https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/KnownIssues.md) -->
       <!-- ToDo: check other solution and avoid unnecessary build -->
-      <_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" --no-restore --logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" --logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" --logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>
+      <!--<_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" --no-restore --framework %(TestToRun.TargetFramework) --logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" --logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" --logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>-->
+      <_TestResultDirectory>$([System.IO.Path]::GetDirectoryName('%(TestToRun.ResultsTrxPath)'))</_TestResultDirectory>
+      <_TestResultTrxFileName>$([System.IO.Path]::GetFileName('%(TestToRun.ResultsTrxPath)'))</_TestResultTrxFileName>
+      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" "--ResultsDirectory:$(_TestResultDirectory)" --logger:"trx%3BLogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
@@ -48,6 +50,14 @@
       <_TestRunner Condition="'$(_TestRuntime)' != 'Mono'">$(_XUnitConsoleExePath)</_TestRunner>
     </PropertyGroup>
 
+
+    <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" -->
+    <ItemGroup>
+      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
+      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
+
     <PropertyGroup>
       <_TestRunnerCommand>"$(_TestRunner)" $(_TestRunnerArgs)</_TestRunnerCommand>
 
@@ -60,10 +70,10 @@
 
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
-      <_OutputFiles Include="%(TestToRun.ResultsCoverletCoveragePath)" />
+      <!--<_OutputFiles Include="%(TestToRun.ResultsCoverletCoveragePath)" />
       <_OutputFiles Include="%(TestToRun.ResultsXmlPath)" />
       <_OutputFiles Include="%(TestToRun.ResultsHtmlPath)" />
-      <_OutputFiles Include="%(TestToRun.ResultsStdOutPath)" />
+      <_OutputFiles Include="%(TestToRun.ResultsStdOutPath)" />-->
     </ItemGroup>
 
     <MakeDir Directories="@(_OutputFiles->'%(RootDir)%(Directory)')"/>
