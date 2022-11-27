@@ -108,6 +108,13 @@ stages:
           fetchDepth: 0
           clean: true
         steps:
+        - task: DotNetCoreCLI@2
+          inputs:
+            command: 'publish'
+            publishWebProjects: false
+            projects: 'src/**/*.Tests.csproj'
+            zipAfterPublish: false
+            modifyOutputPath: false
         - task: NuGetAuthenticate@1
         - powershell: eng\commonlight\build.ps1
             -configuration $(_BuildConfig)

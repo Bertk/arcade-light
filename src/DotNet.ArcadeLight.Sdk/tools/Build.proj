@@ -9,11 +9,6 @@
   Optional parameters:
     Configuration                   Build configuration: "Debug", "Release", etc.
 
-    DotNetOutputBlobFeedDir         Directory to publish Source Build assets to (packages, symbol packages, installers, etc.).
-    DotNetPublishUsingPipelines     Publish assets to Build Asset Registry.
-    DotNetSymbolServerTokenMsdl     Personal access token for MSDL symbol server. Available from variable group DotNet-Symbol-Server-Pats.	
-    DotNetSymbolServerTokenSymWeb   Personal access token for SymWeb symbol server. Available from variable group DotNet-Symbol-Server-Pats.	
-    DotNetSymbolExpirationInDays    Symbol expiration time in days (defaults to 10 years).
     DotNetSignType                  Specifies the signing type: 'real' (default), 'test'.
     DotNetRuntimeSourceFeed         Storage account to lookup for the .Net runtime files
     DotNetRuntimeSourceFeedKey      In case the storage account to fetch the .Net runtime files are private this should contain a SAS token.
@@ -67,11 +62,6 @@
     <ProjectToBuild Include="$(RepoRoot)*.sln" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <_DotNetOutputBlobFeedDir>$(DotNetOutputBlobFeedDir)</_DotNetOutputBlobFeedDir>
-    <_DotNetOutputBlobFeedDir Condition="'$(_DotNetOutputBlobFeedDir)' != '' and !HasTrailingSlash('$(_DotNetOutputBlobFeedDir)')">$(_DotNetOutputBlobFeedDir)\</_DotNetOutputBlobFeedDir>
-  </PropertyGroup>
-
   <Target Name="Execute">
     <Error Text="No projects were found to build. Either the 'Projects' property or 'ProjectToBuild' item group must be specified." Condition="'@(ProjectToBuild)' == ''"/>
     <Error Text="Property 'RepoRoot' must be specified" Condition="'$(RepoRoot)' == ''"/>
@@ -82,16 +72,6 @@
       <_NuGetRestoreTargets Condition="Exists('$(MSBuildToolsPath)\NuGet.targets')" >$(MSBuildToolsPath)\NuGet.targets</_NuGetRestoreTargets>
       <_NuGetRestoreTargets Condition="'$([MSBuild]::IsRunningFromVisualStudio())' == 'true' And Exists('$(MSBuildToolsPath32)\..\..\..\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.targets')">$(MSBuildToolsPath32)\..\..\..\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.targets</_NuGetRestoreTargets>
 
-      <!-- If `DotNetPublishUsingPipelines` is not set we default it to false. -->
-      <DotNetPublishUsingPipelines Condition="'$(DotNetPublishUsingPipelines)' == ''">false</DotNetPublishUsingPipelines>
-
-      <!-- 
-        If DotNetPublishUsingPipelines is set we don't publish symbols during the build stage,
-        only in the Maestro post-build stages. If DotNetPublishUsingPipelines is NOT set then
-        we publish symbols during the build stage.
-      -->
-      <PublishToSymbolServer>true</PublishToSymbolServer>
-      <PublishToSymbolServer Condition="'$(DotNetPublishUsingPipelines)' == 'true'">false</PublishToSymbolServer>
     </PropertyGroup>
 
     <ItemGroup>
@@ -134,8 +114,6 @@
       <!-- Used in the SDK (Tools.proj) to control whether SymbolUploader.Build.Task will be restored or not. -->
       <_RestoreToolsProps Include="PublishToSymbolServer=$(PublishToSymbolServer)"/>
 
-      <!-- Forward this property because we can't assume it will be available globally. -->
-      <_RestoreToolsProps Include="DotNetPublishUsingPipelines=$(DotNetPublishUsingPipelines)"/>
     </ItemGroup>
 
     <!--
@@ -149,13 +127,13 @@
 
     <ItemGroup>
       <_PublishProps Include="@(_CommonProps)"/>
-      <_PublishProps Include="DotNetOutputBlobFeedDir=$(_DotNetOutputBlobFeedDir)" Condition="'$(_DotNetOutputBlobFeedDir)' != ''" />
 
       <!-- Used in a few places in the stack to decide if publishing was enabled or not. -->
       <_PublishProps Include="Publish=$(Publish)"/>
 
-      <!-- Forward this property because we can't assume it will be available globally. -->
-      <_PublishProps Include="DotNetPublishUsingPipelines=$(DotNetPublishUsingPipelines)"/>
+      <!-- coverlet.collector and vstest requires publishing test project-->
+      <_PublishProps Include="Publish=True" Condition="'$(IsTestProject)' == 'true'"/>
+
     </ItemGroup>
 
     <ItemGroup>
@@ -239,6 +217,14 @@
       </_ProjectToRestore>
     </ItemGroup>
 
+    <!--<PropertyGroup>
+      <PublishProtocol>FileSystem</PublishProtocol>
+      <PublishSingleFile>false</PublishSingleFile>
+      <PublishReadyToRun>false</PublishReadyToRun>
+      <PublishUrl>Publish</PublishUrl>
+      <PublishDir>Publish</PublishDir>
+    </PropertyGroup>-->
+
     <MSBuild Projects="@(_ProjectToRestore)"
              Properties="@(_SolutionRestoreProps)"
              RemoveProperties="$(_RemoveProps);TreatWarningsAsErrors"
@@ -258,9 +244,9 @@
              Condition="'@(_SolutionBuildTargets)' != ''" />
 
     <MSBuild Projects="AfterSolutionBuild.proj"
-             Properties="@(_CommonProps);_NETCORE_ENGINEERING_TELEMETRY=Build"
-             Targets="@(_SolutionBuildTargets)"
-             Condition="'@(_SolutionBuildTargets)' != ''" />
-
+         Properties="@(_CommonProps);_NETCORE_ENGINEERING_TELEMETRY=Build"
+         Targets="@(_SolutionBuildTargets)"
+         Condition="'@(_SolutionBuildTargets)' != ''" />
+    
   </Target>
 </Project>
