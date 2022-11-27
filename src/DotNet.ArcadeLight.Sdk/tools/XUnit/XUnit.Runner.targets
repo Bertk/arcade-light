@@ -51,11 +51,6 @@
     </PropertyGroup>
 
 
-    <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" -->
-    <ItemGroup>
-      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
-      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
-    </ItemGroup>
     <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
 
     <PropertyGroup>

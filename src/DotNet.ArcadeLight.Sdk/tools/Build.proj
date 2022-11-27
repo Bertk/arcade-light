@@ -217,14 +217,6 @@
       </_ProjectToRestore>
     </ItemGroup>
 
-    <!--<PropertyGroup>
-      <PublishProtocol>FileSystem</PublishProtocol>
-      <PublishSingleFile>false</PublishSingleFile>
-      <PublishReadyToRun>false</PublishReadyToRun>
-      <PublishUrl>Publish</PublishUrl>
-      <PublishDir>Publish</PublishDir>
-    </PropertyGroup>-->
-
     <MSBuild Projects="@(_ProjectToRestore)"
              Properties="@(_SolutionRestoreProps)"
              RemoveProperties="$(_RemoveProps);TreatWarningsAsErrors"
