@@ -8,6 +8,7 @@
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
     <!--coverlet workaround -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <IsPublishable>true</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
