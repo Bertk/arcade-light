@@ -1,17 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
     <IsTestProject>true</IsTestProject>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
 
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
     <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="Microsoft.Build.Tasks.Core" />
     <PackageReference Include="Microsoft.Build.Framework" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" />
     <PackageReference Include="xunit" />
   </ItemGroup>

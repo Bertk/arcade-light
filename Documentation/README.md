@@ -1,6 +1,6 @@
 # **The original documentation is available [here](https://github.com/dotnet/arcade/tree/main/Documentation)**
 
-Removed features:
+##Removed features:
 
 - [arcade Versioning](https://github.com/dotnet/arcade/blob/main/Documentation/CorePackages/Versioning.md) is replaced by [NerdbankGitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning) and yaml templates
 - use [Nuget Central Package Management](https://devblogs.microsoft.com/nuget/introducing-central-package-management/?WT.mc_id=DT-MVP-5004452) and remove nuget package versions from `Versions.props` file
@@ -10,7 +10,17 @@ Removed features:
 - remove Maestro channel support
 - remove Darc support
 - remove micro build (microsoft internal)
+- remove sign.proj and pack.proj (should be handled in build pipeline)
+- remove PublishToSymbolServer 
 
-=> add test code coverage using coverlet.msbuild
+##Update:
+
+- __publish__ workflow for CIBuild.cmd
+
+
+## new features
+
+- add test code coverage using coverlet
     - successful for local builds
+    - `dotnet publish` for test projects - required for code coverage generated executing vstest
     - issues with CI execution (see [coverlet known issues](https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/KnownIssues.md))
