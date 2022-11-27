@@ -9,6 +9,7 @@
     <DebugType>embedded</DebugType>
     <!--coverlet workaround -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">

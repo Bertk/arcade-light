@@ -22,4 +22,5 @@
 
 - add test code coverage using coverlet
     - successful for local builds
+    - `dotnet publish` for test projects - required for code coverage generated executing vstest
     - issues with CI execution (see [coverlet known issues](https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/KnownIssues.md))
