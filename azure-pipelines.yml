@@ -201,6 +201,11 @@ stages:
       inputs:
         packageType: 'sdk'
         useGlobalJson: true
+    - task: UseDotNet@2
+      displayName: 'Use dotnet SDK (global)'
+      inputs:
+        packageType: 'runtime'
+        version: 6.x
 
     - task: NuGetAuthenticate@1
 
