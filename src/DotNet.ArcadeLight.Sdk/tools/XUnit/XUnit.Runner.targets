@@ -68,7 +68,6 @@
     </ItemGroup>
     <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
 
-
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
       <!--<_OutputFiles Include="%(TestToRun.ResultsCoverletCoveragePath)" />
