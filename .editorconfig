@@ -5,7 +5,7 @@
 # All files
 [*]
 indent_style = space
-indent_size = 4
+indent_size = 2
 insert_final_newline = true
 charset = utf-8
 trim_trailing_whitespace = true
@@ -156,6 +156,9 @@ csharp_preserve_single_line_blocks = true
 ###############################
 # VB Coding Conventions       #
 ###############################
+
+# CA1307: Specify StringComparison for clarity
+dotnet_diagnostic.CA1307.severity = silent
 
 # CA1707: Identifiers should not contain underscores
 dotnet_diagnostic.CA1707.severity = none

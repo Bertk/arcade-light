@@ -6,6 +6,6 @@
     "dotnet": "7.0.100"
   },
   "msbuild-sdks": {
-    "DotNet.ArcadeLight.Sdk": "0.2.17-beta"
+    "DotNet.ArcadeLight.Sdk": "0.2.18-beta"
   }
 }
