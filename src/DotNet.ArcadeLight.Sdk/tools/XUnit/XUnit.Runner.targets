@@ -61,6 +61,14 @@
       <_TestRunnerCommand Condition="'$(TestCaptureOutput)' != 'false'">$(_TestRunnerCommand) > "%(TestToRun.ResultsStdOutPath)" 2>&amp;1</_TestRunnerCommand>
     </PropertyGroup>
 
+    <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" (local builds only)-->
+    <ItemGroup>
+      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
+      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
+
+
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
       <!--<_OutputFiles Include="%(TestToRun.ResultsCoverletCoveragePath)" />
