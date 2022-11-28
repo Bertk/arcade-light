@@ -35,7 +35,7 @@
       <!--<_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" - -no-restore - -framework %(TestToRun.TargetFramework) - -logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" - -logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" - -logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>-->
       <_TestResultDirectory>$([System.IO.Path]::GetDirectoryName('%(TestToRun.ResultsTrxPath)'))</_TestResultDirectory>
       <_TestResultTrxFileName>$([System.IO.Path]::GetFileName('%(TestToRun.ResultsTrxPath)'))</_TestResultTrxFileName>
-      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" "--ResultsDirectory:$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>
+      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
@@ -60,6 +60,13 @@
       -->
       <_TestRunnerCommand Condition="'$(TestCaptureOutput)' != 'false'">$(_TestRunnerCommand) > "%(TestToRun.ResultsStdOutPath)" 2>&amp;1</_TestRunnerCommand>
     </PropertyGroup>
+
+    <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" (local builds only)-->
+    <ItemGroup>
+      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
+      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
 
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
