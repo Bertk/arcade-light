@@ -11,9 +11,10 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
     <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.3.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
     <PackageReference Include="Microsoft.Build" />
   </ItemGroup>
 

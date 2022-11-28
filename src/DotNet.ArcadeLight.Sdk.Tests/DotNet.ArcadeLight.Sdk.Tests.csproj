@@ -25,7 +25,7 @@
     <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" /> 
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
     <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="Microsoft.Build.Framework" />
     <PackageReference Include="Microsoft.Build.Tasks.Core" />
