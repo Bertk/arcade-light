@@ -11,20 +11,6 @@
     <IsPublishable>true</IsPublishable>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
-    <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.3.2" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
-    <PackageReference Include="Microsoft.Build" />
-    <PackageReference Include="Microsoft.Build.Framework" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="FluentAssertions" />
