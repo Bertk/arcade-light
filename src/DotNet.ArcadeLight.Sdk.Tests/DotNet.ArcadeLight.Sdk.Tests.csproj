@@ -11,22 +11,20 @@
     <IsPublishable>true</IsPublishable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
-    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Test.Common\DotNet.ArcadeLight.Test.Common.csproj" />
-    <ProjectReference Include="..\DotNet.ArcadeLight.Sdk\DotNet.ArcadeLight.Sdk.csproj" />
-    <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
-  </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
     <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
     <PackageReference Include="Microsoft.Build" />
+    <PackageReference Include="Microsoft.Build.Framework" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" />
   </ItemGroup>
 
-  
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="FluentAssertions" />
@@ -110,5 +108,12 @@
     </PropertyGroup>
     <WriteLinesToFile Lines="$(TestNuGetConfigContent)" File="$(TargetDir)testassets\boilerplate\NuGet.config" Overwrite="true" />
   </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
+    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Test.Common\DotNet.ArcadeLight.Test.Common.csproj" />
+    <ProjectReference Include="..\DotNet.ArcadeLight.Sdk\DotNet.ArcadeLight.Sdk.csproj" />
+    <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
+  </ItemGroup>
 
 </Project>
