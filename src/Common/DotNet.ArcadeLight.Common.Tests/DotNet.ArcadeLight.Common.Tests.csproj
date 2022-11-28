@@ -35,13 +35,6 @@
       </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
-    <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.3.2" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
   </ItemGroup>
