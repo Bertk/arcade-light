@@ -38,8 +38,8 @@
       <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>
     </PropertyGroup>
 
-    <Message Text="Publish folder for test exists: '$(_TargetDir)publish'" Condition="Exists('$(_TargetDir)publish')" Importance="high" />
-    <Message Text="Publish folder for test not found: '$(_TargetDir)publish'" Condition="!Exists('$(_TargetDir)publish')" Importance="high" />
+    <Message Text="Publish folder for test exists (coverlet.collector): '$(_TargetDir)publish'" Condition="Exists('$(_TargetDir)publish')" Importance="high" />
+    <Message Text="Publish folder for test not found (coverlet.collector): '$(_TargetDir)publish'" Condition="!Exists('$(_TargetDir)publish')" Importance="high" />
 
     <PropertyGroup Condition="'$(_TestRuntime)' == 'Core' and Exists('$(_TargetDir)publish')">
       <!-- coverlet collector will create coverage data after publish of test project was done -->
