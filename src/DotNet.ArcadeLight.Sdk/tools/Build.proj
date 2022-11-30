@@ -131,9 +131,6 @@
       <!-- Used in a few places in the stack to decide if publishing was enabled or not. -->
       <_PublishProps Include="Publish=$(Publish)"/>
 
-      <!-- coverlet.collector and vstest requires publishing test project-->
-      <_PublishProps Include="Publish=True" Condition="'$(IsTestProject)' == 'true'"/>
-
     </ItemGroup>
 
     <ItemGroup>
