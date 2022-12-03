@@ -17,6 +17,5 @@
   <Target Name="Restore"/>
   <Target Name="Build"/>
   <Target Name="Test"/>
-  <Target Name="Publish"/>
 
 </Project>

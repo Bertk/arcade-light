@@ -17,13 +17,9 @@
     Restore                         "true" to restore toolset and solution
     Build                           "true" to build solution
     Rebuild                         "true" to rebuild solution
-    Deploy                          "true" to deploy assets (e.g. VSIXes)
     Test                            "true" to run tests
     IntegrationTest                 "true" to run integration tests
     PerformanceTest                 "true" to run performance tests
-    Pack                            "true" to build NuGet packages and VS insertion manifests
-    Sign                            "true" to sign built binaries
-    Publish                         "true" to publish artifacts (e.g. symbols)
   -->
 
   <PropertyGroup>
@@ -80,7 +76,6 @@
       <!-- Deploy target is set up to chain after Build so that F5 in VS works. -->
       <_SolutionBuildTargets Include="Test" Condition="'$(Test)' == 'true'" />
       <!-- Pack before running integration and performance tests so that these tests can test packages produced by the repo. -->
-      <_SolutionBuildTargets Include="Pack" Condition="'$(Pack)' == 'true'" />
       <_SolutionBuildTargets Include="IntegrationTest" Condition="'$(IntegrationTest)' == 'true'" />
       <_SolutionBuildTargets Include="PerformanceTest" Condition="'$(PerformanceTest)' == 'true'" />
     </ItemGroup>
