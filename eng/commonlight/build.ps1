@@ -11,13 +11,9 @@ Param(
   [switch] $deployDeps,
   [switch][Alias('b')]$build,
   [switch] $rebuild,
-  [switch] $deploy,
   [switch][Alias('t')]$test,
   [switch] $integrationTest,
   [switch] $performanceTest,
-  [switch] $sign,
-  [switch] $pack,
-  [switch] $publish,
   [switch] $clean,
   [switch][Alias('bl')]$binaryLog,
   [switch][Alias('nobl')]$excludeCIBinarylog,
@@ -33,7 +29,7 @@ Param(
 # Unset 'Platform' environment variable to avoid unwanted collision in InstallDotNetCore.targets file
 # some computer has this env var defined (e.g. Some HP)
 if($env:Platform) {
-  $env:Platform=""  
+  $env:Platform=""
 }
 function Print-Usage() {
   Write-Host "Common settings:"
@@ -48,14 +44,9 @@ function Print-Usage() {
   Write-Host "  -restore                Restore dependencies (short: -r)"
   Write-Host "  -build                  Build solution (short: -b)"
   Write-Host "  -rebuild                Rebuild solution"
-  Write-Host "  -deploy                 Deploy built VSIXes"
-  Write-Host "  -deployDeps             Deploy dependencies (e.g. VSIXes for integration tests)"
   Write-Host "  -test                   Run all unit tests in the solution (short: -t)"
   Write-Host "  -integrationTest        Run all integration tests in the solution"
   Write-Host "  -performanceTest        Run all performance tests in the solution"
-  Write-Host "  -pack                   Package build outputs into NuGet packages and Willow components"
-  Write-Host "  -sign                   Sign build outputs"
-  Write-Host "  -publish                Publish artifacts (e.g. symbols)"
   Write-Host "  -clean                  Clean the solution"
   Write-Host ""
 
@@ -98,10 +89,10 @@ function Build {
     # Re-assign properties to a new variable because PowerShell doesn't let us append properties directly for unclear reasons.
     # Explicitly set the type as string[] because otherwise PowerShell would make this char[] if $properties is empty.
     [string[]] $msbuildArgs = $properties
-    
-    # Resolve relative project paths into full paths 
+
+    # Resolve relative project paths into full paths
     $projects = ($projects.Split(';').ForEach({Resolve-Path $_}) -join ';')
-    
+
     $msbuildArgs += "/p:Projects=$projects"
     $properties = $msbuildArgs
   }
@@ -115,13 +106,9 @@ function Build {
     /p:DeployDeps=$deployDeps `
     /p:Build=$build `
     /p:Rebuild=$rebuild `
-    /p:Deploy=$deploy `
     /p:Test=$test `
-    /p:Pack=$pack `
     /p:IntegrationTest=$integrationTest `
     /p:PerformanceTest=$performanceTest `
-    /p:Sign=$sign `
-    /p:Publish=$publish `
     @properties
 }
 

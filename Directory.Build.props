@@ -22,28 +22,9 @@
     <XUnitCoreSettingsFile>$(MSBuildThisFileDirectory)eng/xunit.runner.json</XUnitCoreSettingsFile>
   </PropertyGroup>
 
-  <ItemGroup Condition="$(BUILD_REASON) == ''">
-    <PackageReference Include="SonarAnalyzer.CSharp">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="AsyncFixer">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
   <PropertyGroup Condition="$(BUILD_REASON) == ''">
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
-
-  <ItemGroup>
-    <!-- lightweight GitVersioning tool - not depended on tags or branches -->
-    <PackageReference Include="Nerdbank.GitVersioning">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
 
   <!-- https://devblogs.microsoft.com/dotnet/producing-packages-with-source-link/ -->
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">

@@ -14,7 +14,7 @@
   "nugetPackageVersion": {
     "semVer": 2
  },
-    "version": "0.2-beta",
+    "version": "1.0-beta",
     "release" : {
       "branchName" : "v{version}",
       "versionIncrement" : "minor",

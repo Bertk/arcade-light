@@ -23,9 +23,6 @@ usage()
   echo "  --test                     Run all unit tests in the solution (short: -t)"
   echo "  --integrationTest          Run all integration tests in the solution"
   echo "  --performanceTest          Run all performance tests in the solution"
-  echo "  --pack                     Package build outputs into NuGet packages and Willow components"
-  echo "  --sign                     Sign build outputs"
-  echo "  --publish                  Publish artifacts (e.g. symbols)"
   echo "  --clean                    Clean the solution"
   echo ""
 
@@ -59,9 +56,6 @@ rebuild=false
 test=false
 integration_test=false
 performance_test=false
-pack=false
-publish=false
-sign=false
 public=false
 ci=false
 clean=false
@@ -116,9 +110,6 @@ while [[ $# > 0 ]]; do
     -rebuild)
       rebuild=true
       ;;
-    -pack)
-      pack=true
-      ;;
     -test|-t)
       test=true
       ;;
@@ -127,12 +118,6 @@ while [[ $# > 0 ]]; do
       ;;
     -performancetest)
       performance_test=true
-      ;;
-    -sign)
-      sign=true
-      ;;
-    -publish)
-      publish=true
       ;;
     -preparemachine)
       prepare_machine=true
@@ -207,11 +192,8 @@ function Build {
     /p:Build=$build \
     /p:Rebuild=$rebuild \
     /p:Test=$test \
-    /p:Pack=$pack \
     /p:IntegrationTest=$integration_test \
     /p:PerformanceTest=$performance_test \
-    /p:Sign=$sign \
-    /p:Publish=$publish \
     $properties
 
   ExitWithExitCode 0
