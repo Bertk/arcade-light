@@ -107,7 +107,7 @@
       <_RestoreToolsProps Include="Publish=$(Publish)"/>
 
       <!-- Used in the SDK (Tools.proj) to control whether SymbolUploader.Build.Task will be restored or not. -->
-      <_RestoreToolsProps Include="PublishToSymbolServer=$(PublishToSymbolServer)"/>
+      <!--<_RestoreToolsProps Include="PublishToSymbolServer=$(PublishToSymbolServer)"/>-->
 
     </ItemGroup>
 

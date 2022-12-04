@@ -22,17 +22,6 @@
     <XUnitCoreSettingsFile>$(MSBuildThisFileDirectory)eng/xunit.runner.json</XUnitCoreSettingsFile>
   </PropertyGroup>
 
-  <!--<ItemGroup Condition="$(BUILD_REASON) == ''">
-    <PackageReference Include="SonarAnalyzer.CSharp">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="AsyncFixer">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>-->
-
   <PropertyGroup Condition="$(BUILD_REASON) == ''">
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
