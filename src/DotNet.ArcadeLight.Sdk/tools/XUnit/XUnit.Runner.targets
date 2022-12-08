@@ -16,43 +16,75 @@
       <_TestRunnerAdditionalArguments>%(TestToRun.TestRunnerAdditionalArguments)</_TestRunnerAdditionalArguments>
 
       <_TestRunnerTargetFramework>net6.0</_TestRunnerTargetFramework>
-      <_TestRunnerTargetFramework Condition="'$(TargetFrameworkForNETSDK)' != ''">$(TargetFrameworkForNETSDK)</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework Condition="'$(TargetFrameworkForNETSDK)' != ''">%(TestToRun.TargetFramework)</_TestRunnerTargetFramework>
       <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == 'netcoreapp1.1' or %(TestToRun.TargetFramework) == 'netcoreapp1.0'">netcoreapp1.0</_TestRunnerTargetFramework>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' == 'Core'">
       <_TargetFileNameNoExt>$([System.IO.Path]::GetFileNameWithoutExtension('$(_TestAssembly)'))</_TargetFileNameNoExt>
       <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
-      <!-- coverlet collector will create coverage data after publish of test project was done -->
-      <_TargetDir Condition="Exists('$(_TargetDir)publish\)')">$(_TargetDir)publish\</_TargetDir>
-      <_TestAssembly Condition="Exists('$(_TargetDir)publish\)')">$($_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
       <_CoreRuntimeConfigPath>$(_TargetDir)$(_TargetFileNameNoExt).runtimeconfig.json</_CoreRuntimeConfigPath>
       <_CoreDepsPath>$(_TargetDir)$(_TargetFileNameNoExt).deps.json</_CoreDepsPath>
 
       <_TestRunner Condition="'%(TestToRun.Architecture)'=='x86' And Exists('$(DotNetRoot)x86\dotnet.exe')">$(DotNetRoot)x86\dotnet.exe</_TestRunner>
       <_TestRunner Condition="'$(_TestRunner)'==''">$(DotNetTool)</_TestRunner>
 
-      <!--<_TestRunnerArgs>exec depsfile "$(_CoreDepsPath)" runtimeconfig "$(_CoreRuntimeConfigPath)" $(TestRuntimeAdditionalArguments) "$(NuGetPackageRoot)xunit.runner.console/$(XUnitVersion)/tools/$(_TestRunnerTargetFramework)/xunit.console.dll" "$(_TestAssembly)" -xml "%(TestToRun.ResultsXmlPath)" -html "%(TestToRun.ResultsHtmlPath)" $(_TestRunnerAdditionalArguments)</_TestRunnerArgs>-->
-      <!-- coverlet known issue "no-build" symptom (see https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/KnownIssues.md) -->
-      <!-- ToDo: check other solution and avoid unnecessary build -->
-      <!--<_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" - -no-restore - -framework %(TestToRun.TargetFramework) - -logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" - -logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" - -logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>-->
       <_TestResultDirectory>$([System.IO.Path]::GetDirectoryName('%(TestToRun.ResultsTrxPath)'))</_TestResultDirectory>
       <_TestResultTrxFileName>$([System.IO.Path]::GetFileName('%(TestToRun.ResultsTrxPath)'))</_TestResultTrxFileName>
       <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>
+
+      <_PublishCommand Condition="'$(_PublishCommand)'==''">$(DotNetTool)</_PublishCommand>
+      <_PublishCommandArgs>publish "$(MSBuildProjectFullPath)" --framework $(_TestRunnerTargetFramework) --no-restore</_PublishCommandArgs>
+      <PublishDir Condition="'$(PublishDir)' == ''">$(_TargetDir)publish</PublishDir>
+      <_PublishExists>false</_PublishExists>
+      <_PublishExists Condition="Exists('$(PublishDir)')">true</_PublishExists>
     </PropertyGroup>
 
-    <Message Text="Publish folder for test exists (coverlet.collector): '$(_TargetDir)publish'" Condition="Exists('$(_TargetDir)publish')" Importance="high" />
-    <Message Text="Publish folder for test not found (coverlet.collector): '$(_TargetDir)publish'" Condition="!Exists('$(_TargetDir)publish')" Importance="high" />
+    <Message Text="Publish folder for test exists (coverlet.collector): $(PublishDir)" Condition="'$(_PublishExists)' == 'true'" Importance="high" />
+    <Message Text="Publish folder for test not found (coverlet.collector): $(PublishDir)" Condition="'$(_PublishExists)' == 'false'" Importance="high" />
 
-    <PropertyGroup Condition="'$(_TestRuntime)' == 'Core' and Exists('$(_TargetDir)publish')">
+    <PropertyGroup>
+      <_PublishTestCommand>"$(_PublishCommand)" $(_PublishCommandArgs)</_PublishTestCommand>
+
+      <!--
+        Redirect std output of the runner.
+        Note that xUnit outputs failure info to both STDOUT (stack trace, message) and STDERR (failed test name)
+      -->
+      <_PublishTestCommand Condition="'$(TestCaptureOutput)' != 'false'">$(_PublishTestCommand) > "%(TestToRun.ResultsStdOutPath).publish" 2>&amp;1</_PublishTestCommand>
+    </PropertyGroup>
+
+    <Message Text="Publish project: $(MSBuildProjectFile) [$(_TestEnvironment)]" Condition="'$(_PublishExists)' == 'false'" Importance="high"/>
+
+    <Exec Command='$(_PublishTestCommand)'
+      Condition="'$(_PublishExists)' == 'false'"
+      LogStandardErrorAsError="false"
+      WorkingDirectory="$(_TargetDir)"
+      IgnoreExitCode="false"
+      Timeout="$(_TestTimeout)"
+      ContinueOnError="WarnAndContinue">
+      <Output TaskParameter="ExitCode" PropertyName="_TestErrorCode" />
+    </Exec>
+
+    <!--
+      Add command line to the log.
+    -->
+    <WriteLinesToFile File="%(TestToRun.ResultsStdOutPath).command.publish"
+                      Overwrite="false"
+                      Lines=";=== COMMAND LINE Publish ===;$(_PublishTestCommand)"
+                      Condition="'$(_PublishExists)' == 'false'" />
+
+     <PropertyGroup Condition="'$(_TestRuntime)' == 'Core' and Exists('$(PublishDir)')">
       <!-- coverlet collector will create coverage data after publish of test project was done -->
-      <_TargetDir>$(_TargetDir)publish\</_TargetDir>
+      <_TargetDir>$([MSBuild]::EnsureTrailingSlash('$(PublishDir)'))</_TargetDir>
       <_TestAssembly>$(_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
+      <_CoreRuntimeConfigPath>$(_TargetDir)$(_TargetFileNameNoExt).runtimeconfig.json</_CoreRuntimeConfigPath>
+      <_CoreDepsPath>$(_TargetDir)$(_TargetFileNameNoExt).deps.json</_CoreDepsPath>
+      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>
     </PropertyGroup>
 
-    <Message Text="Use _TestAssembly  '$(_TestAssembly)'" Condition="Exists('$(_TargetDir)publish)')" Importance="high" />
+     <Message Text="Running tests: $(_TestAssembly) [$(_TestEnvironment)]" Importance="high"/>
 
-    <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
+    <!-- <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
       <_XUnitConsoleExe>xunit.console.exe</_XUnitConsoleExe>
       <_XUnitConsoleExe Condition="'%(TestToRun.Architecture)' == 'x86'">xunit.console.x86.exe</_XUnitConsoleExe>
       <_XUnitConsoleExePath>$(NuGetPackageRoot)xunit.runner.console\$(XUnitVersion)\tools\$(_TestRunnerTargetFramework)\$(_XUnitConsoleExe)</_XUnitConsoleExePath>
@@ -62,8 +94,7 @@
 
       <_TestRunner Condition="'$(_TestRuntime)' == 'Mono'">$(MonoTool)</_TestRunner>
       <_TestRunner Condition="'$(_TestRuntime)' != 'Mono'">$(_XUnitConsoleExePath)</_TestRunner>
-    </PropertyGroup>
-
+    </PropertyGroup> -->
 
     <PropertyGroup>
       <_TestRunnerCommand>"$(_TestRunner)" $(_TestRunnerArgs)</_TestRunnerCommand>
@@ -74,13 +105,6 @@
       -->
       <_TestRunnerCommand Condition="'$(TestCaptureOutput)' != 'false'">$(_TestRunnerCommand) > "%(TestToRun.ResultsStdOutPath)" 2>&amp;1</_TestRunnerCommand>
     </PropertyGroup>
-
-    <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" (local builds only)-->
-    <ItemGroup>
-      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
-      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
-    </ItemGroup>
-    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
 
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
@@ -106,7 +130,7 @@
     <!--
       Add command line to the log.
     -->
-    <WriteLinesToFile File="%(TestToRun.ResultsStdOutPath)"
+    <WriteLinesToFile File="%(TestToRun.ResultsStdOutPath).command"
                       Overwrite="false"
                       Lines=";=== COMMAND LINE ===;$(_TestRunnerCommand)"
                       Condition="'$(TestCaptureOutput)' != 'false'" />
