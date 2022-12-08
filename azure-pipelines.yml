@@ -116,6 +116,7 @@ stages:
             -restore
             -test
             -projects $(Build.SourcesDirectory)\**\*Tests.csproj
+            -verbosity diagnostic
             /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
             /p:RestoreUsingNuGetTargets=false
           displayName: Run Tests
