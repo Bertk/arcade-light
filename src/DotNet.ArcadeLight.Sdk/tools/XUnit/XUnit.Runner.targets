@@ -34,7 +34,7 @@
       <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>
 
       <_PublishCommand Condition="'$(_PublishCommand)'==''">$(DotNetTool)</_PublishCommand>
-      <_PublishCommandArgs>publish "$(MSBuildProjectFullPath)" --framework $(_TestRunnerTargetFramework) --no-restore</_PublishCommandArgs>
+      <_PublishCommandArgs>publish "$(MSBuildProjectFullPath)" --framework $(_TestRunnerTargetFramework)</_PublishCommandArgs>
       <PublishDir Condition="'$(PublishDir)' == ''">$(_TargetDir)publish</PublishDir>
       <_PublishExists>false</_PublishExists>
       <_PublishExists Condition="Exists('$(PublishDir)')">true</_PublishExists>

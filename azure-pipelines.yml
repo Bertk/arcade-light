@@ -109,22 +109,6 @@ stages:
           clean: true
         steps:
         - task: NuGetAuthenticate@1
-        #- task: DotNetCoreCLI@2
-        #  inputs:
-        #    command: 'publish'
-        #    arguments: '-f net6.0'
-        #    publishWebProjects: false
-        #    projects: 'src/**/*.Tests.csproj'
-        #    zipAfterPublish: false
-        #    modifyOutputPath: false
-        #- task: DotNetCoreCLI@2
-        #  inputs:
-        #    command: 'publish'
-        #    arguments: '-f net7.0'
-        #    publishWebProjects: false
-        #    projects: 'src/**/*.Tests.csproj'
-        #    zipAfterPublish: false
-        #    modifyOutputPath: false
         - powershell: eng\commonlight\build.ps1
             -configuration $(_BuildConfig)
             -prepareMachine
