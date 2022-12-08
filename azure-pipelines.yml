@@ -112,7 +112,6 @@ stages:
         - powershell: eng\commonlight\build.ps1
             -configuration $(_BuildConfig)
             -prepareMachine
-            -ci
             -restore
             -test
             -projects $(Build.SourcesDirectory)\**\*Tests.csproj
