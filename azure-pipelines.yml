@@ -127,10 +127,9 @@ stages:
             modifyOutputPath: false
         - powershell: eng\commonlight\build.ps1
             -configuration $(_BuildConfig)
-            -prepareMachine
-            -ci
             -restore
             -test
+            -verbosity diag
             -projects $(Build.SourcesDirectory)\**\*Tests.csproj
             /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
             /p:RestoreUsingNuGetTargets=false
@@ -142,6 +141,10 @@ stages:
           inputs:
             testRunner: VSTest
             testResultsFiles: '**/*.trx'
+
+        - publish: '$(Build.SourcesDirectory)/artifacts/bin'
+          displayName: 'Publish Test Artifacts (publish folder)'
+          artifact: Artifacts_Test_$(Agent.Os)_$(_BuildConfig)
 
         - template: ../steps/CoverageResults.yml
           parameters:

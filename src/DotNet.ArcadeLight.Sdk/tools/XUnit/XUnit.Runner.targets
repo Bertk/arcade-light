@@ -7,7 +7,7 @@
   <Target Name="RunTests"
           Outputs="%(TestToRun.ResultsStdOutPath)"
           Condition="'@(TestToRun)' != ''">
-    <!--<Telemetry EventName="NETCORE_ENGINEERING_TELEMETRY" EventData="Category=Test" />-->
+
     <PropertyGroup>
       <_TestEnvironment>%(TestToRun.EnvironmentDisplay)</_TestEnvironment>
       <_TestAssembly>%(TestToRun.Identity)</_TestAssembly>
@@ -16,13 +16,13 @@
       <_TestRunnerAdditionalArguments>%(TestToRun.TestRunnerAdditionalArguments)</_TestRunnerAdditionalArguments>
 
       <_TestRunnerTargetFramework>net6.0</_TestRunnerTargetFramework>
-      <_TestRunnerTargetFramework Condition="'$(TargetFrameworkForNETSDK)' != ''">%(TestToRun.TargetFramework)</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework Condition="'$(TargetFrameworkForNETSDK)' != ''">$(TargetFrameworkForNETSDK)</_TestRunnerTargetFramework>
       <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == 'netcoreapp1.1' or %(TestToRun.TargetFramework) == 'netcoreapp1.0'">netcoreapp1.0</_TestRunnerTargetFramework>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' == 'Core'">
       <_TargetFileNameNoExt>$([System.IO.Path]::GetFileNameWithoutExtension('$(_TestAssembly)'))</_TargetFileNameNoExt>
-      <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
+      <_TargetDir>$([MSBuild]::EnsureTrailingSlash($([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))))</_TargetDir>
 
       <_TestRunner Condition="'%(TestToRun.Architecture)'=='x86' And Exists('$(DotNetRoot)x86\dotnet.exe')">$(DotNetRoot)x86\dotnet.exe</_TestRunner>
       <_TestRunner Condition="'$(_TestRunner)'==''">$(DotNetTool)</_TestRunner>
@@ -49,7 +49,7 @@
     <PropertyGroup>
       <_CoreRuntimeConfigPath>$(_TargetDir)$(_TargetFileNameNoExt).runtimeconfig.json</_CoreRuntimeConfigPath>
       <_CoreDepsPath>$(_TargetDir)$(_TargetFileNameNoExt).deps.json</_CoreDepsPath>
-      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>    
+      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" --Diag:"%(TestToRun.ResultDiagLogfilePath);tracelevel=verbose" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile="**/*.Version.cs"</_TestRunnerArgs>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
@@ -75,19 +75,9 @@
       <_TestRunnerCommand Condition="'$(TestCaptureOutput)' != 'false'">$(_TestRunnerCommand) > "%(TestToRun.ResultsStdOutPath)" 2>&amp;1</_TestRunnerCommand>
     </PropertyGroup>
 
-    <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" (local builds only)-->
-    <!--<ItemGroup>
-      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
-      <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
-    </ItemGroup>
-    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />-->
-
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
-      <!--<_OutputFiles Include="%(TestToRun.ResultsCoverletCoveragePath)" />
-      <_OutputFiles Include="%(TestToRun.ResultsXmlPath)" />
-      <_OutputFiles Include="%(TestToRun.ResultsHtmlPath)" />
-      <_OutputFiles Include="%(TestToRun.ResultsStdOutPath)" />-->
+      <_OutputFiles Include="%(TestToRun.ResultDiagLogfilePath)" />
     </ItemGroup>
 
     <MakeDir Directories="@(_OutputFiles->'%(RootDir)%(Directory)')"/>

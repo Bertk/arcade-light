@@ -62,6 +62,7 @@
         <ResultsCoverletCoveragePath>$(ArtifactsTestResultsDir)$(_ResultFileNameNoExt).coverage.cobertura.xml</ResultsCoverletCoveragePath>
         <ResultsHtmlPath>$(ArtifactsTestResultsDir)$(_ResultFileNameNoExt).html</ResultsHtmlPath>
         <ResultsStdOutPath>$(ArtifactsLogDir)$(_ResultFileNameNoExt).log</ResultsStdOutPath>
+        <ResultDiagLogfilePath>$(ArtifactsLogDir)$(_ResultFileNameNoExt).diag.log</ResultDiagLogfilePath>
         <TestRunnerAdditionalArguments>$(TestRunnerAdditionalArguments)</TestRunnerAdditionalArguments>
       </TestToRun>
     </ItemGroup>
