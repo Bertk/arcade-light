@@ -7,7 +7,7 @@
   <Target Name="RunTests"
           Outputs="%(TestToRun.ResultsStdOutPath)"
           Condition="'@(TestToRun)' != ''">
-    <!--<Telemetry EventName="NETCORE_ENGINEERING_TELEMETRY" EventData="Category=Test" />-->
+
     <PropertyGroup>
       <_TestEnvironment>%(TestToRun.EnvironmentDisplay)</_TestEnvironment>
       <_TestAssembly>%(TestToRun.Identity)</_TestAssembly>
@@ -24,8 +24,8 @@
       <_TargetFileNameNoExt>$([System.IO.Path]::GetFileNameWithoutExtension('$(_TestAssembly)'))</_TargetFileNameNoExt>
       <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
       <!-- coverlet collector will create coverage data after publish of test project was done -->
-      <_TargetDir Condition="Exists('$(_TargetDir)publish\)')">$(_TargetDir)publish\</_TargetDir>
-      <_TestAssembly Condition="Exists('$(_TargetDir)publish\)')">$($_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
+      <_TargetDir Condition="Exists('$(PublishDir)')">$([MSBuild]::EnsureTrailingSlash('$(PublishDir)'))</_TargetDir>
+      <_TestAssembly Condition="Exists('$(PublishDir)')">$($_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
       <_CoreRuntimeConfigPath>$(_TargetDir)$(_TargetFileNameNoExt).runtimeconfig.json</_CoreRuntimeConfigPath>
       <_CoreDepsPath>$(_TargetDir)$(_TargetFileNameNoExt).deps.json</_CoreDepsPath>
 
@@ -41,16 +41,10 @@
       <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" --Diag:"%(TestToRun.ResultDiagLogfilePath);tracelevel=verbose" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile="**/*.Version.cs"</_TestRunnerArgs>
     </PropertyGroup>
 
-    <Message Text="Publish folder for test exists (coverlet.collector): '$(_TargetDir)publish'" Condition="Exists('$(_TargetDir)publish')" Importance="high" />
-    <Message Text="Publish folder for test not found (coverlet.collector): '$(_TargetDir)publish'" Condition="!Exists('$(_TargetDir)publish')" Importance="high" />
+    <Message Text="Publish folder for test exists (coverlet.collector): '$(_TargetDir)publish'" Condition="Exists('$(PublishDir)')" Importance="high" />
+    <Message Text="Publish folder for test not found (coverlet.collector): '$(_TargetDir)publish'" Condition="!Exists('$(PublishDir)')" Importance="high" />
 
-    <PropertyGroup Condition="'$(_TestRuntime)' == 'Core' and Exists('$(_TargetDir)publish')">
-      <!-- coverlet collector will create coverage data after publish of test project was done -->
-      <_TargetDir>$(_TargetDir)publish\</_TargetDir>
-      <_TestAssembly>$(_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
-    </PropertyGroup>
-
-    <Message Text="Use _TestAssembly  '$(_TestAssembly)'" Condition="Exists('$(_TargetDir)publish)')" Importance="high" />
+    <Message Text="Use _TestAssembly  '$(_TestAssembly)'" Condition="Exists('$(PublishDir)')" Importance="high" />
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
       <_XUnitConsoleExe>xunit.console.exe</_XUnitConsoleExe>
@@ -76,11 +70,11 @@
     </PropertyGroup>
 
     <!-- Copy Coverlet-collector dlls with datacollector "XPlat Code Coverage" (local builds only)-->
-    <ItemGroup>
+    <!--<ItemGroup>
       <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.collector.dll" />
       <CoverletDataCollectorFiles Include="$(NuGetPackageRoot)coverlet.collector/$(CoverletCollectorVersion)/build/netstandard1.0/coverlet.core.dll" />
     </ItemGroup>
-    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />
+    <Copy SourceFiles="@(CoverletDataCollectorFiles)" DestinationFolder="$(_TargetDir)" />-->
 
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
