@@ -38,7 +38,7 @@
       <!--<_TestRunnerArgs>test "$(MSBuildProjectFullPath)" /p:CollectCoverage=true /p:UseSourceLink=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput="%(TestToRun.ResultsCoverletCoveragePath)" - -no-restore - -framework %(TestToRun.TargetFramework) - -logger:"trx;LogFileName=%(TestToRun.ResultsTrxPath)" - -logger:"html;LogFileName=%(TestToRun.ResultsHtmlPath)" - -logger:"console;LogFileName=%(TestToRun.ResultsStdOutPath)"</_TestRunnerArgs>-->
       <_TestResultDirectory>$([System.IO.Path]::GetDirectoryName('%(TestToRun.ResultsTrxPath)'))</_TestResultDirectory>
       <_TestResultTrxFileName>$([System.IO.Path]::GetFileName('%(TestToRun.ResultsTrxPath)'))</_TestResultTrxFileName>
-      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura</_TestRunnerArgs>
+      <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" --Diag:"%(TestToRun.ResultDiagLogfilePath);tracelevel=verbose" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile="**/*.Version.cs"</_TestRunnerArgs>
     </PropertyGroup>
 
     <Message Text="Publish folder for test exists (coverlet.collector): '$(_TargetDir)publish'" Condition="Exists('$(_TargetDir)publish')" Importance="high" />
@@ -84,10 +84,7 @@
 
     <ItemGroup>
       <_OutputFiles Include="%(TestToRun.ResultsTrxPath)" />
-      <!--<_OutputFiles Include="%(TestToRun.ResultsCoverletCoveragePath)" />
-      <_OutputFiles Include="%(TestToRun.ResultsXmlPath)" />
-      <_OutputFiles Include="%(TestToRun.ResultsHtmlPath)" />
-      <_OutputFiles Include="%(TestToRun.ResultsStdOutPath)" />-->
+      <_OutputFiles Include="%(TestToRun.ResultDiagLogfilePath)" />
     </ItemGroup>
 
     <MakeDir Directories="@(_OutputFiles->'%(RootDir)%(Directory)')"/>
