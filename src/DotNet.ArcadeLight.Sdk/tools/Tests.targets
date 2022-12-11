@@ -64,6 +64,7 @@
         <ResultsStdOutPath>$(ArtifactsLogDir)$(_ResultFileNameNoExt).log</ResultsStdOutPath>
         <ResultDiagLogfilePath>$(ArtifactsLogDir)$(_ResultFileNameNoExt).diag.log</ResultDiagLogfilePath>
         <TestRunnerAdditionalArguments>$(TestRunnerAdditionalArguments)</TestRunnerAdditionalArguments>
+        <TestPublishDir>$(PublishDir)</TestPublishDir>
       </TestToRun>
     </ItemGroup>
   </Target>

@@ -117,6 +117,7 @@ stages:
             projects: 'src/**/*.Tests.csproj'
             zipAfterPublish: false
             modifyOutputPath: false
+          enabled: false
         - task: DotNetCoreCLI@2
           inputs:
             command: 'publish'
@@ -125,6 +126,7 @@ stages:
             projects: 'src/**/*.Tests.csproj'
             zipAfterPublish: false
             modifyOutputPath: false
+            enabled: false
         - powershell: eng\commonlight\build.ps1
             -configuration $(_BuildConfig)
             -prepareMachine
