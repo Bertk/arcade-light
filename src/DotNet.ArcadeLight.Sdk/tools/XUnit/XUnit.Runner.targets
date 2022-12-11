@@ -37,11 +37,9 @@
     <Exec Command='$(_PublishTestCommand)'
       Condition="'_PublishTestCommand' != ''"
       LogStandardErrorAsError="false"
-      WorkingDirectory="$(_TargetDir)"
       IgnoreExitCode="false"
-      Timeout="$(_TestTimeout)"
       ContinueOnError="WarnAndContinue">
-      <Output TaskParameter="ExitCode" PropertyName="_TestErrorCode" />
+      <Output TaskParameter="ExitCode" PropertyName="_TestPublishErrorCode" />
     </Exec>
 
     <PropertyGroup Condition="'$(_TestRuntime)' == 'Core'">
@@ -65,8 +63,8 @@
       <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" --Diag:"%(TestToRun.ResultDiagLogfilePath);tracelevel=verbose" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile="**/*.Version.cs"</_TestRunnerArgs>
     </PropertyGroup>
 
-    <Message Text="Publish folder for test exists (coverlet.collector): '$(_TargetDir)publish'" Condition="Exists('$(PublishDir)')" Importance="high" />
-    <Message Text="Publish folder for test not found (coverlet.collector): '$(_TargetDir)publish'" Condition="!Exists('$(PublishDir)')" Importance="high" />
+    <Message Text="Publish folder for test exists (coverlet.collector): '$(PublishDir)'" Condition="Exists('$(PublishDir)')" Importance="high" />
+    <Message Text="Publish folder for test not found (coverlet.collector): '$(PublishDir)'" Condition="!Exists('$(PublishDir)')" Importance="high" />
 
     <Message Text="Use _TestAssembly  '$(_TestAssembly)'" Condition="Exists('$(PublishDir)')" Importance="high" />
 
