@@ -35,10 +35,6 @@
     <DotNetTool Condition="'$(OS)' == 'Windows_NT'">$(DotNetRoot)dotnet.exe</DotNetTool>
     <DotNetTool Condition="'$(OS)' != 'Windows_NT'">$(DotNetRoot)dotnet</DotNetTool>
   </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(MonoTool)' == ''">
-    <MonoTool>mono</MonoTool>
-  </PropertyGroup>
 
   <PropertyGroup>
     <RepositoryEngineeringDir>$([MSBuild]::NormalizeDirectory('$(RepoRoot)', 'eng'))</RepositoryEngineeringDir>
