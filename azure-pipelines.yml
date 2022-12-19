@@ -167,14 +167,12 @@ stages:
           inputs:
             packageType: 'sdk'
             useGlobalJson: true
-
-        - task: UseDotNet@2
-          displayName: 'Use dotnet SDK (global)'
+         - task: UseDotNet@2
+          displayName: 'Use dotnet SDK 6.x'
           inputs:
             packageType: 'runtime'
             version: 6.x
-
-        - task: NuGetAuthenticate@1
+       - task: NuGetAuthenticate@1
         - script: eng/commonlight/build.sh
             --configuration $(_BuildConfig)
             --prepareMachine
@@ -213,7 +211,7 @@ stages:
         useGlobalJson: true
 
     - task: UseDotNet@2
-      displayName: 'Use dotnet SDK (global)'
+      displayName: 'Use dotnet SDK 6.x'
       inputs:
         packageType: 'runtime'
         version: 6.x
