@@ -48,8 +48,8 @@
       <_TargetFileNameNoExt>$([System.IO.Path]::GetFileNameWithoutExtension('$(_TestAssembly)'))</_TargetFileNameNoExt>
       <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
       <!-- coverlet collector will create coverage data after publish of test project was done -->
-      <!-- <_TargetDir Condition="Exists('$(_TestPublishDir)')">$([MSBuild]::EnsureTrailingSlash('$(_TestPublishDir)'))</_TargetDir>
-      <_TestAssembly Condition="Exists('$(_TestPublishDir)')">$(_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly> -->
+      <_TargetDir Condition="Exists('$(_TestPublishDir)')">$([MSBuild]::EnsureTrailingSlash('$(_TestPublishDir)'))</_TargetDir>
+      <_TestAssembly Condition="Exists('$(_TestPublishDir)')">$(_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
       <_CoreRuntimeConfigPath>$(_TargetDir)$(_TargetFileNameNoExt).runtimeconfig.json</_CoreRuntimeConfigPath>
       <_CoreDepsPath>$(_TargetDir)$(_TargetFileNameNoExt).deps.json</_CoreDepsPath>
 
