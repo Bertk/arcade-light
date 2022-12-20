@@ -1,11 +1,11 @@
 {
   "sdk": {
-    "version": "7.0.100"
+    "version": "7.0.101"
   },
   "tools": {
-    "dotnet": "7.0.100"
+    "dotnet": "7.0.101"
   },
   "msbuild-sdks": {
-    "DotNet.ArcadeLight.Sdk": "1.0.9-beta"
+    "DotNet.ArcadeLight.Sdk": "1.0.11"
   }
 }

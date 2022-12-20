@@ -108,7 +108,19 @@ stages:
           fetchDepth: 0
           clean: true
         steps:
+        - task: UseDotNet@2
+          displayName: 'Use dotnet SDK (global)'
+          inputs:
+            packageType: 'sdk'
+            useGlobalJson: true
+        - task: UseDotNet@2
+          displayName: 'Use dotnet SDK (global)'
+          inputs:
+            packageType: 'runtime'
+            version: 6.x
+
         - task: NuGetAuthenticate@1
+
         - powershell: eng\commonlight\build.ps1
             -configuration $(_BuildConfig)
             -prepareMachine
@@ -121,6 +133,7 @@ stages:
           displayName: Run Tests
           env:
             SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
         - task: PublishTestResults@2
           condition: succeededOrFailed()
           inputs:
@@ -149,6 +162,18 @@ stages:
           fetchDepth: 0
           clean: true
         steps:
+        - task: UseDotNet@2
+          displayName: 'Use dotnet SDK (global)'
+          inputs:
+            packageType: 'sdk'
+            useGlobalJson: true
+
+        - task: UseDotNet@2
+          displayName: 'Use dotnet SDK (global)'
+          inputs:
+            packageType: 'runtime'
+            version: 6.x
+
         - task: NuGetAuthenticate@1
         - script: eng/commonlight/build.sh
             --configuration $(_BuildConfig)
@@ -162,6 +187,7 @@ stages:
           displayName: Run Tests
           env:
             SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
         - task: PublishTestResults@2
           condition: succeededOrFailed()
           inputs:
@@ -185,6 +211,7 @@ stages:
       inputs:
         packageType: 'sdk'
         useGlobalJson: true
+
     - task: UseDotNet@2
       displayName: 'Use dotnet SDK (global)'
       inputs:
@@ -214,7 +241,6 @@ stages:
         projects: '$(Build.SourcesDirectory)\$(_SolutionFile)'
         outputPath: '$(Build.SourcesDirectory)\artifacts'
         publishSBOM: true
-
 
   - job: Windows_NT
     timeoutInMinutes: 90

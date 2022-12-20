@@ -7,6 +7,7 @@
     <ExcludeFromSourceBuild>false</ExcludeFromSourceBuild>
     <PackageId>DotNet.ArcadeLight.Sdk</PackageId>
     <Description>Lightweight package of dotnet Arcade (does not use Microsoft private tooling)</Description>
+    <PackageReleaseNotes>https://github.com/Bertk/arcade-light/blob/main/CHANGELOG.md</PackageReleaseNotes>
 
     <IsPackable>true</IsPackable>
     <!-- Generate package during Build, rather than Pack, so that it can be used during Test. -->
