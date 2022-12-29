@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
     <PackageVersion Include="Microsoft.Build" Version="17.4.0" />
     <PackageVersion Include="Microsoft.Build.Framework" Version="17.4.0" />
     <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="17.4.0" />
