@@ -114,7 +114,7 @@ stages:
             packageType: 'sdk'
             useGlobalJson: true
         - task: UseDotNet@2
-          displayName: 'Use dotnet SDK (global)'
+          displayName: 'Use dotnet SDK 6.x'
           inputs:
             packageType: 'runtime'
             version: 6.x
@@ -128,6 +128,7 @@ stages:
             -restore
             -test
             -projects $(Build.SourcesDirectory)\**\*Tests.csproj
+            -verbosity detailed 
             /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
             /p:RestoreUsingNuGetTargets=false
           displayName: Run Tests
@@ -169,12 +170,13 @@ stages:
             useGlobalJson: true
 
         - task: UseDotNet@2
-          displayName: 'Use dotnet SDK (global)'
+          displayName: 'Use dotnet SDK 6.x'
           inputs:
             packageType: 'runtime'
             version: 6.x
 
         - task: NuGetAuthenticate@1
+
         - script: eng/commonlight/build.sh
             --configuration $(_BuildConfig)
             --prepareMachine
@@ -213,7 +215,7 @@ stages:
         useGlobalJson: true
 
     - task: UseDotNet@2
-      displayName: 'Use dotnet SDK (global)'
+      displayName: 'Use dotnet SDK 6.x'
       inputs:
         packageType: 'runtime'
         version: 6.x
