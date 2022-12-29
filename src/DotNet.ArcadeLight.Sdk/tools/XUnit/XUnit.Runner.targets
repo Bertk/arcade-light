@@ -48,8 +48,14 @@
       <_TargetFileNameNoExt>$([System.IO.Path]::GetFileNameWithoutExtension('$(_TestAssembly)'))</_TargetFileNameNoExt>
       <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
       <!-- coverlet collector will create coverage data after publish of test project was done -->
+      <!-- source: https://github.com/microsoft/vstest-docs/blob/main/docs/dotnetcoretests.md
+        "To mitigate the issue and as a general recommendation for running dot net core tests with vstest task please ask the customer to publish the test project and point
+        to the publish location for running tests. Publish ensures all needed dependencies are present for the tests to be executed alongside the test dll in case of
+        dot net core tests."
+
       <_TargetDir Condition="Exists('$(_TestPublishDir)')">$([MSBuild]::EnsureTrailingSlash('$(_TestPublishDir)'))</_TargetDir>
       <_TestAssembly Condition="Exists('$(_TestPublishDir)')">$(_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
+      -->
       <_CoreRuntimeConfigPath>$(_TargetDir)$(_TargetFileNameNoExt).runtimeconfig.json</_CoreRuntimeConfigPath>
       <_CoreDepsPath>$(_TargetDir)$(_TargetFileNameNoExt).deps.json</_CoreDepsPath>
 
