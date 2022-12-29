@@ -6,6 +6,6 @@
     "dotnet": "7.0.101"
   },
   "msbuild-sdks": {
-    "DotNet.ArcadeLight.Sdk": "1.1.8-alpha.g86d6dd6ceb"
+    "DotNet.ArcadeLight.Sdk": "1.1.12-alpha.g958d035504"
   }
 }
