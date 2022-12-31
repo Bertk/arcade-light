@@ -54,9 +54,16 @@ stages:
             -prepareMachine
             $(_InternalBuildArgs)
             /p:Test=false
-          displayName: Windows Build / Publish
+          displayName: Windows Build
           env:
             SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+        # publish requires obj folder
+        - template: /eng/azuredevops/pipelines/steps/publishTests.yml
+          parameters:
+            frameworks: ["net6.0", "net7.0"]
+            rid: win-x64
+
       - ${{ if eq(variables._RunAsPublic, True) }}:
         - job: Linux
           timeoutInMinutes: 90
@@ -78,9 +85,15 @@ stages:
               --configuration $(_BuildConfig)
               --prepareMachine
               /p:Test=false
-            displayName: Unix Build / Publish
+            displayName: Unix Build
             env:
               SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+          # publish requires obj folder
+          - template: /eng/azuredevops/pipelines/steps/publishTests.yml
+            parameters:
+              frameworks: ["net6.0", "net7.0"]
+              rid: linux-x64
 
 - stage: Test
   dependsOn: build

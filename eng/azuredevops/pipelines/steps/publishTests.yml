@@ -1,0 +1,15 @@
+parameters:
+  frameworks: []
+  rid: ''
+
+steps:
+- ${{ each _framework in parameters.frameworks }}:
+  - task: DotNetCoreCLI@2
+    displayName: Publish tests (${{ _framework }})
+    inputs:
+      command: 'publish'
+      projects: 'src/**/*.Tests.csproj'
+      arguments: '--framework ${{ _framework }} --self-contained --runtime ${{ parameters.rid }}'
+      zipAfterPublish: false
+      publishWebProjects: false
+      modifyOutputPath: false
