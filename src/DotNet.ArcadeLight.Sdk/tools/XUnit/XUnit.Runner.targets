@@ -21,29 +21,6 @@
       <_TestPublishDir>%(TestToRun.TestPublishDir)</_TestPublishDir>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(_TestRuntime)' == 'Core' And !Exists($(_TestPublishDir))" >
-      <_PublishCommand Condition="'$(_PublishCommand)'==''">$(DotNetTool)</_PublishCommand>
-      <_PublishCommandArgs>publish "$(MSBuildProjectFullPath)" --framework %(TestToRun.TargetFramework)</_PublishCommandArgs>
-      <_PublishTestCommand>"$(_PublishCommand)" $(_PublishCommandArgs)</_PublishTestCommand>
-
-      <!--
-        Redirect std output of the runner.
-        Note that xUnit outputs failure info to both STDOUT (stack trace, message) and STDERR (failed test name)
-      -->
-      <_PublishTestCommand Condition="'$(TestCaptureOutput)' != 'false'">$(_PublishTestCommand) > "%(TestToRun.ResultsStdOutPath).publish" 2>&amp;1</_PublishTestCommand>
-    </PropertyGroup>
-
-    <Message Text="Publish project: $(MSBuildProjectFile) [$(_TestEnvironment)]" Condition="!Exists($(_TestPublishDir))" Importance="high"/>
-    <Message Text="Project publish folder exists." Condition="Exists($(_TestPublishDir))" Importance="high"/>
-
-    <Exec Command='$(_PublishTestCommand)'
-      Condition="'$(_PublishTestCommand)' != ''"
-      LogStandardErrorAsError="false"
-      IgnoreExitCode="false"
-      ContinueOnError="WarnAndContinue">
-      <Output TaskParameter="ExitCode" PropertyName="_TestPublishErrorCode" />
-    </Exec>
-
     <PropertyGroup Condition="'$(_TestRuntime)' == 'Core'">
       <_TargetFileNameNoExt>$([System.IO.Path]::GetFileNameWithoutExtension('$(_TestAssembly)'))</_TargetFileNameNoExt>
       <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
@@ -52,9 +29,6 @@
         "To mitigate the issue and as a general recommendation for running dot net core tests with vstest task please ask the customer to publish the test project and point
         to the publish location for running tests. Publish ensures all needed dependencies are present for the tests to be executed alongside the test dll in case of
         dot net core tests."
-
-      <_TargetDir Condition="Exists('$(_TestPublishDir)')">$([MSBuild]::EnsureTrailingSlash('$(_TestPublishDir)'))</_TargetDir>
-      <_TestAssembly Condition="Exists('$(_TestPublishDir)')">$(_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
       -->
       <_CoreRuntimeConfigPath>$(_TargetDir)$(_TargetFileNameNoExt).runtimeconfig.json</_CoreRuntimeConfigPath>
       <_CoreDepsPath>$(_TargetDir)$(_TargetFileNameNoExt).deps.json</_CoreDepsPath>
@@ -66,9 +40,6 @@
       <_TestResultTrxFileName>$([System.IO.Path]::GetFileName('%(TestToRun.ResultsTrxPath)'))</_TestResultTrxFileName>
       <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" --Diag:"%(TestToRun.ResultDiagLogfilePath);tracelevel=verbose" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile="**/*.Version.cs"</_TestRunnerArgs>
     </PropertyGroup>
-
-    <Message Text="Publish folder for test exists (coverlet.collector): '$(_TestPublishDir)'" Condition="Exists($(_TestPublishDir))" Importance="high" />
-    <Message Text="Publish folder for test not found (coverlet.collector): '$(_TestPublishDir)'" Condition="!Exists($(_TestPublishDir))" Importance="high" />
 
     <Message Text="Use _TestAssembly  '$(_TestAssembly)'" Condition="Exists($(_TestAssembly))" Importance="high" />
 
