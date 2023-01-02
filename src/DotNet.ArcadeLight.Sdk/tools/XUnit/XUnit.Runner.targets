@@ -21,15 +21,24 @@
       <_TestPublishDir>%(TestToRun.TestPublishDir)</_TestPublishDir>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(_TestRuntime)' == 'Core'">
-      <_TargetFileNameNoExt>$([System.IO.Path]::GetFileNameWithoutExtension('$(_TestAssembly)'))</_TargetFileNameNoExt>
-      <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
+    <Message Text="Project publish folder '$(_TestPublishDir)' exists." Condition="Exists($(_TestPublishDir))" Importance="high"/>
+    <Message Text="Project publish folder '$(_TestPublishDir)' not found." Condition="!Exists($(_TestPublishDir))" Importance="high"/>
+
+    <PropertyGroup Condition="'$(_TestRuntime)' == 'Core' And Exists($(_TestPublishDir))" >
       <!-- coverlet collector will create coverage data after publish of test project was done -->
       <!-- source: https://github.com/microsoft/vstest-docs/blob/main/docs/dotnetcoretests.md
         "To mitigate the issue and as a general recommendation for running dot net core tests with vstest task please ask the customer to publish the test project and point
         to the publish location for running tests. Publish ensures all needed dependencies are present for the tests to be executed alongside the test dll in case of
         dot net core tests."
-      -->
+        Does not support Automatic RuntimeIdentifier see https://learn.microsoft.com/en-us/dotnet/core/compatibility/sdk/7.0/automatic-runtimeidentifier -->
+      <_TargetDir>$([MSBuild]::EnsureTrailingSlash('$(_TestPublishDir)'))</_TargetDir>
+      <_TestAssembly>$(_TargetDir)$([System.IO.Path]::GetFileName('$(_TestAssembly)'))</_TestAssembly>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(_TestRuntime)' == 'Core'">
+      <_TargetFileNameNoExt>$([System.IO.Path]::GetFileNameWithoutExtension('$(_TestAssembly)'))</_TargetFileNameNoExt>
+      <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
+
       <_CoreRuntimeConfigPath>$(_TargetDir)$(_TargetFileNameNoExt).runtimeconfig.json</_CoreRuntimeConfigPath>
       <_CoreDepsPath>$(_TargetDir)$(_TargetFileNameNoExt).deps.json</_CoreDepsPath>
 
@@ -40,7 +49,7 @@
       <_TestResultTrxFileName>$([System.IO.Path]::GetFileName('%(TestToRun.ResultsTrxPath)'))</_TestResultTrxFileName>
       <_TestRunnerArgs>vstest "$(_TestAssembly)" /collect:"XPlat Code Coverage" --ResultsDirectory:"$(_TestResultDirectory)" --logger:"trx;LogFileName=$(_TestResultTrxFileName)" --Diag:"%(TestToRun.ResultDiagLogfilePath);tracelevel=verbose" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.ExcludeByFile="**/*.Version.cs"</_TestRunnerArgs>
     </PropertyGroup>
-
+ 
     <Message Text="Use _TestAssembly  '$(_TestAssembly)'" Condition="Exists($(_TestAssembly))" Importance="high" />
 
     <PropertyGroup Condition="'$(_TestRuntime)' != 'Core'">
