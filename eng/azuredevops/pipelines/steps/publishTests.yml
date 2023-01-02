@@ -1,6 +1,5 @@
 parameters:
   frameworks: []
-  rid: ''
 
 steps:
 - ${{ each _framework in parameters.frameworks }}:
@@ -9,7 +8,7 @@ steps:
     inputs:
       command: 'publish'
       projects: 'src/**/*.Tests.csproj'
-      arguments: '--framework ${{ _framework }} --runtime ${{ parameters.rid }}'
+      arguments: '--framework ${{ _framework }}'
       zipAfterPublish: false
       publishWebProjects: false
       modifyOutputPath: false
