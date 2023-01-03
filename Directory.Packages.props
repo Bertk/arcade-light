@@ -15,8 +15,10 @@
     <PackageVersion Include="Microsoft.Build.Framework" Version="17.4.0" />
     <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="17.4.0" />
     <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.4.0" />
+    <PackageVersion Include="Microsoft.CodeCoverage" Version="17.4.1" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
     <PackageVersion Include="Microsoft.NET.StringTools" Version="17.4.0" />
     <PackageVersion Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" />
