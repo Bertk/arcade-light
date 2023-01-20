@@ -13,7 +13,7 @@ Download MSBuild Structured Log Viewer
 
 ## Create binary log file
 
-Create log file `msbuild.binlog` with MSBuild
+Create log file `.\msbuild.binlog` with MSBuild
 ```sh
 msbuild MySolution.sln /bl
 ```
@@ -23,7 +23,7 @@ Create log file `artifacts\log\Debug\Build.binlog` with arcade scripts
 build -bl
 ```
 
-## Investigate log file
+## Investigate binary log file
 
 Search properties or analyze errors
 
