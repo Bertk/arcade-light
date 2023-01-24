@@ -1,9 +1,17 @@
 version: 2
+
+registries:
+  nuget-azure-devops:
+    type: nuget-feed
+    url: https://pkgs.dev.azure.com/bertk0374/_packaging/public/nuget/v3/index.json
+    token: '${{secrets.AZURE_DEVOPS_TOKEN}}:'
+
 updates:
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 15
 
 #  - package-ecosystem: "github-actions"
 #    directory: "/"
