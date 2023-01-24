@@ -12,6 +12,8 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 15
+    registries:
+      - nuget-azure-devops
 
 #  - package-ecosystem: "github-actions"
 #    directory: "/"
