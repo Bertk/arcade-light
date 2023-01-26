@@ -10,6 +10,8 @@ pr:
     include:
     - main
     - templates
+    exclude:
+    - releases/*
 
 variables:
 - template: eng/common-variables.yml
