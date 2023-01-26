@@ -9,6 +9,11 @@
     "^refs/heads/releases/.*$",
     "^refs/tags/v\\d+\\.\\d+"
   ],
+  "release": {
+    "branchName" : "releases/v{version}",
+    "versionIncrement" : "minor",
+    "firstUnstableTag" : "beta"
+  },
   "cloudBuild": {
     "buildNumber": {
       "enabled": true
