@@ -2,7 +2,9 @@
 
 ## [Unreleased]
 
-## [1.1.x] - 2023-01-26
+- n.a.
+
+## [1.1.15] - 2023-01-26
 ### Added
 
 - Documentation
