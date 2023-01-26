@@ -10,7 +10,7 @@ updates:
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
     open-pull-requests-limit: 15
     registries:
       - nuget-azure-devops

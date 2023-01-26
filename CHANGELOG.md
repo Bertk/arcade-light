@@ -2,14 +2,24 @@
 
 ## [Unreleased]
 
+## [1.1.x] - 2023-01-26
 ### Added
 
-- `PackageReleaseNotes` property for nuget package release notes `CHANGELOG.md`
-
+- Documentation
+  - CHANGELOG.md
+  - binary log viewer information (hints only)
 ### Changed
 
-- TODO
-  - coverlet coverage should use published artifacts for test
+
+
+- `PackageReleaseNotes` property for nuget package release notes `CHANGELOG.md`
+- update dependencies
+  - Microsoft.TemplateEngine.Tasks from 7.0.100 to 7.0.102
+  - vswhere from 3.0.3 to 3.1.1
+  - System.Security.Cryptography.Xml from 7.0.0 to 7.0.1
+  - NUnit3TestAdapter from 4.2.1 to 4.3.1
+
+
 
 ## [1.0.11] - 2022-12-12
 

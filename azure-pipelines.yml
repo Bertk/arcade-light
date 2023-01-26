@@ -3,12 +3,15 @@ trigger:
   branches:
     include:
     - main
+    - releases/*
 
 pr:
   branches:
     include:
     - main
     - templates
+    exclude:
+    - releases/*
 
 variables:
 - template: eng/common-variables.yml
@@ -128,7 +131,7 @@ stages:
             -restore
             -test
             -projects $(Build.SourcesDirectory)\**\*Tests.csproj
-            -verbosity detailed 
+            -verbosity detailed
             /bl:$(Build.SourcesDirectory)\artifacts\log\$(_BuildConfig)\test-windows.binlog
             /p:RestoreUsingNuGetTargets=false
           displayName: Run Tests
