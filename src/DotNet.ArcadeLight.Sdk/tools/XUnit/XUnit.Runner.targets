@@ -23,7 +23,7 @@
 
     <PropertyGroup Condition="'$(_TestRuntime)' == 'Core' And !Exists($(_TestPublishDir))" >
       <_PublishCommand Condition="'$(_PublishCommand)'==''">$(DotNetTool)</_PublishCommand>
-      <_PublishCommandArgs>publish "$(MSBuildProjectFullPath)" --framework %(TestToRun.TargetFramework) --no-build</_PublishCommandArgs>
+      <_PublishCommandArgs>publish "$(MSBuildProjectFullPath)" --framework %(TestToRun.TargetFramework)</_PublishCommandArgs>
       <_PublishTestCommand>"$(_PublishCommand)" $(_PublishCommandArgs)</_PublishTestCommand>
 
       <!--
