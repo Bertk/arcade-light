@@ -161,9 +161,9 @@ stages:
           inputs:
             PathtoPublish: '$(Build.ArtifactStagingDirectory)/artifacts'
             PublishLocation: Container
-            ArtifactName: ${{ coalesce(parameters.enablePublishBuildArtifacts.artifactName, 'published_$(Agent.Os)_$(Agent.JobName)' ) }}
+            ArtifactName: 'Artifacts_published_$(Agent.Os)_$(Agent.JobName)'
           continueOnError: true
-          condition: always()
+          condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
 ## end just for analysis
       - job: Linux
         timeoutInMinutes: 90
