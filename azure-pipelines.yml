@@ -9,7 +9,6 @@ pr:
   branches:
     include:
     - main
-    - templates
     exclude:
     - releases/*
 

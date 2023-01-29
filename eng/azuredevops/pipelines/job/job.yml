@@ -150,6 +150,23 @@ jobs:
       continueOnError: true
       condition: always()
 
+  - ${{ if ne(parameters.enablePublishTestResults, 'false') }}:
+    - ${{ if or(eq(parameters.enablePublishTestResults, 'true'), eq(parameters.testResultsFormat, 'xunit')) }}:
+      - task: CopyFiles@2
+        displayName: Gather binaries for publish to artifacts
+        inputs:
+          SourceFolder: 'artifacts/bin'
+          Contents: '**'
+          TargetFolder: '$(Build.ArtifactStagingDirectory)/artifacts/bin'
+      - task: PublishBuildArtifacts@1
+        displayName: Publish Artifacts published tests
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)/artifacts/bin/$(_BuildConfig)'
+          PublishLocation: Container
+          ArtifactName: ${{ coalesce(parameters.enablePublishBuildArtifacts.artifactName, 'published_$(Agent.Os)_$(Agent.JobName)' ) }}
+        continueOnError: true
+        condition: always()
+
   - ${{ if or(and(eq(parameters.enablePublishTestResults, 'true'), eq(parameters.testResultsFormat, '')), eq(parameters.testResultsFormat, 'xunit')) }}:
     - task: PublishTestResults@2
       displayName: Publish XUnit Test Results
