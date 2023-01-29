@@ -149,7 +149,22 @@ stages:
             condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
             assemblyfilters: '-xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing'
             breakBuild: true
-
+## just for analysis
+        - task: CopyFiles@2
+          displayName: Gather binaries for publish to artifacts
+          inputs:
+            SourceFolder: 'artifacts/bin'
+            Contents: '**'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)/artifacts/bin'
+        - task: PublishBuildArtifacts@1
+          displayName: Publish Artifacts published tests
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)/artifacts'
+            PublishLocation: Container
+            ArtifactName: ${{ coalesce(parameters.enablePublishBuildArtifacts.artifactName, 'published_$(Agent.Os)_$(Agent.JobName)' ) }}
+          continueOnError: true
+          condition: always()
+## end just for analysis
       - job: Linux
         timeoutInMinutes: 90
         pool:
