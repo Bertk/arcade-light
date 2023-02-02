@@ -484,7 +484,7 @@ Imports System.Reflection
             strings.AppendLine();
         }
 
-        private class ResourceString
+        private sealed class ResourceString
         {
             private static readonly Regex _namedParameterMatcher = new Regex(@"\{([a-z]\w+)\}", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             private static readonly Regex _numberParameterMatcher = new Regex(@"\{(\d+)\}", RegexOptions.Compiled);

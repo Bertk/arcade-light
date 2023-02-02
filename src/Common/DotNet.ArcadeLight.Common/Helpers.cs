@@ -41,6 +41,7 @@ namespace DotNet.ArcadeLight.Common
                 }
                 catch (AbandonedMutexException)
                 {
+                // empty block
                 }
 
                 hasMutex = true;

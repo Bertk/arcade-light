@@ -66,7 +66,7 @@ namespace DotNet.ArcadeLight.Logging
         }
         public void Shutdown()
         {
-
+        // empty block
         }
 
         private void LogErrorOrWarning(

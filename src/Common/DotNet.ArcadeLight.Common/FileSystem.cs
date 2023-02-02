@@ -28,7 +28,7 @@ namespace DotNet.ArcadeLight.Common
 
         public void WriteToFile(string path, string content)
         {
-            string dirPath = Path.GetDirectoryName(path);
+            string dirPath = Path.GetDirectoryName(path)!;
             Directory.CreateDirectory(dirPath);
             File.WriteAllText(path, content);
         }
