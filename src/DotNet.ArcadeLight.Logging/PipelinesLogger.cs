@@ -106,8 +106,8 @@ namespace DotNet.ArcadeLight.Logging
             _builder.Finish(message);
             Console.WriteLine(_builder.GetMessage());
         }
-
-        private void LogDetail(
+#pragma warning disable S107 // method has 10 parameters, which is greater than 7 authorized
+    private void LogDetail(
             Guid id,
             string type,
             string name,
@@ -118,8 +118,9 @@ namespace DotNet.ArcadeLight.Logging
             string order = null,
             string progress = null,
             Guid? parentId = null)
-        {
-            _builder.Start("logdetail");
+#pragma warning restore S107 // method has 10 parameters, which is greater than 7 authorized
+    {
+      _builder.Start("logdetail");
             _builder.AddProperty("id", id);
 
             if (parentId != null)
@@ -229,8 +230,10 @@ namespace DotNet.ArcadeLight.Logging
                 progress: "100");
         }
 
-        private void OnProjectStarted(object sender, ProjectStartedEventArgs e)
-        {
+#pragma warning disable S3776 // Cognitive Complexity of methods should not be too high
+    private void OnProjectStarted(object sender, ProjectStartedEventArgs e)
+#pragma warning restore S3776 // Cognitive Complexity of methods should not be too high
+    {
             if (_ignoredTargets.Contains(e.TargetNames))
             {
                 return;

@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 
 # Visual Studio XML Project Files
 [*.{csproj,vbproj,vcxproj.filters,proj,projitems,shproj}]
-indent_size = 4
+indent_size = 2
 
 # XML Configuration Files
 [*.{xml,config,props,targets,nuspec,resx,ruleset,vsixmanifest,vsct}]
@@ -679,7 +679,7 @@ dotnet_diagnostic.S3693.severity = none
 
 dotnet_diagnostic.S3717.severity = none
 
-dotnet_diagnostic.S3776.severity = warning
+dotnet_diagnostic.S3776.severity = none
 
 dotnet_diagnostic.S3869.severity = warning
 
