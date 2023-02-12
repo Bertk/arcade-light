@@ -9,7 +9,7 @@ namespace DotNet.ArcadeLight.Common
 {
     public struct CommandResult
     {
-        public static readonly CommandResult Empty = new CommandResult();
+        public static readonly CommandResult Empty;
 
         public ProcessStartInfo StartInfo { get; }
         public int ExitCode { get; }
@@ -24,7 +24,12 @@ namespace DotNet.ArcadeLight.Common
             StdErr = stdErr;
         }
 
-        public void EnsureSuccessful(bool suppressOutput = false)
+        public void EnsureSuccessful()
+        {
+            EnsureSuccessful(false);
+        }
+
+            public void EnsureSuccessful(bool suppressOutput)
         {
             if (ExitCode != 0)
             {

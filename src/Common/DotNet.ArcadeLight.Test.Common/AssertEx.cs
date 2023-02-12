@@ -397,6 +397,8 @@ namespace DotNet.ArcadeLight.Test.Common
         public static string NormalizeWhitespace(string input)
         {
             var output = new StringBuilder();
+            if (string.IsNullOrEmpty(input))
+                throw new ArgumentNullException(input + "Cannot be null or be empty");
             var inputLines = input.Split('\n', '\r');
             foreach (var line in inputLines)
             {

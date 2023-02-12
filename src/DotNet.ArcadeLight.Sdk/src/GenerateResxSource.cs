@@ -119,7 +119,7 @@ namespace DotNet.ArcadeLight.Sdk
                     return false;
                 }
 
-                if (name == "")
+                if (string.IsNullOrEmpty(name))
                 {
                     Log.LogError($"Empty resource name");
                     return false;
@@ -446,7 +446,7 @@ Imports System.Reflection
                 // duplicate '"' for VB and C#
                 if (original[i] == '\"')
                 {
-                    stringLiteral.Append("\"");
+                    stringLiteral.Append('\"');
                 }
                 stringLiteral.Append(original[i]);
             }
@@ -484,7 +484,7 @@ Imports System.Reflection
             strings.AppendLine();
         }
 
-        private class ResourceString
+        private sealed class ResourceString
         {
             private static readonly Regex _namedParameterMatcher = new Regex(@"\{([a-z]\w+)\}", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             private static readonly Regex _numberParameterMatcher = new Regex(@"\{(\d+)\}", RegexOptions.Compiled);

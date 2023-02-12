@@ -23,7 +23,7 @@ namespace DotNet.ArcadeLight.Logging
         private string _solutionDirectory;
         public LoggerVerbosity Verbosity { get; set; }
         public string Parameters { get; set; }
-        private static readonly string s_TelemetryMarker = "NETCORE_ENGINEERING_TELEMETRY";
+        private const string s_TelemetryMarker = "NETCORE_ENGINEERING_TELEMETRY";
 
         public void Initialize(IEventSource eventSource)
         {
@@ -66,7 +66,7 @@ namespace DotNet.ArcadeLight.Logging
         }
         public void Shutdown()
         {
-
+        // empty block
         }
 
         private void LogErrorOrWarning(
@@ -88,12 +88,9 @@ namespace DotNet.ArcadeLight.Logging
                 {
                     telemetryCategory = telemetryInfo.Category;
                 }
-                if (string.IsNullOrEmpty(telemetryCategory))
+                if (string.IsNullOrEmpty(telemetryCategory) && _projectInfoMap.TryGetValue(parentId.Value, out ProjectInfo projectInfo))
                 {
-                    if (_projectInfoMap.TryGetValue(parentId.Value, out ProjectInfo projectInfo))
-                    {
-                        telemetryCategory = projectInfo.PropertiesCategory;
-                    }
+                    telemetryCategory = projectInfo.PropertiesCategory;
                 }
             }
             _builder.Start("logissue");
@@ -109,8 +106,8 @@ namespace DotNet.ArcadeLight.Logging
             _builder.Finish(message);
             Console.WriteLine(_builder.GetMessage());
         }
-
-        private void LogDetail(
+#pragma warning disable S107 // method has 10 parameters, which is greater than 7 authorized
+    private void LogDetail(
             Guid id,
             string type,
             string name,
@@ -121,8 +118,9 @@ namespace DotNet.ArcadeLight.Logging
             string order = null,
             string progress = null,
             Guid? parentId = null)
-        {
-            _builder.Start("logdetail");
+#pragma warning restore S107 // method has 10 parameters, which is greater than 7 authorized
+    {
+      _builder.Start("logdetail");
             _builder.AddProperty("id", id);
 
             if (parentId != null)
@@ -196,7 +194,7 @@ namespace DotNet.ArcadeLight.Logging
 
         private void OnTelemetryLogged(object sender, TelemetryEventArgs e)
         {
-            if (e.EventName.Equals(s_TelemetryMarker))
+            if (e.EventName.Equals(s_TelemetryMarker, StringComparison.Ordinal))
             {
                 if (!e.Properties.TryGetValue("Category", out string telemetryCategory))
                     return;
@@ -232,17 +230,19 @@ namespace DotNet.ArcadeLight.Logging
                 progress: "100");
         }
 
-        private void OnProjectStarted(object sender, ProjectStartedEventArgs e)
-        {
+#pragma warning disable S3776 // Cognitive Complexity of methods should not be too high
+    private void OnProjectStarted(object sender, ProjectStartedEventArgs e)
+#pragma warning restore S3776 // Cognitive Complexity of methods should not be too high
+    {
             if (_ignoredTargets.Contains(e.TargetNames))
             {
                 return;
             }
 
-            string propertyCategory = e.Properties?.Cast<DictionaryEntry>().LastOrDefault(p => p.Key.ToString().Equals(s_TelemetryMarker)).Value?.ToString();
+            string propertyCategory = e.Properties?.Cast<DictionaryEntry>().LastOrDefault(p => p.Key.ToString().Equals(s_TelemetryMarker, StringComparison.Ordinal)).Value?.ToString();
             if(string.IsNullOrWhiteSpace(propertyCategory))
             {
-                propertyCategory = e.GlobalProperties?.LastOrDefault(p => p.Key.ToString().Equals($"_{s_TelemetryMarker}")).Value;
+                propertyCategory = e.GlobalProperties?.LastOrDefault(p => p.Key.ToString().Equals($"_{s_TelemetryMarker}", StringComparison.Ordinal)).Value;
             }
             var parentId = _buildEventContextMap.TryGetValue(e.ParentProjectBuildEventContext, out var guid)
             ? (Guid?)guid
@@ -288,6 +288,7 @@ namespace DotNet.ArcadeLight.Logging
                     }
                     catch (Exception)
                     {
+                        // empty
                     }
                 }
 

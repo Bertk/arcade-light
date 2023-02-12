@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace DotNet.ArcadeLight.Test.Common
 {
-    public class DiffUtil
+    public static class DiffUtil
     {
         private enum EditKind
         {
@@ -183,34 +183,6 @@ namespace DotNet.ArcadeLight.Test.Common
                     j--;
                     yield return new Edit(EditKind.Insert, -1, j);
                 }
-            }
-
-            /// <summary>
-            /// Returns a distance [0..1] of the specified sequences.
-            /// The smaller distance the more of their elements match.
-            /// </summary>
-            /// <summary>
-            /// Returns a distance [0..1] of the specified sequences.
-            /// The smaller distance the more of their elements match.
-            /// </summary>
-            protected double ComputeDistance(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
-            {
-                Debug.Assert(lengthA >= 0 && lengthB >= 0);
-
-                if (lengthA == 0 || lengthB == 0)
-                {
-                    return (lengthA == lengthB) ? 0.0 : 1.0;
-                }
-
-                int lcsLength = 0;
-                foreach (var pair in GetMatchingPairs(sequenceA, lengthA, sequenceB, lengthB))
-                {
-                    lcsLength++;
-                }
-
-                int max = Math.Max(lengthA, lengthB);
-                Debug.Assert(lcsLength <= max);
-                return 1.0 - (double)lcsLength / (double)max;
             }
 
             /// <summary>

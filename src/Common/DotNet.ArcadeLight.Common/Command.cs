@@ -28,8 +28,8 @@ namespace DotNet.ArcadeLight.Common
         private Action<string> _stdOutHandler;
         private Action<string> _stdErrHandler;
 
-        private bool _running = false;
-        private bool _quietBuildReporter = false;
+        private bool _running;
+        private bool _quietBuildReporter;
 
         internal Command(string executable, string args)
         {
@@ -211,7 +211,7 @@ namespace DotNet.ArcadeLight.Common
             return this;
         }
 
-        private string FormatProcessInfo(ProcessStartInfo info, bool includeWorkingDirectory)
+        static private string FormatProcessInfo(ProcessStartInfo info, bool includeWorkingDirectory)
         {
             string prefix = includeWorkingDirectory ?
                 $"{info.WorkingDirectory}> {info.FileName}" :
@@ -253,7 +253,7 @@ namespace DotNet.ArcadeLight.Common
             }
         }
 
-        private void ProcessData(string data, StringWriter capture, Action<string> forward, Action<string> handler)
+        static private void ProcessData(string data, StringWriter capture, Action<string> forward, Action<string> handler)
         {
             if (data == null)
             {

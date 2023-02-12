@@ -18,7 +18,7 @@ namespace DotNet.ArcadeLight.Common
         public async Task AddResourceFileToArchive<TAssembly>(string archivePath, string resourceName, string targetFileName = null)
         {
             using Stream fileStream = GetResourceFileContent<TAssembly>(resourceName);
-            await AddContentToArchive(archivePath, targetFileName ?? resourceName, fileStream);
+            await AddContentToArchive(archivePath, targetFileName ?? resourceName, fileStream).ConfigureAwait(true);
         }
 
         public void ArchiveDirectory(string directoryPath, string archivePath, bool includeBaseDirectory)
@@ -54,7 +54,7 @@ namespace DotNet.ArcadeLight.Common
 
             ZipArchiveEntry entry = archive.CreateEntry(targetFilename);
             using Stream targetStream = entry.Open();
-            await content.CopyToAsync(targetStream);
+            await content.CopyToAsync(targetStream).ConfigureAwait(true);
         }
 
         public static Stream GetResourceFileContent<TAssembly>(string resourceFileName)
