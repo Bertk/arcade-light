@@ -8,7 +8,6 @@
   <Import Project="BeforeCommonTargets.targets" Condition="'$(_ArcadeBeforeCommonTargetsImported)' != 'true' and '$(IsCrossTargetingBuild)' != 'true'"/>
 
   <Import Project="ProjectDefaults.targets"/>
-  <Import Project="GenerateChecksums.targets" />
   <Import Project="GenerateInternalsVisibleTo.targets" />
   <Import Project="GenerateResxSource.targets" />
   <Import Project="Workarounds.targets"/>
