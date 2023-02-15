@@ -15,7 +15,7 @@ namespace DotNet.ArcadeLight.Test.Common
             => new HttpClient(
                 new FakeHttpMessageHandler(responses));
 
-        private class FakeHttpMessageHandler : HttpMessageHandler
+        private sealed class FakeHttpMessageHandler : HttpMessageHandler
         {
             private readonly IEnumerator<HttpResponseMessage> _responseEnumerator;
 

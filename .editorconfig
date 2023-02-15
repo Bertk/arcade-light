@@ -42,7 +42,7 @@ end_of_line = lf
 ###############################
 [*.{cs,vb}]
 # Default file header
-#file_header_template = some source file header 
+#file_header_template = some source file header
 # Organize usings
 dotnet_sort_system_directives_first = true
 # this. preferences
@@ -167,6 +167,9 @@ dotnet_diagnostic.CA1707.severity = none
 
 # CS1591: Missing XML comment for publicly visible type or member
 dotnet_diagnostic.CS1591.severity = none
+
+# CA1852: Seal internal types
+dotnet_diagnostic.CA1852.severity = warning
 
 # NOTE: Requires **VS2019 16.3** or later
 
