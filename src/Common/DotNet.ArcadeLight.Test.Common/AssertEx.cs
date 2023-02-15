@@ -20,7 +20,7 @@ namespace DotNet.ArcadeLight.Test.Common
     {
         #region AssertEqualityComparer<T>
 
-        private class AssertEqualityComparer<T> : IEqualityComparer<T>
+        private sealed class AssertEqualityComparer<T> : IEqualityComparer<T>
         {
             private static readonly IEqualityComparer<T> s_instance = new AssertEqualityComparer<T>();
 

@@ -33,7 +33,7 @@ namespace DotNet.ArcadeLight.Test.Common
             Delete = 3,
         }
 
-        private class LCS<T> : LongestCommonSubsequence<IList<T>>
+        private sealed class LCS<T> : LongestCommonSubsequence<IList<T>>
         {
             public static readonly LCS<T> Default = new LCS<T>((left, right) => EqualityComparer<T>.Default.Equals(left, right));
 

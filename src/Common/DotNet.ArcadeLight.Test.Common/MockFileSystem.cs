@@ -76,7 +76,7 @@ namespace DotNet.ArcadeLight.Test.Common
         /// <summary>
         /// Allows to write to a stream that will end up in the MockFileSystem.
         /// </summary>
-        private class MockFileStream : MemoryStream
+        private sealed class MockFileStream : MemoryStream
         {
             private readonly MockFileSystem _fileSystem;
             private readonly string _path;
