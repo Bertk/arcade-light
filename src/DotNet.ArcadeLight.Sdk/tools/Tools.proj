@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <Target Name="RestoreRepoTools"
-          Condition="'$(DotNetBuildFromSource)' != 'true' and Exists('$(_RepoToolManifest)')"
+          Condition="Exists('$(_RepoToolManifest)')"
           BeforeTargets="Restore">
 
     <Exec Command='"$(DotNetTool)" tool restore' WorkingDirectory="$(RepoRoot)" />
@@ -37,6 +37,6 @@
   <!-- Repository extensibility point -->
   <Import Project="$(RepositoryEngineeringDir)Tools.props" Condition="Exists('$(RepositoryEngineeringDir)Tools.props')" />
 
-  <Import Project="InstallDotNetCore.targets" Condition="'$(DotNetBuildFromSource)' != 'true'" />
+  <Import Project="InstallDotNetCore.targets" />
 
 </Project>
