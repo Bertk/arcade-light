@@ -146,7 +146,7 @@ namespace DotNet.ArcadeLight.Sdk
             return !Log.HasLoggedErrors;
         }
 
-        private string GetArchitecture(string architecture)
+    internal string GetArchitecture(string architecture)
         {
             if (!string.IsNullOrWhiteSpace(architecture))
             {
