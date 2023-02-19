@@ -11,7 +11,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
   public class CheckRequiredDotNetVersionTests
   {
     private readonly MockRepository mockRepository;
-    private readonly Mock<IBuildEngine> buildEngine;
+    private readonly Mock<IBuildEngine4> buildEngine;
     private readonly List<BuildErrorEventArgs> errors;
     private readonly string repositoryRoot;
 
@@ -19,7 +19,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
     public CheckRequiredDotNetVersionTests()
     {
       mockRepository = new MockRepository(MockBehavior.Strict);
-      buildEngine = new Mock<IBuildEngine>();
+      buildEngine = new Mock<IBuildEngine4>();
       errors = new List<BuildErrorEventArgs>();
       buildEngine.Setup(x => x.LogErrorEvent(It.IsAny<BuildErrorEventArgs>())).Callback<BuildErrorEventArgs>(e => errors.Add(e));
 

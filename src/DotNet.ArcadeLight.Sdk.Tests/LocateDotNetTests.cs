@@ -11,14 +11,14 @@ namespace DotNet.ArcadeLight.Sdk.Tests
   public class LocateDotNetTests
   {
     private MockRepository mockRepository;
-    private readonly Mock<IBuildEngine> buildEngine;
+    private readonly Mock<IBuildEngine4> buildEngine;
     private readonly List<BuildErrorEventArgs> errors;
     private readonly string repositoryRoot;
 
     public LocateDotNetTests()
     {
       mockRepository = new MockRepository(MockBehavior.Strict);
-      buildEngine = new Mock<IBuildEngine>();
+      buildEngine = new Mock<IBuildEngine4>();
       errors = new List<BuildErrorEventArgs>();
       buildEngine.Setup(x => x.LogErrorEvent(It.IsAny<BuildErrorEventArgs>())).Callback<BuildErrorEventArgs>(e => errors.Add(e));
 

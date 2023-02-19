@@ -47,13 +47,13 @@ namespace DotNet.ArcadeLight.Sdk
             var lastWrite = File.GetLastWriteTimeUtc(globalJsonPath);
             var paths = Environment.GetEnvironmentVariable("PATH");
 
-            //var cachedResult = (CacheEntry)BuildEngine4.GetRegisteredTaskObject(s_cacheKey, RegisteredTaskObjectLifetime.Build);
-            //if (cachedResult != null && lastWrite == cachedResult.LastWrite && paths == cachedResult.Paths)
-            //{
-            //    Log.LogMessage(MessageImportance.Low, $"Reused cached value.");
-            //    DotNetPath = cachedResult.Value;
-            //    return;
-            //}
+            var cachedResult = (CacheEntry)BuildEngine4.GetRegisteredTaskObject(s_cacheKey, RegisteredTaskObjectLifetime.Build);
+            if (cachedResult != null && lastWrite == cachedResult.LastWrite && paths == cachedResult.Paths)
+            {
+               Log.LogMessage(MessageImportance.Low, $"Reused cached value.");
+               DotNetPath = cachedResult.Value;
+               return;
+            }
 
             var globalJson = File.ReadAllText(globalJsonPath);
 
@@ -77,7 +77,7 @@ namespace DotNet.ArcadeLight.Sdk
             }
 
             DotNetPath = Path.GetFullPath(Path.Combine(dotNetDir, fileName));
-            // BuildEngine4.RegisterTaskObject(s_cacheKey, new CacheEntry(lastWrite, paths, DotNetPath), RegisteredTaskObjectLifetime.Build, allowEarlyCollection: true);
+            BuildEngine4.RegisterTaskObject(s_cacheKey, new CacheEntry(lastWrite, paths, DotNetPath), RegisteredTaskObjectLifetime.Build, allowEarlyCollection: true);
         }
     }
 }
