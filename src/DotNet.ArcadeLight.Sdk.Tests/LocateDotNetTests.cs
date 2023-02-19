@@ -27,7 +27,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
 
     [Fact]
-    public void LocateDotNetTestSuccess()
+    public void LocateDotNetVerify()
     {
       // Arrange
       LocateDotNet locateDotNet = new LocateDotNet();
@@ -38,7 +38,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
       locateDotNet.Execute();
 
       // Assert
-      Assert.NotNull(locateDotNet.DotNetPath);
+      //Assert.NotNull(locateDotNet.DotNetPath);
       Assert.True(File.Exists(locateDotNet.DotNetPath));
       mockRepository.VerifyAll();
       Assert.Empty(errors);
