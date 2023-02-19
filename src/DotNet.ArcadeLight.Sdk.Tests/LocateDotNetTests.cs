@@ -1,3 +1,4 @@
+using DotNet.ArcadeLight.Test.Common;
 using Microsoft.Build.Framework;
 using Moq;
 using System;
@@ -10,7 +11,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 {
   public class LocateDotNetTests
   {
-    private MockRepository mockRepository;
+    private readonly MockRepository mockRepository;
     private readonly Mock<IBuildEngine4> buildEngine;
     private readonly List<BuildErrorEventArgs> errors;
     private readonly string repositoryRoot;
@@ -26,7 +27,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
     }
 
 
-    [Fact]
+    [IgnoreOnLinuxFact]
     public void LocateDotNetVerify()
     {
       // Arrange
@@ -38,7 +39,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
       locateDotNet.Execute();
 
       // Assert
-      //Assert.NotNull(locateDotNet.DotNetPath);
+      Assert.NotNull(locateDotNet.DotNetPath);
       Assert.True(File.Exists(locateDotNet.DotNetPath));
       mockRepository.VerifyAll();
       Assert.Empty(errors);

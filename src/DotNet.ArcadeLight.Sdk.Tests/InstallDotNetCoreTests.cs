@@ -40,12 +40,12 @@ namespace DotNet.ArcadeLight.Sdk.Tests
       //Arrange
       InstallDotNetCore customTask = new InstallDotNetCore ();
       customTask.GlobalJsonPath = Path.GetFullPath(Path.Combine(projectRootDir, "global.json"));
-      customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight\dotnet-install.cmd"));
+      customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd"));
       customTask.BuildEngine = buildEngine.Object;
       //Act and Assert
       var success = customTask.Execute ();
       Assert.True(success);
-      //Assert.Empty(errors);
+      Assert.Empty(errors);
       this.mockRepository.VerifyAll();
     }
 
