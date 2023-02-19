@@ -36,7 +36,7 @@ namespace DotNet.ArcadeLight.Sdk
 
         public override bool Execute()
         {
-            if (!SemanticVersion.TryParse(SdkVersion, out var currentSdkVersion))
+            if (!SemanticVersion.TryParse(SdkVersion, out SemanticVersion currentSdkVersion))
             {
                 Log.LogError($"Invalid version: {SdkVersion}");
                 return false;
@@ -54,17 +54,17 @@ namespace DotNet.ArcadeLight.Sdk
                 return false;
             }
 
-            var cachedResult = (CacheEntry)BuildEngine4.GetRegisteredTaskObject(s_cacheKey, RegisteredTaskObjectLifetime.Build);
-            if (cachedResult != null && lastWrite == cachedResult.LastWrite)
-            {
-                // Error has already been reported if the current SDK version is not sufficient.
-                if (!cachedResult.Success)
-                {
-                    Log.LogMessage(MessageImportance.Low, $"Previous .NET Core SDK version check failed.");
-                }
+            //var cachedResult = (CacheEntry)BuildEngine4.GetRegisteredTaskObject(s_cacheKey, RegisteredTaskObjectLifetime.Build);
+            //if (cachedResult != null && lastWrite == cachedResult.LastWrite)
+            //{
+            //    // Error has already been reported if the current SDK version is not sufficient.
+            //    if (!cachedResult.Success)
+            //    {
+            //        Log.LogMessage(MessageImportance.Low, $"Previous .NET Core SDK version check failed.");
+            //    }
 
-                return cachedResult.Success;
-            }
+            //    return cachedResult.Success;
+            //}
 
             bool execute()
             {
@@ -104,7 +104,7 @@ namespace DotNet.ArcadeLight.Sdk
             }
 
             bool success = execute();
-            BuildEngine4.RegisterTaskObject(s_cacheKey, new CacheEntry(lastWrite, success), RegisteredTaskObjectLifetime.Build, allowEarlyCollection: true);
+            //BuildEngine4.RegisterTaskObject(s_cacheKey, new CacheEntry(lastWrite, success), RegisteredTaskObjectLifetime.Build, allowEarlyCollection: true);
             return success;
         }
     }
