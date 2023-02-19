@@ -67,7 +67,7 @@ namespace DotNet.ArcadeLight.Sdk
             }
 
             bool execute()
-                  {
+            {
                 string globalJson;
                 try
                 {

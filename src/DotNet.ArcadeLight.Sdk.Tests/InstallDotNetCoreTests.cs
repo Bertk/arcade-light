@@ -29,7 +29,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
       errors = new List<BuildErrorEventArgs>();
       buildEngine.Setup(x => x.LogErrorEvent(It.IsAny<BuildErrorEventArgs>())).Callback<BuildErrorEventArgs>(e => errors.Add(e));
 
-      projectRootDir = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"..\..\..\..\..\"));
+      projectRootDir = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../../../../"));
       repositoryEngineeringDir = Path.GetFullPath(Path.Combine(projectRootDir, "eng"));
     }
 
