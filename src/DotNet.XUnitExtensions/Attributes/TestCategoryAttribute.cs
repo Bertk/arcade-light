@@ -9,7 +9,7 @@ namespace Xunit
     /// <summary>
     /// Apply this attribute to your test method to specify the test category.
     /// </summary>
-    [TraitDiscoverer("Microsoft.DotNet.XUnitExtensions.TestCategoryDiscoverer", "Microsoft.DotNet.XUnitExtensions")]
+    [TraitDiscoverer("DotNet.XUnitExtensions.TestCategoryDiscoverer", "DotNet.XUnitExtensions")]
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
     public class TestCategoryAttribute : Attribute, ITraitAttribute
     {
