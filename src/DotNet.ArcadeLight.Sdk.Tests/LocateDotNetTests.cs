@@ -43,7 +43,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
     }
 
     [Fact]
-    public void LocateDotNetTestNoFile()
+    public void LocateDotNetWrongFolder()
     {
       // Arrange
       LocateDotNet locateDotNet = new LocateDotNet();
