@@ -8,22 +8,20 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 {
   public class SingleErrorTests
   {
-    private readonly MockRepository mockRepository;
     private readonly Mock<IBuildEngine4> buildEngine;
     private readonly List<BuildErrorEventArgs> errors;
 
 
     public SingleErrorTests()
     {
-      mockRepository = new MockRepository(MockBehavior.Loose);
-      buildEngine = new Mock<IBuildEngine4>(MockBehavior.Loose);
+      buildEngine = new Mock<IBuildEngine4>();
       errors = new List<BuildErrorEventArgs>();
       buildEngine.Setup(x => x.LogErrorEvent(It.IsAny<BuildErrorEventArgs>())).Callback<BuildErrorEventArgs>(e => errors.Add(e));
 
     }
 
     [Fact]
-    public void SingleErrorSuccess()
+    public void SingleErrorVerify()
     {
       // Arrange
       var singleError = new SingleError();
@@ -35,7 +33,6 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
       // Assert
       Assert.False(result);
-      mockRepository.VerifyAll();
       Assert.NotEmpty(errors);
     }
   }

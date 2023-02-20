@@ -10,7 +10,6 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 {
   public class CheckRequiredDotNetVersionTests
   {
-    private readonly MockRepository mockRepository;
     private readonly Mock<IBuildEngine4> buildEngine;
     private readonly List<BuildErrorEventArgs> errors;
     private readonly string repositoryRoot;
@@ -18,7 +17,6 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
     public CheckRequiredDotNetVersionTests()
     {
-      mockRepository = new MockRepository(MockBehavior.Strict);
       buildEngine = new Mock<IBuildEngine4>();
       errors = new List<BuildErrorEventArgs>();
       buildEngine.Setup(x => x.LogErrorEvent(It.IsAny<BuildErrorEventArgs>())).Callback<BuildErrorEventArgs>(e => errors.Add(e));
@@ -30,7 +28,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
     [Theory]
     [InlineData("7.0.103", true)]
     [InlineData("7.0.200", true)]
-    public void CheckRequiredDotNetVersionTest(string minSdkVersionStr, bool expectedResult)
+    public void CheckRequiredDotNetVersionVerify(string minSdkVersionStr, bool expectedResult)
     {
       // Arrange
       CheckRequiredDotNetVersion checkRequiredDotNetVersion = new CheckRequiredDotNetVersion();
@@ -42,7 +40,6 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
       // Assert
       Assert.Equal(expectedResult, result);
-      mockRepository.VerifyAll();
       Assert.Empty(errors);
     }
 
@@ -59,7 +56,6 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
       // Assert
       Assert.False(result);
-      mockRepository.VerifyAll();
       Assert.NotEmpty(errors);
     }
 
@@ -76,12 +72,11 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
       // Assert
       Assert.False(result);
-      mockRepository.VerifyAll();
       Assert.NotEmpty(errors);
     }
 
     [Fact]
-    public void CheckRequiredDotNetVersionInvalidversionTest()
+    public void CheckRequiredDotNetVersionInvalidVersion()
     {
       // Arrange
       CheckRequiredDotNetVersion checkRequiredDotNetVersion = new CheckRequiredDotNetVersion();
@@ -93,7 +88,6 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
       // Assert
       Assert.False(result);
-      mockRepository.VerifyAll();
       Assert.NotEmpty(errors);
     }
   }

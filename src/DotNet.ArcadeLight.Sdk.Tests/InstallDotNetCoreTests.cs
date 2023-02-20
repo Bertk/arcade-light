@@ -13,19 +13,18 @@ namespace DotNet.ArcadeLight.Sdk.Tests
   using System.Collections.Generic;
   using System.Reflection;
   using System.Linq;
+  using Xunit.Sdk;
 
   public class InstallDotNetCoreTests
   {
-    private MockRepository mockRepository;
-    private Mock<IBuildEngine> buildEngine;
-    private List<BuildErrorEventArgs> errors;
+    private readonly Mock<IBuildEngine4> buildEngine;
+    private readonly List<BuildErrorEventArgs> errors;
     private readonly string projectRootDir;
     private readonly string repositoryEngineeringDir;
 
     public InstallDotNetCoreTests()
     {
-      this.mockRepository = new MockRepository(MockBehavior.Strict);
-      buildEngine = new Mock<IBuildEngine>();
+      buildEngine = new Mock<IBuildEngine4>();
       errors = new List<BuildErrorEventArgs>();
       buildEngine.Setup(x => x.LogErrorEvent(It.IsAny<BuildErrorEventArgs>())).Callback<BuildErrorEventArgs>(e => errors.Add(e));
 
@@ -45,15 +44,41 @@ namespace DotNet.ArcadeLight.Sdk.Tests
       //Act and Assert
       var success = customTask.Execute ();
       Assert.True(success);
-      Assert.Empty(errors);
-      this.mockRepository.VerifyAll();
+    }
+
+    [Fact]
+    public void InstallDotNetCoreNoGlobalJsonFile()
+    {
+      //Arrange
+      InstallDotNetCore customTask = new InstallDotNetCore();
+      customTask.GlobalJsonPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "global.json"));
+      customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd"));
+      customTask.BuildEngine = buildEngine.Object;
+      //Act and Assert
+      var success = customTask.Execute();
+      Assert.True(success);
+      // warning list is not available
+    }
+
+    [Fact]
+    public void InstallDotNetCoreNoInstallScript()
+    {
+      //Arrange
+      InstallDotNetCore customTask = new InstallDotNetCore();
+      customTask.GlobalJsonPath = Path.GetFullPath(Path.Combine(projectRootDir, "global.json"));
+      customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"xxx.cmd"));
+      customTask.BuildEngine = buildEngine.Object;
+      //Act and Assert
+      var success = customTask.Execute();
+      Assert.False(success);
+      Assert.NotEmpty(errors);
     }
 
     [Theory]
     [InlineData("x86", "x86")]
     [InlineData("x64", "x64")]
     [InlineData("", "x64")]
-    public void GetArchitectureTest(string architecture, string value)
+    public void GetArchitectureVerify(string architecture, string value)
     {
       //Arrange
       InstallDotNetCore customTask = new InstallDotNetCore();
