@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
 
 namespace DotNet.ArcadeLight.Sdk
 {
@@ -50,9 +49,9 @@ namespace DotNet.ArcadeLight.Sdk
             var cachedResult = (CacheEntry)BuildEngine4.GetRegisteredTaskObject(s_cacheKey, RegisteredTaskObjectLifetime.Build);
             if (cachedResult != null && lastWrite == cachedResult.LastWrite && paths == cachedResult.Paths)
             {
-                Log.LogMessage(MessageImportance.Low, $"Reused cached value.");
-                DotNetPath = cachedResult.Value;
-                return;
+               Log.LogMessage(MessageImportance.Low, $"Reused cached value.");
+               DotNetPath = cachedResult.Value;
+               return;
             }
 
             var globalJson = File.ReadAllText(globalJsonPath);

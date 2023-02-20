@@ -19,6 +19,8 @@
   <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" />
     <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.extensibility.core" />
+    <PackageReference Include="xunit.extensibility.execution" />
   </ItemGroup>
 
   <ItemGroup>
