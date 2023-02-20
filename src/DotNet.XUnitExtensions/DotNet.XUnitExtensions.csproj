@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyName>DotNet.XUnitExtensions</AssemblyName>
+    <Description>This package provides things like various traits and discovers like OuterLoop/ActiveIssue that are used by .NET test projects.</Description>
+    <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
+    <IsPackable>true</IsPackable>
+    <!-- Generate package during Build, rather than Pack, so that it can be used during Test. -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.extensibility.core" />
+    <PackageReference Include="xunit.extensibility.execution" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(RepoRoot)LICENSE.txt" PackagePath="LICENSE.txt" Pack="true" />
+    <None Include="$(RepoRoot)THIRD-PARTY-NOTICES.txt" PackagePath="THIRD-PARTY-NOTICES.txt" Pack="true" />
+  </ItemGroup>
+</Project>

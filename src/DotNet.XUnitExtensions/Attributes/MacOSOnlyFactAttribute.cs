@@ -4,23 +4,24 @@
 #nullable enable
 
 using System.Runtime.InteropServices;
+using DotNet.XUnitExtensions;
 
 namespace Xunit
 {
     /// <summary>
-    /// This test should be run only on Linux.
+    /// This test should be run only on OSX.
     /// </summary>
-    public class LinuxOnlyFactAttribute : FactAttribute
+    public class MacOSOnlyFactAttribute : FactAttribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="LinuxOnlyFactAttribute"/> class.
+        /// Initializes a new instance of the <see cref="MacOSOnlyFactAttribute"/> class.
         /// </summary>
         /// <param name="additionalMessage">The additional message that is appended to skip reason, when test is skipped.</param>
-        public LinuxOnlyFactAttribute(string? additionalMessage = null)
+        public MacOSOnlyFactAttribute(string? additionalMessage = null)
         {
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                this.Skip = "This test requires Linux to run.".AppendAdditionalMessage(additionalMessage);
+                this.Skip = "This test requires macOS to run.".AppendAdditionalMessage(additionalMessage);
             }
         }
     }
