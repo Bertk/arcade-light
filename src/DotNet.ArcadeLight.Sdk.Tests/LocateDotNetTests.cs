@@ -27,7 +27,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
     }
 
 
-    [Fact(Skip = "Fails on Linux platform : line 42")]
+    [WindowsOnlyFact("Fails on Linux platform : line 42")]
     public void LocateDotNetVerify()
     {
       // Arrange
