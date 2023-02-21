@@ -4,23 +4,20 @@
 
 - [arcade Versioning](https://github.com/dotnet/arcade/blob/main/Documentation/CorePackages/Versioning.md) is replaced by [NerdbankGitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning) and yaml templates
 - use [Nuget Central Package Management](https://devblogs.microsoft.com/nuget/introducing-central-package-management/?WT.mc_id=DT-MVP-5004452) and remove nuget package versions from `Versions.props` file
-- remove SourceBuild (feature)
-- remove Helix channel support
-- remove telemetry support (NETCORE_ENGINEERING_TELEMETRY)
-- remove Maestro channel support
-- remove Darc support
-- remove micro build (microsoft internal)
-- remove sign.proj and pack.proj (should be handled in build pipeline)
-- remove PublishToSymbolServer 
-
-##Update:
-
-- __publish__ workflow for CIBuild.cmd
-
+- removed SourceBuild (feature)
+- removed Helix channel support
+- removed telemetry support (NETCORE_ENGINEERING_TELEMETRY)
+- removed Maestro channel support
+- removed Darc support
+- removed micro build (microsoft internal)
+- removed sign.proj and pack.proj (should be handled in build pipeline)
+- removed PublishToSymbolServer 
+- removed SetCorFlags
+- removed GenerateChecksums
+- removed ExtractNgenMethodList
 
 ## new features
 
 - add test code coverage using coverlet
-    - successful for local builds
-    - `dotnet publish` for test projects - required for code coverage generated executing vstest
+    - successful for local and CI builds
     - issues with CI execution (see [coverlet known issues](https://github.com/coverlet-coverage/coverlet/blob/master/Documentation/KnownIssues.md))
