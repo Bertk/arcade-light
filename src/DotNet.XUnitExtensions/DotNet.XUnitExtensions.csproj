@@ -3,11 +3,18 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>DotNet.XUnitExtensions</AssemblyName>
     <Description>This package provides things like various traits and discovers like OuterLoop/ActiveIssue that are used by .NET test projects.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
     <IsPackable>true</IsPackable>
     <!-- Generate package during Build, rather than Pack, so that it can be used during Test. -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DevelopmentDependency>true</DevelopmentDependency>
+    <PackageType>Dependency</PackageType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="docs\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="xunit.extensibility.core" />
