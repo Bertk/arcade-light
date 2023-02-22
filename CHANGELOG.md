@@ -4,12 +4,26 @@
 
 - n.a.
 
+## [1.2.20] - 2023-02-22
+
+### Added
+
+- README.md for nuget package DotNet.ArcadeLight.Sdk
+- DotNet.XUnitExtensions nuget package
+- Unit tests LocateDotNetTests, SingleErrorTests, LocateDotNetVerify, CheckRequiredDotNetVersionTests, CompareVersionsTests
+
+### Changed
+
+- removed unused classes SetCorFlags, SaveItems, Unsign, ExponentialRetry, ZipArchiveManager
+
 ## [1.1.15] - 2023-01-26
+
 ### Added
 
 - Documentation
   - CHANGELOG.md
   - binary log viewer information (hints only)
+
 ### Changed
 
 
