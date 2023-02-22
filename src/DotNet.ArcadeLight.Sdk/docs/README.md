@@ -19,17 +19,23 @@ Lightweight package of dotnet Arcade (does not use Microsoft proprietary tooling
 }
 ```
 
-#### 2) Add line `<Import Project="Sdk.props" ...\>` in Directory.Build.props
+#### 2) create `nuget.config` file with a source for the DotNet.ArcadeLight.Sdk nuget package
+
+#### 3) Add lines in Directory.Build.props
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+
+  <PropertyGroup>
+      <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
   ...
 <\Project>
 ```
 
-#### 3) Add line `<Import Project="Sdk.targets" ...\>` in Directory.build.targets
+#### 4) Add line in Directory.build.targets
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -39,21 +45,35 @@ Lightweight package of dotnet Arcade (does not use Microsoft proprietary tooling
 <\Project>
 ```
 
-#### 4) Copy `eng\commonlight` from Arcade-light into repo.
+#### 5) Add lines in Directory.Packages.props
 
-#### 5) Add the Versions.props file to your eng\ folder
+```xml
+<Project>
+  <PropertyGroup>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
 
-#### 6) copy `version.json` to repository root folder
+  <ItemGroup>
+    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.5.119" />
+  </ItemGroup>
+  ...
+<\Project>
+```
 
-#### 7) create `nuget.config` file with a source for the DotNet.ArcadeLight.Sdk nuget package
+#### 6) Copy `eng\commonlight` from Arcade-light into repo.
 
-#### 8) optionally copy the scripts for `restore`, `build` and `test` to repository root folder
+#### 7) Add the Versions.props file to your eng\ folder
+
+#### 8) copy `version.json` to repository root folder
+
+
+#### 9) optionally copy the scripts for `restore`, `build` and `test` to repository root folder
 
 ### Use ArcadeLight with command shell or Visual Studio
 
-```
-> build
-> test
+```shell
+build
+test
 ```
 
 ## Related documentation
