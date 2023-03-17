@@ -2,7 +2,19 @@
 
 ## [Unreleased]
 
-- n.a.
+- update dependencies
+  - dotnet-reportgenerator-globaltool from 5.1.18 to 5.1.19
+  - SonarAnalyzer.CSharp from 8.53.0.62665 to 8.54.0.64047
+  - Microsoft.Build from 17.4.0 to 17.5.0
+  - Microsoft.Build.Framework from 17.4.0 to 17.5.0
+  - Microsoft.Build.Tasks.Core from 17.4.0 to 17.5.0
+  - Microsoft.Build.Utilities.Core from 17.4.0 to 17.5.0
+  - Microsoft.NET.StringTools from 17.4.0 to 17.5.0
+  - Newtonsoft.Json from 13.0.2 to 13.0.3
+  - NuGet.Versioning from 6.4.0 to 6.5.0
+  - NuGet.Frameworks from 6.4.0 to 6.5.0
+  - NUnit3TestAdapter from 4.3.1 to 4.4.2
+  - System.Reflection.Metadata from 7.0.0 to 7.0.1
 
 ## [1.2.20] - 2023-02-22
 
