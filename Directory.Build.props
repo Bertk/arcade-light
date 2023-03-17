@@ -44,6 +44,7 @@
     <Authors>Bert</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>dotnet;unittest;msbuild;sdk;mstest;nunit;xunit;build tools</PackageTags>
     <IncludeSource>false</IncludeSource>
     <!-- Optional: A URL for the project homepage or source repository.-->
     <PackageProjectUrl>https://github.com/Bertk/arcade-light</PackageProjectUrl>
