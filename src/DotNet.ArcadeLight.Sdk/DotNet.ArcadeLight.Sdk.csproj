@@ -14,7 +14,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
     <Description>Common toolset for repositories</Description>
-    <PackageTags>Arcade Build Repository Toolset MSBuild SDK</PackageTags>
+    <PackageTags>dotnet;unittest;msbuild;sdk;mstest;nunit;xunit;build tools</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageType>MSBuildSdk</PackageType>
