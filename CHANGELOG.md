@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+- n.a.
+
+## [1.3.17] - 2023-03-18
+
+### Changed
+
+- update nuget package tags
 - update dependencies
   - dotnet-reportgenerator-globaltool from 5.1.18 to 5.1.19
   - SonarAnalyzer.CSharp from 8.53.0.62665 to 8.54.0.64047
