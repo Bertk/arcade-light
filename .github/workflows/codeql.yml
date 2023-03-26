@@ -61,9 +61,12 @@ jobs:
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
+    - name: Restore dependencies
+      run: dotnet restore
+
     - run: |
         echo "Run, Build Application using script"
-        ./eng/commonlight/build.sh --build --restore
+        ./eng/commonlight/build.sh --build
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
