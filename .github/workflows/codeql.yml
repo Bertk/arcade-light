@@ -20,9 +20,6 @@ on:
   schedule:
     - cron: '23 17 * * 1'
 
-env:
-  NUGET_AUTH_TOKEN: ${{secrets.AZURE_DEVOPS_TOKEN}}
-
 jobs:
   analyze:
     name: Analyze
@@ -56,6 +53,13 @@ jobs:
 
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
+
+    - name: Setup dotnet 7.0
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
     - run: |
         echo "Run, Build Application using script"
