@@ -89,7 +89,7 @@ jobs:
         uses: irongut/CodeCoverageSummary@v1.3.0
         if: matrix.os  == 'ubuntu-latest'
         with:
-          filename: coverage/**/coverage.cobertura.xml
+          filename: artifacts/TestResults/**/coverage.cobertura.xml
           badge: true
           format: 'markdown'
           output: 'both'
