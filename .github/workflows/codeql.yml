@@ -21,7 +21,7 @@ on:
     - cron: '23 17 * * 1'
 
 env:
-  NUGET_AUTH_TOKEN=${{secrets.AZURE_DEVOPS_TOKEN}}
+  NUGET_AUTH_TOKEN: ${{secrets.AZURE_DEVOPS_TOKEN}}
 
 jobs:
   analyze:
