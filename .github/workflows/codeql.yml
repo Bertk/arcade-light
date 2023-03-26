@@ -21,7 +21,7 @@ on:
     - cron: '23 17 * * 1'
 
 env:
-  AZURE_ARTIFACTS_FEED_URL: https://pkgs.dev.azure.com/bertk0374/_packaging/public/nuget/v3/index.json
+  NUGET_AUTH_TOKEN=${{secrets.AZURE_DEVOPS_TOKEN}}
 
 jobs:
   analyze:
@@ -57,11 +57,8 @@ jobs:
         # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-
     - run: |
         echo "Run, Build Application using script"
-        echo "NUGET_AUTH_TOKEN=secrets.AZURE_DEVOPS_TOKEN">> $GITHUB_ENV
-        echo "source-url=env.AZURE_ARTIFACTS_FEED_URL">> $GITHUB_ENV
         ./eng/commonlight/build.sh --build --restore
 
     - name: Perform CodeQL Analysis
