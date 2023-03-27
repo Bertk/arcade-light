@@ -98,10 +98,10 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           recreate: true
-          path: ./artifacts/CoverageReport/Summary.md
+          path: ./artifacts/CoverageReport/SummaryGithub.md
 
       - name: Write to Job Summary
-        run: cat ./artifacts/CoverageReport/Summary.md >> $GITHUB_STEP_SUMMARY
+        run: cat ./artifacts/CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
 
       - name: Upload coverage report artifact
         uses: actions/upload-artifact@v2.2.3
