@@ -88,7 +88,7 @@ jobs:
       - name: ReportGenerator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.1.19
         with:
-          reports: artifacts/TestResults/**/coverage.cobertura.xml
+          reports: ./artifacts/TestResults/**/coverage.cobertura.xml
           assemblyfilters: -xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing
           targetdir: ./artifacts/CoverageReport
           reporttypes: HtmlInline;Cobertura;MarkdownSummaryGithub
@@ -104,7 +104,7 @@ jobs:
         run: cat ./artifacts/CoverageReport/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
 
       - name: Upload coverage report artifact
-        uses: actions/upload-artifact@v2.2.3
+        uses: actions/upload-artifact@v3
         with:
           name: CoverageReport # Artifact name        
           path: ./artifacts/CoverageReport # Directory containing files to upload
