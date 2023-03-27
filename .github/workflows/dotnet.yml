@@ -84,6 +84,12 @@ jobs:
       - run: |
           echo "Run, Build Application using script"
           ./eng/commonlight/build.sh --build --restore --test
+        if: matrix.os  == 'ubuntu-latest'
+
+      - run: |
+          echo "Run, Build Application using script"
+          ./eng/commonlight/build.ps1 -build -restore -test
+        if: matrix.os  == 'windows-latest'
 
       - name: ReportGenerator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.1.19
