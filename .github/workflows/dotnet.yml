@@ -88,7 +88,7 @@ jobs:
       - name: ReportGenerator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.1.19
         with:
-          reports: coverage.cobertura.xml
+          reports: artifacts/TestResults/**/coverage.cobertura.xml
           assemblyfilters: -xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing
           targetdir: ./artifacts/CoverageReport
           reporttypes: HtmlInline;Cobertura;MarkdownSummaryGithub
