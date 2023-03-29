@@ -1,5 +1,5 @@
 using DotNetDev.ArcadeLight.Test.Common;
-using DotNetDev.ArcadeLight.Sdk.src;
+using DotNetDev.ArcadeLight.Sdk;
 using Microsoft.Build.Framework;
 using Moq;
 using System;

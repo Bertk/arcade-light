@@ -4,7 +4,7 @@
 using System;
 using System.IO;
 using DotNetDev.ArcadeLight.Test.Common;
-using DotNetDev.ArcadeLight.Sdk.src;
+using DotNetDev.ArcadeLight.Sdk;
 using Xunit;
 using Xunit.Abstractions;
 

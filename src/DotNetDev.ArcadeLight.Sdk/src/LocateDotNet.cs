@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Framework;
 
-namespace DotNetDev.ArcadeLight.Sdk.src
+namespace DotNetDev.ArcadeLight.Sdk
 {
   public class LocateDotNet : Microsoft.Build.Utilities.Task
   {

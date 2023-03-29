@@ -8,7 +8,7 @@ using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace DotNetDev.ArcadeLight.Sdk.src
+namespace DotNetDev.ArcadeLight.Sdk
 {
   /// <summary>
   /// Checks that the content of two license files is the same modulo line breaks, leading and trailing whitespace.

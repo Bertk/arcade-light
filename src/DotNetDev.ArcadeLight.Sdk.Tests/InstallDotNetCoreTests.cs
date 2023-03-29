@@ -14,7 +14,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
   using System.Reflection;
   using System.Linq;
   using Xunit.Sdk;
-  using DotNetDev.ArcadeLight.Sdk.src;
+  using DotNetDev.ArcadeLight.Sdk;
 
   public class InstallDotNetCoreTests
   {

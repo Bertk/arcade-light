@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 
-namespace DotNetDev.ArcadeLight.Sdk.src
+namespace DotNetDev.ArcadeLight.Sdk
 {
 
   public class InstallDotNetCore : Task

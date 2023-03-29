@@ -12,7 +12,7 @@ using System.Xml.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace DotNetDev.ArcadeLight.Sdk.src
+namespace DotNetDev.ArcadeLight.Sdk
 {
   public sealed class GenerateResxSource : Task
   {
