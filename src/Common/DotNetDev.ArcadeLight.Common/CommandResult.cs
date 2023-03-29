@@ -4,16 +4,6 @@
 using System;
 using System.Text;
 using System.Diagnostics;
-/* Unmerged change from project 'DotNetDev.ArcadeLight.Common (net7.0)'
-Before:
-namespace DotNet.ArcadeLight.Common
-After:
-namespace DotNet.ArcadeLight.Common;
-using DotNetDev.ArcadeLight.Common;
-
-namespace DotNetDev.ArcadeLight.Common
-*/
-
 
 namespace DotNetDev.ArcadeLight.Common
 {

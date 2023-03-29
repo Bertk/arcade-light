@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="Sdk.targets" Sdk="DotNet.ArcadeLight.Sdk" />
+  <Import Project="Sdk.targets" Sdk="DotNetDev.ArcadeLight.Sdk" />
   <Target Name="VSTestIfTestProject">
     <CallTarget Targets="VSTest" Condition="'$(IsTestProject)' == 'true'" />
   </Target>

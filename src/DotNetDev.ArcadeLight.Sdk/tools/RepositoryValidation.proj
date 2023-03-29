@@ -4,8 +4,8 @@
 
   <Import Project="BuildTasks.props" />
 
-  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.ValidateLicense" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
-  <UsingTask TaskName="DotNet.ArcadeLight.Sdk.GetLicenseFilePath" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNetDev.ArcadeLight.Sdk.ValidateLicense" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
+  <UsingTask TaskName="DotNetDev.ArcadeLight.Sdk.GetLicenseFilePath" AssemblyFile="$(ArcadeSdkBuildTasksAssembly)" />
 
   <Target Name="Validate" DependsOnTargets="_ValidateLicenseFile" >
     <Message Text="Repository validated." Importance="low" />
@@ -26,11 +26,11 @@
     <Error Text="Unknown license expression: '$(_LicenseExpression)'."
            Condition="!Exists('$(_ExpectedLicensePath)')"/>
 
-    <DotNet.ArcadeLight.Sdk.GetLicenseFilePath Directory="$(RepoRoot)">
+    <DotNetDev.ArcadeLight.Sdk.GetLicenseFilePath Directory="$(RepoRoot)">
       <Output TaskParameter="Path" PropertyName="_RepositoryLicensePath"/>
-    </DotNet.ArcadeLight.Sdk.GetLicenseFilePath>
+    </DotNetDev.ArcadeLight.Sdk.GetLicenseFilePath>
 
-      <DotNet.ArcadeLight.Sdk.ValidateLicense LicensePath="$(_RepositoryLicensePath)" 
+      <DotNetDev.ArcadeLight.Sdk.ValidateLicense LicensePath="$(_RepositoryLicensePath)" 
                                                  ExpectedLicensePath="$(_ExpectedLicensePath)" />
   </Target>
 
