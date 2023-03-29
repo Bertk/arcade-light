@@ -371,4 +371,4 @@ babel-webpack/
 
 .dotnet/
 *bom.xml
-/nuget.config
+nuget.config
