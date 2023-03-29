@@ -14,7 +14,7 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
     "dotnet": "7.0.202"
   },
   "msbuild-sdks": {
-    "DotNetDev.ArcadeLight.Sdk": "1.4.12"
+    "DotNetDev.ArcadeLight.Sdk": "1.4.14"
   }
 }
 ```
