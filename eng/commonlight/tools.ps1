@@ -646,7 +646,7 @@ function InitializeToolset() {
 
   $nugetCache = GetNuGetPackageCachePath
 
-  $toolsetVersion = $GlobalJson.'msbuild-sdks'.'DotNet.ArcadeLight.Sdk'
+  $toolsetVersion = $GlobalJson.'msbuild-sdks'.'DotNetDev.ArcadeLight.Sdk'
   $toolsetLocationFile = Join-Path $ToolsetDir "$toolsetVersion.txt"
 
   if (Test-Path $toolsetLocationFile) {
@@ -666,7 +666,7 @@ function InitializeToolset() {
   $proj = Join-Path $ToolsetDir 'restore.proj'
   $bl = if ($binaryLog) { '/bl:' + (Join-Path $LogDir 'ToolsetRestore.binlog') } else { '' }
 
-  '<Project Sdk="DotNet.ArcadeLight.Sdk"/>' | Set-Content $proj
+  '<Project Sdk="DotNetDev.ArcadeLight.Sdk"/>' | Set-Content $proj
 
   MSBuild-Core $proj $bl /t:__WriteToolsetLocation /clp:ErrorsOnly`;NoSummary /p:__ToolsetLocationOutputFile=$toolsetLocationFile
 
@@ -725,10 +725,10 @@ function MSBuild() {
     $basePath = Split-Path -parent $toolsetBuildProject
     $possiblePaths = @(
       # new scripts need to work with old packages, so we need to look for the old names/versions
-      (Join-Path $basePath (Join-Path $buildTool.Framework 'DotNet.ArcadeLight.Logging.dll')),
-      (Join-Path $basePath (Join-Path $buildTool.Framework 'DotNet.ArcadeLight.Sdk.dll')),
-      (Join-Path $basePath (Join-Path net6.0 'DotNet.ArcadeLight.Logging.dll')),
-      (Join-Path $basePath (Join-Path net6.0 'DotNet.ArcadeLight.Sdk.dll'))
+      (Join-Path $basePath (Join-Path $buildTool.Framework 'DotNetDev.ArcadeLight.Logging.dll')),
+      (Join-Path $basePath (Join-Path $buildTool.Framework 'DotNetDev.ArcadeLight.Sdk.dll')),
+      (Join-Path $basePath (Join-Path net6.0 'DotNetDev.ArcadeLight.Logging.dll')),
+      (Join-Path $basePath (Join-Path net6.0 'DotNetDev.ArcadeLight.Sdk.dll'))
     )
     $selectedPath = $null
     foreach ($path in $possiblePaths) {

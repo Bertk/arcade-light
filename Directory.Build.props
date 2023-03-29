@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="Sdk.props" Sdk="DotNet.ArcadeLight.Sdk" />
+  <Import Project="Sdk.props" Sdk="DotNetDev.ArcadeLight.Sdk" />
   <Import Project="$(RepositoryEngineeringDir)TargetFrameworkDefaults.props" />
   <PropertyGroup>
 
@@ -30,7 +30,7 @@
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
