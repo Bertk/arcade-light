@@ -4,17 +4,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace DotNet.ArcadeLight.Sdk.Tests
+namespace DotNetDev.ArcadeLight.Sdk.Tests.Utilities
 {
-    public static class CollectionExtensions
+  public static class CollectionExtensions
+  {
+    public static Collection<T> AddRange<T>(this Collection<T> collection, IEnumerable<T> items)
     {
-        public static Collection<T> AddRange<T>(this Collection<T> collection, IEnumerable<T> items)
-        {
-            foreach(var item in items)
-            {
-                collection.Add(item);
-            }
-            return collection;
-        }
+      foreach (var item in items)
+      {
+        collection.Add(item);
+      }
+      return collection;
     }
+  }
 }

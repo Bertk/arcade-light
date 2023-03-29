@@ -5,40 +5,40 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using NuGet.Versioning;
 
-namespace DotNet.ArcadeLight.Sdk
+namespace DotNetDev.ArcadeLight.Sdk.src
 {
-    public class CompareVersions : Microsoft.Build.Utilities.Task
+  public class CompareVersions : Task
+  {
+    [Required]
+    public string Left { get; set; }
+
+    [Required]
+    public string Right { get; set; }
+
+    [Output]
+    public int Result { get; set; }
+
+    public override bool Execute()
     {
-        [Required]
-        public string Left { get; set; }
-
-        [Required]
-        public string Right { get; set; }
-
-        [Output]
-        public int Result { get; set; }
-
-        public override bool Execute()
-        {
-            ExecuteImpl();
-            return !Log.HasLoggedErrors;
-        }
-
-        private void ExecuteImpl()
-        {
-            if (!SemanticVersion.TryParse(Left, out var left))
-            {
-                Log.LogError($"Invalid version: '{Left}'");
-                return;
-            }
-
-            if (!SemanticVersion.TryParse(Right, out var right))
-            {
-                Log.LogError($"Invalid version: '{Right}'");
-                return;
-            }
-
-            Result = left.CompareTo(right);
-        }
+      ExecuteImpl();
+      return !Log.HasLoggedErrors;
     }
+
+    private void ExecuteImpl()
+    {
+      if (!SemanticVersion.TryParse(Left, out var left))
+      {
+        Log.LogError($"Invalid version: '{Left}'");
+        return;
+      }
+
+      if (!SemanticVersion.TryParse(Right, out var right))
+      {
+        Log.LogError($"Invalid version: '{Right}'");
+        return;
+      }
+
+      Result = left.CompareTo(right);
+    }
+  }
 }

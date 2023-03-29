@@ -5,15 +5,15 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DotNet.ArcadeLight.Common
+namespace DotNetDev.ArcadeLight.Common
 {
-    public interface IRetryHandler
-    {
-        Task<bool> RunAsync(
-            Func<int, Task<bool>> actionSuccessfulAsync);
+  public interface IRetryHandler
+  {
+    Task<bool> RunAsync(
+        Func<int, Task<bool>> actionSuccessfulAsync);
 
-        Task<bool> RunAsync(
-            Func<int, Task<bool>> actionSuccessfulAsync,
-            CancellationToken cancellationToken);
-    }
+    Task<bool> RunAsync(
+        Func<int, Task<bool>> actionSuccessfulAsync,
+        CancellationToken cancellationToken);
+  }
 }

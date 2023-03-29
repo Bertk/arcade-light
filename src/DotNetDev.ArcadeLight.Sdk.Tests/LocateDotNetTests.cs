@@ -1,4 +1,5 @@
-using DotNet.ArcadeLight.Test.Common;
+using DotNetDev.ArcadeLight.Test.Common;
+using DotNetDev.ArcadeLight.Sdk.src;
 using Microsoft.Build.Framework;
 using Moq;
 using System;
@@ -7,7 +8,7 @@ using System.IO;
 using System.Reflection;
 using Xunit;
 
-namespace DotNet.ArcadeLight.Sdk.Tests
+namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
   public class LocateDotNetTests
   {

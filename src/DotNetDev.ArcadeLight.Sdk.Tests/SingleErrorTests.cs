@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace DotNet.ArcadeLight.Sdk.Tests
+namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
   public class SingleErrorTests
   {

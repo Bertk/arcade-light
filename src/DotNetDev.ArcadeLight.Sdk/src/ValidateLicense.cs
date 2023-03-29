@@ -8,72 +8,72 @@ using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace DotNet.ArcadeLight.Sdk
+namespace DotNetDev.ArcadeLight.Sdk.src
 {
+  /// <summary>
+  /// Checks that the content of two license files is the same modulo line breaks, leading and trailing whitespace.
+  /// </summary>
+  public class ValidateLicense : Task
+  {
     /// <summary>
-    /// Checks that the content of two license files is the same modulo line breaks, leading and trailing whitespace.
+    /// Full path to the file that contains the license text to be validated.
     /// </summary>
-    public class ValidateLicense : Microsoft.Build.Utilities.Task
+    [Required]
+    public string LicensePath { get; set; }
+
+    /// <summary>
+    /// Full path to the file that contains expected license text.
+    /// </summary>
+    [Required]
+    public string ExpectedLicensePath { get; set; }
+
+    public override bool Execute()
     {
-        /// <summary>
-        /// Full path to the file that contains the license text to be validated.
-        /// </summary>
-        [Required]
-        public string LicensePath { get; set; }
-
-        /// <summary>
-        /// Full path to the file that contains expected license text.
-        /// </summary>
-        [Required]
-        public string ExpectedLicensePath { get; set; }
-
-        public override bool Execute()
-        {
-            ExecuteImpl();
-            return !Log.HasLoggedErrors;
-        }
-
-        private void ExecuteImpl()
-        {
-            var actualLines = File.ReadAllLines(LicensePath, Encoding.UTF8);
-            var expectedLines = File.ReadAllLines(ExpectedLicensePath, Encoding.UTF8);
-
-            if (!LinesEqual(actualLines, expectedLines))
-            {
-                Log.LogError($"License file content '{LicensePath}' doesn't match the expected license '{ExpectedLicensePath}'.");
-            }
-        }
-
-        internal static bool LinesEqual(IEnumerable<string> actual, IEnumerable<string> expected)
-        {
-            IEnumerable<string> normalize(IEnumerable<string> lines)
-                => from line in lines
-                   where !string.IsNullOrWhiteSpace(line)
-                   select line.Trim();
-
-            var normalizedActual = normalize(actual).ToArray();
-            var normalizedExpected = normalize(expected).ToArray();
-
-            if (normalizedActual.Length != normalizedExpected.Length)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < normalizedActual.Length; i++)
-            {
-                if (normalizedExpected[i] == "*ignore-line*")
-                {
-                    continue;
-                }
-
-                if (normalizedActual[i] != normalizedExpected[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
+      ExecuteImpl();
+      return !Log.HasLoggedErrors;
     }
+
+    private void ExecuteImpl()
+    {
+      var actualLines = File.ReadAllLines(LicensePath, Encoding.UTF8);
+      var expectedLines = File.ReadAllLines(ExpectedLicensePath, Encoding.UTF8);
+
+      if (!LinesEqual(actualLines, expectedLines))
+      {
+        Log.LogError($"License file content '{LicensePath}' doesn't match the expected license '{ExpectedLicensePath}'.");
+      }
+    }
+
+    internal static bool LinesEqual(IEnumerable<string> actual, IEnumerable<string> expected)
+    {
+      IEnumerable<string> normalize(IEnumerable<string> lines)
+          => from line in lines
+             where !string.IsNullOrWhiteSpace(line)
+             select line.Trim();
+
+      var normalizedActual = normalize(actual).ToArray();
+      var normalizedExpected = normalize(expected).ToArray();
+
+      if (normalizedActual.Length != normalizedExpected.Length)
+      {
+        return false;
+      }
+
+      for (int i = 0; i < normalizedActual.Length; i++)
+      {
+        if (normalizedExpected[i] == "*ignore-line*")
+        {
+          continue;
+        }
+
+        if (normalizedActual[i] != normalizedExpected[i])
+        {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+  }
 }

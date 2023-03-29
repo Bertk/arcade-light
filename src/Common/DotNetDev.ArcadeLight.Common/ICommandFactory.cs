@@ -3,12 +3,12 @@
 
 using System.Collections.Generic;
 
-namespace DotNet.ArcadeLight.Common
+namespace DotNetDev.ArcadeLight.Common
 {
-    public interface ICommandFactory
-    {
-        ICommand Create(string executable, IEnumerable<string> args);
-        ICommand Create(string executable, params string[] args);
-        ICommand Create(string executable, string args);
-    }
+  public interface ICommandFactory
+  {
+    ICommand Create(string executable, IEnumerable<string> args);
+    ICommand Create(string executable, params string[] args);
+    ICommand Create(string executable, string args);
+  }
 }

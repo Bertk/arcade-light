@@ -5,7 +5,7 @@
     <LangVersion>preview</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ExcludeFromSourceBuild>false</ExcludeFromSourceBuild>
-    <PackageId>DotNet.ArcadeLight.Sdk</PackageId>
+    <PackageId>DotNetDev.ArcadeLight.Sdk</PackageId>
     <Description>Lightweight package of dotnet Arcade (does not use Microsoft proprietary tooling)</Description>
     <PackageReleaseNotes>https://github.com/Bertk/arcade-light/blob/main/CHANGELOG.md</PackageReleaseNotes>
 
@@ -47,7 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="DotNet.ArcadeLight.Sdk.Tests" />
+    <InternalsVisibleTo Include="DotNetDev.ArcadeLight.Sdk.Tests" />
   </ItemGroup>
 
   <ItemGroup>

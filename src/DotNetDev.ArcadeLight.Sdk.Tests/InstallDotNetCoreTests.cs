@@ -1,4 +1,4 @@
-namespace DotNet.ArcadeLight.Sdk.Tests
+namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
   using System;
 
@@ -6,7 +6,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
 
   using Xunit;
 
-  using DotNet.ArcadeLight.Test.Common;
+  using DotNetDev.ArcadeLight.Test.Common;
   using System.IO;
   using Microsoft.Build.Framework;
   using Moq;
@@ -14,6 +14,7 @@ namespace DotNet.ArcadeLight.Sdk.Tests
   using System.Reflection;
   using System.Linq;
   using Xunit.Sdk;
+  using DotNetDev.ArcadeLight.Sdk.src;
 
   public class InstallDotNetCoreTests
   {
@@ -37,12 +38,12 @@ namespace DotNet.ArcadeLight.Sdk.Tests
     public void InstallDotNetCoreVerify()
     {
       //Arrange
-      InstallDotNetCore customTask = new InstallDotNetCore ();
+      InstallDotNetCore customTask = new InstallDotNetCore();
       customTask.GlobalJsonPath = Path.GetFullPath(Path.Combine(projectRootDir, "global.json"));
       customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd"));
       customTask.BuildEngine = buildEngine.Object;
       //Act and Assert
-      var success = customTask.Execute ();
+      var success = customTask.Execute();
       Assert.True(success);
     }
 

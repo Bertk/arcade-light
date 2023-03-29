@@ -5,32 +5,32 @@ using System;
 using System.IO;
 using Xunit;
 
-namespace DotNet.ArcadeLight.Sdk.Tests
+namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
-    public class GetLicenseFilePathTests
+  public class GetLicenseFilePathTests
+  {
+    [Theory]
+    [InlineData("licenSe.TXT")]
+    [InlineData("license.md")]
+    [InlineData("LICENSE")]
+    public void GetLicenseFilePath(string licenseFileName)
     {
-        [Theory]
-        [InlineData("licenSe.TXT")]
-        [InlineData("license.md")]
-        [InlineData("LICENSE")]
-        public void GetLicenseFilePath(string licenseFileName)
-        {
-            var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-            Directory.CreateDirectory(dir);
-            var licensePath = Path.Combine(dir, licenseFileName);
+      var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+      Directory.CreateDirectory(dir);
+      var licensePath = Path.Combine(dir, licenseFileName);
 
-            File.WriteAllText(licensePath, "");
+      File.WriteAllText(licensePath, "");
 
-            var task = new GetLicenseFilePath()
-            {
-                Directory = dir
-            };
+      var task = new GetLicenseFilePath()
+      {
+        Directory = dir
+      };
 
-            bool result = task.Execute();
-            Assert.Equal(licensePath, task.Path);
-            Assert.True(result);
+      bool result = task.Execute();
+      Assert.Equal(licensePath, task.Path);
+      Assert.True(result);
 
-            Directory.Delete(dir, recursive: true);
-        }
+      Directory.Delete(dir, recursive: true);
     }
+  }
 }

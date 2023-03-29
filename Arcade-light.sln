@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C53DD924
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Sdk.Tests", "src\DotNetDev.ArcadeLight.Sdk.Tests\DotNetDev.ArcadeLight.Sdk.Tests.csproj", "{BA4250FD-9258-4469-A16D-48A0CAF5A2F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.Internal.DependencyInjection.Testing", "src\DotNetDev.Internal.DependencyInjection.Testing\DotNetDev.Internal.DependencyInjection.Testing.csproj", "{5B75BEBE-58A8-409D-8069-5210E87AA99A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Internal.DependencyInjection.Testing", "src\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj", "{5B75BEBE-58A8-409D-8069-5210E87AA99A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Logging", "src\DotNetDev.ArcadeLight.Logging\DotNetDev.ArcadeLight.Logging.csproj", "{73496668-336D-4D43-9093-C17862E78BCE}"
 EndProject

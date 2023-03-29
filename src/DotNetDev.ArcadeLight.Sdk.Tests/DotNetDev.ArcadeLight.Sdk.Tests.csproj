@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" />  
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="FluentAssertions" />
     <PackageReference Include="Moq" />
     <PackageReference Include="Newtonsoft.Json" />
@@ -107,7 +107,7 @@
     <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Test.Common\DotNetDev.ArcadeLight.Test.Common.csproj" />
     <ProjectReference Include="..\DotNet.XUnitExtensions\DotNet.XUnitExtensions.csproj" />
     <ProjectReference Include="..\DotNetDev.ArcadeLight.Sdk\DotNetDev.ArcadeLight.Sdk.csproj" />
-    <ProjectReference Include="..\DotNetDev.Internal.DependencyInjection.Testing\DotNetDev.Internal.DependencyInjection.Testing.csproj" />
+    <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
   </ItemGroup>
 
 </Project>
