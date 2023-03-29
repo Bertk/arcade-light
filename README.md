@@ -11,6 +11,6 @@ Arcade-light is inspired from dotnet/arcade but minimized and without Microsoft 
 
 ## GitHub actions
 
-![GitHub Workflow .NET Status (manual trigger)](https://img.shields.io/github/actions/workflow/status/Bertk/arcade-light/dotnet.yml)
+![GitHub Workflow .NET Status (manual trigger)](https://img.shields.io/github/actions/workflow/status/Bertk/arcade-light/dotnet.yml?label=.NET)
 
-![GitHub Workflow CodeQL Status](https://img.shields.io/github/actions/workflow/status/Bertk/arcade-light/codeql.yml)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Bertk/arcade-light/dotnet.yml?label=CodeQL)
