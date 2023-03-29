@@ -4,6 +4,14 @@
 
 - n.a.
 
+## [1.4.x] - 2023-03-29
+
+### Changed
+
+- activate CodeQL
+- add workflow for .NET (manual build)
+- rename package ID prefix (prepare upload to nuget.org)
+
 ## [1.3.17] - 2023-03-18
 
 ### Changed

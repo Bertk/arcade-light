@@ -14,7 +14,7 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
     "dotnet": "7.0.202"
   },
   "msbuild-sdks": {
-    "DotNetDev.ArcadeLight.Sdk": "1.1.16"
+    "DotNetDev.ArcadeLight.Sdk": "1.4.12"
   }
 }
 ```
@@ -26,7 +26,7 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <Import Project="Sdk.props" Sdk="DotNet.ArcadeLight.Sdk" />
+  <Import Project="Sdk.props" Sdk="DotNetDev.ArcadeLight.Sdk" />
 
   <PropertyGroup>
       <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
@@ -40,7 +40,7 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <Import Project="Sdk.targets" Sdk="DotNet.ArcadeLight.Sdk" />
+  <Import Project="Sdk.targets" Sdk="DotNetDev.ArcadeLight.Sdk" />
   ...
 <\Project>
 ```
@@ -65,7 +65,6 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 #### 7) Add the Versions.props file to your eng\ folder
 
 #### 8) copy `version.json` to repository root folder
-
 
 #### 9) optionally copy the scripts for `restore`, `build` and `test` to repository root folder
 
