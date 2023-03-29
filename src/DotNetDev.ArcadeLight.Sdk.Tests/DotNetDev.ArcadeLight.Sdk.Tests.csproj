@@ -72,7 +72,7 @@
               "dotnet": "$(NETCoreSdkVersion)"
           },
           "msbuild-sdks": {
-              "DotNet.ArcadeLight.Sdk": "$(PackageVersion)"
+              "DotNetDev.ArcadeLight.Sdk": "$(PackageVersion)"
           }
           }
       </GlobalJsonContent>
@@ -102,12 +102,12 @@
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
-    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
-    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Test.Common\DotNet.ArcadeLight.Test.Common.csproj" />
+    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
+    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
+    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Test.Common\DotNetDev.ArcadeLight.Test.Common.csproj" />
     <ProjectReference Include="..\DotNet.XUnitExtensions\DotNet.XUnitExtensions.csproj" />
-    <ProjectReference Include="..\DotNet.ArcadeLight.Sdk\DotNet.ArcadeLight.Sdk.csproj" />
-    <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
+    <ProjectReference Include="..\DotNetDev.ArcadeLight.Sdk\DotNetDev.ArcadeLight.Sdk.csproj" />
+    <ProjectReference Include="..\DotNetDev.Internal.DependencyInjection.Testing\DotNetDev.Internal.DependencyInjection.Testing.csproj" />
   </ItemGroup>
 
 </Project>

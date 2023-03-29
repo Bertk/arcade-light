@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
+    <ProjectReference Include="..\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
   </ItemGroup>
 
 </Project>

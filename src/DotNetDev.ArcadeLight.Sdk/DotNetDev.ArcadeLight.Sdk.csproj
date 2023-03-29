@@ -71,8 +71,8 @@
   <!-- </ItemGroup> -->
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj" />
-    <ProjectReference Include="..\DotNet.ArcadeLight.Logging\DotNet.ArcadeLight.Logging.csproj" />
+    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
+    <ProjectReference Include="..\DotNetDev.ArcadeLight.Logging\DotNetDev.ArcadeLight.Logging.csproj" />
   </ItemGroup>
 
   <Target Name="_GenerateSdkVersionFile" Inputs="$(MSBuildAllProjects)" Outputs="$(_GeneratedVersionFilePath)" BeforeTargets="GenerateNuSpec">

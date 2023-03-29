@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.ArcadeLight.Sdk", "src\DotNet.ArcadeLight.Sdk\DotNet.ArcadeLight.Sdk.csproj", "{747A5C75-6069-4C45-8049-AEAA1D864105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Sdk", "src\DotNetDev.ArcadeLight.Sdk\DotNetDev.ArcadeLight.Sdk.csproj", "{747A5C75-6069-4C45-8049-AEAA1D864105}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C53DD924-C212-49EA-9BC4-1827421361EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.ArcadeLight.Sdk.Tests", "src\DotNet.ArcadeLight.Sdk.Tests\DotNet.ArcadeLight.Sdk.Tests.csproj", "{BA4250FD-9258-4469-A16D-48A0CAF5A2F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Sdk.Tests", "src\DotNetDev.ArcadeLight.Sdk.Tests\DotNetDev.ArcadeLight.Sdk.Tests.csproj", "{BA4250FD-9258-4469-A16D-48A0CAF5A2F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Internal.DependencyInjection.Testing", "src\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj", "{5B75BEBE-58A8-409D-8069-5210E87AA99A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.Internal.DependencyInjection.Testing", "src\DotNetDev.Internal.DependencyInjection.Testing\DotNetDev.Internal.DependencyInjection.Testing.csproj", "{5B75BEBE-58A8-409D-8069-5210E87AA99A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.ArcadeLight.Logging", "src\DotNet.ArcadeLight.Logging\DotNet.ArcadeLight.Logging.csproj", "{73496668-336D-4D43-9093-C17862E78BCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Logging", "src\DotNetDev.ArcadeLight.Logging\DotNetDev.ArcadeLight.Logging.csproj", "{73496668-336D-4D43-9093-C17862E78BCE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.ArcadeLight.Common", "src\Common\DotNet.ArcadeLight.Common\DotNet.ArcadeLight.Common.csproj", "{CE0834DF-707B-4998-8767-92E1478152AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Common", "src\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj", "{CE0834DF-707B-4998-8767-92E1478152AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.ArcadeLight.Test.Common", "src\Common\DotNet.ArcadeLight.Test.Common\DotNet.ArcadeLight.Test.Common.csproj", "{6CA09DC9-E654-4906-A977-1279F6EDC109}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Test.Common", "src\Common\DotNetDev.ArcadeLight.Test.Common\DotNetDev.ArcadeLight.Test.Common.csproj", "{6CA09DC9-E654-4906-A977-1279F6EDC109}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.ArcadeLight.Common.Tests", "src\Common\DotNet.ArcadeLight.Common.Tests\DotNet.ArcadeLight.Common.Tests.csproj", "{B5E9D9D8-59E0-49F8-9C3C-75138A2D452C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Common.Tests", "src\Common\DotNetDev.ArcadeLight.Common.Tests\DotNetDev.ArcadeLight.Common.Tests.csproj", "{B5E9D9D8-59E0-49F8-9C3C-75138A2D452C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5CFEC5E-6116-4AF3-B08E-B46360AB8711}"
 	ProjectSection(SolutionItems) = preProject

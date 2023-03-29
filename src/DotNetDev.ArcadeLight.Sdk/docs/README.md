@@ -1,6 +1,6 @@
 ## About
 
-Lightweight package of dotnet Arcade (does not use Microsoft proprietary tooling)
+Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without Microsoft proprietary tooling
 
 ## How to Use
 
@@ -11,22 +11,22 @@ Lightweight package of dotnet Arcade (does not use Microsoft proprietary tooling
 ```json
 {
   "tools": {
-    "dotnet": "7.0.103"
+    "dotnet": "7.0.202"
   },
   "msbuild-sdks": {
-    "DotNet.ArcadeLight.Sdk": "1.1.16"
+    "DotNetDev.ArcadeLight.Sdk": "1.1.16"
   }
 }
 ```
 
-#### 2) create `nuget.config` file with a source for the DotNet.ArcadeLight.Sdk nuget package
+#### 2) create `nuget.config` file with a source for the *DotNetDev.ArcadeLight.Sdk* nuget package
 
 #### 3) Add lines in Directory.Build.props
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+  <Import Project="Sdk.props" Sdk="DotNet.ArcadeLight.Sdk" />
 
   <PropertyGroup>
       <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
@@ -40,7 +40,7 @@ Lightweight package of dotnet Arcade (does not use Microsoft proprietary tooling
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+  <Import Project="Sdk.targets" Sdk="DotNet.ArcadeLight.Sdk" />
   ...
 <\Project>
 ```
