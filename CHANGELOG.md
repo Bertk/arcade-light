@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-- n.a.
+- add badges
 
 ## [1.4.14] - 2023-03-29
 
