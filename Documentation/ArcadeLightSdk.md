@@ -4,7 +4,6 @@ ArcadeLight SDK is a reduced version of Microsoft .NET Arcade SDK. It is a set o
 
 ArcadeLight SDK does not use additional, proprietary Microsoft tools.
 
-
 The goals are
 
 - tiny build SDK for .NET projects
@@ -24,7 +23,7 @@ The toolset has following requirements on the repository layout.
 
 ## Single build output
 
-All build outputs are located under a single directory called `artifacts`. 
+All build outputs are located under a single directory called `artifacts`.
 The ArcadeLight SDK defines the following output structure:
 
 ```text
@@ -92,7 +91,7 @@ ArcadeLight provides common build scripts in the [eng/commonlight](https://githu
 
 - eng/common/[build.ps1](https://github.com/Bertk/arcade-light/blob/main/eng/commonlight/build.ps1)|[build.sh](https://github.com/Bertk/arcade-light/blob/main/eng/commonlight/build.sh)
 
-  The scripts are designed to be used by repos that need a single `MSBuild` invocation to restore, build, package and test all projects in the repo. These scripts are thin wrappers calling into functions defined in `eng/common/tools.ps1|sh`. If the repository needs to run additional builds or commands it is recommended to create `eng/build.ps1|sh` scripts in the repository using `eng/common/build.ps1|sh` as a template and customize the implementation as necessary. These custom scripts should use common helpers and global variables defined in `eng/common/tools.ps1|sh` and provide command line switches that are a superset of the ones provided by `eng/common/build.ps1|sh`. 
+  The scripts are designed to be used by repos that need a single `MSBuild` invocation to restore, build, package and test all projects in the repo. These scripts are thin wrappers calling into functions defined in `eng/common/tools.ps1|sh`. If the repository needs to run additional builds or commands it is recommended to create `eng/build.ps1|sh` scripts in the repository using `eng/common/build.ps1|sh` as a template and customize the implementation as necessary. These custom scripts should use common helpers and global variables defined in `eng/common/tools.ps1|sh` and provide command line switches that are a superset of the ones provided by `eng/common/build.ps1|sh`.
 
 - eng/common/[tools.ps1](https://github.com/Bertk/arcade-light/blob/main/eng/commonlight/tools.ps1)|[tools.sh](https://github.com/Bertk/arcade-light/blob/main/eng/commonlight/tools.sh)
 
@@ -101,7 +100,7 @@ ArcadeLight provides common build scripts in the [eng/commonlight](https://githu
 - eng/common/[CIBuild.cmd](https://github.com/Bertk/arcade-light/blob/main/eng/commonlight/CIBuild.cmd)|[cibuild.sh](https://github.com/Bertk/arcade-light/blob/main/eng/commonlight/cibuild.sh)
 
   Repositories that use `eng/common/build.ps1|sh` (as opposed to a customized `eng/build.ps1|sh`) should use this build script for the main build step in their pipeline definition. Repositories with custom `eng/build.ps1|sh` should also add the corresponding `eng/CIBuild.cmd|cibuild.sh` for use in their pipeline definition.
-   
+
 Repos may also provide a few convenience build scripts in the repository root that dispatch to either `eng/common/build.ps1|sh` or `eng/build.ps1|sh` (if repo uses customized build scripts) but do not implement any logic:
 
 - [Build.cmd](https://github.com/Bertk/arcade-light/blob/main/Build.cmd) | [build.sh](https://github.com/Bertk/arcade-light/blob/main/build.sh) - default wrapper script for building and restoring the repo.
@@ -128,7 +127,7 @@ It is a common practice to specify properties applicable to all (most) projects 
 
 ```xml
 <Project>
-  <Import Project="Sdk.props" Sdk="DotNet.ArcadeLight.Sdk" />    
+  <Import Project="Sdk.props" Sdk="DotNetDev.ArcadeLight.Sdk" />    
   <PropertyGroup> 
     <!-- Public keys used by InternalsVisibleTo project items -->
     <MoqPublicKey>00240000048000009400...</MoqPublicKey> 
@@ -149,7 +148,7 @@ It is a common practice to specify properties applicable to all (most) projects 
 
 ```xml
 <Project>
-  <Import Project="Sdk.targets" Sdk="DotNet.ArcadeLight.Sdk" />
+  <Import Project="Sdk.targets" Sdk="DotNetDev.ArcadeLight.Sdk" />
 </Project>
 ```
 
@@ -249,16 +248,13 @@ optimizations by setting 'RestoreUsingNuGetTargets' to false.
 </Project>
 ```
 
-
-
 The toolset also defines default versions for various dependencies, such as XUnit, VSSDK, etc. These defaults can be overridden in the Versions.props file.
 
-See [DefaultVersions (legacy)](https://github.com/Bertk/arcade-light/blob/main/src/DotNet.ArcadeLight.Sdk/tools/DefaultVersions.props) for a list of *UsingTool* properties and default versions.
-
+See [DefaultVersions (legacy)](https://github.com/Bertk/arcade-light/blob/main/src/DotNetDev.ArcadeLight.Sdk/tools/DefaultVersions.props) for a list of *UsingTool* properties and default versions.
 
 ### /global.json
 
-`/global.json` file is present and specifies the version of the dotnet and `Microsoft.DotNet.Arcade.Sdk` SDKs.
+`/global.json` file is present and specifies the version of the dotnet and `DotNetDev.ArcadeLight.Sdk` SDKs.
 
 For example,
 
@@ -268,10 +264,11 @@ For example,
     "dotnet": "6.0.402"
   },
   "msbuild-sdks": {
-    "DotNet.ArcadeLight.Sdk": "0.1.6-beta"
+    "DotNetDev.ArcadeLight.Sdk": "1.4.14"
   }
 }
 ```
+
 Note: defining `runtimes` in your global.json will signal to ArcadeLight to install a local version of the SDK for the runtimes to use rather than depending on a matching global SDK.
 
 ### /NuGet.config
@@ -284,7 +281,7 @@ Note: defining `runtimes` in your global.json will signal to ArcadeLight to inst
   <packageSources>
     <clear />
     <!-- Feed to use to restore the ArcadeLight SDK from -->  
-    <add key="dotnet-eng" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json" />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
     <!-- Feeds to use to restore dependent packages from -->  
     <add key="my-feed" value="https://dotnet.myget.org/F/myfeed/api/v3/index.json" />
   </packageSources>
@@ -307,7 +304,7 @@ See [NuGet documentation](https://docs.microsoft.com/en-us/nuget/reference/msbui
 
 ### Source Projects
 
-Projects are located under `src` directory under root repo, in any subdirectory structure appropriate for the repo. 
+Projects are located under `src` directory under root repo, in any subdirectory structure appropriate for the repo.
 
 Projects shall use `Microsoft.NET.Sdk` SDK like so:
 
@@ -319,8 +316,8 @@ Projects shall use `Microsoft.NET.Sdk` SDK like so:
 
 ### Project name conventions
 
-- Unit test project file names shall end with `.UnitTests` or `.Tests`, e.g. `MyProject.UnitTests.csproj` or `MyProject.Tests.csproj`. 
-- Integration test project file names shall end with `.IntegrationTests`, e.g. `MyProject.IntegrationTests.vbproj`.
+- Unit test project file names shall end with `.UnitTests` or `.Tests`, e.g. `MyProject.UnitTests.csproj` or `MyProject.Tests.csproj`.
+- Integration test project file names shall end with `.IntegrationTests`, e.g. `MyProject.IntegrationTests.csproj`.
 - Performance test project file names shall end with `.PerformanceTests`, e.g. `MyProject.PerformanceTests.csproj`.
 - If `source.extension.vsixmanifest` is present next to the project file the project is by default considered to be a VSIX producing project.
 
@@ -334,14 +331,14 @@ ArcadeLight SDK provides targets for building source packages.
 
 Set `IsSourcePackage` to `true` to indicate that the project produces a source package (along with `IsPackable`, `PackageDescription` and other package properties).
 
-If the project does not have an explicitly provided `.nuspec` file (`NuspecFile` property is empty) setting `IsSourcePackage` to `true` will trigger a target that 
+If the project does not have an explicitly provided `.nuspec` file (`NuspecFile` property is empty) setting `IsSourcePackage` to `true` will trigger a target that
 puts sources contained in the project directory to the `contentFiles` directory of the source package produced by the project.
 
 In addition a `build/$(PackageId).targets` file will be auto-generated that links the sources contained in the package to the source server via a Source Link target.
 If your package already has a `build/$(PackageId).targets` file set `SourcePackageSourceLinkTargetsFileName` property to a different file name (e.g. `SourceLink.targets`)
-and import the file from `build/$(PackageId).targets`. 
+and import the file from `build/$(PackageId).targets`.
 
-If the project is packaged using a custom `.nuspec` file then the source and targets files must be listed in the `.nuspec` file. The path to the generated Source Link 
+If the project is packaged using a custom `.nuspec` file then the source and targets files must be listed in the `.nuspec` file. The path to the generated Source Link
 targets file will be available within the `.nuspec` file via variable `$SourceLinkTargetsFilePath$`.
 
 ## Common steps in Azure DevOps pipeline
@@ -387,7 +384,7 @@ The steps below assume the following variables to be defined:
 
 By default all assets produced by a project are considered _shipping_. Set `IsShipping` to `false` if none of the assets produced by the project are _shipping_. Test projects (`IsTestProject` is `true`) set `IsShipping` to `false` automatically.
 
-Setting `IsShipping` property is sufficient for most projects. Projects that produce both _shipping_ and _non-shipping_ assets need a finer grained control. Set `IsShippingAssembly`, `IsShippingPackage` or `IsShippingVsix` to `false` if the assembly, package, or VSIX produced by the project is not _shipping_, respectively. 
+Setting `IsShipping` property is sufficient for most projects. Projects that produce both _shipping_ and _non-shipping_ assets need a finer grained control. Set `IsShippingAssembly`, `IsShippingPackage` or `IsShippingVsix` to `false` if the assembly, package, or VSIX produced by the project is not _shipping_, respectively.
 
 Build targets shall not directly use `IsShipping`. Instead they shall use `IsShippingAssembly`, `IsShippingPackage` and `IsShippingVsix` depending on the asset they are dealing with.
 
@@ -407,12 +404,7 @@ By default, all _shipping_ libraries are localized.
 
 ### `IsVisualStudioBuildPackage` (bool)
 
-Set to `true` in projects that build Visual Studio Build (CoreXT) packages. These packages are non-shipping, but their content is shipping. They are inserted into and referenced from the internal DevDiv `VS` repository.
-
-### `PublishWindowsPdb` (bool)
-
-`true` (default) if the PDBs produced by the project should be converted to Windows PDB and published to Microsoft symbol servers.
-Set to `false` to override the default (uncommon).
+Set to `true` in projects that build Visual Studio Build packages. These packages are non-shipping, but their content is shipping. They are inserted into and referenced from the internal DevDiv `VS` repository.
 
 ### `SkipTests` (bool)
 
@@ -429,7 +421,7 @@ For example, a project that targets `AnyCPU` can opt-into running tests using bo
 
 By default, the test runner will run tests for all frameworks a test project targets. Use `TestTargetFrameworks` to reduce the set of frameworks to run against.
 
-For example, consider a project that has `<TargetFrameworks>net6.0;net472</TargetFrameworks>`. To only run .NET Core tests run 
+For example, consider a project that has `<TargetFrameworks>net6.0</TargetFrameworks>`. To only run .NET Core tests run
 
 ```text
 msbuild Project.UnitTests.csproj /t:Test /p:TestTargetFrameworks=net6.0
@@ -468,6 +460,7 @@ The contents of the generated source can be fine-tuned with these additional set
 When a string in the resx file has argument placeholders, generate a `.FormatXYZ(...)` method with parameters for each placeholder in the string.
 
 Example: if the resx file contains a string "This has {0} and {1} placeholders", this method will be generated:
+
 ```c#
 class Resources
 {
@@ -477,7 +470,9 @@ class Resources
 ```
 
 #### `GenerateResxSourceIncludeDefaultValues` (bool)
+
 If set to true calls to GetResourceString receive a default resource string value.
 
 #### `GenerateResxSourceOmitGetResourceString` (bool)
+
 If set to true the GetResourceString method is not included in the generated class and must be specified in a separate source file.
