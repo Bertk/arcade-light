@@ -15,7 +15,7 @@ updates:
     registries:
       - nuget-azure-devops
 
-#  - package-ecosystem: "github-actions"
-#    directory: "/"
-#    schedule:
-#      interval: "daily"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
