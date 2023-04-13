@@ -27,7 +27,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     }
 
     [Theory]
-    [InlineData("7.0.202", true)]
+    [InlineData("7.0.203", true)]
     [InlineData("7.0.888", true)]
     public void CheckRequiredDotNetVersionVerify(string minSdkVersionStr, bool expectedResult)
     {
