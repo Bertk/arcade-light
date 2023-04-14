@@ -2,9 +2,16 @@
 
 ## [Unreleased]
 
-- n.a.
 
-## [1.4.x] - 2023-03-29
+### Changed
+
+- Updated dependencies
+  - Microsoft.TemplateEngine.Tasks from 7.0.103 to 7.0.105
+  - Microsoft.VSSDK.BuildTools from 17.5.4065 to 17.5.4072
+- Updated .github/dependbot.yml
+
+
+## [1.4.14] - 2023-03-29
 
 ### Changed
 
