@@ -2,7 +2,23 @@
 
 ## [Unreleased]
 
-- add badges
+### Added
+
+- added badges in ./README.md
+- added GitHub actions
+  - .github/workflows/dotnet.yml
+  - .github/workflows/codeql.yml
+  - .github/workflows/powershell.yml
+- added .github/CODEOWNERS
+
+### Changed
+
+- Updated .NET SDK to 7.0.203
+- Updated dependencies
+  - Microsoft.TemplateEngine.Tasks from 7.0.103 to 7.0.105
+  - Microsoft.VSSDK.BuildTools from 17.5.4065 to 17.5.4072
+- Updated .github/dependbot.yml
+
 
 ## [1.4.14] - 2023-03-29
 
