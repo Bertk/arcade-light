@@ -11,6 +11,8 @@
   - .github/workflows/powershell.yml
 - added .github/CODEOWNERS
 
+## [1.4.20] - 2023-04-17
+
 ### Changed
 
 - Updated .NET SDK to 7.0.203
@@ -18,7 +20,6 @@
   - Microsoft.TemplateEngine.Tasks from 7.0.103 to 7.0.105
   - Microsoft.VSSDK.BuildTools from 17.5.4065 to 17.5.4072
 - Updated .github/dependbot.yml
-
 
 ## [1.4.14] - 2023-03-29
 
