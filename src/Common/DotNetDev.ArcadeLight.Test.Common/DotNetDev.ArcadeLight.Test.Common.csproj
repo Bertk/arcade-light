@@ -8,15 +8,8 @@
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
-    <PackageReference Include="Microsoft.Build" />
-  </ItemGroup>
-  
   <ItemGroup>
+    <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="System.Collections.Immutable" />
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.extensibility.core" />

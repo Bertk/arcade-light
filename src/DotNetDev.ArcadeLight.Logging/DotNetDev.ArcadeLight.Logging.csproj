@@ -9,11 +9,7 @@
     <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
+  <ItemGroup>
     <PackageReference Include="Microsoft.Build" />
   </ItemGroup>
 
