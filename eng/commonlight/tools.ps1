@@ -573,7 +573,7 @@ function InitializeBuildTool() {
       ExitWithExitCode 1
     }
     $dotnetPath = Join-Path $dotnetRoot (GetExecutableFileName 'dotnet')
-    $buildTool = @{ Path = $dotnetPath; Command = 'msbuild'; Tool = 'dotnet'; Framework = 'net6.0' }
+    $buildTool = @{ Path = $dotnetPath; Command = 'msbuild'; Tool = 'dotnet'; Framework = 'net7.0' }
   } elseif ($msbuildEngine -eq "vs") {
     try {
       $msbuildPath = InitializeVisualStudioMSBuild -install:$restore
@@ -727,8 +727,8 @@ function MSBuild() {
       # new scripts need to work with old packages, so we need to look for the old names/versions
       (Join-Path $basePath (Join-Path $buildTool.Framework 'DotNetDev.ArcadeLight.Logging.dll')),
       (Join-Path $basePath (Join-Path $buildTool.Framework 'DotNetDev.ArcadeLight.Sdk.dll')),
-      (Join-Path $basePath (Join-Path net6.0 'DotNetDev.ArcadeLight.Logging.dll')),
-      (Join-Path $basePath (Join-Path net6.0 'DotNetDev.ArcadeLight.Sdk.dll'))
+      (Join-Path $basePath (Join-Path net7.0 'DotNetDev.ArcadeLight.Logging.dll')),
+      (Join-Path $basePath (Join-Path net7.0 'DotNetDev.ArcadeLight.Sdk.dll'))
     )
     $selectedPath = $null
     foreach ($path in $possiblePaths) {
