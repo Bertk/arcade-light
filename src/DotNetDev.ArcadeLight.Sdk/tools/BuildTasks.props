@@ -4,5 +4,6 @@
   <PropertyGroup>
     <ArcadeSdkBuildTasksAssembly Condition="'$(MSBuildRuntimeType)' != 'Core'">$(MSBuildThisFileDirectory)net472\DotNetDev.ArcadeLight.Sdk.dll</ArcadeSdkBuildTasksAssembly>
     <ArcadeSdkBuildTasksAssembly Condition="'$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)net7.0\DotNetDev.ArcadeLight.Sdk.dll</ArcadeSdkBuildTasksAssembly>
+    <ArcadeSdkBuildTasksAssembly Condition="'$(MSBuildRuntimeType)' == 'Core' And '$(TargetFrameworkForNETSDK)' != ''">$(MSBuildThisFileDirectory$(TargetFrameworkForNETSDK)\DotNetDev.ArcadeLight.Sdk.dll</ArcadeSdkBuildTasksAssembly>
   </PropertyGroup>
 </Project>
