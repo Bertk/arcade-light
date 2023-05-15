@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <IsPackable>true</IsPackable>
     <NoWarn>$(NoWarn);NU1507</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
