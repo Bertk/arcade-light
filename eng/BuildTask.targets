@@ -60,12 +60,12 @@
     <PackageReference Update="System.Threading.Tasks.Dataflow" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
-    <PackageReference Update="Microsoft.Build" VersionOverride="17.3.2" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" />
-    <PackageReference Update="Microsoft.Build.Framework" VersionOverride="17.3.2" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" />
-    <PackageReference Update="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" />
-    <PackageReference Update="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" />
-  </ItemGroup>
+  <!-- <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' "> -->
+    <!-- <PackageReference Update="Microsoft.Build" VersionOverride="17.3.2" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" /> -->
+    <!-- <PackageReference Update="Microsoft.Build.Framework" VersionOverride="17.3.2" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" /> -->
+    <!-- <PackageReference Update="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" /> -->
+    <!-- <PackageReference Update="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" /> -->
+  <!-- </ItemGroup> -->
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
     <PackageReference Update="Microsoft.Build" PrivateAssets="All" Publish="false" ExcludeAssets="runtime" />

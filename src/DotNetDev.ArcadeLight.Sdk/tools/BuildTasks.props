@@ -3,6 +3,6 @@
 <Project>
   <PropertyGroup>
     <ArcadeSdkBuildTasksAssembly Condition="'$(MSBuildRuntimeType)' != 'Core'">$(MSBuildThisFileDirectory)net472\DotNetDev.ArcadeLight.Sdk.dll</ArcadeSdkBuildTasksAssembly>
-    <ArcadeSdkBuildTasksAssembly Condition="'$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)net6.0\DotNetDev.ArcadeLight.Sdk.dll</ArcadeSdkBuildTasksAssembly>
+    <ArcadeSdkBuildTasksAssembly Condition="'$(MSBuildRuntimeType)' == 'Core'">$(MSBuildThisFileDirectory)net7.0\DotNetDev.ArcadeLight.Sdk.dll</ArcadeSdkBuildTasksAssembly>
   </PropertyGroup>
 </Project>

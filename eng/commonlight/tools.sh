@@ -431,8 +431,8 @@ function MSBuild {
     local possiblePaths=()
     possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/DotNetDev.ArcadeLight.Logging.dll" )
     possiblePaths+=( "$toolset_dir/$_InitializeBuildToolFramework/DotNetDev.ArcadeLight.Sdk.dll" )
-    possiblePaths+=( "$toolset_dir/net6.0/DotNetDev.ArcadeLight.Logging.dll" )
-    possiblePaths+=( "$toolset_dir/net6.0/DotNetDev.ArcadeLight.Sdk.dll" )
+    possiblePaths+=( "$toolset_dir/net7.0/DotNetDev.ArcadeLight.Logging.dll" )
+    possiblePaths+=( "$toolset_dir/net7.0/DotNetDev.ArcadeLight.Sdk.dll" )
     for path in "${possiblePaths[@]}"; do
       if [[ -f $path ]]; then
         selectedPath=$path
