@@ -11,7 +11,7 @@
   - .github/workflows/powershell.yml
 - added .github/CODEOWNERS
 
-## [1.4.20] - 2023-04-17
+## [1.4.20](https://github.com/Bertk/arcade-light/compare/v1.4.14...v1.4.20) - 2023-04-17
 
 ### Changed
 
@@ -21,7 +21,7 @@
   - Microsoft.VSSDK.BuildTools from 17.5.4065 to 17.5.4072
 - Updated .github/dependbot.yml
 
-## [1.4.14] - 2023-03-29
+## [1.4.14](https://github.com/Bertk/arcade-light/compare/v1.3.17...v1.4.14) - 2023-03-29
 
 ### Changed
 
@@ -29,7 +29,7 @@
 - add workflow for .NET (manual build)
 - rename package ID prefix (prepare upload to nuget.org)
 
-## [1.3.17] - 2023-03-18
+## [1.3.17](https://github.com/Bertk/arcade-light/compare/v1.2.20...v1.3.17) - 2023-03-18
 
 ### Changed
 
@@ -48,7 +48,7 @@
   - NUnit3TestAdapter from 4.3.1 to 4.4.2
   - System.Reflection.Metadata from 7.0.0 to 7.0.1
 
-## [1.2.20] - 2023-02-22
+## [1.2.20](https://github.com/Bertk/arcade-light/compare/v1.1.15...v1.2.20) - 2023-02-22
 
 ### Added
 
@@ -60,7 +60,7 @@
 
 - removed unused classes SetCorFlags, SaveItems, Unsign, ExponentialRetry, ZipArchiveManager
 
-## [1.1.15] - 2023-01-26
+## [1.1.15](https://github.com/Bertk/arcade-light/compare/v1.0.11...v1.1.15) - 2023-01-26
 
 ### Added
 
@@ -81,7 +81,7 @@
 
 
 
-## [1.0.11] - 2022-12-12
+## [1.0.11](https://github.com/Bertk/arcade-light/compare/v1.0.0...v1.0.11) - 2022-12-12
 
 - initial release of DotNet.ArcadeLight.Sdk nuget package
 
