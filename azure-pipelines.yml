@@ -148,7 +148,7 @@ stages:
           parameters:
             reports: $(Build.SourcesDirectory)/**/coverage.cobertura.xml
             condition: and(succeeded(), eq(variables['_BuildConfig'], 'Debug'))
-            assemblyfilters: '-xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing'
+            assemblyfilters: '-xunit*;-DotNet.XUnitExtensions;-DotNetDev.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing'
             breakBuild: true
 
       - job: Linux
