@@ -7,7 +7,7 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
-## [1.5.x](https://github.com/Bertk/arcade-light/compare/v1.4.20...v1.5.33) - 2023-04-17
+## [1.5.33](https://github.com/Bertk/arcade-light/compare/v1.4.20...v1.5.33) - 2023-05-17
 
 ### Added
 
