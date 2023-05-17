@@ -1,5 +1,8 @@
 # Changelog DotNet.ArcadeLight.Sdk
 
+All notable changes to this project will be documented in this file. See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelines.
+Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.132/doc/nbgv-cli.md#preparing-a-release)).
+
 ## [Unreleased]
 
 ### Added
