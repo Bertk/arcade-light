@@ -66,10 +66,6 @@
     </None>
   </ItemGroup>
 
-  <!-- <ItemGroup> -->
-    <!-- <Compile Include="..\Common\Internal\AssemblyResolution.cs" Link="src\AssemblyResolution.cs" /> -->
-  <!-- </ItemGroup> -->
-
   <ItemGroup>
     <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
     <ProjectReference Include="..\DotNetDev.ArcadeLight.Logging\DotNetDev.ArcadeLight.Logging.csproj" />
