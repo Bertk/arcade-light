@@ -1,9 +1,13 @@
 # Changelog DotNet.ArcadeLight.Sdk
 
-All notable changes to this project will be documented in this file. See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelines.
+All notable changes to this project will be documented in this file.
+See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelines.
+
 Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.132/doc/nbgv-cli.md#preparing-a-release)).
 
 ## [Unreleased]
+
+## [1.5.x](https://github.com/Bertk/arcade-light/compare/v1.4.20...v1.5.33) - 2023-04-17
 
 ### Added
 
@@ -13,6 +17,18 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
   - .github/workflows/codeql.yml
   - .github/workflows/powershell.yml
 - added .github/CODEOWNERS
+- added .markdownlint.json
+
+### Changed
+
+- Update dotnet SDK and nuget versions
+- Avoid deprecated nuget packages
+- Updated dependencies
+  - Bump Nerdbank.GitVersioning from 3.6.128 to 3.6.132
+  - Bump nbgv from 3.6.128 to 3.6.132
+  - Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.19 to 5.1.20
+  - Bump dotnet-reportgenerator-globaltool from 5.1.19 to 5.1.20
+  - Bump SonarAnalyzer.CSharp from 8.55.0.65544 to 9.0.0.68202
 
 ## [1.4.20](https://github.com/Bertk/arcade-light/compare/v1.4.14...v1.4.20) - 2023-04-17
 
