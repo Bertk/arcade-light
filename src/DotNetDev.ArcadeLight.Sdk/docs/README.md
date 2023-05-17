@@ -54,7 +54,7 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
   </PropertyGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.5.119" />
+    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.132" />
   </ItemGroup>
   ...
 <\Project>
