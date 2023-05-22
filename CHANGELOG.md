@@ -11,6 +11,8 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 - Updated dependencies
   - Bump coverlet.collector from 3.2.0 to 6.0.0
+  - Bump NuGet.Versioning from 6.5.0 to 6.6.0
+  - Bump NuGet.Frameworks from 6.5.0 to 6.6.0
 
 ## [1.5.35](https://github.com/Bertk/arcade-light/compare/v1.4.20...v1.5.35) - 2023-05-17
 
