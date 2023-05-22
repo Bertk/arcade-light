@@ -7,6 +7,11 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+### Changed
+
+- Updated dependencies
+  - Bump coverlet.collector from 3.2.0 to 6.0.0
+
 ## [1.5.35](https://github.com/Bertk/arcade-light/compare/v1.4.20...v1.5.35) - 2023-05-17
 
 ### Added
