@@ -22,7 +22,7 @@
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.2" />
     <PackageVersion Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
-    <PackageVersion Include="Microsoft.TestPlatform" Version="17.6.0" />
+    <PackageVersion Include="Microsoft.TestPlatform" Version="17.6.1" />
     <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.6.1" />
     <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="17.6.1" />
     <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.6.2164" />
