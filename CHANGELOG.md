@@ -7,12 +7,27 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+## [1.5.53](https://github.com/Bertk/arcade-light/compare/v1.5.35...v1.5.53) - 2023-06-05
+
 ### Changed
 
 - Updated dependencies
+  - Bump Nerdbank.GitVersioning from 3.6.132 to 3.6.133
   - Bump coverlet.collector from 3.2.0 to 6.0.0
+  - Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.20 to 5.1.21
+  - Bump Bump dotnet-reportgenerator-globaltool from 5.1.20 to 5.1.21
+  - Microsoft.Build.Framework from 17.5.0 to 17.6.3
+  - Microsoft.Build.Tasks.Core from 17.5.0 to 17.6.3
+  - Microsoft.Build.Utilities.Core from 17.5.0 to 17.6.3
+  - Bump Microsoft.NET.Test.Sdk from 17.6.0 to 17.6.1
+  - Bump Microsoft.TestPlatform from 17.6.0 to 17.6.1
+  - Bump Microsoft.TestPlatform.ObjectModel from 17.6.0 to 17.6.1
+  - Bump Microsoft.TestPlatform.TestHost from 17.6.0 to 17.6.1
+  - Bump Microsoft.VSSDK.BuildTools from 17.5.4074 to 17.6.2164
+  - Bump nbgv from 3.6.132 to 3.6.133
   - Bump NuGet.Versioning from 6.5.0 to 6.6.0
   - Bump NuGet.Frameworks from 6.5.0 to 6.6.0
+  - Bump NUnit3TestAdapter from 4.4.2 to 4.5.0
 
 ## [1.5.35](https://github.com/Bertk/arcade-light/compare/v1.4.20...v1.5.35) - 2023-05-17
 
