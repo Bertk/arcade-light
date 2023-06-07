@@ -49,6 +49,14 @@ stages:
           clean: true
         steps:
         - task: NuGetAuthenticate@1
+        - task: DotNetCoreCLI@2
+          displayName: 'dotnet restore'
+          inputs:
+            command: restore
+            projects: 'Arcade-light.sln'
+            feedsToUse: config
+            nugetConfigPath: NuGet.Config
+            noCache: true
         - script: eng\commonlight\cibuild.cmd
             -configuration $(_BuildConfig)
             -prepareMachine
@@ -74,6 +82,14 @@ stages:
             clean: true
           steps:
           - task: NuGetAuthenticate@1
+          - task: DotNetCoreCLI@2
+            displayName: 'dotnet restore'
+            inputs:
+              command: restore
+              projects: 'Arcade-light.sln'
+              feedsToUse: config
+              nugetConfigPath: NuGet.Config
+              noCache: true
           - script: eng/commonlight/cibuild.sh
               --configuration $(_BuildConfig)
               --prepareMachine
