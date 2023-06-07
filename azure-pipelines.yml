@@ -55,7 +55,7 @@ stages:
             command: restore
             projects: 'Arcade-light.sln'
             feedsToUse: config
-            nugetConfigPath: NuGet.Config
+            nugetConfigPath: nuget.config
             noCache: true
         - script: eng\commonlight\cibuild.cmd
             -configuration $(_BuildConfig)
@@ -88,7 +88,7 @@ stages:
               command: restore
               projects: 'Arcade-light.sln'
               feedsToUse: config
-              nugetConfigPath: NuGet.Config
+              nugetConfigPath: nuget.config
               noCache: true
           - script: eng/commonlight/cibuild.sh
               --configuration $(_BuildConfig)
