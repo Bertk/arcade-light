@@ -48,7 +48,21 @@ stages:
           fetchDepth: 0
           clean: true
         steps:
+        - task: UseDotNet@2
+          displayName: 'Use .NET Core sdk'
+          inputs:
+            packageType: sdk
+            useGlobalJson: true
         - task: NuGetAuthenticate@1
+        - task: DotNetCoreCLI@2
+          displayName: 'dotnet restore'
+          inputs:
+            command: restore
+            projects: 'Arcade-light.sln'
+            feedsToUse: config
+            nugetConfigPath: nuget.config
+            noCache: true
+          enabled: false
         - script: eng\commonlight\cibuild.cmd
             -configuration $(_BuildConfig)
             -prepareMachine
@@ -73,7 +87,21 @@ stages:
             fetchDepth: 0
             clean: true
           steps:
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core sdk'
+            inputs:
+              packageType: sdk
+              useGlobalJson: true
           - task: NuGetAuthenticate@1
+          - task: DotNetCoreCLI@2
+            displayName: 'dotnet restore'
+            inputs:
+              command: restore
+              projects: 'Arcade-light.sln'
+              feedsToUse: config
+              nugetConfigPath: nuget.config
+              noCache: true
+            enabled: false
           - script: eng/commonlight/cibuild.sh
               --configuration $(_BuildConfig)
               --prepareMachine
