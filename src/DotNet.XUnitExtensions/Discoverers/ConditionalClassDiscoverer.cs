@@ -5,17 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace DotNet.XUnitExtensions
 {
-    /// <summary>
-    /// This class discovers all of the tests and test classes that have
-    /// applied the ConditionalClass attribute
-    /// </summary>
-    public class ConditionalClassDiscoverer : ITraitDiscoverer
+  /// <summary>
+  /// This class discovers all of the tests and test classes that have
+  /// applied the ConditionalClass attribute
+  /// </summary>
+  public class ConditionalClassDiscoverer : ITraitDiscoverer
     {
         /// <summary>
         /// Gets the trait values from the Category attribute.

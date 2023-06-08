@@ -2,18 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace DotNet.XUnitExtensions
 {
-    /// <summary>Wraps RunAsync for ConditionalFact.</summary>
-    public class SkippedFactTestCase : XunitTestCase
+  /// <summary>Wraps RunAsync for ConditionalFact.</summary>
+  public class SkippedFactTestCase : XunitTestCase
     {
         [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes", error: true)]
         public SkippedFactTestCase() { }

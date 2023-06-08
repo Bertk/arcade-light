@@ -3,35 +3,34 @@
 
 using System.Reflection;
 using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  public class GetAssemblyFullName : Task
-  {
-    [Required]
-    public ITaskItem[] Items { get; set; }
-
-    public string PathMetadata { get; set; }
-
-    [Required]
-    public string FullNameMetadata { get; set; }
-
-    [Output]
-    public ITaskItem[] ItemsWithFullName { get; set; }
-
-    public override bool Execute()
+  public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
     {
-      ItemsWithFullName = Items;
+        [Required]
+        public ITaskItem[] Items { get; set; }
 
-      foreach (var item in Items)
-      {
-        var assemblyPath = string.IsNullOrEmpty(PathMetadata) ? item.ItemSpec : item.GetMetadata(PathMetadata);
-        item.SetMetadata(FullNameMetadata, AssemblyName.GetAssemblyName(assemblyPath).FullName);
-      }
+        public string PathMetadata { get; set; }
 
-      return true;
+        [Required]
+        public string FullNameMetadata { get; set; }
+
+        [Output]
+        public ITaskItem[] ItemsWithFullName { get; set; }
+
+        public override bool Execute()
+        {
+            ItemsWithFullName = Items;
+
+            foreach (var item in Items)
+            {
+                var assemblyPath = string.IsNullOrEmpty(PathMetadata) ? item.ItemSpec : item.GetMetadata(PathMetadata);
+                item.SetMetadata(FullNameMetadata, AssemblyName.GetAssemblyName(assemblyPath).FullName);
+            }
+
+            return true;
+        }
     }
-  }
 }
 

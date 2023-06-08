@@ -1,6 +1,5 @@
 using Microsoft.Build.Framework;
 using Moq;
-using System;
 using System.Collections.Generic;
 using Xunit;
 

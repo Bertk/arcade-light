@@ -3,15 +3,11 @@
 //
 
 using System;
-using System.Globalization;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Text;
 
 namespace Xunit
 {
-    public static class CoreClrConfigurationDetection
+  public static class CoreClrConfigurationDetection
     {
         public static bool IsJitStress => !string.Equals(GetEnvironmentVariableValue("JitStress"), "0", StringComparison.InvariantCulture);
         public static bool IsJitStressRegs => !string.Equals(GetEnvironmentVariableValue("JitStressRegs"), "0", StringComparison.InvariantCulture);

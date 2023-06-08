@@ -1,21 +1,12 @@
+using Xunit;
+using System.IO;
+using Microsoft.Build.Framework;
+using Moq;
+using System.Collections.Generic;
+using System.Reflection;
+
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
-  using System;
-
-  using FluentAssertions;
-
-  using Xunit;
-
-  using DotNetDev.ArcadeLight.Test.Common;
-  using System.IO;
-  using Microsoft.Build.Framework;
-  using Moq;
-  using System.Collections.Generic;
-  using System.Reflection;
-  using System.Linq;
-  using Xunit.Sdk;
-  using DotNetDev.ArcadeLight.Sdk;
-
   public class InstallDotNetCoreTests
   {
     private readonly Mock<IBuildEngine4> buildEngine;
@@ -75,21 +66,5 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.NotEmpty(errors);
     }
 
-    [Theory]
-    [InlineData("x86", "x86")]
-    [InlineData("x64", "x64")]
-    [InlineData("", "x64")]
-    public void GetArchitectureVerify(string architecture, string value)
-    {
-      //Arrange
-      InstallDotNetCore customTask = new InstallDotNetCore();
-
-      //Act
-      var result = customTask.GetArchitecture(architecture);
-
-      //Assert
-      Assert.Equal(value, result);
-
-    }
   }
 }

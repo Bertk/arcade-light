@@ -3,7 +3,6 @@
 
 using FluentAssertions;
 using Xunit;
-using DotNetDev.ArcadeLight.Common;
 
 namespace DotNetDev.ArcadeLight.Common.Tests
 {
