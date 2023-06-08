@@ -12,7 +12,7 @@ using Tasks = System.Threading.Tasks;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  public class DownloadFile : Microsoft.Build.Utilities.Task, ICancelableTask
+    public class DownloadFile : Microsoft.Build.Utilities.Task, ICancelableTask
     {
         /// <summary>
         /// List of URls to attempt download from. Accepted metadata are:

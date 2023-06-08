@@ -7,29 +7,29 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  /// <summary>
-  /// Groups items by ItemSpec.
-  /// 
-  /// Given the following items:
-  /// <![CDATA[
-  /// <ItemGroup>
-  ///   <Stuff Include="A" Value="X"/>
-  ///   <Stuff Include="A" Value="Y"/>
-  ///   <Stuff Include="B" Value="Z"/>
-  /// </ItemGroup>
-  /// ]]>
-  /// 
-  /// produces
-  /// 
-  /// <![CDATA[
-  /// <ItemGroup>
-  ///   <Stuff Include="A" Value="X;Y"/>
-  ///   <Stuff Include="B" Value="Z"/>
-  /// </ItemGroup>
-  /// ]]>
-  /// 
-  /// </summary>
-  public sealed class GroupItemsBy : Microsoft.Build.Utilities.Task
+    /// <summary>
+    /// Groups items by ItemSpec.
+    /// 
+    /// Given the following items:
+    /// <![CDATA[
+    /// <ItemGroup>
+    ///   <Stuff Include="A" Value="X"/>
+    ///   <Stuff Include="A" Value="Y"/>
+    ///   <Stuff Include="B" Value="Z"/>
+    /// </ItemGroup>
+    /// ]]>
+    /// 
+    /// produces
+    /// 
+    /// <![CDATA[
+    /// <ItemGroup>
+    ///   <Stuff Include="A" Value="X;Y"/>
+    ///   <Stuff Include="B" Value="Z"/>
+    /// </ItemGroup>
+    /// ]]>
+    /// 
+    /// </summary>
+    public sealed class GroupItemsBy : Microsoft.Build.Utilities.Task
     {
         /// <summary>
         /// Items to group by their ItemSpec.

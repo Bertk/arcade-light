@@ -6,7 +6,7 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
+    public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
     {
         [Required]
         public ITaskItem[] Items { get; set; }

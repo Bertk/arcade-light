@@ -6,7 +6,7 @@ using NuGet.Versioning;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  public class CompareVersions : Microsoft.Build.Utilities.Task
+    public class CompareVersions : Microsoft.Build.Utilities.Task
     {
         [Required]
         public string Left { get; set; }

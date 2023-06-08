@@ -9,10 +9,10 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  /// <summary>
-  /// Checks that the content of two license files is the same modulo line breaks, leading and trailing whitespace.
-  /// </summary>
-  public class ValidateLicense : Microsoft.Build.Utilities.Task
+    /// <summary>
+    /// Checks that the content of two license files is the same modulo line breaks, leading and trailing whitespace.
+    /// </summary>
+    public class ValidateLicense : Microsoft.Build.Utilities.Task
     {
         /// <summary>
         /// Full path to the file that contains the license text to be validated.

@@ -10,7 +10,7 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  public sealed class GenerateSourcePackageSourceLinkTargetsFile : Microsoft.Build.Utilities.Task
+    public sealed class GenerateSourcePackageSourceLinkTargetsFile : Microsoft.Build.Utilities.Task
     {
         [Required]
         public string ProjectDirectory { get; set; }

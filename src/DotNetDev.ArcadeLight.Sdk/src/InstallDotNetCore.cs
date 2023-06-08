@@ -12,7 +12,7 @@ using System.Text.Json;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  public class InstallDotNetCore : Microsoft.Build.Utilities.Task
+    public class InstallDotNetCore : Microsoft.Build.Utilities.Task
     {
         public string VersionsPropsPath { get; set; }
 

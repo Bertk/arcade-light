@@ -13,7 +13,7 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-  public sealed class GenerateResxSource : Microsoft.Build.Utilities.Task
+    public sealed class GenerateResxSource : Microsoft.Build.Utilities.Task
     {
         private const int maxDocCommentLength = 256;
 
