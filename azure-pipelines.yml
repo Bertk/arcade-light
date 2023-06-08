@@ -62,6 +62,7 @@ stages:
             feedsToUse: config
             nugetConfigPath: nuget.config
             noCache: true
+          enabled: false
         - script: eng\commonlight\cibuild.cmd
             -configuration $(_BuildConfig)
             -prepareMachine
@@ -100,6 +101,7 @@ stages:
               feedsToUse: config
               nugetConfigPath: nuget.config
               noCache: true
+            enabled: false
           - script: eng/commonlight/cibuild.sh
               --configuration $(_BuildConfig)
               --prepareMachine
