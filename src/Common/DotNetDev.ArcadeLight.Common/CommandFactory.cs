@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace DotNetDev.ArcadeLight.Common
 {
-  public class CommandFactory : ICommandFactory
+    public class CommandFactory : ICommandFactory
     {
         public ICommand Create(string executable, params string[] args)
         {

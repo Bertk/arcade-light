@@ -6,73 +6,64 @@ using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using DotNetDev.ArcadeLight.Test.Common;
-/* Unmerged change from project 'DotNetDev.ArcadeLight.Sdk.Tests (net7.0)'
-Before:
-namespace DotNet.ArcadeLight.Sdk.Tests
-After:
-namespace DotNet.ArcadeLight.Sdk.Tests;
-
-namespace DotNetDev.ArcadeLight.Sdk.Tests
-*/
-
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
-  public class GetAssemblyFullNameTests
-  {
-    [Fact]
-    public void PathInMetadata()
+    public class GetAssemblyFullNameTests
     {
-      var objectAssembly = typeof(object).Assembly;
-      var thisAssembly = typeof(GetAssemblyFullNameTests).Assembly;
+        [Fact]
+        public void PathInMetadata()
+        {
+            var objectAssembly = typeof(object).Assembly;
+            var thisAssembly = typeof(GetAssemblyFullNameTests).Assembly;
 
-      var task = new GetAssemblyFullName()
-      {
-        Items = new TaskItem[]
-          {
+            var task = new GetAssemblyFullName()
+            {
+                Items = new TaskItem[]
+                {
                     new TaskItem("Item", new Dictionary<string, string> { { "SomePath", objectAssembly.Location } }),
                     new TaskItem("Item", new Dictionary<string, string> { { "SomePath", thisAssembly.Location } }),
-          },
-        PathMetadata = "SomePath",
-        FullNameMetadata = "SomeFullName"
-      };
+                },
+                PathMetadata = "SomePath",
+                FullNameMetadata = "SomeFullName"
+            };
 
-      bool result = task.Execute();
+            bool result = task.Execute();
 
-      AssertEx.Equal(new[]
-     {
+            AssertEx.Equal(new[]
+           {
                 objectAssembly.FullName,
                 thisAssembly.FullName
             }, task.ItemsWithFullName.Select(i => i.GetMetadata("SomeFullName")));
 
-      Assert.True(result);
-    }
+            Assert.True(result);
+        }
 
-    [Fact]
-    public void PathInItemSpec()
-    {
-      var objectAssembly = typeof(object).Assembly;
-      var thisAssembly = typeof(GetAssemblyFullNameTests).Assembly;
+        [Fact]
+        public void PathInItemSpec()
+        {
+            var objectAssembly = typeof(object).Assembly;
+            var thisAssembly = typeof(GetAssemblyFullNameTests).Assembly;
 
-      var task = new GetAssemblyFullName()
-      {
-        Items = new TaskItem[]
-          {
+            var task = new GetAssemblyFullName()
+            {
+                Items = new TaskItem[]
+                {
                     new TaskItem(objectAssembly.Location),
                     new TaskItem(thisAssembly.Location),
-          },
-        FullNameMetadata = "SomeFullName"
-      };
+                },
+                FullNameMetadata = "SomeFullName"
+            };
 
-      bool result = task.Execute();
+            bool result = task.Execute();
 
-      AssertEx.Equal(new[]
-      {
+            AssertEx.Equal(new[]
+            {
                 objectAssembly.FullName,
                 thisAssembly.FullName
             }, task.ItemsWithFullName.Select(i => i.GetMetadata("SomeFullName")));
 
-      Assert.True(result);
+            Assert.True(result);
+        }
     }
-  }
 }

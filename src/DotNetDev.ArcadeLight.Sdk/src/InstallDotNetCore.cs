@@ -75,7 +75,7 @@ namespace DotNetDev.ArcadeLight.Sdk
                                 }
                                 else
                                 {
-                                    var proj = Project.FromFile(VersionsPropsPath, new Microsoft.Build.Definition.ProjectOptions());
+                                    var proj = Project.FromFile(VersionsPropsPath, new Microsoft.Build.Definition.ProjectOptions() { ProjectCollection = new ProjectCollection() });
                                     properties = proj.AllEvaluatedProperties.ToLookup(p => p.Name, StringComparer.OrdinalIgnoreCase);
                                 }
                             }
@@ -130,8 +130,28 @@ namespace DotNetDev.ArcadeLight.Sdk
                                         {
                                             FileName = DotNetInstallScript,
                                             Arguments = arguments,
-                                            UseShellExecute = false
+                                            UseShellExecute = false,
+                                            // Redirect to stdout/err. Addressing https://github.com/dotnet/msbuild/issues/7913
+                                            // Without it script execution was failing on Linux when run from
+                                            RedirectStandardOutput = true,
+                                            RedirectStandardError = true,
                                         });
+                                        process.OutputDataReceived += (sender, e) =>
+                                        {
+                                            if (!String.IsNullOrEmpty(e.Data))
+                                            {
+                                                Console.WriteLine(e.Data);
+                                            }
+                                        };
+                                        process.ErrorDataReceived += (sender, e) =>
+                                        {
+                                            if (!String.IsNullOrEmpty(e.Data))
+                                            {
+                                                Console.Error.WriteLine(e.Data);
+                                            }
+                                        };
+                                        process.BeginOutputReadLine();
+                                        process.BeginErrorReadLine();
                                         process.WaitForExit();
                                         if (process.ExitCode != 0)
                                         {
