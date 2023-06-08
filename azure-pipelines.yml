@@ -48,6 +48,11 @@ stages:
           fetchDepth: 0
           clean: true
         steps:
+        - task: UseDotNet@2
+          displayName: 'Use .NET Core sdk'
+          inputs:
+            packageType: sdk
+            useGlobalJson: true
         - task: NuGetAuthenticate@1
         - task: DotNetCoreCLI@2
           displayName: 'dotnet restore'
@@ -81,6 +86,11 @@ stages:
             fetchDepth: 0
             clean: true
           steps:
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core sdk'
+            inputs:
+              packageType: sdk
+              useGlobalJson: true
           - task: NuGetAuthenticate@1
           - task: DotNetCoreCLI@2
             displayName: 'dotnet restore'
