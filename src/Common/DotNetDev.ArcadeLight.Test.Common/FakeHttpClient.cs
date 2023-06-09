@@ -9,36 +9,35 @@ using System.Threading.Tasks;
 
 namespace DotNetDev.ArcadeLight.Test.Common
 {
-  public static class FakeHttpClient
-  {
-    public static HttpClient WithResponses(params HttpResponseMessage[] responses)
-        => new HttpClient(
-            new FakeHttpMessageHandler(responses));
-
-    private sealed class FakeHttpMessageHandler : HttpMessageHandler
+    public static class FakeHttpClient
     {
-      private readonly IEnumerator<HttpResponseMessage> _responseEnumerator;
+        public static HttpClient WithResponses(params HttpResponseMessage[] responses)
+            => new HttpClient(new FakeHttpMessageHandler(responses)); // lgtm [cs/httpclient-checkcertrevlist-disabled] This is used for unit tests
 
-      public FakeHttpMessageHandler(IEnumerable<HttpResponseMessage> responses)
-      {
-        _responseEnumerator = responses.GetEnumerator();
-      }
-
-      protected override void Dispose(bool disposing)
-      {
-        if (disposing)
+        private class FakeHttpMessageHandler : HttpMessageHandler
         {
-          _responseEnumerator.Dispose();
+            private readonly IEnumerator<HttpResponseMessage> _responseEnumerator;
+
+            public FakeHttpMessageHandler(IEnumerable<HttpResponseMessage> responses)
+            {
+                _responseEnumerator = responses.GetEnumerator();
+            }
+
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing)
+                {
+                    _responseEnumerator.Dispose();
+                }
+            }
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            {
+                if (!_responseEnumerator.MoveNext())
+                    throw new InvalidOperationException($"Unexpected end of response sequence. Number of predefined responses should be at least equal to number of requests invoked by HttpClient.");
+
+                return Task.FromResult(_responseEnumerator.Current);
+            }
         }
-      }
-
-      protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-      {
-        if (!_responseEnumerator.MoveNext())
-          throw new InvalidOperationException($"Unexpected end of response sequence. Number of predefined responses should be at least equal to number of requests invoked by HttpClient.");
-
-        return Task.FromResult(_responseEnumerator.Current);
-      }
     }
-  }
 }

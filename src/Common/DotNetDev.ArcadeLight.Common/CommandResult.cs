@@ -7,49 +7,44 @@ using System.Diagnostics;
 
 namespace DotNetDev.ArcadeLight.Common
 {
-  public struct CommandResult
-  {
-    public static readonly CommandResult Empty;
-
-    public ProcessStartInfo StartInfo { get; }
-    public int ExitCode { get; }
-    public string StdOut { get; }
-    public string StdErr { get; }
-
-    public CommandResult(ProcessStartInfo startInfo, int exitCode, string stdOut, string stdErr)
+    public struct CommandResult
     {
-      StartInfo = startInfo;
-      ExitCode = exitCode;
-      StdOut = stdOut;
-      StdErr = stdErr;
-    }
+        public static readonly CommandResult Empty = new CommandResult();
 
-    public void EnsureSuccessful()
-    {
-      EnsureSuccessful(false);
-    }
+        public ProcessStartInfo StartInfo { get; }
+        public int ExitCode { get; }
+        public string StdOut { get; }
+        public string StdErr { get; }
 
-    public void EnsureSuccessful(bool suppressOutput)
-    {
-      if (ExitCode != 0)
-      {
-        StringBuilder message = new StringBuilder($"Command failed with exit code {ExitCode}: {StartInfo.FileName} {StartInfo.Arguments}");
-
-        if (!suppressOutput)
+        public CommandResult(ProcessStartInfo startInfo, int exitCode, string stdOut, string stdErr)
         {
-          if (!string.IsNullOrEmpty(StdOut))
-          {
-            message.AppendLine($"{Environment.NewLine}Standard Output:{Environment.NewLine}{StdOut}");
-          }
-
-          if (!string.IsNullOrEmpty(StdErr))
-          {
-            message.AppendLine($"{Environment.NewLine}Standard Error:{Environment.NewLine}{StdErr}");
-          }
+            StartInfo = startInfo;
+            ExitCode = exitCode;
+            StdOut = stdOut;
+            StdErr = stdErr;
         }
 
-        throw new Exception(message.ToString());
-      }
+        public void EnsureSuccessful(bool suppressOutput = false)
+        {
+            if (ExitCode != 0)
+            {
+                StringBuilder message = new StringBuilder($"Command failed with exit code {ExitCode}: {StartInfo.FileName} {StartInfo.Arguments}");
+
+                if (!suppressOutput)
+                {
+                    if (!string.IsNullOrEmpty(StdOut))
+                    {
+                        message.AppendLine($"{Environment.NewLine}Standard Output:{Environment.NewLine}{StdOut}");
+                    }
+
+                    if (!string.IsNullOrEmpty(StdErr))
+                    {
+                        message.AppendLine($"{Environment.NewLine}Standard Error:{Environment.NewLine}{StdErr}");
+                    }
+                }
+
+                throw new Exception(message.ToString());
+            }
+        }
     }
-  }
 }

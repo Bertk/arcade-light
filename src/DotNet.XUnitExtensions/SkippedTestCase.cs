@@ -2,17 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace DotNet.XUnitExtensions
 {
-    /// <summary>Wraps another test case that should be skipped.</summary>
-    internal sealed class SkippedTestCase : XunitTestCase
+  /// <summary>Wraps another test case that should be skipped.</summary>
+  internal sealed class SkippedTestCase : XunitTestCase
     {
         private string _skipReason;
 

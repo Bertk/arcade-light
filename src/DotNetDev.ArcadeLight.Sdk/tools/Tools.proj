@@ -18,7 +18,9 @@
     if we use the same config for all restore operations.
   -->
   <PropertyGroup>
-    <RestoreConfigFile>$(RepoRoot)NuGet.config</RestoreConfigFile>
+    <RestoreConfigFile Condition="Exists('$(RepoRoot)NuGet.config')">$(RepoRoot)NuGet.config</RestoreConfigFile>
+    <RestoreConfigFile Condition="Exists('$(RepoRoot)NuGet.Config')">$(RepoRoot)NuGet.Config</RestoreConfigFile>
+    <RestoreConfigFile Condition="Exists('$(RepoRoot)nuget.config')">$(RepoRoot)nuget.config</RestoreConfigFile>
   </PropertyGroup>
 
   <Import Project="$(_NuGetRestoreTargets)" />

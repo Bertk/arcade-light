@@ -77,11 +77,6 @@
         <file src="$(PackageLicenseFullPath)" target="$(PackageLicenseFile)" />
       </_LicenseFileElement>
 
-      <!-- <_TagsElement/> -->
-      <!-- <_TagsElement Condition="'$(PackageTags)' != ''"> -->
-        <!-- <tags>$(PackageTags.Replace(';', ' '))</tags> -->
-      <!-- </_TagsElement> -->
-
       <_IconUrlElement/>
       <_IconUrlElement Condition="'$(PackageIcon)' == '' and '$(PackageIconUrl)' != ''">
         <iconUrl>$(PackageIconUrl)</iconUrl>

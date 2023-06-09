@@ -4,14 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace DotNet.XUnitExtensions
 {
-    public class SkipOnCoreClrDiscoverer : ITraitDiscoverer
+  public class SkipOnCoreClrDiscoverer : ITraitDiscoverer
     {
         private static readonly Lazy<bool> s_isJitStress = new Lazy<bool>(() => CoreClrConfigurationDetection.IsJitStress);
         private static readonly Lazy<bool> s_isJitStressRegs = new Lazy<bool>(() => CoreClrConfigurationDetection.IsJitStressRegs);

@@ -4,14 +4,13 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace DotNet.XUnitExtensions
 {
-    /// <summary>Wraps RunAsync for ConditionalTheory.</summary>
-    public class SkippedTheoryTestCase : XunitTheoryTestCase
+  /// <summary>Wraps RunAsync for ConditionalTheory.</summary>
+  public class SkippedTheoryTestCase : XunitTheoryTestCase
     {
         [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes", error: true)]
         public SkippedTheoryTestCase() { }

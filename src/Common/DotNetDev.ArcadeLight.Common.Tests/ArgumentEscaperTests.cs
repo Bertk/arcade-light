@@ -3,17 +3,16 @@
 
 using FluentAssertions;
 using Xunit;
-using DotNetDev.ArcadeLight.Common;
 
 namespace DotNetDev.ArcadeLight.Common.Tests
 {
-  public class ArgumentEscaperTests
-  {
-    [Fact]
-    public void EscapesOnlyArgsWithSpecialCharacters()
+    public class ArgumentEscaperTests
     {
-      var args = new[]
-      {
+        [Fact]
+        public void EscapesOnlyArgsWithSpecialCharacters()
+        {
+            var args = new[]
+            {
                 "subcommand",
                 "--not-escaped",
                 "1.0.0-prerelease.21165.2",
@@ -24,13 +23,13 @@ namespace DotNetDev.ArcadeLight.Common.Tests
                 "containing-\"-quote",
             };
 
-      string escaped = ArgumentEscaper.EscapeAndConcatenateArgArrayForProcessStart(args);
-      escaped.Should().Be(
-          "subcommand " +
-          "--not-escaped 1.0.0-prerelease.21165.2 " +
-          "--with-space \"/mnt/d/Program Files\" " +
-          "--already-escaped \"some value\" " +
-          "\"containing-\\\"-quote\"");
+            string escaped = ArgumentEscaper.EscapeAndConcatenateArgArrayForProcessStart(args);
+            escaped.Should().Be(
+                "subcommand " +
+                "--not-escaped 1.0.0-prerelease.21165.2 " +
+                "--with-space \"/mnt/d/Program Files\" " +
+                "--already-escaped \"some value\" " +
+                "\"containing-\\\"-quote\"");
+        }
     }
-  }
 }
