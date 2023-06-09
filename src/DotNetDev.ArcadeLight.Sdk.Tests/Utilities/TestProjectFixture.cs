@@ -25,7 +25,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests.Utilities
 
         private static readonly string[] _packagesToClear =
         {
-            "Microsoft.DotNet.Arcade.Sdk",
+            "DotNet.ArcadeLight.Sdk",
         };
 
         public TestProjectFixture()
