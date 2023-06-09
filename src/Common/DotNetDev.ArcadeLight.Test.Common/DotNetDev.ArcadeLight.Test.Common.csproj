@@ -6,6 +6,7 @@
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
 
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
