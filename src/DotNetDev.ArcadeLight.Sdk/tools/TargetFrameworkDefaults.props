@@ -21,8 +21,8 @@
     <NetMinimum>net6.0</NetMinimum>
 
     <!-- .NET Framework -->
-    <!--<NetFrameworkMinimum>net462</NetFrameworkMinimum>
+    <NetFrameworkMinimum>net462</NetFrameworkMinimum>
     <NetFrameworkToolCurrent>net472</NetFrameworkToolCurrent>
-    <NetFrameworkCurrent>net481</NetFrameworkCurrent>-->
+    <NetFrameworkCurrent>net481</NetFrameworkCurrent>
   </PropertyGroup>
 </Project>

@@ -6,7 +6,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ExcludeFromSourceBuild>false</ExcludeFromSourceBuild>
     <PackageId>DotNetDev.ArcadeLight.Sdk</PackageId>
-    <Description>Lightweight package of dotnet Arcade (does not use Microsoft proprietary tooling)</Description>
+    <Description>Lightweight package of dotnet Arcade build tools (does not use Microsoft proprietary tooling)</Description>
     <PackageReleaseNotes>https://github.com/Bertk/arcade-light/blob/main/CHANGELOG.md</PackageReleaseNotes>
 
     <IsPackable>true</IsPackable>
@@ -91,5 +91,5 @@
     </ItemGroup>
   </Target>
 
-  <Import Project="$(RepoRoot)eng\BuildTask.targets" />
+  <Import Project="$(RepositoryEngineeringDir)\BuildTask.targets" />
 </Project>
