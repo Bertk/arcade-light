@@ -28,15 +28,6 @@
 
   <ItemGroup>
     <!--
-      Do not include assemblies that MSBuild ships with in the package.
-    -->
-    <PackageReference Update="Microsoft.Build" Publish="false" />
-    <PackageReference Update="Microsoft.Build.Framework" Publish="false" />
-    <PackageReference Update="Microsoft.Build.Tasks.Core" Publish="false" />
-    <PackageReference Update="Microsoft.Build.Utilities.Core" Publish="false" />
-    <PackageReference Update="System.Collections.Immutable" Publish="false" />
-    <PackageReference Update="System.Runtime.InteropServices.RuntimeInformation" Publish="false" />
-    <!--
       Update all PackageReference and ProjectReference Items to have
       PrivateAssets="All" and default Publish to true.
       This removes the dependency nodes from the generated nuspec and
