@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
+    <TargetFrameworks>$(NetMinimum);$(NetCurrent)</TargetFrameworks>
     <DefaultItemExcludes>$(DefaultItemExcludes);testassets\**\*</DefaultItemExcludes>
     <EnableSourceLink>false</EnableSourceLink>
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
@@ -12,13 +12,13 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
     <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.3.2" />
     <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" />
   </ItemGroup>
 

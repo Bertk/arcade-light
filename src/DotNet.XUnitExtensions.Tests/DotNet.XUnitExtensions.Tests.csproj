@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(TargetFrameworkForNETSDK);net6.0</TargetFrameworks>
+    <TargetFrameworks>$(NetCurrent);$(NetMinimum)</TargetFrameworks>
     <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
     <Copyright>$(MyCopyright)</Copyright>
     <IsPackable>false</IsPackable>

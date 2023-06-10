@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
+    <TargetFrameworks>$(NetMinimum);$(NetCurrent)</TargetFrameworks>
     <IsPackable>true</IsPackable>
     <NoWarn>$(NoWarn);NU1507</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
@@ -9,11 +9,11 @@
     <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" />
   </ItemGroup>
 

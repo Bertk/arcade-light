@@ -17,5 +17,6 @@
   <Import Project="ProjectDefaults.props"/>
   <Import Project="Tests.props" />
   <Import Project="Workarounds.props"/>
+  <Import Project="TargetFrameworkDefaults.props"/>
 
 </Project>
