@@ -7,6 +7,12 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+### Changed
+- use $(NetMinimum) and $(NetCurrent) for SDK (prepare net8.0 updates)
+- Fix SBOM (ignore tests)
+- Updated dependencies
+
+
 ## [1.5.53](https://github.com/Bertk/arcade-light/compare/v1.5.35...v1.5.53) - 2023-06-05
 
 ### Changed
