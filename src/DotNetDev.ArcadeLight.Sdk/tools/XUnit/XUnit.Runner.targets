@@ -15,8 +15,8 @@
       <_TestTimeout>%(TestToRun.TestTimeout)</_TestTimeout>
       <_TestRunnerAdditionalArguments>%(TestToRun.TestRunnerAdditionalArguments)</_TestRunnerAdditionalArguments>
 
-      <_TestRunnerTargetFramework>net6.0</_TestRunnerTargetFramework>
-      <_TestRunnerTargetFramework Condition="'$(TargetFrameworkForNETSDK)' != ''">$(TargetFrameworkForNETSDK)</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework>$(NetMinimum)</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework Condition="'$(NetCurrent)' != ''">$(NetCurrent)</_TestRunnerTargetFramework>
       <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == 'netcoreapp1.1' or %(TestToRun.TargetFramework) == 'netcoreapp1.0'">netcoreapp1.0</_TestRunnerTargetFramework>
       <_TestPublishDir>%(TestToRun.TestPublishDir)</_TestPublishDir>
     </PropertyGroup>

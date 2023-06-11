@@ -1,12 +1,12 @@
 <!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. -->
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;$(TargetFrameworkForNETSDK)</TargetFrameworks>
+    <TargetFrameworks>$(NetMinimum);$(NetCurrent)</TargetFrameworks>
     <LangVersion>preview</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ExcludeFromSourceBuild>false</ExcludeFromSourceBuild>
     <PackageId>DotNetDev.ArcadeLight.Sdk</PackageId>
-    <Description>Lightweight package of dotnet Arcade (does not use Microsoft proprietary tooling)</Description>
+    <Description>Lightweight package of dotnet Arcade build tools (does not use Microsoft proprietary tooling)</Description>
     <PackageReleaseNotes>https://github.com/Bertk/arcade-light/blob/main/CHANGELOG.md</PackageReleaseNotes>
 
     <IsPackable>true</IsPackable>
@@ -30,11 +30,11 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net6.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" />
   </ItemGroup>
 
@@ -91,5 +91,5 @@
     </ItemGroup>
   </Target>
 
-  <Import Project="$(RepoRoot)eng\BuildTask.targets" />
+  <Import Project="$(RepositoryEngineeringDir)\BuildTask.targets" />
 </Project>

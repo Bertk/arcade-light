@@ -26,6 +26,7 @@
     <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.6.2" />
     <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="17.6.2" />
     <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.6.2164" />
+    <PackageVersion Include="NETStandard.Library" Version="2.0.3" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="NuGet.Versioning" Version="6.6.0" />
     <PackageVersion Include="NuGet.Frameworks" Version="6.6.0" />

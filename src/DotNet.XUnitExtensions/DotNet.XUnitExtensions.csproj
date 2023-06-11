@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
     <AssemblyName>DotNet.XUnitExtensions</AssemblyName>
     <Description>This package provides things like various traits and discovers like OuterLoop/ActiveIssue that are used by .NET test projects.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
