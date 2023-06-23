@@ -1,9 +1,9 @@
 {
   "sdk": {
-    "version": "7.0.302"
+    "version": "7.0.304"
   },
   "tools": {
-    "dotnet": "7.0.302"
+    "dotnet": "7.0.304"
   },
   "msbuild-sdks": {
     "DotNetDev.ArcadeLight.Sdk": "1.5.59-beta"
