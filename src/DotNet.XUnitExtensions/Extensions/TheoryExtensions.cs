@@ -23,7 +23,7 @@ namespace DotNet.XUnitExtensions
 
         private class TheoryDataAdapter : TheoryData, IEnumerable<object[]>
         {
-            private IEnumerable<object[]> _data;
+            private readonly IEnumerable<object[]> _data;
 
             public TheoryDataAdapter(IEnumerable<object[]> data)
             {

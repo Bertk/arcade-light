@@ -444,7 +444,7 @@ dotnet_diagnostic.S2330.severity = warning
 
 dotnet_diagnostic.S2333.severity = none
 
-dotnet_diagnostic.S2339.severity = warning
+dotnet_diagnostic.S2339.severity = silent
 
 dotnet_diagnostic.S2342.severity = none
 
@@ -694,7 +694,7 @@ dotnet_diagnostic.S3776.severity = none
 
 dotnet_diagnostic.S3869.severity = warning
 
-dotnet_diagnostic.S3871.severity = warning
+dotnet_diagnostic.S3871.severity = silent
 
 dotnet_diagnostic.S3872.severity = none
 
@@ -848,7 +848,7 @@ dotnet_diagnostic.S4061.severity = none
 
 dotnet_diagnostic.S4069.severity = none
 
-dotnet_diagnostic.S4070.severity = warning
+dotnet_diagnostic.S4070.severity = silent
 
 dotnet_diagnostic.S4136.severity = none
 
@@ -1003,6 +1003,7 @@ csharp_style_prefer_switch_expression = true:suggestion
 csharp_style_prefer_pattern_matching = true:silent
 csharp_style_prefer_not_pattern = true:suggestion
 csharp_style_prefer_extended_property_pattern = true:suggestion
+csharp_style_prefer_primary_constructors = true:suggestion
 
 [*.vb]
 # Modifier preferences

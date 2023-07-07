@@ -14,7 +14,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
         [Fact]
         public void GroupItemsBy()
         {
-            var task = new GroupItemsBy()
+      GroupItemsBy task = new GroupItemsBy()
             {
                 Items = new TaskItem[] 
                 {
@@ -28,7 +28,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
             };
 
             bool result = task.Execute();
-            var inspectMetadata = new[] { "X", "Y", "Z", "U", "W" };
+      string[] inspectMetadata = new[] { "X", "Y", "Z", "U", "W" };
 
             AssertEx.Equal(new[] 
             {

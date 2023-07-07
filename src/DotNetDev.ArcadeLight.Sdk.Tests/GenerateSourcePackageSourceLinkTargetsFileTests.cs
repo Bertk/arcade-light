@@ -18,7 +18,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
             string NormalizePath(string path) =>
                 path.Replace('\\', Path.DirectorySeparatorChar);
 
-            var task = new GenerateSourcePackageSourceLinkTargetsFile
+      GenerateSourcePackageSourceLinkTargetsFile task = new GenerateSourcePackageSourceLinkTargetsFile
             {
                 ProjectDirectory = NormalizePath(@"C:\temp\A\B\C\D\E\F"),
                 PackageId = "My.Package",

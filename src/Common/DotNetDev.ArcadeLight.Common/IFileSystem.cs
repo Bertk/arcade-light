@@ -28,7 +28,7 @@ namespace DotNetDev.ArcadeLight.Common
 
         void DeleteFile(string path);
 
-        void CopyFile(string sourceFileName, string destFileName, bool overwrite = false);
+        void CopyFile(string sourceFileName, string destinationFileName, bool overwrite = false);
 
         Stream GetFileStream(string path, FileMode mode, FileAccess access);
 

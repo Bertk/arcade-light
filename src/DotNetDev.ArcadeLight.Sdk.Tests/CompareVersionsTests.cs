@@ -33,7 +33,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       compareVersionsTask.Right = right;
 
       // Act
-      var currentResult = compareVersionsTask.Execute();
+      bool currentResult = compareVersionsTask.Execute();
 
 
       // Assert
@@ -53,7 +53,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       compareVersionsTask.Right = right;
 
       // Act
-      var currentResult = compareVersionsTask.Execute();
+      bool currentResult = compareVersionsTask.Execute();
 
 
       // Assert

@@ -45,7 +45,7 @@ namespace DotNetDev.ArcadeLight.Sdk
             }
 
 #else
-            var options = new EnumerationOptions
+      EnumerationOptions options = new EnumerationOptions
             {
                 MatchCasing = MatchCasing.CaseInsensitive,
                 RecurseSubdirectories = false,
@@ -57,7 +57,7 @@ namespace DotNetDev.ArcadeLight.Sdk
             IEnumerable<string> enumerateFiles(string extension) =>
                 System.IO.Directory.EnumerateFileSystemEntries(Directory, fileName + extension, options);
 #endif
-            var matches = 
+      string[] matches = 
                 (from extension in new[] { ".txt", ".md", "" }
                  from path in enumerateFiles(extension)
                  select path).ToArray();

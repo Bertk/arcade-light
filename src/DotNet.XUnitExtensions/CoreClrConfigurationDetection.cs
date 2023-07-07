@@ -23,15 +23,17 @@ namespace Xunit
         public static bool IsReleaseRuntime => AssemblyConfigurationEquals("Release");
         public static bool IsDebugRuntime => AssemblyConfigurationEquals("Debug");
 
-        public static bool IsStressTest =>
+#pragma warning disable S1067 // Expressions should not be too complex
+    public static bool IsStressTest =>
             IsGCStress ||
             IsZapDisable ||
             IsTailCallStress ||
             IsJitStressRegs ||
             IsJitStress ||
             IsJitMinOpts;
+#pragma warning restore S1067 // Expressions should not be too complex
 
-        private static string GetEnvironmentVariableValue(string name) =>
+    private static string GetEnvironmentVariableValue(string name) =>
             Environment.GetEnvironmentVariable("DOTNET_" + name) ?? Environment.GetEnvironmentVariable("COMPlus_" + name) ?? "0";
 
         private static bool AssemblyConfigurationEquals(string configuration)

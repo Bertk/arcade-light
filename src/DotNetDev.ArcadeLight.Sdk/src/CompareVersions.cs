@@ -25,13 +25,13 @@ namespace DotNetDev.ArcadeLight.Sdk
 
         private void ExecuteImpl()
         {
-            if (!SemanticVersion.TryParse(Left, out var left))
+            if (!SemanticVersion.TryParse(Left, out SemanticVersion left))
             {
                 Log.LogError($"Invalid version: '{Left}'");
                 return;
             }
 
-            if (!SemanticVersion.TryParse(Right, out var right))
+            if (!SemanticVersion.TryParse(Right, out SemanticVersion right))
             {
                 Log.LogError($"Invalid version: '{Right}'");
                 return;

@@ -56,13 +56,16 @@ namespace DotNet.XUnitExtensions
             return Array.Empty<KeyValuePair<string, string>>();
         }
 
-        private static bool RuntimeConfigurationApplies(RuntimeConfiguration runtimeConfigurations) =>
+#pragma warning disable S1067 // Expressions should not be too complex
+    private static bool RuntimeConfigurationApplies(RuntimeConfiguration runtimeConfigurations) =>
             (runtimeConfigurations.HasFlag(RuntimeConfiguration.Checked) && s_isCheckedRuntime.Value) ||
             (runtimeConfigurations.HasFlag(RuntimeConfiguration.Release) && s_isReleaseRuntime.Value) ||
             (runtimeConfigurations.HasFlag(RuntimeConfiguration.Debug) && s_isDebugRuntime.Value);
+#pragma warning restore S1067 // Expressions should not be too complex
 
-        // Order here matters as some env variables may appear in multiple modes
-        private static bool StressModeApplies(RuntimeTestModes stressMode) =>
+    // Order here matters as some env variables may appear in multiple modes
+#pragma warning disable S1067 // Expressions should not be too complex
+    private static bool StressModeApplies(RuntimeTestModes stressMode) =>
             (stressMode.HasFlag(RuntimeTestModes.RegularRun) && !s_isStressTest.Value) ||
             (stressMode.HasFlag(RuntimeTestModes.GCStress3) && s_isGCStress3.Value) ||
             (stressMode.HasFlag(RuntimeTestModes.GCStressC) && s_isGCStressC.Value) ||
@@ -71,5 +74,6 @@ namespace DotNet.XUnitExtensions
             (stressMode.HasFlag(RuntimeTestModes.JitStressRegs) && s_isJitStressRegs.Value) ||
             (stressMode.HasFlag(RuntimeTestModes.JitStress) && s_isJitStress.Value) ||
             (stressMode.HasFlag(RuntimeTestModes.JitMinOpts) && s_isJitMinOpts.Value);
-    }
+#pragma warning restore S1067 // Expressions should not be too complex
+  }
 }

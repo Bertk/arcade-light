@@ -28,12 +28,12 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
         [InlineData(true, 2, true)]
         public void RepoProducesPackages(bool buildAdditionalProject, int expectedPackages, bool stablePackages)
         {
-            var app = _fixture.CreateTestApp("RepoWithConditionalProjectsToBuild");
-            var packArg = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+      TestApp app = _fixture.CreateTestApp("RepoWithConditionalProjectsToBuild");
+      string packArg = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? "-pack"
                 : "--pack";
-            var finalVersionKindarg = stablePackages ? "/p:DotNetFinalVersionKind=release" : "/p:DotNetFinalVersionKind=prerelease";
-            var exitCode = app.ExecuteBuild(_output,
+      string finalVersionKindarg = stablePackages ? "/p:DotNetFinalVersionKind=release" : "/p:DotNetFinalVersionKind=prerelease";
+      int exitCode = app.ExecuteBuild(_output,
                 packArg,
                 $"/p:ShouldBuildMaybe={buildAdditionalProject}",
                 // these properties are required for projects that are not in a git repo
@@ -41,11 +41,11 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
                 "/p:EnableSourceControlManagerQueries=false",
                 finalVersionKindarg);
             Assert.Equal(0, exitCode);
-            var nupkgFiles = Directory.GetFiles(Path.Combine(app.WorkingDirectory, "artifacts", "packages", "Debug", "Shipping"), "*.nupkg");
+      string[] nupkgFiles = Directory.GetFiles(Path.Combine(app.WorkingDirectory, "artifacts", "packages", "Debug", "Shipping"), "*.nupkg");
 
             _output.WriteLine("Packages produced:");
 
-            foreach(var file in nupkgFiles)
+            foreach(string file in nupkgFiles)
             {
                 _output.WriteLine(file);
             }

@@ -1,6 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using System.IO;
 
 #nullable enable
@@ -28,12 +29,17 @@ namespace DotNetDev.ArcadeLight.Common
 
         public void WriteToFile(string path, string content)
         {
-            string dirPath = Path.GetDirectoryName(path);
+            string? dirPath = Path.GetDirectoryName(path);
+
+            if (dirPath == null) {
+              throw new ArgumentNullException (nameof(path));
+            }
             Directory.CreateDirectory(dirPath);
             File.WriteAllText(path, content);
+
         }
 
-        public void CopyFile(string sourceFileName, string destFileName, bool overwrite = false) => File.Copy(sourceFileName, destFileName, overwrite);
+        public void CopyFile(string sourceFileName, string destinationFileName, bool overwrite = false) => File.Copy(sourceFileName, destinationFileName, overwrite);
 
         public Stream GetFileStream(string path, FileMode mode, FileAccess access) => new FileStream(path, mode, access);
 

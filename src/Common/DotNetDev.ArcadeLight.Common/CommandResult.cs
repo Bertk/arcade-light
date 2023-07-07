@@ -7,11 +7,13 @@ using System.Diagnostics;
 
 namespace DotNetDev.ArcadeLight.Common
 {
-    public struct CommandResult
-    {
-        public static readonly CommandResult Empty = new CommandResult();
+#pragma warning disable CA1815 // Override equals and operator equals on value types
+  public struct CommandResult
+#pragma warning restore CA1815 // Override equals and operator equals on value types
+  {
+        public static readonly CommandResult Empty;
 
-        public ProcessStartInfo StartInfo { get; }
+    public ProcessStartInfo StartInfo { get; }
         public int ExitCode { get; }
         public string StdOut { get; }
         public string StdErr { get; }
@@ -43,7 +45,7 @@ namespace DotNetDev.ArcadeLight.Common
                     }
                 }
 
-                throw new Exception(message.ToString());
+                throw new ArgumentException(message.ToString());
             }
         }
     }

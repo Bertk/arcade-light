@@ -34,8 +34,8 @@ namespace DotNetDev.ArcadeLight.Sdk
 
         private void ExecuteImpl()
         {
-            var actualLines = File.ReadAllLines(LicensePath, Encoding.UTF8);
-            var expectedLines = File.ReadAllLines(ExpectedLicensePath, Encoding.UTF8);
+      string[] actualLines = File.ReadAllLines(LicensePath, Encoding.UTF8);
+      string[] expectedLines = File.ReadAllLines(ExpectedLicensePath, Encoding.UTF8);
 
             if (!LinesEqual(actualLines, expectedLines))
             {
@@ -50,8 +50,8 @@ namespace DotNetDev.ArcadeLight.Sdk
                    where !string.IsNullOrWhiteSpace(line)
                    select line.Trim();
 
-            var normalizedActual = normalize(actual).ToArray();
-            var normalizedExpected = normalize(expected).ToArray();
+      string[] normalizedActual = normalize(actual).ToArray();
+      string[] normalizedExpected = normalize(expected).ToArray();
 
             if (normalizedActual.Length != normalizedExpected.Length)
             {

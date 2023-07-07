@@ -23,9 +23,9 @@ namespace DotNetDev.ArcadeLight.Sdk
         {
             ItemsWithFullName = Items;
 
-            foreach (var item in Items)
+            foreach (ITaskItem item in Items)
             {
-                var assemblyPath = string.IsNullOrEmpty(PathMetadata) ? item.ItemSpec : item.GetMetadata(PathMetadata);
+        string assemblyPath = string.IsNullOrEmpty(PathMetadata) ? item.ItemSpec : item.GetMetadata(PathMetadata);
                 item.SetMetadata(FullNameMetadata, AssemblyName.GetAssemblyName(assemblyPath).FullName);
             }
 

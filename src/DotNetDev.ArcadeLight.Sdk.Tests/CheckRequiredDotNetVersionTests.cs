@@ -35,7 +35,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       checkRequiredDotNetVersion.RepositoryRoot = repositoryRoot;
       checkRequiredDotNetVersion.SdkVersion = minSdkVersionStr;
       // Act
-      var result = checkRequiredDotNetVersion.Execute();
+      bool result = checkRequiredDotNetVersion.Execute();
 
       // Assert
       Assert.Equal(expectedResult, result);
@@ -51,7 +51,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       checkRequiredDotNetVersion.RepositoryRoot = repositoryRoot;
       checkRequiredDotNetVersion.SdkVersion = "6.0.101";
       // Act
-      var result = checkRequiredDotNetVersion.Execute();
+      bool result = checkRequiredDotNetVersion.Execute();
 
       // Assert
       Assert.False(result);
@@ -67,7 +67,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       checkRequiredDotNetVersion.RepositoryRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
       checkRequiredDotNetVersion.SdkVersion = "7.0.200";
       // Act
-      var result = checkRequiredDotNetVersion.Execute();
+      bool result = checkRequiredDotNetVersion.Execute();
 
       // Assert
       Assert.False(result);
@@ -83,7 +83,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       checkRequiredDotNetVersion.RepositoryRoot = repositoryRoot;
       checkRequiredDotNetVersion.SdkVersion = "7.0.a";
       // Act
-      var result = checkRequiredDotNetVersion.Execute();
+      bool result = checkRequiredDotNetVersion.Execute();
 
       // Assert
       Assert.False(result);

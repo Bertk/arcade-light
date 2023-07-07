@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
+using Xunit.Sdk;
 
 namespace Microsoft.DotNet.Internal.DependencyInjection.Testing
 {
@@ -35,10 +37,14 @@ namespace Microsoft.DotNet.Internal.DependencyInjection.Testing
         {
             errorMessage = null;
 
-            StringBuilder allErrors = new StringBuilder();
+            StringBuilder allErrors = new();
             allErrors.Append("The following types are not resolvable:");
 
-            var services = new ServiceCollection();
+            ServiceCollection services = new();
+            if (register == null)
+            {
+              throw new ArgumentNullException(nameof(register));
+            }
 
             register(services);
 
@@ -238,23 +244,19 @@ namespace Microsoft.DotNet.Internal.DependencyInjection.Testing
 
         private static bool IsOptionsType(Type parameterRoot)
         {
-            switch (parameterRoot.FullName)
-            {
-                case "Microsoft.Extensions.Options.IOptions`1":
-                case "Microsoft.Extensions.Options.IOptionsMonitor`1":
-                case "Microsoft.Extensions.Options.IOptionsSnapshot`1":
-                    return true;
-                default:
-                    return false;
-            }
-        }
+      return parameterRoot.FullName switch
+      {
+        "Microsoft.Extensions.Options.IOptions`1" or "Microsoft.Extensions.Options.IOptionsMonitor`1" or "Microsoft.Extensions.Options.IOptionsSnapshot`1" => true,
+        _ => false,
+      };
+    }
 
         private static bool IsExemptType(Type type)
         {
             if (type.IsConstructedGenericType)
                 return IsExemptType(type.GetGenericTypeDefinition());
 
-            return s_exemptTypes.Contains(type.FullName) || s_exemptNamespaces.Any(n => type.FullName.StartsWith(n));
+            return s_exemptTypes.Contains(type.FullName) || s_exemptNamespaces.Exists(n => type.FullName.StartsWith(n, StringComparison.CurrentCulture));
         }
     }
 }

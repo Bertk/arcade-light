@@ -23,12 +23,12 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     public void SingleErrorVerify()
     {
       // Arrange
-      var singleError = new SingleError();
+      SingleError singleError = new SingleError();
       singleError.BuildEngine = buildEngine.Object;
       singleError.Text = "nasty error message";
 
       // Act
-      var result = singleError.Execute();
+      bool result = singleError.Execute();
 
       // Assert
       Assert.False(result);

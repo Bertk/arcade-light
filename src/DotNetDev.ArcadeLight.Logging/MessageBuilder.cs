@@ -13,7 +13,7 @@ namespace DotNetDev.ArcadeLight.Logging
             Finished,
         }
 
-        private readonly StringBuilder _builder = new StringBuilder();
+        private readonly StringBuilder _builder = new();
         private State _state;
 
         public void Start(string kind)
@@ -38,7 +38,7 @@ namespace DotNetDev.ArcadeLight.Logging
         public void Finish(string message = null)
         {
             Debug.Assert(_state == State.Properties);
-            _builder.Append("]");
+            _builder.Append(']');
             if (!string.IsNullOrEmpty(message))
             {
                 _builder.Append(Escape(message));
@@ -60,7 +60,7 @@ namespace DotNetDev.ArcadeLight.Logging
                 return string.Empty;
             }
 
-            var result = new StringBuilder(value.Length);
+            StringBuilder result = new(value.Length);
             foreach (char c in value)
             {
                 switch (c)

@@ -15,13 +15,13 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
         [InlineData("LICENSE")]
         public void GetLicenseFilePath(string licenseFileName)
         {
-            var dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+      string dir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
             Directory.CreateDirectory(dir);
-            var licensePath = Path.Combine(dir, licenseFileName);
+      string licensePath = Path.Combine(dir, licenseFileName);
 
             File.WriteAllText(licensePath, "");
 
-            var task = new GetLicenseFilePath()
+      GetLicenseFilePath task = new GetLicenseFilePath()
             {
                 Directory = dir
             };

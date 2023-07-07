@@ -14,10 +14,10 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
         [Fact]
         public void PathInMetadata()
         {
-            var objectAssembly = typeof(object).Assembly;
-            var thisAssembly = typeof(GetAssemblyFullNameTests).Assembly;
+      System.Reflection.Assembly objectAssembly = typeof(object).Assembly;
+      System.Reflection.Assembly thisAssembly = typeof(GetAssemblyFullNameTests).Assembly;
 
-            var task = new GetAssemblyFullName()
+      GetAssemblyFullName task = new GetAssemblyFullName()
             {
                 Items = new TaskItem[]
                 {
@@ -42,10 +42,10 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
         [Fact]
         public void PathInItemSpec()
         {
-            var objectAssembly = typeof(object).Assembly;
-            var thisAssembly = typeof(GetAssemblyFullNameTests).Assembly;
+      System.Reflection.Assembly objectAssembly = typeof(object).Assembly;
+      System.Reflection.Assembly thisAssembly = typeof(GetAssemblyFullNameTests).Assembly;
 
-            var task = new GetAssemblyFullName()
+      GetAssemblyFullName task = new GetAssemblyFullName()
             {
                 Items = new TaskItem[]
                 {

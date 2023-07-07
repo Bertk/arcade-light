@@ -41,7 +41,7 @@ namespace DotNetDev.ArcadeLight.Common
             var shouldQuote = !quoted && ShouldSurroundWithQuotes(argument);
             if (shouldQuote || quoted)
             {
-                sb.Append("\"");
+                sb.Append('"');
             }
 
             for (int i = 0; i < argument.Length; ++i)
@@ -85,7 +85,7 @@ namespace DotNetDev.ArcadeLight.Common
 
             if (shouldQuote || quoted)
             {
-                sb.Append("\"");
+                sb.Append('"');
             }
 
             return sb.ToString();
@@ -114,7 +114,7 @@ namespace DotNetDev.ArcadeLight.Common
                 }
                 else
                 {
-                    sb.Append("^");
+                    sb.Append('^');
                     sb.Append(character);
                 }
             }

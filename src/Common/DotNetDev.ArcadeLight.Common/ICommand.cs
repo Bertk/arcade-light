@@ -13,9 +13,9 @@ namespace DotNetDev.ArcadeLight.Common
         ICommand CaptureStdErr();
         ICommand CaptureStdOut();
         ICommand EnvironmentVariable(string name, string value);
-        ICommand ForwardStatus(TextWriter to = null);
-        ICommand ForwardStdErr(TextWriter to = null);
-        ICommand ForwardStdOut(TextWriter to = null);
+        ICommand ForwardStatus(TextWriter toStatus = null);
+        ICommand ForwardStdErr(TextWriter toErr = null);
+        ICommand ForwardStdOut(TextWriter toOut = null);
         ICommand OnErrorLine(Action<string> handler);
         ICommand OnOutputLine(Action<string> handler);
         ICommand QuietBuildReporter();

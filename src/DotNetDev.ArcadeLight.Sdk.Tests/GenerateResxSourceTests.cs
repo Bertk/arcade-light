@@ -25,11 +25,11 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
         [InlineData(false, false, true, "TestStrings.OmitGetResourceString.cs.txt")]
         public void GeneratesCSharp(bool emitFormatMethods, bool asConstants, bool omitGetResourceString, string expectedFileName)
         {
-            var resx = Path.Combine(AppContext.BaseDirectory, "testassets", "Resources", "TestStrings.resx");
-            var actualFile = Path.Combine(AppContext.BaseDirectory, Path.GetRandomFileName());
+      string resx = Path.Combine(AppContext.BaseDirectory, "testassets", "Resources", "TestStrings.resx");
+      string actualFile = Path.Combine(AppContext.BaseDirectory, Path.GetRandomFileName());
 
-            var engine = new MockEngine(_output);
-            var task = new GenerateResxSource
+      MockEngine engine = new MockEngine(_output);
+      GenerateResxSource task = new GenerateResxSource
             {
                 BuildEngine = engine,
                 ResourceFile = resx,
@@ -42,7 +42,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
                 OutputPath = actualFile,
             };
 
-            var expectedFile = Path.Combine(AppContext.BaseDirectory, "testassets", "Resources", expectedFileName);
+      string expectedFile = Path.Combine(AppContext.BaseDirectory, "testassets", "Resources", expectedFileName);
 
             if (File.Exists(actualFile))
             {
@@ -54,7 +54,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
             Assert.Empty(engine.Warnings);
 
             Assert.True(File.Exists(actualFile), "Actual file does not exist");
-            var actualFileContents = File.ReadAllText(actualFile);
+      string actualFileContents = File.ReadAllText(actualFile);
             _output.WriteLine(actualFileContents);
             Assert.Equal(File.ReadAllText(expectedFile), actualFileContents, ignoreLineEndingDifferences: true);
         }

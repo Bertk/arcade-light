@@ -17,7 +17,8 @@ namespace DotNet.XUnitExtensions
         public static bool IsRunningOnNetCoreApp { get; } = (Environment.Version.Major >= 5 || !RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase));
         public static bool IsRunningOnNetFramework { get; } = RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
 
-        public static bool TestPlatformApplies(TestPlatforms platforms) =>
+#pragma warning disable S1067 // Expressions should not be too complex
+    public static bool TestPlatformApplies(TestPlatforms platforms) =>
                 (platforms.HasFlag(TestPlatforms.Any)) ||
                 (platforms.HasFlag(TestPlatforms.FreeBSD) && RuntimeInformation.IsOSPlatform(OSPlatform.Create("FREEBSD"))) ||
                 (platforms.HasFlag(TestPlatforms.Linux) && RuntimeInformation.IsOSPlatform(OSPlatform.Linux)) ||
@@ -33,8 +34,9 @@ namespace DotNet.XUnitExtensions
                 (platforms.HasFlag(TestPlatforms.Browser) && RuntimeInformation.IsOSPlatform(OSPlatform.Create("BROWSER"))) ||
                 (platforms.HasFlag(TestPlatforms.Wasi) && RuntimeInformation.IsOSPlatform(OSPlatform.Create("WASI"))) ||
                 (platforms.HasFlag(TestPlatforms.Windows) && RuntimeInformation.IsOSPlatform(OSPlatform.Windows));
+#pragma warning restore S1067 // Expressions should not be too complex
 
-        public static bool TestRuntimeApplies(TestRuntimes runtimes) =>
+    public static bool TestRuntimeApplies(TestRuntimes runtimes) =>
                 (runtimes.HasFlag(TestRuntimes.Mono) && IsMonoRuntime) ||
                 (runtimes.HasFlag(TestRuntimes.CoreCLR) && !IsMonoRuntime); // assume CoreCLR if it's not Mono
 
