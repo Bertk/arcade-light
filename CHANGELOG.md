@@ -7,10 +7,31 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+
+## [1.5.54](https://github.com/Bertk/arcade-light/compare/v1.5.53...v1.5.80) - 2023-07-07
+
 ### Changed
+
 - use $(NetMinimum) and $(NetCurrent) for SDK (prepare net8.0 updates)
 - Fix SBOM (ignore tests)
+- fix warnings (#145)
 - Updated dependencies
+  - Bump xunit from 2.4.2 to 2.5.0 (#151)
+  - Bump xunit.extensibility.execution from 2.4.2 to 2.5.0 (#148)
+  - Bump xunit.runner.console from 2.4.2 to 2.5.0 (#149)
+  - Bump xunit.extensibility.core from 2.4.2 to 2.5.0 (#150)
+  - Bump dotnet-reportgenerator-globaltool from 5.1.22 to 5.1.23 (#152)
+  - Bump vswhere from 3.1.4 to 3.1.7 (#147)
+  - Bump xunit.runner.visualstudio from 2.4.5 to 2.5.0 (#146)
+  - Bump cyclonedx from 2.7.0 to 2.8.0 (#143)
+  - Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.21 to 5.1.22 (#142)
+  - Bump Microsoft.TemplateEngine.Tasks from 7.0.107 to 7.0.108 (#144)
+  - Update Microsoft.NET.Test.Sdk version (#141)
+  - Bump NuGet.Frameworks from 6.6.0 to 6.6.1 (#139)
+  - Bump Microsoft.NETCore.Platforms from 7.0.2 to 7.0.3 (#136)
+  - Bump System.Reflection.Metadata from 7.0.1 to 7.0.2 (#137)
+  - Bump NuGet.Versioning from 6.6.0 to 6.6.1 (#135)
+  - Bump System.Text.Json from 7.0.2 to 7.0.3 (#138)
 
 
 ## [1.5.53](https://github.com/Bertk/arcade-light/compare/v1.5.35...v1.5.53) - 2023-06-05
