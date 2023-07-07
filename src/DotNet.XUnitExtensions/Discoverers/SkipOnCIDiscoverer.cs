@@ -8,20 +8,20 @@ using Xunit.Sdk;
 
 namespace DotNet.XUnitExtensions
 {
-    /// <summary>
-    /// This class discovers all of the tests and test classes that have
-    /// applied the SkipOnCIAttribute
-    /// </summary>
-    public class SkipOnCIDiscoverer : ITraitDiscoverer
+  /// <summary>
+  /// This class discovers all of the tests and test classes that have
+  /// applied the SkipOnCIAttribute
+  /// </summary>
+  public class SkipOnCIDiscoverer : ITraitDiscoverer
+  {
+    public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {
-        public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
-        {
-            if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_CI")) ||
-                !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT")) ||
-                !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_OS")))
-            {
-                yield return new KeyValuePair<string, string>(XunitConstants.Category, XunitConstants.Failing);
-            }
-        }
+      if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DOTNET_CI")) ||
+          !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT")) ||
+          !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("AGENT_OS")))
+      {
+        yield return new KeyValuePair<string, string>(XunitConstants.Category, XunitConstants.Failing);
+      }
     }
+  }
 }

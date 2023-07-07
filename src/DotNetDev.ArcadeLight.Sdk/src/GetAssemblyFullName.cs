@@ -6,31 +6,35 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-    public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
+  public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
+  {
+    [Required]
+#pragma warning disable CA1819 // Properties should not return arrays
+    public ITaskItem[] Items { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
+
+    public string PathMetadata { get; set; }
+
+    [Required]
+    public string FullNameMetadata { get; set; }
+
+    [Output]
+#pragma warning disable CA1819 // Properties should not return arrays
+    public ITaskItem[] ItemsWithFullName { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
+
+    public override bool Execute()
     {
-        [Required]
-        public ITaskItem[] Items { get; set; }
+      ItemsWithFullName = Items;
 
-        public string PathMetadata { get; set; }
+      foreach (ITaskItem item in Items)
+      {
+        string assemblyPath = string.IsNullOrEmpty(PathMetadata) ? item.ItemSpec : item.GetMetadata(PathMetadata);
+        item.SetMetadata(FullNameMetadata, AssemblyName.GetAssemblyName(assemblyPath).FullName);
+      }
 
-        [Required]
-        public string FullNameMetadata { get; set; }
-
-        [Output]
-        public ITaskItem[] ItemsWithFullName { get; set; }
-
-        public override bool Execute()
-        {
-            ItemsWithFullName = Items;
-
-            foreach (var item in Items)
-            {
-                var assemblyPath = string.IsNullOrEmpty(PathMetadata) ? item.ItemSpec : item.GetMetadata(PathMetadata);
-                item.SetMetadata(FullNameMetadata, AssemblyName.GetAssemblyName(assemblyPath).FullName);
-            }
-
-            return true;
-        }
+      return true;
     }
+  }
 }
 

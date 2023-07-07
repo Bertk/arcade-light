@@ -8,26 +8,26 @@ using DotNet.XUnitExtensions;
 
 namespace Xunit
 {
+  /// <summary>
+  ///  This test should be run only on Windows on .NET Framework.
+  /// </summary>
+  public class WindowsFullFrameworkOnlyFactAttribute : FactAttribute
+  {
     /// <summary>
-    ///  This test should be run only on Windows on .NET Framework.
+    /// Initializes a new instance of the <see cref="WindowsFullFrameworkOnlyFactAttribute"/> class.
     /// </summary>
-    public class WindowsFullFrameworkOnlyFactAttribute : FactAttribute
+    /// <param name="additionalMessage">The additional message that is appended to skip reason, when test is skipped.</param>
+    public WindowsFullFrameworkOnlyFactAttribute(string? additionalMessage = null)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WindowsFullFrameworkOnlyFactAttribute"/> class.
-        /// </summary>
-        /// <param name="additionalMessage">The additional message that is appended to skip reason, when test is skipped.</param>
-        public WindowsFullFrameworkOnlyFactAttribute(string? additionalMessage = null)
-        {
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                this.Skip = "This test only runs on Windows on .NET Framework.".AppendAdditionalMessage(additionalMessage);
-                return;
-            }
-            if (!DiscovererHelpers.IsRunningOnNetFramework)
-            {
-                this.Skip = "This test only runs on .NET Framework.".AppendAdditionalMessage(additionalMessage);
-            }
-        }
+      if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+      {
+        this.Skip = "This test only runs on Windows on .NET Framework.".AppendAdditionalMessage(additionalMessage);
+        return;
+      }
+      if (!DiscovererHelpers.IsRunningOnNetFramework)
+      {
+        this.Skip = "This test only runs on .NET Framework.".AppendAdditionalMessage(additionalMessage);
+      }
     }
+  }
 }

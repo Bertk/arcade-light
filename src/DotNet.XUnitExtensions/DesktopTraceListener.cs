@@ -6,26 +6,29 @@ using System.Diagnostics;
 
 namespace DotNet.XUnitExtensions
 {
-    /// <summary>
-    /// Trace Listener for corefx Desktop test execution to avoid showing assert pop-ups and making the test fail when an Assert fails.
-    /// </summary>
-    public class DesktopTestTraceListener : DefaultTraceListener
-    {
-        /// <summary>
-        /// Override of <see cref="DefaultTraceListener.Fail" /> to handle Assert failures with custom behavior.
-        /// When an Assert failure happens during test execution we will rather throw a DebugAssertException so that the test fails and we have a full StackTrace.
-        /// </summary>
-        public override void Fail(string message, string detailMessage)
-        {
-            throw new DebugAssertException(message, detailMessage);
-        }
+  /// <summary>
+  /// Trace Listener for corefx Desktop test execution to avoid showing assert pop-ups and making the test fail when an Assert fails.
+  /// </summary>
+  public class DesktopTestTraceListener : DefaultTraceListener
+  {
 
-        private sealed class DebugAssertException : Exception
-        {
-            internal DebugAssertException(string message, string detailMessage) :
-                base(message + Environment.NewLine + detailMessage)
-            {
-            }
-        }
+#pragma warning disable CS0419 // Ambiguous reference in cref attribute
+    /// <summary>
+    /// Override of <see cref="DefaultTraceListener.Fail" /> to handle Assert failures with custom behavior.
+    /// When an Assert failure happens during test execution we will rather throw a DebugAssertException so that the test fails and we have a full StackTrace.
+    /// </summary>
+    public override void Fail(string message, string detailMessage)
+#pragma warning restore CS0419 // Ambiguous reference in cref attribute
+    {
+      throw new DebugAssertException(message, detailMessage);
     }
+
+    private sealed class DebugAssertException : Exception
+    {
+      internal DebugAssertException(string message, string detailMessage) :
+          base(message + Environment.NewLine + detailMessage)
+      {
+      }
+    }
+  }
 }

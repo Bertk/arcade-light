@@ -7,78 +7,92 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
+  /// <summary>
+  /// Groups items by ItemSpec.
+  /// 
+  /// Given the following items:
+  /// <![CDATA[
+  /// <ItemGroup>
+  ///   <Stuff Include="A" Value="X"/>
+  ///   <Stuff Include="A" Value="Y"/>
+  ///   <Stuff Include="B" Value="Z"/>
+  /// </ItemGroup>
+  /// ]]>
+  /// 
+  /// produces
+  /// 
+  /// <![CDATA[
+  /// <ItemGroup>
+  ///   <Stuff Include="A" Value="X;Y"/>
+  ///   <Stuff Include="B" Value="Z"/>
+  /// </ItemGroup>
+  /// ]]>
+  /// 
+  /// </summary>
+  public sealed class GroupItemsBy : Microsoft.Build.Utilities.Task
+  {
     /// <summary>
-    /// Groups items by ItemSpec.
-    /// 
-    /// Given the following items:
-    /// <![CDATA[
-    /// <ItemGroup>
-    ///   <Stuff Include="A" Value="X"/>
-    ///   <Stuff Include="A" Value="Y"/>
-    ///   <Stuff Include="B" Value="Z"/>
-    /// </ItemGroup>
-    /// ]]>
-    /// 
-    /// produces
-    /// 
-    /// <![CDATA[
-    /// <ItemGroup>
-    ///   <Stuff Include="A" Value="X;Y"/>
-    ///   <Stuff Include="B" Value="Z"/>
-    /// </ItemGroup>
-    /// ]]>
-    /// 
+    /// Items to group by their ItemSpec.
     /// </summary>
-    public sealed class GroupItemsBy : Microsoft.Build.Utilities.Task
+    [Required]
+#pragma warning disable CA1819 // Properties should not return arrays
+    public ITaskItem[] Items { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
+
+    /// <summary>
+    /// Names of custom metadata to group (e.g. "Value" in the example above).
+    /// When merging two items the values of metadata in this set are merged into a list, 
+    /// while the first value is used for metadata not in this set.
+    /// </summary>
+    [Required]
+#pragma warning disable CA1819 // Properties should not return arrays
+    public string[] GroupMetadata { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
+
+    /// <summary>
+    /// Items with grouped metadata values.
+    /// </summary>
+    [Output]
+#pragma warning disable CA1819 // Properties should not return arrays
+    public ITaskItem[] GroupedItems { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
+
+    public override bool Execute()
     {
-        /// <summary>
-        /// Items to group by their ItemSpec.
-        /// </summary>
-        [Required]
-        public ITaskItem[] Items { get; set; }
+      ITaskItem mergeItems(IEnumerable<ITaskItem> items)
+      {
+        ITaskItem result = items.First();
 
-        /// <summary>
-        /// Names of custom metadata to group (e.g. "Value" in the example above).
-        /// When merging two items the values of metadata in this set are merged into a list, 
-        /// while the first value is used for metadata not in this set.
-        /// </summary>
-        [Required]
-        public string[] GroupMetadata { get; set; }
-
-        /// <summary>
-        /// Items with grouped metadata values.
-        /// </summary>
-        [Output]
-        public ITaskItem[] GroupedItems { get; set; }
-
-        public override bool Execute()
+        foreach (ITaskItem item in items.Skip(1))
         {
-            ITaskItem mergeItems(IEnumerable<ITaskItem> items)
+          foreach (string metadataName in GroupMetadata)
+          {
+            string left = result.GetMetadata(metadataName);
+            string right = item.GetMetadata(metadataName);
+
+            if (string.IsNullOrEmpty(right))
             {
-                var result = items.First();
-
-                foreach (var item in items.Skip(1))
-                {
-                    foreach (string metadataName in GroupMetadata)
-                    {
-                        var left = result.GetMetadata(metadataName);
-                        var right = item.GetMetadata(metadataName);
-
-                        result.SetMetadata(metadataName, 
-                            (string.IsNullOrEmpty(left) || left == right) ? right : string.IsNullOrEmpty(right) ? left : left + ";" + right);
-                    }
-                }
-
-                return result;
+              result.SetMetadata(metadataName,
+                            (string.IsNullOrEmpty(left) || left == right) ? right : left);
             }
-
-            GroupedItems = (from item in Items
-                            group item by item.ItemSpec
-                            into itemsWithEqualKey
-                            select mergeItems(itemsWithEqualKey)).ToArray();
-
-            return true;
+            else
+            {
+              result.SetMetadata(metadataName,
+                            (string.IsNullOrEmpty(left) || left == right) ? right : left + ";" + right);
+            }
+          }
         }
+
+        return result;
+      }
+
+      GroupedItems = (from item in Items
+                      group item by item.ItemSpec
+                      into itemsWithEqualKey
+                      select mergeItems(itemsWithEqualKey)).ToArray();
+
+      return true;
     }
+  }
 }
 

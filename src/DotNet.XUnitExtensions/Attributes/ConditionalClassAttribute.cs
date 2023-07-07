@@ -7,21 +7,21 @@ using Xunit.Sdk;
 
 namespace Xunit
 {
-    [TraitDiscoverer("DotNet.XUnitExtensions.ConditionalClassDiscoverer", "DotNet.XUnitExtensions")]
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public sealed class ConditionalClassAttribute : Attribute, ITraitAttribute
-    {
-        [DynamicallyAccessedMembers(StaticReflectionConstants.ConditionalMemberKinds)]
-        public Type CalleeType { get; private set; }
-        public string[] ConditionMemberNames { get; private set; }
+  [TraitDiscoverer("DotNet.XUnitExtensions.ConditionalClassDiscoverer", "DotNet.XUnitExtensions")]
+  [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+  public sealed class ConditionalClassAttribute : Attribute, ITraitAttribute
+  {
+    [DynamicallyAccessedMembers(StaticReflectionConstants.ConditionalMemberKinds)]
+    public Type CalleeType { get; private set; }
+    public string[] ConditionMemberNames { get; private set; }
 
-        public ConditionalClassAttribute(
-            [DynamicallyAccessedMembers(StaticReflectionConstants.ConditionalMemberKinds)]
+    public ConditionalClassAttribute(
+        [DynamicallyAccessedMembers(StaticReflectionConstants.ConditionalMemberKinds)]
             Type calleeType,
-            params string[] conditionMemberNames)
-        {
-            CalleeType = calleeType;
-            ConditionMemberNames = conditionMemberNames;
-        }
+        params string[] conditionMemberNames)
+    {
+      CalleeType = calleeType;
+      ConditionMemberNames = conditionMemberNames;
     }
+  }
 }

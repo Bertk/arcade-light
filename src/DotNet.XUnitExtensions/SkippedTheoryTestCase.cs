@@ -11,28 +11,30 @@ namespace DotNet.XUnitExtensions
 {
   /// <summary>Wraps RunAsync for ConditionalTheory.</summary>
   public class SkippedTheoryTestCase : XunitTheoryTestCase
+  {
+#pragma warning disable S1133 // Deprecated code should be removed
+    [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes", error: true)]
+#pragma warning restore S1133 // Deprecated code should be removed
+    public SkippedTheoryTestCase() { }
+
+    public SkippedTheoryTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay defaultMethodDisplay, TestMethodDisplayOptions defaultMethodDisplayOptions, ITestMethod testMethod)
+        : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod) { }
+
+    public override async Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,
+                                                    IMessageBus messageBus,
+                                                    object[] constructorArguments,
+                                                    ExceptionAggregator aggregator,
+                                                    CancellationTokenSource cancellationTokenSource)
     {
-        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes", error: true)]
-        public SkippedTheoryTestCase() { }
+      SkippedTestMessageBus skipMessageBus = new SkippedTestMessageBus(messageBus);
+      var result = await base.RunAsync(diagnosticMessageSink, skipMessageBus, constructorArguments, aggregator, cancellationTokenSource);
+      if (skipMessageBus.SkippedTestCount > 0)
+      {
+        result.Failed -= skipMessageBus.SkippedTestCount;
+        result.Skipped += skipMessageBus.SkippedTestCount;
+      }
 
-        public SkippedTheoryTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay defaultMethodDisplay, TestMethodDisplayOptions defaultMethodDisplayOptions, ITestMethod testMethod)
-            : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod) { }
-
-        public override async Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,
-                                                        IMessageBus messageBus,
-                                                        object[] constructorArguments,
-                                                        ExceptionAggregator aggregator,
-                                                        CancellationTokenSource cancellationTokenSource)
-        {
-            SkippedTestMessageBus skipMessageBus = new SkippedTestMessageBus(messageBus);
-            var result = await base.RunAsync(diagnosticMessageSink, skipMessageBus, constructorArguments, aggregator, cancellationTokenSource);
-            if (skipMessageBus.SkippedTestCount > 0)
-            {
-                result.Failed -= skipMessageBus.SkippedTestCount;
-                result.Skipped += skipMessageBus.SkippedTestCount;
-            }
-
-            return result;
-        }
+      return result;
     }
+  }
 }

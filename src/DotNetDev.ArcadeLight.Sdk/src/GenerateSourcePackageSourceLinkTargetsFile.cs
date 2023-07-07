@@ -10,105 +10,103 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-    public sealed class GenerateSourcePackageSourceLinkTargetsFile : Microsoft.Build.Utilities.Task
+  public sealed class GenerateSourcePackageSourceLinkTargetsFile : Microsoft.Build.Utilities.Task
+  {
+    [Required]
+    public string ProjectDirectory { get; set; }
+
+    [Required]
+    public string PackageId { get; set; }
+
+    [Required]
+#pragma warning disable CA1819 // Properties should not return arrays
+    public ITaskItem[] SourceRoots { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
+
+    [Required]
+    public string OutputPath { get; set; }
+
+    public override bool Execute()
     {
-        [Required]
-        public string ProjectDirectory { get; set; }
+      ExecuteImpl();
+      return !Log.HasLoggedErrors;
+    }
 
-        [Required]
-        public string PackageId { get; set; }
+    private void ExecuteImpl()
+    {
+      Directory.CreateDirectory(Path.GetDirectoryName(OutputPath));
+      File.WriteAllText(OutputPath, GetOutputFileContent(), Encoding.UTF8);
+    }
 
-        [Required]
-        public ITaskItem[] SourceRoots { get; set; }
+    // for testing
+    internal string GetOutputFileContent()
+    {
+      string projectDir = EndWithSeparator(ProjectDirectory);
 
-        [Required]
-        public string OutputPath { get; set; }
-
-        public override bool Execute()
+      string innerMostRootItemSpec = null;
+      string innerMostRootSourceLinkUrl = null;
+      foreach (ITaskItem sourceRoot in SourceRoots)
+      {
+        string itemSpec = sourceRoot.ItemSpec;
+        if (itemSpec.Length > projectDir.Length && itemSpec.StartsWith(projectDir, StringComparison.Ordinal))
         {
-            ExecuteImpl();
-            return !Log.HasLoggedErrors;
+          Log.LogError($"Directory '{ProjectDirectory}' contains source roots (e.g. git submodules), which is not supported.");
+          return null;
         }
 
-        private void ExecuteImpl()
+        if (!projectDir.StartsWith(itemSpec, StringComparison.Ordinal) ||
+            innerMostRootItemSpec != null && itemSpec.Length <= innerMostRootItemSpec.Length)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(OutputPath));
-            File.WriteAllText(OutputPath, GetOutputFileContent(), Encoding.UTF8);
+          continue;
         }
 
-        // for testing
-        internal string GetOutputFileContent()
+        string url = sourceRoot.GetMetadata("SourceLinkUrl");
+        if (string.IsNullOrEmpty(url))
         {
-            var projectDir = EndWithSeparator(ProjectDirectory);
-
-            string innerMostRootItemSpec = null;
-            string innerMostRootSourceLinkUrl = null;
-            foreach (var sourceRoot in SourceRoots)
-            {
-                var itemSpec = sourceRoot.ItemSpec;
-                if (itemSpec.Length > projectDir.Length && itemSpec.StartsWith(projectDir, StringComparison.Ordinal))
-                {
-                    Log.LogError($"Directory '{ProjectDirectory}' contains source roots (e.g. git submodules), which is not supported.");
-                    return null;
-                }
-
-                if (!projectDir.StartsWith(itemSpec, StringComparison.Ordinal) ||
-                    innerMostRootItemSpec != null && itemSpec.Length <= innerMostRootItemSpec.Length)
-                {
-                    continue;
-                }
-
-                var url = sourceRoot.GetMetadata("SourceLinkUrl");
-                if (string.IsNullOrEmpty(url))
-                {
-                    continue;
-                }
-
-                innerMostRootItemSpec = itemSpec;
-                innerMostRootSourceLinkUrl = url;
-            }
-
-            if (innerMostRootSourceLinkUrl == null)
-            {
-                Log.LogError($"No SourceRoot with SourceLinkUrl contains directory '{ProjectDirectory}'.");
-                return null;
-            }
-
-            if (innerMostRootSourceLinkUrl.Count(c => c == '*') != 1)
-            {
-                Log.LogError($"SourceLinkUrl must contain exactly one '*': '{innerMostRootSourceLinkUrl}'");
-                return null;
-            }
-
-            if (!EndsWithSeparator(innerMostRootItemSpec))
-            {
-                Log.LogError($"SourceRoot must end with a directory separator: '{innerMostRootItemSpec}'");
-                return null;
-            }
-
-            var relativePathToSourceRoot = projectDir.Substring(innerMostRootItemSpec.Length);
-            var contentFilesSourceLinkUrl = innerMostRootSourceLinkUrl.Replace("*", Uri.EscapeUriString(relativePathToSourceRoot.Replace('\\', '/')) + "*");
-            return GetTargetsFileContent(PackageId, contentFilesSourceLinkUrl);
+          continue;
         }
 
-        private static bool EndsWithSeparator(string path)
-        {
-            char last = path[path.Length - 1];
-            return last == Path.DirectorySeparatorChar || last == Path.AltDirectorySeparatorChar;
-        }
+        innerMostRootItemSpec = itemSpec;
+        innerMostRootSourceLinkUrl = url;
+      }
 
-        private static string EndWithSeparator(string path)
-            => EndsWithSeparator(path) ? path : path + Path.DirectorySeparatorChar;
+      if (innerMostRootSourceLinkUrl == null)
+      {
+        Log.LogError($"No SourceRoot with SourceLinkUrl contains directory '{ProjectDirectory}'.");
+        return null;
+      }
 
-        private static string GetTargetsFileContent(string packageId, string sourceLinkUrl)
-        {
-            string hash;
-            using (var hashAlg = SHA256.Create())
-            {
-                hash = BitConverter.ToString(hashAlg.ComputeHash(Encoding.UTF8.GetBytes(packageId)), 0, 20).Replace("-", "");
-            }
+      if (innerMostRootSourceLinkUrl.Count(c => c == '*') != 1)
+      {
+        Log.LogError($"SourceLinkUrl must contain exactly one '*': '{innerMostRootSourceLinkUrl}'");
+        return null;
+      }
 
-            return $@"<?xml version=""1.0"" encoding=""utf-8""?>
+      if (!EndsWithSeparator(innerMostRootItemSpec))
+      {
+        Log.LogError($"SourceRoot must end with a directory separator: '{innerMostRootItemSpec}'");
+        return null;
+      }
+
+      string relativePathToSourceRoot = projectDir.Substring(innerMostRootItemSpec.Length);
+      string contentFilesSourceLinkUrl = innerMostRootSourceLinkUrl.Replace("*", Uri.EscapeUriString(relativePathToSourceRoot.Replace('\\', '/')) + "*");
+      return GetTargetsFileContent(PackageId, contentFilesSourceLinkUrl);
+    }
+
+    private static bool EndsWithSeparator(string path)
+    {
+      char last = path[path.Length - 1];
+      return last == Path.DirectorySeparatorChar || last == Path.AltDirectorySeparatorChar;
+    }
+
+    private static string EndWithSeparator(string path)
+        => EndsWithSeparator(path) ? path : path + Path.DirectorySeparatorChar;
+
+    private static string GetTargetsFileContent(string packageId, string sourceLinkUrl)
+    {
+      string hash = BitConverter.ToString(SHA256.HashData(Encoding.UTF8.GetBytes(packageId)), 0, 20).Replace("-", "");
+
+      return $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <Target Name=""_AddSourcePackageSourceRoot_{hash}"" BeforeTargets=""InitializeSourceControlInformation"">
     <ItemGroup>
@@ -128,6 +126,6 @@ namespace DotNetDev.ArcadeLight.Sdk
   </Target>
 </Project>
 ";
-        }
     }
+  }
 }

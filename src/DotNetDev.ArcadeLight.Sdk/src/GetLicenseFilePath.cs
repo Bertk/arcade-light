@@ -8,33 +8,33 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
+  /// <summary>
+  /// Finds a license file in the given directory.
+  /// File is considered a license file if its name matches 'license(.txt|.md|)', ignoring case.
+  /// </summary>
+  public class GetLicenseFilePath : Microsoft.Build.Utilities.Task
+  {
     /// <summary>
-    /// Finds a license file in the given directory.
-    /// File is considered a license file if its name matches 'license(.txt|.md|)', ignoring case.
+    /// Full path to the directory to search for the license file.
     /// </summary>
-    public class GetLicenseFilePath : Microsoft.Build.Utilities.Task
+    [Required]
+    public string Directory { get; set; }
+
+    /// <summary>
+    /// Full path to the license file, or empty if it is not found.
+    /// </summary>
+    [Output]
+    public string Path { get; private set; }
+
+    public override bool Execute()
     {
-        /// <summary>
-        /// Full path to the directory to search for the license file.
-        /// </summary>
-        [Required]
-        public string Directory { get; set; }
+      ExecuteImpl();
+      return !Log.HasLoggedErrors;
+    }
 
-        /// <summary>
-        /// Full path to the license file, or empty if it is not found.
-        /// </summary>
-        [Output]
-        public string Path { get; private set; }
-
-        public override bool Execute()
-        {
-            ExecuteImpl();
-            return !Log.HasLoggedErrors;
-        }
-
-        private void ExecuteImpl()
-        {
-            const string fileName = "license";
+    private void ExecuteImpl()
+    {
+      const string fileName = "license";
 
 #if NET472
             IEnumerable<string> enumerateFiles(string extension)
@@ -45,35 +45,35 @@ namespace DotNetDev.ArcadeLight.Sdk
             }
 
 #else
-            var options = new EnumerationOptions
-            {
-                MatchCasing = MatchCasing.CaseInsensitive,
-                RecurseSubdirectories = false,
-                MatchType = MatchType.Simple
-            };
+      EnumerationOptions options = new EnumerationOptions
+      {
+        MatchCasing = MatchCasing.CaseInsensitive,
+        RecurseSubdirectories = false,
+        MatchType = MatchType.Simple
+      };
 
-            options.AttributesToSkip |= FileAttributes.Directory;
+      options.AttributesToSkip |= FileAttributes.Directory;
 
-            IEnumerable<string> enumerateFiles(string extension) =>
-                System.IO.Directory.EnumerateFileSystemEntries(Directory, fileName + extension, options);
+      IEnumerable<string> enumerateFiles(string extension) =>
+          System.IO.Directory.EnumerateFileSystemEntries(Directory, fileName + extension, options);
 #endif
-            var matches = 
+      string[] matches =
                 (from extension in new[] { ".txt", ".md", "" }
                  from path in enumerateFiles(extension)
                  select path).ToArray();
 
-            if (matches.Length == 0)
-            {
-                Log.LogError($"No license file found in '{Directory}'.");
-            }
-            else if (matches.Length > 1)
-            {
-                Log.LogError($"Multiple license files found in '{Directory}': '{string.Join("', '", matches)}'.");
-            }
-            else 
-            {
-                Path = matches[0];
-            }
-        }
+      if (matches.Length == 0)
+      {
+        Log.LogError($"No license file found in '{Directory}'.");
+      }
+      else if (matches.Length > 1)
+      {
+        Log.LogError($"Multiple license files found in '{Directory}': '{string.Join("', '", matches)}'.");
+      }
+      else
+      {
+        Path = matches[0];
+      }
     }
+  }
 }

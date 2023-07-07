@@ -6,13 +6,13 @@ using Xunit.Sdk;
 
 namespace Xunit
 {
-    /// <summary>
-    /// Apply this attribute to your test method to specify the test category.
-    /// </summary>
-    [TraitDiscoverer("DotNet.XUnitExtensions.TestCategoryDiscoverer", "DotNet.XUnitExtensions")]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
-    public class TestCategoryAttribute : Attribute, ITraitAttribute
-    {
-        public TestCategoryAttribute(string category) { }
-    }
+  /// <summary>
+  /// Apply this attribute to your test method to specify the test category.
+  /// </summary>
+  [TraitDiscoverer("DotNet.XUnitExtensions.TestCategoryDiscoverer", "DotNet.XUnitExtensions")]
+  [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
+  public class TestCategoryAttribute : Attribute, ITraitAttribute
+  {
+    public TestCategoryAttribute(string category) { }
+  }
 }

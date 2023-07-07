@@ -5,11 +5,11 @@ using System;
 
 namespace Xunit
 {
-    [Flags]
-    public enum TargetFrameworkMonikers
-    {
-        Netcoreapp = 1,
-        NetFramework = 2,
-        Any = ~0
-    }
+  [Flags]
+  public enum TargetFrameworkMonikers
+  {
+    Netcoreapp = 1,
+    NetFramework = 2,
+    Any = ~0
+  }
 }

@@ -1,9 +1,9 @@
-using Xunit;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Microsoft.Build.Framework;
 using Moq;
-using System.Collections.Generic;
-using System.Reflection;
+using Xunit;
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
@@ -34,7 +34,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd"));
       customTask.BuildEngine = buildEngine.Object;
       //Act and Assert
-      var success = customTask.Execute();
+      bool success = customTask.Execute();
       Assert.True(success);
     }
 
@@ -47,7 +47,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd"));
       customTask.BuildEngine = buildEngine.Object;
       //Act and Assert
-      var success = customTask.Execute();
+      bool success = customTask.Execute();
       Assert.True(success);
       // warning list is not available
     }
@@ -61,7 +61,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"xxx.cmd"));
       customTask.BuildEngine = buildEngine.Object;
       //Act and Assert
-      var success = customTask.Execute();
+      bool success = customTask.Execute();
       Assert.False(success);
       Assert.NotEmpty(errors);
     }

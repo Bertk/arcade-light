@@ -5,11 +5,11 @@ using System;
 
 namespace Xunit
 {
-    [Flags]
-    public enum TestRuntimes
-    {
-        CoreCLR = 1,
-        Mono = 2,
-        Any = ~0
-    }
+  [Flags]
+  public enum TestRuntimes
+  {
+    CoreCLR = 1,
+    Mono = 2,
+    Any = ~0
+  }
 }

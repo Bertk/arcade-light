@@ -1,9 +1,9 @@
-using Microsoft.Build.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Logging
 {
@@ -14,11 +14,11 @@ namespace DotNetDev.ArcadeLight.Logging
   /// </summary>
   public sealed class PipelinesLogger : ILogger
   {
-    private readonly MessageBuilder _builder = new MessageBuilder();
-    private readonly Dictionary<BuildEventContext, Guid> _buildEventContextMap = new Dictionary<BuildEventContext, Guid>(BuildEventContextComparer.Instance);
-    private readonly Dictionary<Guid, ProjectInfo> _projectInfoMap = new Dictionary<Guid, ProjectInfo>();
-    private readonly Dictionary<Guid, TelemetryTaskInfo> _taskTelemetryInfoMap = new Dictionary<Guid, TelemetryTaskInfo>();
-    private readonly HashSet<Guid> _detailedLoggedSet = new HashSet<Guid>();
+    private readonly MessageBuilder _builder = new();
+    private readonly Dictionary<BuildEventContext, Guid> _buildEventContextMap = new(BuildEventContextComparer.Instance);
+    private readonly Dictionary<Guid, ProjectInfo> _projectInfoMap = new();
+    private readonly Dictionary<Guid, TelemetryTaskInfo> _taskTelemetryInfoMap = new();
+    private readonly HashSet<Guid> _detailedLoggedSet = new();
     private HashSet<string> _ignoredTargets;
     private string _solutionDirectory;
     public LoggerVerbosity Verbosity { get; set; }
@@ -27,16 +27,16 @@ namespace DotNetDev.ArcadeLight.Logging
 
     public void Initialize(IEventSource eventSource)
     {
-      var parameters = LoggerParameters.Parse(Parameters);
+      LoggerParameters parameters = LoggerParameters.Parse(Parameters);
 
       _solutionDirectory = parameters["SolutionDir"];
 
-      var verbosityString = parameters["Verbosity"];
+      string verbosityString = parameters["Verbosity"];
       Verbosity = !string.IsNullOrEmpty(verbosityString) && Enum.TryParse(verbosityString, out LoggerVerbosity verbosity)
           ? verbosity
           : LoggerVerbosity.Normal;
 
-      var ignoredTargets = new string[]
+      string[] ignoredTargets = new string[]
       {
                 "GetCopyToOutputDirectoryItems",
                 "GetNativeManifest",
@@ -46,10 +46,15 @@ namespace DotNetDev.ArcadeLight.Logging
       _ignoredTargets = new HashSet<string>(ignoredTargets, StringComparer.OrdinalIgnoreCase);
 
       // TargetsNotLogged is an optional parameter.
-      var targetsNotLogged = parameters["TargetsNotLogged"];
+      string targetsNotLogged = parameters["TargetsNotLogged"];
       if (!string.IsNullOrEmpty(targetsNotLogged))
       {
         _ignoredTargets.UnionWith(targetsNotLogged.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+      }
+
+      if (eventSource == null)
+      {
+        throw new ArgumentNullException(nameof(eventSource));
       }
 
       eventSource.ErrorRaised += OnErrorRaised;
@@ -78,7 +83,7 @@ namespace DotNetDev.ArcadeLight.Logging
         string message,
         BuildEventContext buildEventContext)
     {
-      var parentId = _buildEventContextMap.TryGetValue(buildEventContext, out var guid)
+      Guid? parentId = _buildEventContextMap.TryGetValue(buildEventContext, out Guid guid)
           ? (Guid?)guid
           : null;
       string telemetryCategory = null;
@@ -199,7 +204,7 @@ namespace DotNetDev.ArcadeLight.Logging
         if (!e.Properties.TryGetValue("Category", out string telemetryCategory))
           return;
 
-        if (!_buildEventContextMap.TryGetValue(e.BuildEventContext, out var parentId))
+        if (!_buildEventContextMap.TryGetValue(e.BuildEventContext, out Guid parentId))
           return;
 
         if (string.IsNullOrEmpty(telemetryCategory))
@@ -208,7 +213,7 @@ namespace DotNetDev.ArcadeLight.Logging
         }
         else
         {
-          var telemetryInfo = new TelemetryTaskInfo(parentId, telemetryCategory);
+          TelemetryTaskInfo telemetryInfo = new(parentId, telemetryCategory);
           _taskTelemetryInfoMap[parentId] = telemetryInfo;
         }
       }
@@ -244,11 +249,11 @@ namespace DotNetDev.ArcadeLight.Logging
       {
         propertyCategory = e.GlobalProperties?.LastOrDefault(p => p.Key.ToString().Equals($"_{s_TelemetryMarker}", StringComparison.Ordinal)).Value;
       }
-      var parentId = _buildEventContextMap.TryGetValue(e.ParentProjectBuildEventContext, out var guid)
+      Guid? parentId = _buildEventContextMap.TryGetValue(e.ParentProjectBuildEventContext, out Guid guid)
       ? (Guid?)guid
       : null;
 
-      var projectInfo = new ProjectInfo(getName(), parentId, propertyCategory);
+      ProjectInfo projectInfo = new(getName(), parentId, propertyCategory);
 
       _buildEventContextMap[e.BuildEventContext] = projectInfo.Id;
 
@@ -271,7 +276,7 @@ namespace DotNetDev.ArcadeLight.Logging
         }
         // Note, website projects (sln file only, no proj file) emit a started event with projectFile == $"{m_solutionDirectory}\\".
         // This causes issues when attempting to get the relative path (and also Path.GetFileName returns empty string).
-        var projectFile = e.ProjectFile;
+        string projectFile = e.ProjectFile;
         projectFile = (projectFile ?? string.Empty).TrimEnd('\\');
 
         // Make the name relative.
@@ -286,7 +291,7 @@ namespace DotNetDev.ArcadeLight.Logging
           {
             projectFile = Path.GetFileName(projectFile);
           }
-          catch (Exception)
+          catch (ArgumentException)
           {
             // empty
           }
@@ -318,7 +323,7 @@ namespace DotNetDev.ArcadeLight.Logging
 
       private readonly Dictionary<string, string> _parameters;
 
-      public string this[string name] => _parameters.TryGetValue(name, out var value) ? value : string.Empty;
+      public string this[string name] => _parameters.TryGetValue(name, out string value) ? value : string.Empty;
 
       public LoggerParameters(Dictionary<string, string> parameters)
       {
@@ -334,7 +339,7 @@ namespace DotNetDev.ArcadeLight.Logging
 
         // split the given string into name1 = value1 | name2 = value2
         string[] nameValuePairs = paramString.Split(NameValuePairDelimiter);
-        var parameters = new Dictionary<string, string>(Comparer);
+        Dictionary<string, string> parameters = new(Comparer);
         foreach (string str in nameValuePairs)
         {
           // look for the = char. URI's are value and can have = in them.
