@@ -203,7 +203,7 @@ namespace DotNetDev.ArcadeLight.Test.Common
           assertMessage = message + "\r\n" + assertMessage;
         }
 
-        Assert.True(false, assertMessage);
+        Assert.Fail(assertMessage);
       }
     }
 
@@ -303,26 +303,22 @@ namespace DotNetDev.ArcadeLight.Test.Common
 
     public static void Fail(string message)
     {
-#pragma warning disable S2701 // Literal boolean values should not be used in assertions
-      Assert.False(true, message);
-#pragma warning restore S2701 // Literal boolean values should not be used in assertions
+      Assert.Fail(message);
     }
 
     public static void Fail(string format, params object[] args)
     {
-#pragma warning disable S2701 // Literal boolean values should not be used in assertions
-      Assert.False(true, string.Format(format, args));
-#pragma warning restore S2701 // Literal boolean values should not be used in assertions
+      Assert.Fail(string.Format(format, args));
     }
 
-    public static void Null<T>(T @object, string message = null)
+    public static void Null<T>(T @obj, string message = null)
     {
-      Assert.True(AssertEqualityComparer<T>.IsNull(@object), message);
+      Assert.True(AssertEqualityComparer<T>.IsNull(@obj), message);
     }
 
-    public static void NotNull<T>(T @object, string message = null)
+    public static void NotNull<T>(T @obj, string message = null)
     {
-      Assert.False(AssertEqualityComparer<T>.IsNull(@object), message);
+      Assert.False(AssertEqualityComparer<T>.IsNull(@obj), message);
     }
 
     // compares against a baseline
@@ -335,7 +331,7 @@ namespace DotNetDev.ArcadeLight.Test.Common
     {
       if (!EqualIgnoringWhitespace(expected, actual))
       {
-        Assert.True(false, GetAssertMessage(expected, actual, escapeQuotes, expectedValueSourcePath, expectedValueSourceLine));
+        Assert.Fail(GetAssertMessage(expected, actual, escapeQuotes, expectedValueSourcePath, expectedValueSourceLine));
       }
     }
 
