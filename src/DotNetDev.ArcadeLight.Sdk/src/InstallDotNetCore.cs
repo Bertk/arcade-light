@@ -1,6 +1,3 @@
-using Microsoft.Build.Evaluation;
-using Microsoft.Build.Framework;
-using NuGet.Versioning;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,42 +6,45 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
+using Microsoft.Build.Evaluation;
+using Microsoft.Build.Framework;
+using NuGet.Versioning;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-    public class InstallDotNetCore : Microsoft.Build.Utilities.Task
+  public class InstallDotNetCore : Microsoft.Build.Utilities.Task
+  {
+    public string VersionsPropsPath { get; set; }
+
+    [Required]
+    public string DotNetInstallScript { get; set; }
+    [Required]
+    public string GlobalJsonPath { get; set; }
+    [Required]
+    public string Platform { get; set; }
+
+    public string RuntimeSourceFeed { get; set; }
+
+    public string RuntimeSourceFeedKey { get; set; }
+
+    public override bool Execute()
     {
-        public string VersionsPropsPath { get; set; }
-
-        [Required]
-        public string DotNetInstallScript { get; set; }
-        [Required]
-        public string GlobalJsonPath { get; set; }
-        [Required]
-        public string Platform { get; set; }
-
-        public string RuntimeSourceFeed { get; set; }
-        
-        public string RuntimeSourceFeedKey { get; set; }
-
-        public override bool Execute()
-        {
-            if (!File.Exists(GlobalJsonPath))
-            {
-                Log.LogWarning($"Unable to find global.json file '{GlobalJsonPath} exiting");
-                return true;
-            }
-            if (!File.Exists(DotNetInstallScript))
-            {
-                Log.LogError($"Unable to find dotnet install script '{DotNetInstallScript} exiting");
-                return !Log.HasLoggedErrors;
-            }
+      if (!File.Exists(GlobalJsonPath))
+      {
+        Log.LogWarning($"Unable to find global.json file '{GlobalJsonPath} exiting");
+        return true;
+      }
+      if (!File.Exists(DotNetInstallScript))
+      {
+        Log.LogError($"Unable to find dotnet install script '{DotNetInstallScript} exiting");
+        return !Log.HasLoggedErrors;
+      }
 
       string jsonContent = File.ReadAllText(GlobalJsonPath);
       byte[] bytes = Encoding.UTF8.GetBytes(jsonContent);
 
-            using (JsonDocument jsonDocument = JsonDocument.Parse(bytes))
-            {
+      using (JsonDocument jsonDocument = JsonDocument.Parse(bytes))
+      {
         if (jsonDocument.RootElement.TryGetProperty("tools", out JsonElement toolsElement) && toolsElement.TryGetProperty("runtimes", out JsonElement dotnetLocalElement))
         {
           Dictionary<string, IEnumerable<KeyValuePair<string, string>>> runtimeItems = new();
@@ -162,52 +162,52 @@ namespace DotNetDev.ArcadeLight.Sdk
           }
         }
       }
-            return !Log.HasLoggedErrors;
-        }
+      return !Log.HasLoggedErrors;
+    }
 
-        private string GetArchitecture(string architecture)
-        {
-            if (!string.IsNullOrWhiteSpace(architecture))
-            {
-                return architecture;
-            }
-            else if (!string.IsNullOrWhiteSpace(Platform) && !string.Equals(Platform, "AnyCpu", StringComparison.OrdinalIgnoreCase))
-            {
-                return Platform;
-            }
-            else if (RuntimeInformation.OSArchitecture == Architecture.X86 ||
-                     RuntimeInformation.OSArchitecture == Architecture.X64)
-            {
-                return "x64";
-            }
+    private string GetArchitecture(string architecture)
+    {
+      if (!string.IsNullOrWhiteSpace(architecture))
+      {
+        return architecture;
+      }
+      else if (!string.IsNullOrWhiteSpace(Platform) && !string.Equals(Platform, "AnyCpu", StringComparison.OrdinalIgnoreCase))
+      {
+        return Platform;
+      }
+      else if (RuntimeInformation.OSArchitecture == Architecture.X86 ||
+               RuntimeInformation.OSArchitecture == Architecture.X64)
+      {
+        return "x64";
+      }
 
-            // let dotnet-install.sh/ps1 infer a default arch
-            return null;
-        }
+      // let dotnet-install.sh/ps1 infer a default arch
+      return null;
+    }
 
-        /*
-         * Parses a json token of this format
-         * { (runtime): [(version), ..., (version)] }
-         * or this format
-         * { (runtime/architecture): [(version), ..., (version)] }
-         */
-        private static IEnumerable<KeyValuePair<string, string>> GetItemsFromJsonElementArray(JsonProperty token, out string runtime)
-        {
+    /*
+     * Parses a json token of this format
+     * { (runtime): [(version), ..., (version)] }
+     * or this format
+     * { (runtime/architecture): [(version), ..., (version)] }
+     */
+    private static IEnumerable<KeyValuePair<string, string>> GetItemsFromJsonElementArray(JsonProperty token, out string runtime)
+    {
       List<KeyValuePair<string, string>> items = new();
 
-            runtime = token.Name;
-            string architecture = string.Empty;
-            if (runtime.Contains('/'))
-            {
+      runtime = token.Name;
+      string architecture = string.Empty;
+      if (runtime.Contains('/'))
+      {
         string[] parts = runtime.Split(new char[] { '/' }, 2);
-                runtime = parts[0];
-                architecture = parts[1];
-            }
-            foreach (JsonElement version in token.Value.EnumerateArray())
-            {
-                items.Add(new KeyValuePair<string, string>(version.GetString(), architecture));
-            }
-            return items.ToArray();
-        }
+        runtime = parts[0];
+        architecture = parts[1];
+      }
+      foreach (JsonElement version in token.Value.EnumerateArray())
+      {
+        items.Add(new KeyValuePair<string, string>(version.GetString(), architecture));
+      }
+      return items.ToArray();
     }
+  }
 }

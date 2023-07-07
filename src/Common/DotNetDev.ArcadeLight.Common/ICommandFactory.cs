@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace DotNetDev.ArcadeLight.Common
 {
-    public interface ICommandFactory
-    {
-        ICommand Create(string executable, IEnumerable<string> args);
-        ICommand Create(string executable, params string[] args);
-        ICommand Create(string executable, string args);
-    }
+  public interface ICommandFactory
+  {
+    ICommand Create(string executable, IEnumerable<string> args);
+    ICommand Create(string executable, params string[] args);
+    ICommand Create(string executable, string args);
+  }
 }

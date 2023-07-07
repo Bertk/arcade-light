@@ -6,31 +6,31 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
-    public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
+  public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
+  {
+    [Required]
+    public ITaskItem[] Items { get; set; }
+
+    public string PathMetadata { get; set; }
+
+    [Required]
+    public string FullNameMetadata { get; set; }
+
+    [Output]
+    public ITaskItem[] ItemsWithFullName { get; set; }
+
+    public override bool Execute()
     {
-        [Required]
-        public ITaskItem[] Items { get; set; }
+      ItemsWithFullName = Items;
 
-        public string PathMetadata { get; set; }
-
-        [Required]
-        public string FullNameMetadata { get; set; }
-
-        [Output]
-        public ITaskItem[] ItemsWithFullName { get; set; }
-
-        public override bool Execute()
-        {
-            ItemsWithFullName = Items;
-
-            foreach (ITaskItem item in Items)
-            {
+      foreach (ITaskItem item in Items)
+      {
         string assemblyPath = string.IsNullOrEmpty(PathMetadata) ? item.ItemSpec : item.GetMetadata(PathMetadata);
-                item.SetMetadata(FullNameMetadata, AssemblyName.GetAssemblyName(assemblyPath).FullName);
-            }
+        item.SetMetadata(FullNameMetadata, AssemblyName.GetAssemblyName(assemblyPath).FullName);
+      }
 
-            return true;
-        }
+      return true;
     }
+  }
 }
 

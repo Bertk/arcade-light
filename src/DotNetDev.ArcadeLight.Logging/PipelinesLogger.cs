@@ -1,9 +1,9 @@
-using Microsoft.Build.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Logging
 {
@@ -54,7 +54,7 @@ namespace DotNetDev.ArcadeLight.Logging
 
       if (eventSource == null)
       {
-        throw new ArgumentNullException(nameof(eventSource)); 
+        throw new ArgumentNullException(nameof(eventSource));
       }
 
       eventSource.ErrorRaised += OnErrorRaised;

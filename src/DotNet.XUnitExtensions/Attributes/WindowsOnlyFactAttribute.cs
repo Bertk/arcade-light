@@ -8,21 +8,21 @@ using DotNet.XUnitExtensions;
 
 namespace Xunit
 {
+  /// <summary>
+  /// This test should be run only on Windows.
+  /// </summary>
+  public class WindowsOnlyFactAttribute : FactAttribute
+  {
     /// <summary>
-    /// This test should be run only on Windows.
+    /// Initializes a new instance of the <see cref="WindowsOnlyFactAttribute"/> class.
     /// </summary>
-    public class WindowsOnlyFactAttribute : FactAttribute
+    /// <param name="additionalMessage">The additional message that is appended to skip reason, when test is skipped.</param>
+    public WindowsOnlyFactAttribute(string? additionalMessage = null)
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WindowsOnlyFactAttribute"/> class.
-        /// </summary>
-        /// <param name="additionalMessage">The additional message that is appended to skip reason, when test is skipped.</param>
-        public WindowsOnlyFactAttribute(string? additionalMessage = null)
-        {
-            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                this.Skip = "This test requires Windows to run.".AppendAdditionalMessage(additionalMessage);
-            }
-        }
+      if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+      {
+        this.Skip = "This test requires Windows to run.".AppendAdditionalMessage(additionalMessage);
+      }
     }
+  }
 }

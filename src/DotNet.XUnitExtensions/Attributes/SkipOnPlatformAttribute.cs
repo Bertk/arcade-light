@@ -6,11 +6,11 @@ using Xunit.Sdk;
 
 namespace Xunit
 {
-    [TraitDiscoverer("DotNet.XUnitExtensions.SkipOnPlatformDiscoverer", "DotNet.XUnitExtensions")]
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class SkipOnPlatformAttribute : Attribute, ITraitAttribute
-    {
-        internal SkipOnPlatformAttribute() { }
-        public SkipOnPlatformAttribute(TestPlatforms testPlatforms, string reason) { }
-    }
+  [TraitDiscoverer("DotNet.XUnitExtensions.SkipOnPlatformDiscoverer", "DotNet.XUnitExtensions")]
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+  public class SkipOnPlatformAttribute : Attribute, ITraitAttribute
+  {
+    internal SkipOnPlatformAttribute() { }
+    public SkipOnPlatformAttribute(TestPlatforms testPlatforms, string reason) { }
+  }
 }

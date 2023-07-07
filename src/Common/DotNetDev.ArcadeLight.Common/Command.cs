@@ -281,8 +281,8 @@ namespace DotNetDev.ArcadeLight.Common
     }
     public void Dispose()
     {
-       Dispose(true);
-       GC.SuppressFinalize(this);
+      Dispose(true);
+      GC.SuppressFinalize(this);
     }
   }
 }

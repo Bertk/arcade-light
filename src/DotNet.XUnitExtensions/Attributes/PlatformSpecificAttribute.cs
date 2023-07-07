@@ -6,13 +6,13 @@ using Xunit.Sdk;
 
 namespace Xunit
 {
-    /// <summary>
-    /// Apply this attribute to your test method to specify this is a platform specific test.
-    /// </summary>
-    [TraitDiscoverer("DotNet.XUnitExtensions.PlatformSpecificDiscoverer", "DotNet.XUnitExtensions")]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false)]
-    public class PlatformSpecificAttribute : Attribute, ITraitAttribute
-    {
-        public PlatformSpecificAttribute(TestPlatforms platforms) { }
-    }
+  /// <summary>
+  /// Apply this attribute to your test method to specify this is a platform specific test.
+  /// </summary>
+  [TraitDiscoverer("DotNet.XUnitExtensions.PlatformSpecificDiscoverer", "DotNet.XUnitExtensions")]
+  [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false)]
+  public class PlatformSpecificAttribute : Attribute, ITraitAttribute
+  {
+    public PlatformSpecificAttribute(TestPlatforms platforms) { }
+  }
 }

@@ -11,50 +11,50 @@ using Xunit.Sdk;
 namespace DotNet.XUnitExtensions
 {
   public class SkipOnCoreClrDiscoverer : ITraitDiscoverer
+  {
+    private static readonly Lazy<bool> s_isJitStress = new Lazy<bool>(() => CoreClrConfigurationDetection.IsJitStress);
+    private static readonly Lazy<bool> s_isJitStressRegs = new Lazy<bool>(() => CoreClrConfigurationDetection.IsJitStressRegs);
+    private static readonly Lazy<bool> s_isJitMinOpts = new Lazy<bool>(() => CoreClrConfigurationDetection.IsJitMinOpts);
+    private static readonly Lazy<bool> s_isTailCallStress = new Lazy<bool>(() => CoreClrConfigurationDetection.IsTailCallStress);
+    private static readonly Lazy<bool> s_isZapDisable = new Lazy<bool>(() => CoreClrConfigurationDetection.IsZapDisable);
+    private static readonly Lazy<bool> s_isGCStress3 = new Lazy<bool>(() => CoreClrConfigurationDetection.IsGCStress3);
+    private static readonly Lazy<bool> s_isGCStressC = new Lazy<bool>(() => CoreClrConfigurationDetection.IsGCStressC);
+    private static readonly Lazy<bool> s_isCheckedRuntime = new Lazy<bool>(() => CoreClrConfigurationDetection.IsCheckedRuntime);
+    private static readonly Lazy<bool> s_isReleaseRuntime = new Lazy<bool>(() => CoreClrConfigurationDetection.IsReleaseRuntime);
+    private static readonly Lazy<bool> s_isDebugRuntime = new Lazy<bool>(() => CoreClrConfigurationDetection.IsDebugRuntime);
+    private static readonly Lazy<bool> s_isStressTest = new Lazy<bool>(() => CoreClrConfigurationDetection.IsStressTest);
+
+    public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {
-        private static readonly Lazy<bool> s_isJitStress = new Lazy<bool>(() => CoreClrConfigurationDetection.IsJitStress);
-        private static readonly Lazy<bool> s_isJitStressRegs = new Lazy<bool>(() => CoreClrConfigurationDetection.IsJitStressRegs);
-        private static readonly Lazy<bool> s_isJitMinOpts = new Lazy<bool>(() => CoreClrConfigurationDetection.IsJitMinOpts);
-        private static readonly Lazy<bool> s_isTailCallStress = new Lazy<bool>(() => CoreClrConfigurationDetection.IsTailCallStress);
-        private static readonly Lazy<bool> s_isZapDisable = new Lazy<bool>(() => CoreClrConfigurationDetection.IsZapDisable);
-        private static readonly Lazy<bool> s_isGCStress3 = new Lazy<bool>(() => CoreClrConfigurationDetection.IsGCStress3);
-        private static readonly Lazy<bool> s_isGCStressC = new Lazy<bool>(() => CoreClrConfigurationDetection.IsGCStressC);
-        private static readonly Lazy<bool> s_isCheckedRuntime = new Lazy<bool>(() => CoreClrConfigurationDetection.IsCheckedRuntime);
-        private static readonly Lazy<bool> s_isReleaseRuntime = new Lazy<bool>(() => CoreClrConfigurationDetection.IsReleaseRuntime);
-        private static readonly Lazy<bool> s_isDebugRuntime = new Lazy<bool>(() => CoreClrConfigurationDetection.IsDebugRuntime);
-        private static readonly Lazy<bool> s_isStressTest = new Lazy<bool>(() =>  CoreClrConfigurationDetection.IsStressTest);
-
-        public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
+      if (!DiscovererHelpers.IsMonoRuntime)
+      {
+        TestPlatforms testPlatforms = TestPlatforms.Any;
+        RuntimeTestModes stressMode = RuntimeTestModes.Any;
+        RuntimeConfiguration runtimeConfigurations = RuntimeConfiguration.Any;
+        foreach (object arg in traitAttribute.GetConstructorArguments().Skip(1)) // We skip the first one as it is the reason
         {
-            if (!DiscovererHelpers.IsMonoRuntime)
-            {
-                TestPlatforms testPlatforms = TestPlatforms.Any;
-                RuntimeTestModes stressMode = RuntimeTestModes.Any;
-                RuntimeConfiguration runtimeConfigurations = RuntimeConfiguration.Any;
-                foreach (object arg in traitAttribute.GetConstructorArguments().Skip(1)) // We skip the first one as it is the reason
-                {
-                    if (arg is TestPlatforms tp)
-                    {
-                        testPlatforms = tp;
-                    }
-                    else if (arg is RuntimeTestModes rtm)
-                    {
-                        stressMode = rtm;
-                    }
-                    else if (arg is RuntimeConfiguration rc)
-                    {
-                        runtimeConfigurations = rc;
-                    }
-                }
-
-                if (DiscovererHelpers.TestPlatformApplies(testPlatforms) && RuntimeConfigurationApplies(runtimeConfigurations) && StressModeApplies(stressMode))
-                {
-                    return new[] { new KeyValuePair<string, string>(XunitConstants.Category, XunitConstants.Failing) };
-                }
-            }
-
-            return Array.Empty<KeyValuePair<string, string>>();
+          if (arg is TestPlatforms tp)
+          {
+            testPlatforms = tp;
+          }
+          else if (arg is RuntimeTestModes rtm)
+          {
+            stressMode = rtm;
+          }
+          else if (arg is RuntimeConfiguration rc)
+          {
+            runtimeConfigurations = rc;
+          }
         }
+
+        if (DiscovererHelpers.TestPlatformApplies(testPlatforms) && RuntimeConfigurationApplies(runtimeConfigurations) && StressModeApplies(stressMode))
+        {
+          return new[] { new KeyValuePair<string, string>(XunitConstants.Category, XunitConstants.Failing) };
+        }
+      }
+
+      return Array.Empty<KeyValuePair<string, string>>();
+    }
 
 #pragma warning disable S1067 // Expressions should not be too complex
     private static bool RuntimeConfigurationApplies(RuntimeConfiguration runtimeConfigurations) =>

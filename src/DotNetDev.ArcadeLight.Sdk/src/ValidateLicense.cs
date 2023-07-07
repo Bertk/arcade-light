@@ -9,70 +9,70 @@ using Microsoft.Build.Framework;
 
 namespace DotNetDev.ArcadeLight.Sdk
 {
+  /// <summary>
+  /// Checks that the content of two license files is the same modulo line breaks, leading and trailing whitespace.
+  /// </summary>
+  public class ValidateLicense : Microsoft.Build.Utilities.Task
+  {
     /// <summary>
-    /// Checks that the content of two license files is the same modulo line breaks, leading and trailing whitespace.
+    /// Full path to the file that contains the license text to be validated.
     /// </summary>
-    public class ValidateLicense : Microsoft.Build.Utilities.Task
+    [Required]
+    public string LicensePath { get; set; }
+
+    /// <summary>
+    /// Full path to the file that contains expected license text.
+    /// </summary>
+    [Required]
+    public string ExpectedLicensePath { get; set; }
+
+    public override bool Execute()
     {
-        /// <summary>
-        /// Full path to the file that contains the license text to be validated.
-        /// </summary>
-        [Required]
-        public string LicensePath { get; set; }
+      ExecuteImpl();
+      return !Log.HasLoggedErrors;
+    }
 
-        /// <summary>
-        /// Full path to the file that contains expected license text.
-        /// </summary>
-        [Required]
-        public string ExpectedLicensePath { get; set; }
-
-        public override bool Execute()
-        {
-            ExecuteImpl();
-            return !Log.HasLoggedErrors;
-        }
-
-        private void ExecuteImpl()
-        {
+    private void ExecuteImpl()
+    {
       string[] actualLines = File.ReadAllLines(LicensePath, Encoding.UTF8);
       string[] expectedLines = File.ReadAllLines(ExpectedLicensePath, Encoding.UTF8);
 
-            if (!LinesEqual(actualLines, expectedLines))
-            {
-                Log.LogError($"License file content '{LicensePath}' doesn't match the expected license '{ExpectedLicensePath}'.");
-            }
-        }
+      if (!LinesEqual(actualLines, expectedLines))
+      {
+        Log.LogError($"License file content '{LicensePath}' doesn't match the expected license '{ExpectedLicensePath}'.");
+      }
+    }
 
-        internal static bool LinesEqual(IEnumerable<string> actual, IEnumerable<string> expected)
-        {
-            IEnumerable<string> normalize(IEnumerable<string> lines)
-                => from line in lines
-                   where !string.IsNullOrWhiteSpace(line)
-                   select line.Trim();
+    internal static bool LinesEqual(IEnumerable<string> actual, IEnumerable<string> expected)
+    {
+      IEnumerable<string> normalize(IEnumerable<string> lines)
+          => from line in lines
+             where !string.IsNullOrWhiteSpace(line)
+             select line.Trim();
 
       string[] normalizedActual = normalize(actual).ToArray();
       string[] normalizedExpected = normalize(expected).ToArray();
 
-            if (normalizedActual.Length != normalizedExpected.Length)
-            {
-                return false;
-            }
+      if (normalizedActual.Length != normalizedExpected.Length)
+      {
+        return false;
+      }
 
-            for (int i = 0; i < normalizedActual.Length; i++)
-            {
-                if (normalizedExpected[i] == "*ignore-line*")
-                {
-                    continue;
-                }
-
-                if (normalizedActual[i] != normalizedExpected[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
+      for (int i = 0; i < normalizedActual.Length; i++)
+      {
+        if (normalizedExpected[i] == "*ignore-line*")
+        {
+          continue;
         }
 
+        if (normalizedActual[i] != normalizedExpected[i])
+        {
+          return false;
+        }
+      }
+
+      return true;
     }
+
+  }
 }

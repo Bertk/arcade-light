@@ -9,25 +9,25 @@ using Xunit.Abstractions;
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
-    [Collection(TestProjectCollection.Name)]
-    public class RepoWithConditionalProjectsToBuildTests
+  [Collection(TestProjectCollection.Name)]
+  public class RepoWithConditionalProjectsToBuildTests
+  {
+    private readonly ITestOutputHelper _output;
+    private readonly TestProjectFixture _fixture;
+
+    public RepoWithConditionalProjectsToBuildTests(ITestOutputHelper output, TestProjectFixture fixture)
     {
-        private readonly ITestOutputHelper _output;
-        private readonly TestProjectFixture _fixture;
+      _output = output;
+      _fixture = fixture;
+    }
 
-        public RepoWithConditionalProjectsToBuildTests(ITestOutputHelper output, TestProjectFixture fixture)
-        {
-            _output = output;
-            _fixture = fixture;
-        }
-
-        [Theory(Skip = "https://github.com/dotnet/arcade/issues/7092")]
-        [InlineData(false, 1, false)]
-        [InlineData(false, 1, true)]
-        [InlineData(true, 2, false)]
-        [InlineData(true, 2, true)]
-        public void RepoProducesPackages(bool buildAdditionalProject, int expectedPackages, bool stablePackages)
-        {
+    [Theory(Skip = "https://github.com/dotnet/arcade/issues/7092")]
+    [InlineData(false, 1, false)]
+    [InlineData(false, 1, true)]
+    [InlineData(true, 2, false)]
+    [InlineData(true, 2, true)]
+    public void RepoProducesPackages(bool buildAdditionalProject, int expectedPackages, bool stablePackages)
+    {
       TestApp app = _fixture.CreateTestApp("RepoWithConditionalProjectsToBuild");
       string packArg = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? "-pack"
@@ -40,17 +40,17 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
                 "/p:EnableSourceLink=false",
                 "/p:EnableSourceControlManagerQueries=false",
                 finalVersionKindarg);
-            Assert.Equal(0, exitCode);
+      Assert.Equal(0, exitCode);
       string[] nupkgFiles = Directory.GetFiles(Path.Combine(app.WorkingDirectory, "artifacts", "packages", "Debug", "Shipping"), "*.nupkg");
 
-            _output.WriteLine("Packages produced:");
+      _output.WriteLine("Packages produced:");
 
-            foreach(string file in nupkgFiles)
-            {
-                _output.WriteLine(file);
-            }
+      foreach (string file in nupkgFiles)
+      {
+        _output.WriteLine(file);
+      }
 
-            Assert.Equal(expectedPackages, nupkgFiles.Length);
-        }
+      Assert.Equal(expectedPackages, nupkgFiles.Length);
     }
+  }
 }

@@ -6,15 +6,15 @@ using Xunit.Sdk;
 
 namespace Xunit
 {
-    [TraitDiscoverer("DotNet.XUnitExtensions.SkipOnCIDiscoverer", "DotNet.XUnitExtensions")]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = false)]
-    public sealed class SkipOnCIAttribute : Attribute, ITraitAttribute
-    {
-        public string Reason { get; private set; }
+  [TraitDiscoverer("DotNet.XUnitExtensions.SkipOnCIDiscoverer", "DotNet.XUnitExtensions")]
+  [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = false)]
+  public sealed class SkipOnCIAttribute : Attribute, ITraitAttribute
+  {
+    public string Reason { get; private set; }
 
-        public SkipOnCIAttribute(string reason)
-        {
-            Reason = reason;
-        }
+    public SkipOnCIAttribute(string reason)
+    {
+      Reason = reason;
     }
+  }
 }

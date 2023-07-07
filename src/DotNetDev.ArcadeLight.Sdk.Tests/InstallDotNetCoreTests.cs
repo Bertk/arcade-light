@@ -1,9 +1,9 @@
-using Xunit;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Microsoft.Build.Framework;
 using Moq;
-using System.Collections.Generic;
-using System.Reflection;
+using Xunit;
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {

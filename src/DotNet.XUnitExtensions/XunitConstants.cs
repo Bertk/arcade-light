@@ -4,12 +4,12 @@
 namespace DotNet.XUnitExtensions
 {
   public struct XunitConstants
-    {
-        internal const string Failing = "failing";
-        internal const string OuterLoop = "outerloop";
+  {
+    internal const string Failing = "failing";
+    internal const string OuterLoop = "outerloop";
 
-        public const string Category = "category";
-        public const string IgnoreForCI = "ignoreforci";
-        public const string RequiresElevation = "requireselevation";
-    }
+    public const string Category = "category";
+    public const string IgnoreForCI = "ignoreforci";
+    public const string RequiresElevation = "requireselevation";
+  }
 }

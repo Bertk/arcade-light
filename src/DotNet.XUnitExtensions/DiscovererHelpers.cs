@@ -10,12 +10,12 @@ using Xunit;
 
 namespace DotNet.XUnitExtensions
 {
-    internal static class DiscovererHelpers
-    {
-        private static readonly Lazy<bool> s_isMonoRuntime = new Lazy<bool>(() => Type.GetType("Mono.RuntimeStructs") != null);
-        public static bool IsMonoRuntime => s_isMonoRuntime.Value;
-        public static bool IsRunningOnNetCoreApp { get; } = (Environment.Version.Major >= 5 || !RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase));
-        public static bool IsRunningOnNetFramework { get; } = RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
+  internal static class DiscovererHelpers
+  {
+    private static readonly Lazy<bool> s_isMonoRuntime = new Lazy<bool>(() => Type.GetType("Mono.RuntimeStructs") != null);
+    public static bool IsMonoRuntime => s_isMonoRuntime.Value;
+    public static bool IsRunningOnNetCoreApp { get; } = (Environment.Version.Major >= 5 || !RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase));
+    public static bool IsRunningOnNetFramework { get; } = RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework", StringComparison.OrdinalIgnoreCase);
 
 #pragma warning disable S1067 // Expressions should not be too complex
     public static bool TestPlatformApplies(TestPlatforms platforms) =>
@@ -40,79 +40,79 @@ namespace DotNet.XUnitExtensions
                 (runtimes.HasFlag(TestRuntimes.Mono) && IsMonoRuntime) ||
                 (runtimes.HasFlag(TestRuntimes.CoreCLR) && !IsMonoRuntime); // assume CoreCLR if it's not Mono
 
-        public static bool TestFrameworkApplies(TargetFrameworkMonikers frameworks) =>
-                (frameworks.HasFlag(TargetFrameworkMonikers.Netcoreapp) && IsRunningOnNetCoreApp) ||
-                (frameworks.HasFlag(TargetFrameworkMonikers.NetFramework) && IsRunningOnNetFramework);
+    public static bool TestFrameworkApplies(TargetFrameworkMonikers frameworks) =>
+            (frameworks.HasFlag(TargetFrameworkMonikers.Netcoreapp) && IsRunningOnNetCoreApp) ||
+            (frameworks.HasFlag(TargetFrameworkMonikers.NetFramework) && IsRunningOnNetFramework);
 
-        internal static bool Evaluate(Type calleeType, string[] conditionMemberNames)
+    internal static bool Evaluate(Type calleeType, string[] conditionMemberNames)
+    {
+      foreach (string entry in conditionMemberNames)
+      {
+        // Null condition member names are silently tolerated.
+        if (string.IsNullOrWhiteSpace(entry)) continue;
+
+        Func<bool> conditionFunc = ConditionalTestDiscoverer.LookupConditionalMember(calleeType, entry);
+        if (conditionFunc == null)
         {
-            foreach (string entry in conditionMemberNames)
-            {
-                // Null condition member names are silently tolerated.
-                if (string.IsNullOrWhiteSpace(entry)) continue;
-
-                Func<bool> conditionFunc = ConditionalTestDiscoverer.LookupConditionalMember(calleeType, entry);
-                if (conditionFunc == null)
-                {
-                    throw new InvalidOperationException($"Unable to get member, please check input for {entry}.");
-                }
-
-                if (!conditionFunc()) return false;
-            }
-
-            return true;
+          throw new InvalidOperationException($"Unable to get member, please check input for {entry}.");
         }
 
-        internal static IEnumerable<KeyValuePair<string, string>> EvaluateArguments(IEnumerable<object> ctorArgs,string category, int skipFirst=1)
-        {
-            Debug.Assert(ctorArgs.Count() >= 2);
+        if (!conditionFunc()) return false;
+      }
 
-            TestPlatforms platforms = TestPlatforms.Any;
-            TargetFrameworkMonikers frameworks = TargetFrameworkMonikers.Any;
-            TestRuntimes runtimes = TestRuntimes.Any;
-            Type calleeType = null;
-            string[] conditionMemberNames = null;
-            
-            foreach (object arg in ctorArgs.Skip(skipFirst)) // First argument is the issue number or reason.
-            {
-                if (arg is TestPlatforms)
-                {
-                    platforms = (TestPlatforms)arg;
-                }
-                else if (arg is TargetFrameworkMonikers)
-                {
-                    frameworks = (TargetFrameworkMonikers)arg;
-                }
-                else if (arg is TestRuntimes)
-                {
-                    runtimes = (TestRuntimes)arg;
-                }
-                else if (arg is Type)
-                {
-                    calleeType = (Type)arg;
-                }
-                else if (arg is string[])
-                {
-                    conditionMemberNames = (string[])arg;
-                }
-            }
-
-            if (calleeType != null && conditionMemberNames != null)
-            {
-                if (DiscovererHelpers.Evaluate(calleeType, conditionMemberNames))
-                {
-                    yield return new KeyValuePair<string, string>(XunitConstants.Category, category);
-                }
-            }
-            else if (DiscovererHelpers.TestPlatformApplies(platforms) &&
-                DiscovererHelpers.TestRuntimeApplies(runtimes) &&
-                DiscovererHelpers.TestFrameworkApplies(frameworks))
-            {
-                yield return new KeyValuePair<string, string>(XunitConstants.Category, category);
-            }
-        }
-
-        internal static string AppendAdditionalMessage(this string message, string additionalMessage)
-            => !string.IsNullOrWhiteSpace(additionalMessage) ? $"{message} {additionalMessage}" : message;
+      return true;
     }
+
+    internal static IEnumerable<KeyValuePair<string, string>> EvaluateArguments(IEnumerable<object> ctorArgs, string category, int skipFirst = 1)
+    {
+      Debug.Assert(ctorArgs.Count() >= 2);
+
+      TestPlatforms platforms = TestPlatforms.Any;
+      TargetFrameworkMonikers frameworks = TargetFrameworkMonikers.Any;
+      TestRuntimes runtimes = TestRuntimes.Any;
+      Type calleeType = null;
+      string[] conditionMemberNames = null;
+
+      foreach (object arg in ctorArgs.Skip(skipFirst)) // First argument is the issue number or reason.
+      {
+        if (arg is TestPlatforms)
+        {
+          platforms = (TestPlatforms)arg;
+        }
+        else if (arg is TargetFrameworkMonikers)
+        {
+          frameworks = (TargetFrameworkMonikers)arg;
+        }
+        else if (arg is TestRuntimes)
+        {
+          runtimes = (TestRuntimes)arg;
+        }
+        else if (arg is Type)
+        {
+          calleeType = (Type)arg;
+        }
+        else if (arg is string[])
+        {
+          conditionMemberNames = (string[])arg;
+        }
+      }
+
+      if (calleeType != null && conditionMemberNames != null)
+      {
+        if (DiscovererHelpers.Evaluate(calleeType, conditionMemberNames))
+        {
+          yield return new KeyValuePair<string, string>(XunitConstants.Category, category);
+        }
+      }
+      else if (DiscovererHelpers.TestPlatformApplies(platforms) &&
+          DiscovererHelpers.TestRuntimeApplies(runtimes) &&
+          DiscovererHelpers.TestFrameworkApplies(frameworks))
+      {
+        yield return new KeyValuePair<string, string>(XunitConstants.Category, category);
+      }
+    }
+
+    internal static string AppendAdditionalMessage(this string message, string additionalMessage)
+        => !string.IsNullOrWhiteSpace(additionalMessage) ? $"{message} {additionalMessage}" : message;
+  }
 }
