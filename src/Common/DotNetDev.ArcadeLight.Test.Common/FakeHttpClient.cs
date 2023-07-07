@@ -12,7 +12,15 @@ namespace DotNetDev.ArcadeLight.Test.Common
   public static class FakeHttpClient
   {
     public static HttpClient WithResponses(params HttpResponseMessage[] responses)
-        => new(new FakeHttpMessageHandler(responses)); // lgtm [cs/httpclient-checkcertrevlist-disabled] This is used for unit tests
+    {
+      if (responses == null || responses.Length == 0)
+      {
+        throw new ArgumentNullException(nameof(responses));
+      }
+#pragma warning disable CA2000 // Dispose objects before losing scope
+      return new(new FakeHttpMessageHandler(responses)); // lgtm [cs/httpclient-checkcertrevlist-disabled] This is used for unit tests
+#pragma warning restore CA2000 // Dispose objects before losing scope
+    }
 
     private sealed class FakeHttpMessageHandler : HttpMessageHandler
     {

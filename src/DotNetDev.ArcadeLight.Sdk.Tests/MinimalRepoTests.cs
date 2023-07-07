@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
-  [Collection(TestProjectCollection.Name)]
+  [Collection(TestProjectName.Name)]
   public class MinimalRepoTests
   {
     private readonly ITestOutputHelper _output;

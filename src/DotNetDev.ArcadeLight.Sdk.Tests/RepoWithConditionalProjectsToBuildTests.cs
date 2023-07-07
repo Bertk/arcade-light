@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
-  [Collection(TestProjectCollection.Name)]
+  [Collection(TestProjectName.Name)]
   public class RepoWithConditionalProjectsToBuildTests
   {
     private readonly ITestOutputHelper _output;
@@ -32,14 +32,14 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       string packArg = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                 ? "-pack"
                 : "--pack";
-      string finalVersionKindarg = stablePackages ? "/p:DotNetFinalVersionKind=release" : "/p:DotNetFinalVersionKind=prerelease";
+      string finalVersionKindArgument = stablePackages ? "/p:DotNetFinalVersionKind=release" : "/p:DotNetFinalVersionKind=prerelease";
       int exitCode = app.ExecuteBuild(_output,
                 packArg,
                 $"/p:ShouldBuildMaybe={buildAdditionalProject}",
                 // these properties are required for projects that are not in a git repo
                 "/p:EnableSourceLink=false",
                 "/p:EnableSourceControlManagerQueries=false",
-                finalVersionKindarg);
+                finalVersionKindArgument);
       Assert.Equal(0, exitCode);
       string[] nupkgFiles = Directory.GetFiles(Path.Combine(app.WorkingDirectory, "artifacts", "packages", "Debug", "Shipping"), "*.nupkg");
 

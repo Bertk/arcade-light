@@ -11,9 +11,9 @@ using Xunit;
 namespace DotNetDev.ArcadeLight.Sdk.Tests.Utilities
 {
   [CollectionDefinition(Name)]
-  public class TestProjectCollection : ICollectionFixture<TestProjectFixture>
+  public class TestProjectName : ICollectionFixture<TestProjectFixture>
   {
-    public const string Name = nameof(TestProjectCollection);
+    public const string Name = nameof(TestProjectName);
   }
 
   public class TestProjectFixture : IDisposable
