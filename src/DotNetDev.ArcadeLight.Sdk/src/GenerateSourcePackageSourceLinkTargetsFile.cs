@@ -19,7 +19,9 @@ namespace DotNetDev.ArcadeLight.Sdk
     public string PackageId { get; set; }
 
     [Required]
+#pragma warning disable CA1819 // Properties should not return arrays
     public ITaskItem[] SourceRoots { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     [Required]
     public string OutputPath { get; set; }

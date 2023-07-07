@@ -35,7 +35,9 @@ namespace DotNetDev.ArcadeLight.Sdk
     /// Items to group by their ItemSpec.
     /// </summary>
     [Required]
+#pragma warning disable CA1819 // Properties should not return arrays
     public ITaskItem[] Items { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     /// <summary>
     /// Names of custom metadata to group (e.g. "Value" in the example above).
@@ -43,13 +45,17 @@ namespace DotNetDev.ArcadeLight.Sdk
     /// while the first value is used for metadata not in this set.
     /// </summary>
     [Required]
+#pragma warning disable CA1819 // Properties should not return arrays
     public string[] GroupMetadata { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     /// <summary>
     /// Items with grouped metadata values.
     /// </summary>
     [Output]
+#pragma warning disable CA1819 // Properties should not return arrays
     public ITaskItem[] GroupedItems { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     public override bool Execute()
     {

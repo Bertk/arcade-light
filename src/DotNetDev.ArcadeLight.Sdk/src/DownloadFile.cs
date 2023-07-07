@@ -18,7 +18,9 @@ namespace DotNetDev.ArcadeLight.Sdk
     /// List of URls to attempt download from. Accepted metadata are:
     ///     - Token: Base64 encoded token to be appended to base URL for accessing private locations.
     /// </summary>
+#pragma warning disable CA1819 // Properties should not return arrays
     public ITaskItem[] Uris { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
 #pragma warning disable CA1056 // URI-like properties should not be strings
     public string Uri { get; set; }
@@ -74,7 +76,9 @@ namespace DotNetDev.ArcadeLight.Sdk
 
       if (!string.IsNullOrWhiteSpace(Uri))
       {
+#pragma warning disable S4462 // Replace this use of 'Task.Result' with 'await'
         return DownloadFromUriAsync(Uri).Result;
+#pragma warning restore S4462 // Replace this use of 'Task.Result' with 'await'
       }
 
       if (Uris != null)
@@ -91,7 +95,9 @@ namespace DotNetDev.ArcadeLight.Sdk
             uri = $"{uri}{decodedToken}";
           }
 
+#pragma warning disable S4462 // Replace this use of 'Task.Result' with 'await'
           if (DownloadFromUriAsync(uri).Result)
+#pragma warning restore S4462 // Replace this use of 'Task.Result' with 'await'
           {
             return true;
           }

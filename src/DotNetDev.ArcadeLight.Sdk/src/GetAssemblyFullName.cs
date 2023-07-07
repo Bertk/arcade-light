@@ -9,7 +9,9 @@ namespace DotNetDev.ArcadeLight.Sdk
   public class GetAssemblyFullName : Microsoft.Build.Utilities.Task
   {
     [Required]
+#pragma warning disable CA1819 // Properties should not return arrays
     public ITaskItem[] Items { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     public string PathMetadata { get; set; }
 
@@ -17,7 +19,9 @@ namespace DotNetDev.ArcadeLight.Sdk
     public string FullNameMetadata { get; set; }
 
     [Output]
+#pragma warning disable CA1819 // Properties should not return arrays
     public ITaskItem[] ItemsWithFullName { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
     public override bool Execute()
     {
