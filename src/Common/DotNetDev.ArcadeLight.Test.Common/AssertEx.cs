@@ -4,7 +4,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -122,64 +121,6 @@ namespace DotNetDev.ArcadeLight.Test.Common
 
     #endregion
 
-    public static void AreEqual<T>(T expected, T actual, string message = null, IEqualityComparer<T> comparer = null)
-    {
-      if (ReferenceEquals(expected, actual))
-      {
-        return;
-      }
-
-      if (expected == null)
-      {
-        Fail("expected was null, but actual wasn't\r\n" + message);
-      }
-      else if (actual == null)
-      {
-        Fail("actual was null, but expected wasn't\r\n" + message);
-      }
-      else
-      {
-        if (!(comparer != null ?
-            comparer.Equals(expected, actual) :
-            AssertEqualityComparer<T>.Equals(expected, actual)))
-        {
-          Fail("Expected and actual were different.\r\n" +
-               "Expected: " + expected + "\r\n" +
-               "Actual:   " + actual + "\r\n" +
-               message);
-        }
-      }
-    }
-
-    public static void Equal<T>(ImmutableArray<T> expected, IEnumerable<T> actual, Func<T, T, bool> comparer = null, string message = null)
-    {
-      if (actual == null || expected.IsDefault)
-      {
-        Assert.True((actual == null) == expected.IsDefault, message);
-      }
-      else
-      {
-        Equal((IEnumerable<T>)expected, actual, comparer, message);
-      }
-    }
-
-    public static void Equal<T>(IEnumerable<T> expected, ImmutableArray<T> actual, Func<T, T, bool> comparer = null, string message = null, string itemSeparator = null)
-    {
-      if (expected == null || actual.IsDefault)
-      {
-        Assert.True((expected == null) == actual.IsDefault, message);
-      }
-      else
-      {
-        Equal(expected, (IEnumerable<T>)actual, comparer, message, itemSeparator);
-      }
-    }
-
-    public static void Equal<T>(ImmutableArray<T> expected, ImmutableArray<T> actual, Func<T, T, bool> comparer = null, string message = null, string itemSeparator = null)
-    {
-      Equal(expected, (IEnumerable<T>)actual, comparer, message, itemSeparator);
-    }
-
     public static void Equal<T>(IEnumerable<T> expected, IEnumerable<T> actual, Func<T, T, bool> comparer = null, string message = null,
         string itemSeparator = null, Func<T, string> itemInspector = null)
     {
@@ -241,86 +182,9 @@ namespace DotNetDev.ArcadeLight.Test.Common
       return true;
     }
 
-    public static void SetEqual<T>(IEnumerable<T> expected, IEnumerable<T> actual, IEqualityComparer<T> comparer = null, string message = null, string itemSeparator = "\r\n")
-    {
-      HashSet<T> expectedSet = new(expected, comparer);
-      bool result = expected.Count() == actual.Count() && expectedSet.SetEquals(actual);
-      if (!result)
-      {
-        if (string.IsNullOrEmpty(message))
-        {
-          message = GetAssertMessage(expected, actual);
-        }
-
-        Assert.True(result, message);
-      }
-    }
-
-    public static void SetEqual<T>(IEnumerable<T> actual, params T[] expected)
-    {
-      HashSet<T> expectedSet = new(expected);
-      Assert.True(expectedSet.SetEquals(actual), string.Format("Expected: {0}\nActual: {1}", ToString(expected), ToString(actual)));
-    }
-
-    public static void None<T>(IEnumerable<T> actual, Func<T, bool> predicate)
-    {
-      bool none = !actual.Any(predicate);
-      if (!none)
-      {
-        Assert.True(none, string.Format(
-            "Unexpected item found among existing items: {0}\nExisting items: {1}",
-            ToString(actual.First(predicate)),
-            ToString(actual)));
-      }
-    }
-
-    public static void Any<T>(IEnumerable<T> actual, Func<T, bool> predicate)
-    {
-      bool any = actual.Any(predicate);
-      Assert.True(any, string.Format("No expected item was found.\nExisting items: {0}", ToString(actual)));
-    }
-
-    public static void All<T>(IEnumerable<T> actual, Func<T, bool> predicate)
-    {
-      bool all = actual.All(predicate);
-      if (!all)
-      {
-        Assert.True(all, string.Format(
-            "Not all items satisfy condition:\n{0}",
-            ToString(actual.Where(i => !predicate(i)))));
-      }
-    }
-
-    public static string ToString(object o)
-    {
-      return Convert.ToString(o);
-    }
-
-    public static string ToString<T>(IEnumerable<T> list, string separator = ", ", Func<T, string> itemInspector = null)
-    {
-      itemInspector ??= i => Convert.ToString(i);
-
-      return string.Join(separator, list.Select(itemInspector));
-    }
-
     public static void Fail(string message)
     {
       Assert.Fail(message);
-    }
-
-    public static void Fail(string format, params object[] args)
-    {
-      Assert.Fail(string.Format(format, args));
-    }
-
-    public static void Null<T>(T @obj, string message = null)
-    {
-      Assert.True(AssertEqualityComparer<T>.IsNull(@obj), message);
-    }
-
-    public static void NotNull<T>(T @obj, string message = null)
-    {
-      Assert.False(AssertEqualityComparer<T>.IsNull(@obj), message);
     }
 
     // compares against a baseline
@@ -341,63 +205,6 @@ namespace DotNetDev.ArcadeLight.Test.Common
         => NormalizeWhitespace(left) == NormalizeWhitespace(right);
 
 #pragma warning disable CA1062 // Validate arguments of public methods
-
-    public static void ThrowsArgumentNull(string parameterName, Action del)
-    {
-      try
-      {
-        del();
-      }
-      catch (ArgumentNullException e)
-      {
-        Assert.Equal(parameterName, e.ParamName);
-      }
-    }
-
-    public static void ThrowsArgumentException(string parameterName, Action del)
-    {
-      try
-      {
-        del();
-      }
-      catch (ArgumentException e)
-      {
-        Assert.Equal(parameterName, e.ParamName);
-      }
-    }
-
-    public static T Throws<T>(Action del, bool allowDerived = false) where T : Exception
-    {
-      try
-      {
-        del();
-      }
-#pragma warning disable CA1031
-      catch (Exception ex)
-#pragma warning restore CA1031
-#pragma warning restore CA1062 // Validate arguments of public methods
-      {
-        Type type = ex.GetType();
-        if (type.Equals(typeof(T)))
-        {
-          // We got exactly the type we wanted
-          return (T)ex;
-        }
-
-        if (allowDerived && typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
-        {
-          // We got a derived type
-          return (T)ex;
-        }
-
-        // We got some other type. We know that type != typeof(T), and so we'll use Assert.Equal since Xunit
-        // will give a nice Expected/Actual output for this
-        Assert.Equal(typeof(T), type);
-      }
-#pragma warning disable CA2201 // Do not raise reserved exception types
-      throw new Exception("No exception was thrown.");
-#pragma warning restore CA2201 // Do not raise reserved exception types
-    }
 
     public static string NormalizeWhitespace(string input)
     {
@@ -479,28 +286,5 @@ namespace DotNetDev.ArcadeLight.Test.Common
 
       return message.ToString();
     }
-
-    public static void AssertLinesEqual(string expected, string actual, string message = null, Func<string, string, bool> comparer = null)
-    {
-      if (expected == actual)
-      {
-        return;
-      }
-
-      Assert.NotNull(expected);
-      Assert.NotNull(actual);
-
-      static IEnumerable<string> GetLines(string str) =>
-          str?.Trim().Replace("\r\n", "\n").Split(new[] { '\r', '\n' }, StringSplitOptions.None);
-
-      Equal(
-          GetLines(expected),
-          GetLines(actual),
-          message: message,
-          comparer: comparer ?? new Func<string, string, bool>((left, right) => left.Trim() == right.Trim()),
-          itemInspector: line => line.Replace("\"", "\"\""),
-          itemSeparator: Environment.NewLine);
-    }
-
   }
 }
