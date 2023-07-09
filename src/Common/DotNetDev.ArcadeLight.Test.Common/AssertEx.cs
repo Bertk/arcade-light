@@ -16,7 +16,9 @@ namespace DotNetDev.ArcadeLight.Test.Common
   /// <summary>
   /// Assert style type to deal with the lack of features in xUnit's Assert type
   /// </summary>
+#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
   public static class AssertEx
+#pragma warning restore CA1711 // Identifiers should not have incorrect suffix
   {
     #region AssertEqualityComparer<T>
 
