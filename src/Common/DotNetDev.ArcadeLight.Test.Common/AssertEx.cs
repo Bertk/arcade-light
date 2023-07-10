@@ -32,16 +32,6 @@ namespace DotNetDev.ArcadeLight.Test.Common
             (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
       }
 
-      public static bool IsNull(T @object)
-      {
-        if (!CanBeNull())
-        {
-          return false;
-        }
-
-        return object.Equals(@object, default(T));
-      }
-
       public static bool Equals(T left, T right)
       {
         return s_instance.Equals(left, right);
