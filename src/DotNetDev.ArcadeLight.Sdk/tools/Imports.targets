@@ -4,7 +4,6 @@
 
   <Import Project="ProjectDefaults.targets"/>
   <Import Project="GenerateInternalsVisibleTo.targets" />
-  <Import Project="GenerateResxSource.targets" />
   <Import Project="Workarounds.targets"/>
   <Import Project="RepositoryInfo.targets"/>
   <Import Project="Tests.targets" />
