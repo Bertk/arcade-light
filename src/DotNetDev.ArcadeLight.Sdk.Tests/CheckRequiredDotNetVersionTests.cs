@@ -60,6 +60,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       // Assert
       Assert.False(result);
       Assert.NotEmpty(errors);
+      Assert.Contains("is below the minimum required version", errors[0].Message);
     }
 
     [Fact]
@@ -78,6 +79,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       // Assert
       Assert.False(result);
       Assert.NotEmpty(errors);
+      Assert.Contains("Error reading file", errors[0].Message);
     }
 
     [Fact]
@@ -96,6 +98,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       // Assert
       Assert.False(result);
       Assert.NotEmpty(errors);
+      Assert.Equal("Invalid version: 7.0.a", errors[0].Message);
     }
     [Fact]
     public void CheckRequiredDotNetVersionInvalidFile()
@@ -113,7 +116,50 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
 
       // Assert
       Assert.False(result);
+      Assert.Contains("Error accessing file", errors[0].Message);
+    }
+
+    [Fact]
+    public void CheckRequiredDotNetVersionInvalidGlobalFileContent()
+    {
+
+      // Arrange
+
+      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
+      {
+        BuildEngine = buildEngine.Object,
+        RepositoryRoot = Path.Combine(repositoryRoot, "src\\DotNetDev.ArcadeLight.Sdk.Tests\\testassets\\invalidcontent"),
+        SdkVersion = "7.0.100"
+      };
+      // Act
+      bool result = checkRequiredDotNetVersion.Execute();
+
+      // Assert
+      Assert.False(result);
       Assert.NotEmpty(errors);
+      Assert.Contains("Unable to determine dotnet version from file", errors[0].Message);
+    }
+
+    [Fact]
+    public void CheckRequiredDotNetVersionInvalidDotnetVersion()
+    {
+
+      // Arrange
+
+      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
+      {
+        BuildEngine = buildEngine.Object,
+        RepositoryRoot = Path.Combine(repositoryRoot, "src\\DotNetDev.ArcadeLight.Sdk.Tests\\testassets\\invalidVersion"),
+        SdkVersion = "7.0.100"
+      };
+      // Act
+      bool result = checkRequiredDotNetVersion.Execute();
+
+      // Assert
+      Assert.False(result);
+      Assert.NotEmpty(errors);
+      Assert.Contains("DotNet version specified in", errors[0].Message);
+
     }
   }
 }

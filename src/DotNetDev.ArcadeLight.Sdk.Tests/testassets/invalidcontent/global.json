@@ -1,0 +1,9 @@
+{
+  "sdk": {
+    "version": "5.x.x"
+  },
+  "msbuild-sdks": {
+    "DotNetDev.ArcadeLight.Sdk": "1.5.80-beta"
+  }
+}
+
