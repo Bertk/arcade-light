@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.4.0.72892" />
+    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.5.0.73987" />
     <GlobalPackageReference Include="AsyncFixer" Version="1.6.0" />
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
@@ -19,7 +19,7 @@
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
     <PackageVersion Include="Microsoft.NET.StringTools" Version="17.6.3" />
-    <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.3" />
+    <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
     <PackageVersion Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="Microsoft.TestPlatform" Version="17.6.3" />
@@ -72,7 +72,7 @@
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
 
-    <PackageVersion Include="Microsoft.TemplateEngine.Tasks" Version="7.0.108" />
+    <PackageVersion Include="Microsoft.TemplateEngine.Tasks" Version="7.0.109" />
     <PackageVersion Include="Microsoft.DiaSymReader.PortablePdb" Version="1.6.0" />
 
   </ItemGroup>
