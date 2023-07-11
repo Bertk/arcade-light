@@ -30,10 +30,12 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     public void CheckRequiredDotNetVersionVerify(string minSdkVersionStr, bool expectedResult)
     {
       // Arrange
-      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new CheckRequiredDotNetVersion();
-      checkRequiredDotNetVersion.BuildEngine = buildEngine.Object;
-      checkRequiredDotNetVersion.RepositoryRoot = repositoryRoot;
-      checkRequiredDotNetVersion.SdkVersion = minSdkVersionStr;
+      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
+      {
+        BuildEngine = buildEngine.Object,
+        RepositoryRoot = repositoryRoot,
+        SdkVersion = minSdkVersionStr
+      };
       // Act
       bool result = checkRequiredDotNetVersion.Execute();
 
@@ -46,10 +48,12 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     public void CheckRequiredDotNetVersionWrongMinVersionTest()
     {
       // Arrange
-      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new CheckRequiredDotNetVersion();
-      checkRequiredDotNetVersion.BuildEngine = buildEngine.Object;
-      checkRequiredDotNetVersion.RepositoryRoot = repositoryRoot;
-      checkRequiredDotNetVersion.SdkVersion = "6.0.101";
+      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
+      {
+        BuildEngine = buildEngine.Object,
+        RepositoryRoot = repositoryRoot,
+        SdkVersion = "6.0.101"
+      };
       // Act
       bool result = checkRequiredDotNetVersion.Execute();
 
@@ -62,10 +66,12 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     public void CheckRequiredDotNetVersionNoFileTest()
     {
       // Arrange
-      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new CheckRequiredDotNetVersion();
-      checkRequiredDotNetVersion.BuildEngine = buildEngine.Object;
-      checkRequiredDotNetVersion.RepositoryRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-      checkRequiredDotNetVersion.SdkVersion = "7.0.200";
+      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
+      {
+        BuildEngine = buildEngine.Object,
+        RepositoryRoot = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+        SdkVersion = "7.0.200"
+      };
       // Act
       bool result = checkRequiredDotNetVersion.Execute();
 
@@ -78,10 +84,30 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     public void CheckRequiredDotNetVersionInvalidVersion()
     {
       // Arrange
-      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new CheckRequiredDotNetVersion();
-      checkRequiredDotNetVersion.BuildEngine = buildEngine.Object;
-      checkRequiredDotNetVersion.RepositoryRoot = repositoryRoot;
-      checkRequiredDotNetVersion.SdkVersion = "7.0.a";
+      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
+      {
+        BuildEngine = buildEngine.Object,
+        RepositoryRoot = repositoryRoot,
+        SdkVersion = "7.0.a"
+      };
+      // Act
+      bool result = checkRequiredDotNetVersion.Execute();
+
+      // Assert
+      Assert.False(result);
+      Assert.NotEmpty(errors);
+    }
+    [Fact]
+    public void CheckRequiredDotNetVersionInvalidFile()
+    {
+      // Arrange
+
+      CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
+      {
+        BuildEngine = buildEngine.Object,
+        RepositoryRoot = ":",
+        SdkVersion = "7.0.100"
+      };
       // Act
       bool result = checkRequiredDotNetVersion.Execute();
 

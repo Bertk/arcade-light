@@ -11,6 +11,14 @@
     <IsPublishable>true</IsPublishable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
+    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Test.Common\DotNetDev.ArcadeLight.Test.Common.csproj" />
+    <ProjectReference Include="..\DotNetDev.ArcadeLight.Sdk\DotNetDev.ArcadeLight.Sdk.csproj" />
+    <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
+    <ProjectReference Include="..\DotNet.XUnitExtensions\DotNet.XUnitExtensions.csproj" />
+  </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
@@ -102,13 +110,5 @@
     <WriteLinesToFile Lines="$(TestNuGetConfigContent)" File="$(TargetDir)testassets\boilerplate\NuGet.config" Overwrite="true" />
   </Target>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
-    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
-    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Test.Common\DotNetDev.ArcadeLight.Test.Common.csproj" />
-    <ProjectReference Include="..\DotNet.XUnitExtensions\DotNet.XUnitExtensions.csproj" />
-    <ProjectReference Include="..\DotNetDev.ArcadeLight.Sdk\DotNetDev.ArcadeLight.Sdk.csproj" />
-    <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
-  </ItemGroup>
 
 </Project>

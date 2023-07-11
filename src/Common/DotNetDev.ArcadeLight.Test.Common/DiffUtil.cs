@@ -179,14 +179,18 @@ namespace DotNetDev.ArcadeLight.Test.Common
       /// In every vertex the cheapest outgoing edge is selected. 
       /// The number of diagonal edges on the path from (0,0) to (lengthA, lengthB) is the length of the longest common subsequence.
       /// </remarks>
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
       private int[,] ComputeCostMatrix(TSequence sequenceA, int lengthA, TSequence sequenceB, int lengthB)
+#pragma warning restore CA1814 // Prefer jagged arrays over multidimensional
       {
         int la = lengthA + 1;
         int lb = lengthB + 1;
 
         // TODO: Optimization possible: O(ND) time, O(N) space
         // EUGENE W. MYERS: An O(ND) Difference Algorithm and Its Variations
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
         int[,] d = new int[la, lb];
+#pragma warning restore CA1814 // Prefer jagged arrays over multidimensional
 
         d[0, 0] = 0;
         for (int i = 1; i <= lengthA; i++)
