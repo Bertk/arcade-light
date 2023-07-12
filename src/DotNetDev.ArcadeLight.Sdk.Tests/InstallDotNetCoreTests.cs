@@ -53,7 +53,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       };
       //Act and Assert
       bool success = customTask.Execute();
-      // returns success and cretes a warning
+      // returns success and creates a warning
       Assert.True(success);
       // warning list is not available and errors are empty
       Assert.Empty(errors);
