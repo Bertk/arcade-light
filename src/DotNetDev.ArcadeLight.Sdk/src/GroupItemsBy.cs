@@ -72,8 +72,10 @@ namespace DotNetDev.ArcadeLight.Sdk
 
             if (string.IsNullOrEmpty(right))
             {
+#pragma warning disable S2589 // Boolean expressions should not be gratuitous
               result.SetMetadata(metadataName,
                             (string.IsNullOrEmpty(left) || left == right) ? right : left);
+#pragma warning restore S2589 // Boolean expressions should not be gratuitous
             }
             else
             {
