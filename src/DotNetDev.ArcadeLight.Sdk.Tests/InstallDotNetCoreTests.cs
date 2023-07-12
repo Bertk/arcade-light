@@ -88,9 +88,26 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       };
       //Act and Assert
       bool success = customTask.Execute();
+      Assert.True(success);
+      Assert.Empty(errors);
+    }
+
+    [WindowsOnlyFact]
+    public void FailInstallDotNetRuntimeWithInstallScript()
+    {
+      //Arrange
+      InstallDotNetCore customTask = new()
+      {
+        GlobalJsonPath = Path.Combine(projectRootDir, @"src/DotNetDev.ArcadeLight.Sdk.Tests/testassets/failVersion/global.json"),
+        DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd")),
+        BuildEngine = buildEngine.Object
+      };
+      //Act and Assert
+      bool success = customTask.Execute();
       Assert.False(success);
       Assert.NotEmpty(errors);
       Assert.Contains("dotnet-install failed", errors[0].Message);
     }
+
   }
 }

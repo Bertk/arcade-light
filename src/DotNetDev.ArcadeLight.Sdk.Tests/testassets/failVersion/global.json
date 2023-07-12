@@ -1,0 +1,12 @@
+{
+  "tools": {
+    "dotnet": "7.0.304",
+    "runtimes": {
+      "version": ["7.0.9"]
+    }
+  },
+  "msbuild-sdks": {
+    "DotNetDev.ArcadeLight.Sdk": "1.5.80-beta"
+  }
+}
+
