@@ -29,41 +29,84 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     public void InstallDotNetCoreVerify()
     {
       //Arrange
-      InstallDotNetCore customTask = new InstallDotNetCore();
-      customTask.GlobalJsonPath = Path.GetFullPath(Path.Combine(projectRootDir, "global.json"));
-      customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd"));
-      customTask.BuildEngine = buildEngine.Object;
+      InstallDotNetCore customTask = new()
+      {
+        GlobalJsonPath = Path.GetFullPath(Path.Combine(projectRootDir, "global.json")),
+        DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd")),
+        BuildEngine = buildEngine.Object
+      };
       //Act and Assert
       bool success = customTask.Execute();
       Assert.True(success);
+      Assert.Empty(errors);
     }
 
     [Fact]
     public void InstallDotNetCoreNoGlobalJsonFile()
     {
       //Arrange
-      InstallDotNetCore customTask = new InstallDotNetCore();
-      customTask.GlobalJsonPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "global.json"));
-      customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd"));
-      customTask.BuildEngine = buildEngine.Object;
+      InstallDotNetCore customTask = new()
+      {
+        GlobalJsonPath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "global.json")),
+        DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd")),
+        BuildEngine = buildEngine.Object
+      };
       //Act and Assert
       bool success = customTask.Execute();
+      // returns success and creates a warning
       Assert.True(success);
-      // warning list is not available
+      // warning list is not available and errors are empty
+      Assert.Empty(errors);
+
     }
 
     [Fact]
     public void InstallDotNetCoreNoInstallScript()
     {
       //Arrange
-      InstallDotNetCore customTask = new InstallDotNetCore();
-      customTask.GlobalJsonPath = Path.GetFullPath(Path.Combine(projectRootDir, "global.json"));
-      customTask.DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"xxx.cmd"));
-      customTask.BuildEngine = buildEngine.Object;
+      InstallDotNetCore customTask = new()
+      {
+        GlobalJsonPath = Path.GetFullPath(Path.Combine(projectRootDir, "global.json")),
+        DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"xxx.cmd")),
+        BuildEngine = buildEngine.Object
+      };
       //Act and Assert
       bool success = customTask.Execute();
       Assert.False(success);
       Assert.NotEmpty(errors);
+      Assert.Contains("Unable to find dotnet install script", errors[0].Message);
+    }
+    [WindowsOnlyFact]
+    public void TryInstallDotNetRuntimeWithInstallScript()
+    {
+      //Arrange
+      InstallDotNetCore customTask = new()
+      {
+        GlobalJsonPath = Path.Combine(projectRootDir, @"src/DotNetDev.ArcadeLight.Sdk.Tests/testassets/installVersion/global.json"),
+        DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd")),
+        BuildEngine = buildEngine.Object
+      };
+      //Act and Assert
+      bool success = customTask.Execute();
+      Assert.True(success);
+      Assert.Empty(errors);
+    }
+
+    [WindowsOnlyFact]
+    public void FailInstallDotNetRuntimeWithInstallScript()
+    {
+      //Arrange
+      InstallDotNetCore customTask = new()
+      {
+        GlobalJsonPath = Path.Combine(projectRootDir, @"src/DotNetDev.ArcadeLight.Sdk.Tests/testassets/failVersion/global.json"),
+        DotNetInstallScript = Path.GetFullPath(Path.Combine(repositoryEngineeringDir, @"commonlight/dotnet-install.cmd")),
+        BuildEngine = buildEngine.Object
+      };
+      //Act and Assert
+      bool success = customTask.Execute();
+      Assert.False(success);
+      Assert.NotEmpty(errors);
+      Assert.Contains("dotnet-install failed", errors[0].Message);
     }
 
   }
