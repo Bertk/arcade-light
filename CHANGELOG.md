@@ -7,6 +7,15 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+### Changed
+
+- Update DefaultVersions.props (coverlet.collextor, xunit, xunit.runner.visualstudio) (#164)
+- Remove useless targets (#156)
+- Improve CheckRequiredDotNetVersionTests (#155)
+- Update dependencies
+  - Bump Microsoft.NETCore.Platforms from 7.0.3 to 7.0.4 (#161)
+  - Bump Microsoft.TemplateEngine.Tasks from 7.0.108 to 7.0.109 (#158)
+  - Bump cyclonedx from 2.8.0 to 2.8.1 (#160)
 
 ## [1.5.81](https://github.com/Bertk/arcade-light/compare/v1.5.53...v1.5.81) - 2023-07-07
 
