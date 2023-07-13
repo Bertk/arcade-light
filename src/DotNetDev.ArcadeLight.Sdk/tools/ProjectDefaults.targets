@@ -22,8 +22,6 @@
     <PackageOutputPath Condition="'$(IsShippingPackage)' != 'true'">$(ArtifactsNonShippingPackagesDir)</PackageOutputPath>
     <PackageOutputPath Condition="'$(IsVisualStudioBuildPackage)' == 'true'">$(VisualStudioBuildPackagesDir)</PackageOutputPath>
 
-    <IsSwixProject>false</IsSwixProject>
-    <IsSwixProject Condition="'$(VisualStudioInsertionComponent)' != '' and '$(IsVsixProject)' != 'true'">true</IsSwixProject>
   </PropertyGroup>
 
   <!--
@@ -49,11 +47,4 @@
     <None Include="$(PackageIconFullPath)" Pack="true" PackagePath="$(PackageIcon)" Visible="false" />
   </ItemGroup>
 
-  <!--
-    Copyright used for binary assets (assemblies and packages) built by Microsoft must be Microsoft copyright.
-    Override any other value the project may set.
-  -->
-  <!-- <PropertyGroup> -->
-    <!-- <Copyright>$(CopyrightMicrosoft)</Copyright> -->
-  <!-- </PropertyGroup> -->
 </Project>
