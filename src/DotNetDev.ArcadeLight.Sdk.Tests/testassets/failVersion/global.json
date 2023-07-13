@@ -1,6 +1,6 @@
 {
   "tools": {
-    "dotnet": "7.0.304",
+    "dotnet": "7.x",
     "runtimes": {
       "version": ["7.0.9"]
     }

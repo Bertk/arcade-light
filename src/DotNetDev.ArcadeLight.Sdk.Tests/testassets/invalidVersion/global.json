@@ -1,7 +1,4 @@
 {
-  "sdk": {
-    "version": "7.0.304"
-  },
   "tools": {
     "dotnet": "7.0.a"
   },
