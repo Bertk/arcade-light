@@ -33,7 +33,8 @@ stages:
         clean: all
       jobs:
       - job: Windows_NT
-        timeoutInMinutes: 90
+        timeoutInMinutes: 15
+        cancelTimeoutInMinutes: 5
         pool:
           vmImage: windows-latest
         strategy:
@@ -73,7 +74,11 @@ stages:
             SYSTEM_ACCESSTOKEN: $(System.AccessToken)
       - ${{ if eq(variables._RunAsPublic, True) }}:
         - job: Linux
-          timeoutInMinutes: 90
+          variables:
+          - name: System.Debug
+            value: true
+          timeoutInMinutes: 15
+          cancelTimeoutInMinutes: 5
           pool:
             vmImage: ubuntu-latest
           strategy:
@@ -124,7 +129,8 @@ stages:
         clean: all
       jobs:
       - job: Windows_NT
-        timeoutInMinutes: 90
+        timeoutInMinutes: 15
+        cancelTimeoutInMinutes: 5
         pool:
           vmimage: windows-latest
         strategy:
@@ -180,7 +186,8 @@ stages:
             breakBuild: true
 
       - job: Linux
-        timeoutInMinutes: 90
+        timeoutInMinutes: 15
+        cancelTimeoutInMinutes: 5
         pool:
           vmimage: ubuntu-latest
         strategy:
@@ -232,7 +239,8 @@ stages:
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   jobs:
   - job: Validate
-    timeoutInMinutes: 90
+    timeoutInMinutes: 15
+    cancelTimeoutInMinutes: 5
     pool:
       vmimage: windows-latest
     variables:
@@ -276,7 +284,8 @@ stages:
         publishSBOM: true
 
   - job: Windows_NT
-    timeoutInMinutes: 90
+    timeoutInMinutes: 15
+    cancelTimeoutInMinutes: 5
     dependsOn: Validate
     pool:
       vmimage: windows-latest
