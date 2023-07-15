@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.Internal.DependencyI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Logging", "src\DotNetDev.ArcadeLight.Logging\DotNetDev.ArcadeLight.Logging.csproj", "{73496668-336D-4D43-9093-C17862E78BCE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Common", "src\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj", "{CE0834DF-707B-4998-8767-92E1478152AF}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Test.Common", "src\Common\DotNetDev.ArcadeLight.Test.Common\DotNetDev.ArcadeLight.Test.Common.csproj", "{6CA09DC9-E654-4906-A977-1279F6EDC109}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5CFEC5E-6116-4AF3-B08E-B46360AB8711}"
@@ -96,18 +94,6 @@ Global
 		{73496668-336D-4D43-9093-C17862E78BCE}.Release|x64.Build.0 = Release|Any CPU
 		{73496668-336D-4D43-9093-C17862E78BCE}.Release|x86.ActiveCfg = Release|Any CPU
 		{73496668-336D-4D43-9093-C17862E78BCE}.Release|x86.Build.0 = Release|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Debug|x64.Build.0 = Debug|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Debug|x86.Build.0 = Debug|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Release|x64.ActiveCfg = Release|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Release|x64.Build.0 = Release|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Release|x86.ActiveCfg = Release|Any CPU
-		{CE0834DF-707B-4998-8767-92E1478152AF}.Release|x86.Build.0 = Release|Any CPU
 		{6CA09DC9-E654-4906-A977-1279F6EDC109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CA09DC9-E654-4906-A977-1279F6EDC109}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CA09DC9-E654-4906-A977-1279F6EDC109}.Debug|x64.ActiveCfg = Debug|Any CPU
