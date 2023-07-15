@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
-    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" PrivateAssets="all"/>
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
-    <PackageReference Include="Microsoft.Build.Tasks.Core" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

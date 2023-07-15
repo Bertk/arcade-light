@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>$(NetCurrent)</TargetFrameworks>
@@ -13,7 +13,6 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
     <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Test.Common\DotNetDev.ArcadeLight.Test.Common.csproj" />
     <ProjectReference Include="..\DotNetDev.ArcadeLight.Sdk\DotNetDev.ArcadeLight.Sdk.csproj" />
     <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
@@ -28,6 +27,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" />
   </ItemGroup>
 
   <ItemGroup>
