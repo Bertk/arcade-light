@@ -28,6 +28,7 @@
 
   <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
     <PackageReference Include="Microsoft.Build" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" />
   </ItemGroup>
 
   <ItemGroup>
