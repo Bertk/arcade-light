@@ -24,8 +24,4 @@
     <PackageReference Include="xunit.extensibility.execution" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DotNetDev.ArcadeLight.Common\DotNetDev.ArcadeLight.Common.csproj" />
-  </ItemGroup>
-
 </Project>
