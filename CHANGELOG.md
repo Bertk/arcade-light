@@ -7,6 +7,12 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+## [1.6.3](https://github.com/Bertk/arcade-light/compare/v1.6.2...v1.6.3) - 2023-07-15
+
+### Changed
+
+- Fix nuget package content (#167)
+
 ## [1.6.2](https://github.com/Bertk/arcade-light/compare/v1.5.81...v1.6.2) - 2023-07-14
 
 ### Changed
