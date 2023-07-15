@@ -1,4 +1,4 @@
-## About
+# About
 
 Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without Microsoft proprietary tooling
 
@@ -11,10 +11,10 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 ```json
 {
   "tools": {
-    "dotnet": "7.0.203"
+    "dotnet": "7.0.306"
   },
   "msbuild-sdks": {
-    "DotNetDev.ArcadeLight.Sdk": "1.4.20"
+    "DotNetDev.ArcadeLight.Sdk": "1.6.3"
   }
 }
 ```
@@ -35,7 +35,7 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 <\Project>
 ```
 
-#### 4) Add line in Directory.build.targets
+#### 4) Add line in Directory.Build.targets
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -54,17 +54,26 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
   </PropertyGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.132" />
+    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
   ...
 <\Project>
 ```
 
-#### 6) Copy `eng\commonlight` from Arcade-light into repo.
+#### 6) Copy `eng\commonlight` from Arcade-light into repo
 
 #### 7) Add the Versions.props file to your eng\ folder
 
-#### 8) copy `version.json` to repository root folder
+#### 8) configure _Nerdbank.GitVersioning_
+
+Copy `version.json` to repository root folder and configure values (see [versionJson.md](https://github.com/dotnet/Nerdbank.GitVersioning/blob/main/doc/versionJson.md))
+
+Alternatively use _nbgv_ tool ([CLI tool docu](https://github.com/dotnet/Nerdbank.GitVersioning/blob/main/doc/nbgv-cli.md))
+
+```shell
+dotnet tool install -g nbgv
+nbgv install
+```
 
 #### 9) optionally copy the scripts for `restore`, `build` and `test` to repository root folder
 
