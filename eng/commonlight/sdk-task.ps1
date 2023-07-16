@@ -69,7 +69,7 @@ try {
     if ($GlobalJson.tools."xcopy-msbuild".Trim() -ine "none") {
         $xcopyMSBuildToolsFolder = InitializeXCopyMSBuild $GlobalJson.tools."xcopy-msbuild" -install $true
     }
-    if ($xcopyMSBuildToolsFolder -eq $null) {
+    if ($null -eq $xcopyMSBuildToolsFolder) {
       throw 'Unable to get xcopy downloadable version of msbuild'
     }
 
