@@ -166,16 +166,16 @@ function InitializeDotNetCli([bool]$install, [bool]$createSdkLocationFile) {
   }
 
   # Source Build uses DotNetCoreSdkDir variable
-  if ($env:DotNetCoreSdkDir -ne $null) {
+  if ($null -ne $env:DotNetCoreSdkDir) {
     $env:DOTNET_INSTALL_DIR = $env:DotNetCoreSdkDir
   }
 
   # Find the first path on %PATH% that contains the dotnet.exe
-  if ($useInstalledDotNetCli -and (-not $globalJsonHasRuntimes) -and ($env:DOTNET_INSTALL_DIR -eq $null)) {
+  if ($useInstalledDotNetCli -and (-not $globalJsonHasRuntimes) -and ($null -eq $env:DOTNET_INSTALL_DIR)) {
     $dotnetExecutable = GetExecutableFileName 'dotnet'
     $dotnetCmd = Get-Command $dotnetExecutable -ErrorAction SilentlyContinue
 
-    if ($dotnetCmd -ne $null) {
+    if ($null -ne $dotnetCmd) {
       $env:DOTNET_INSTALL_DIR = Split-Path $dotnetCmd.Path -Parent
     }
   }
@@ -373,9 +373,9 @@ function InitializeVisualStudioMSBuild([bool]$install, [object]$vsRequirements =
   $vsMinVersion = [Version]::new($vsMinVersionStr)
 
   # Try msbuild command available in the environment.
-  if ($env:VSINSTALLDIR -ne $null) {
+  if ($null -ne $env:VSINSTALLDIR) {
     $msbuildCmd = Get-Command 'msbuild.exe' -ErrorAction SilentlyContinue
-    if ($msbuildCmd -ne $null) {
+    if ($null -ne $msbuildCmd) {
       # Workaround for https://github.com/dotnet/roslyn/issues/35793
       # Due to this issue $msbuildCmd.Version returns 0.0.0.0 for msbuild.exe 16.2+
       $msbuildVersion = [Version]::new((Get-Item $msbuildCmd.Path).VersionInfo.ProductVersion.Split([char[]]@('-', '+'))[0])
@@ -391,7 +391,7 @@ function InitializeVisualStudioMSBuild([bool]$install, [object]$vsRequirements =
 
   # Locate Visual Studio installation or download x-copy msbuild.
   $vsInfo = LocateVisualStudio $vsRequirements
-  if ($vsInfo -ne $null) {
+  if ($null -ne $vsInfo) {
     $vsInstallDir = $vsInfo.installationPath
     $vsMajorVersion = $vsInfo.installationVersion.Split('.')[0]
 
@@ -421,11 +421,11 @@ function InitializeVisualStudioMSBuild([bool]$install, [object]$vsRequirements =
     $vsInstallDir = $null
     if ($xcopyMSBuildVersion.Trim() -ine "none") {
         $vsInstallDir = InitializeXCopyMSBuild $xcopyMSBuildVersion $install
-        if ($vsInstallDir -eq $null) {
+        if ($null -eq $vsInstallDir) {
             throw "Could not xcopy msbuild. Please check that package 'RoslynTools.MSBuild @ $xcopyMSBuildVersion' exists on feed 'dotnet-eng'."
         }
     }
-    if ($vsInstallDir -eq $null) {
+    if ($null -eq $vsInstallDir) {
       throw 'Unable to find Visual Studio that has required version and components installed'
     }
   }
@@ -606,7 +606,7 @@ function GetDefaultMSBuildEngine() {
 }
 
 function GetNuGetPackageCachePath() {
-  if ($env:NUGET_PACKAGES -eq $null) {
+  if ($null -eq $env:NUGET_PACKAGES) {
     # Use local cache on CI to ensure deterministic build.
     # Avoid using the http cache as workaround for https://github.com/NuGet/Home/issues/3116
     # use global cache in dev builds to avoid cost of downloading packages.
@@ -814,7 +814,7 @@ function MSBuild-Core() {
 
 function GetMSBuildBinaryLogCommandLineArgument($arguments) {
   foreach ($argument in $arguments) {
-    if ($argument -ne $null) {
+    if ($null -ne $argument) {
       $arg = $argument.Trim()
       if ($arg.StartsWith('/bl:', "OrdinalIgnoreCase")) {
         return $arg.Substring('/bl:'.Length)
