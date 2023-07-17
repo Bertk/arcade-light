@@ -17,7 +17,7 @@
 
       <_TestRunnerTargetFramework>$(NetMinimum)</_TestRunnerTargetFramework>
       <_TestRunnerTargetFramework Condition="'$(NetCurrent)' != ''">$(NetCurrent)</_TestRunnerTargetFramework>
-      <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == 'netcoreapp1.1' or %(TestToRun.TargetFramework) == 'netcoreapp1.0'">netcoreapp1.0</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == $(NetFrameworkMinimum) or %(TestToRun.TargetFramework) == $(NetFrameworkCurrent)">$(NetFrameworkMinimum)</_TestRunnerTargetFramework>
       <_TestPublishDir>%(TestToRun.TestPublishDir)</_TestPublishDir>
     </PropertyGroup>
 
