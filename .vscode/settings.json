@@ -1,4 +1,28 @@
 {
     "powershell.scriptAnalysis.settingsPath": ".vscode/analyzersettings.psd1",
     "powershell.scriptAnalysis.enable": true,
+    "dotnet.defaultSolution": "disable",
+    "cSpell.ignoreWords": [
+        "Nerdbank"
+    ],
+  "cSpell.words": [
+    "binlog",
+    "bootstrapper",
+    "cibuild",
+    "commonlight",
+    "Darc",
+    "nbgv",
+    "NETCORE",
+    "Ngen",
+    "nupkg",
+    "Pathto",
+    "resx",
+    "runtimes",
+    "toolset",
+    "VSIX",
+    "vsman",
+    "vsmand",
+    "VSSDK",
+    "vsixmanifest"
+  ],
 }
