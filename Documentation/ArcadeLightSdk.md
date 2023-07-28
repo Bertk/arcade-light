@@ -250,7 +250,7 @@ optimizations by setting 'RestoreUsingNuGetTargets' to false.
 
 The toolset also defines default versions for various dependencies, such as XUnit, VSSDK, etc. These defaults can be overridden in the Versions.props file.
 
-See [DefaultVersions (legacy)](https://github.com/Bertk/arcade-light/blob/main/src/DotNetDev.ArcadeLight.Sdk/tools/DefaultVersions.props) for a list of *UsingTool* properties and default versions.
+See [DefaultVersions (legacy)](https://github.com/Bertk/arcade-light/blob/main/src/DotNetDev.ArcadeLight.Sdk/tools/DefaultVersions.props) for a list of _UsingTool_ properties and default versions.
 
 ### /global.json
 

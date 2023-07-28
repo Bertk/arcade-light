@@ -64,11 +64,11 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 
 #### 7) Add the Versions.props file to your eng\ folder
 
-#### 8) configure _Nerdbank.GitVersioning_
+#### 8) configure *Nerdbank.GitVersioning*
 
 Copy `version.json` to repository root folder and configure values (see [versionJson.md](https://github.com/dotnet/Nerdbank.GitVersioning/blob/main/doc/versionJson.md))
 
-Alternatively use _nbgv_ tool ([CLI tool docu](https://github.com/dotnet/Nerdbank.GitVersioning/blob/main/doc/nbgv-cli.md))
+Alternatively use *nbgv* tool ([CLI tool documentation](https://github.com/dotnet/Nerdbank.GitVersioning/blob/main/doc/nbgv-cli.md))
 
 ```shell
 dotnet tool install -g nbgv
