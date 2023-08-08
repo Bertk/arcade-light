@@ -41,7 +41,7 @@
     <PackageVersion Include="xunit.extensibility.core" Version="2.5.0" />
     <PackageVersion Include="xunit.extensibility.execution" Version="2.5.0" />
 
-    <PackageVersion Include="coverlet.collector" Version="6.0.0" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.1-preview.19.g69738170d8" />
 
     <PackageVersion Include="MSTest" Version="2.2.10" />
     <PackageVersion Include="MSTest.TestAdapter" Version="2.2.10" />
