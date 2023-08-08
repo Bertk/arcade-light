@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.6.0.74858" />
+    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.7.0.75501" />
     <GlobalPackageReference Include="AsyncFixer" Version="1.6.0" />
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
@@ -33,7 +33,7 @@
 
 
     <PackageVersion Include="FluentAssertions" Version="6.11.0" />
-    <PackageVersion Include="Moq" Version="4.18.4" />
+    <PackageVersion Include="Moq" Version="4.20.1" />
 
     <PackageVersion Include="xunit" Version="2.5.0" />
     <PackageVersion Include="xunit.runner.console" Version="2.5.0" />
