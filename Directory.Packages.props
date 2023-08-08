@@ -2,13 +2,11 @@
   <PropertyGroup>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
-
   <ItemGroup>
     <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.12.0.78982" />
     <GlobalPackageReference Include="AsyncFixer" Version="1.6.0" />
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
     <PackageVersion Include="Microsoft.Build" Version="17.7.2" />
@@ -42,16 +40,12 @@
     <PackageVersion Include="xunit.extensibility.execution" Version="2.5.2" />
 
     <PackageVersion Include="coverlet.collector" Version="6.0.1-preview.19.g69738170d8" />
-
     <PackageVersion Include="MSTest" Version="2.2.10" />
     <PackageVersion Include="MSTest.TestAdapter" Version="2.2.10" />
     <PackageVersion Include="MSTest.TestFramework" Version="2.2.10" />
-
     <PackageVersion Include="NUnit" Version="3.13.3" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
-
     <PackageVersion Include="vswhere" Version="3.1.7" />
-
     <PackageVersion Include="System.Buffers" Version="4.5.1" />
     <PackageVersion Include="System.Collections.Immutable" Version="7.0.0" />
     <PackageVersion Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
@@ -74,6 +68,5 @@
 
     <PackageVersion Include="Microsoft.TemplateEngine.Tasks" Version="7.0.112" />
     <PackageVersion Include="Microsoft.DiaSymReader.PortablePdb" Version="1.6.0" />
-
   </ItemGroup>
 </Project>
