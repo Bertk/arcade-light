@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.6.0.74858" />
+    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.7.0.75501" />
     <GlobalPackageReference Include="AsyncFixer" Version="1.6.0" />
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
@@ -23,8 +23,8 @@
     <PackageVersion Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="Microsoft.TestPlatform" Version="17.6.3" />
-    <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.6.3" />
-    <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="17.6.3" />
+    <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.7.0" />
+    <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="17.7.0" />
     <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.6.2164" />
     <PackageVersion Include="NETStandard.Library" Version="2.0.3" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
@@ -33,7 +33,7 @@
 
 
     <PackageVersion Include="FluentAssertions" Version="6.11.0" />
-    <PackageVersion Include="Moq" Version="4.18.4" />
+    <PackageVersion Include="Moq" Version="4.20.1" />
 
     <PackageVersion Include="xunit" Version="2.5.0" />
     <PackageVersion Include="xunit.runner.console" Version="2.5.0" />
@@ -72,7 +72,7 @@
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
 
-    <PackageVersion Include="Microsoft.TemplateEngine.Tasks" Version="7.0.109" />
+    <PackageVersion Include="Microsoft.TemplateEngine.Tasks" Version="7.0.110" />
     <PackageVersion Include="Microsoft.DiaSymReader.PortablePdb" Version="1.6.0" />
 
   </ItemGroup>
