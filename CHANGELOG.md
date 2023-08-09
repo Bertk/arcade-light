@@ -7,6 +7,17 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+### Changed
+
+- Bump Microsoft.NET.Test.Sdk from 17.6.3 to 17.7.0 (#177)
+- Bump Microsoft.TestPlatform.ObjectModel from 17.6.3 to 17.7.0 (#178)
+- Bump Microsoft.TestPlatform.TestHost from 17.6.3 to 17.7.0 (#179)
+- Bump Microsoft.TemplateEngine.Tasks from 7.0.109 to 7.0.110 (#176)
+- Bump Moq from 4.18.4 to 4.20.1 (#175)
+- Bump SonarAnalyzer.CSharp from 9.6.0.74858 to 9.7.0.75501 (#180)
+- Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.22 to 5.1.23 (#173)
+- Bump SonarAnalyzer.CSharp from 9.5.0.73987 to 9.6.0.74858 (#174)
+
 ## [1.6.3](https://github.com/Bertk/arcade-light/compare/v1.6.2...v1.6.3) - 2023-07-15
 
 ### Changed
