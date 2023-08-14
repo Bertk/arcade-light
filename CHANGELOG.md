@@ -7,6 +7,27 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+### Changed
+
+- Bump Microsoft.NET.StringTools from 17.6.3 to 17.7.0 (#189)
+- Bump Microsoft.Build.Framework from 17.6.3 to 17.7.0 (#188)
+- Bump Microsoft.Build from 17.6.3 to 17.7.0 (#187)
+- Bump NuGet.Versioning from 6.6.1 to 6.7.0 (#186)
+- Bump Moq from 4.20.1 to 4.20.2 (#185)
+- Bump Microsoft.Build.Utilities.Core from 17.6.3 to 17.7.0 #184
+- Bump Microsoft.Build.Tasks.Core from 17.6.3 to 17.7.0 (#183)
+- Bump NuGet.Frameworks from 6.6.1 to 6.7.0 (#182)
+- update .NET SDK 7.0.400 (#181)
+- Bump SonarAnalyzer.CSharp from 9.6.0.74858 to 9.7.0.75501 (#180)
+- Bump Microsoft.TestPlatform.TestHost from 17.6.3 to 17.7.0 (#179)
+- Bump Microsoft.TestPlatform.ObjectModel from 17.6.3 to 17.7.0 (#178)
+- Bump Microsoft.NET.Test.Sdk from 17.6.3 to 17.7.0 (#177)
+- Bump Microsoft.TemplateEngine.Tasks from 7.0.109 to 7.0.110 (#176)
+- Bump Moq from 4.18.4 to 4.20.1 (#175)
+- Bump SonarAnalyzer.CSharp from 9.5.0.73987 to 9.6.0.74858 (#174)
+- Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.22 to 5.1.23 (#173)
+
+
 ## [1.6.3](https://github.com/Bertk/arcade-light/compare/v1.6.2...v1.6.3) - 2023-07-15
 
 ### Changed
@@ -49,7 +70,6 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
   - Bump System.Reflection.Metadata from 7.0.1 to 7.0.2 (#137)
   - Bump NuGet.Versioning from 6.6.0 to 6.6.1 (#135)
   - Bump System.Text.Json from 7.0.2 to 7.0.3 (#138)
-
 
 ## [1.5.53](https://github.com/Bertk/arcade-light/compare/v1.5.35...v1.5.53) - 2023-06-05
 
@@ -155,16 +175,12 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ### Changed
 
-
-
 - `PackageReleaseNotes` property for nuget package release notes `CHANGELOG.md`
 - update dependencies
   - Microsoft.TemplateEngine.Tasks from 7.0.100 to 7.0.102
   - vswhere from 3.0.3 to 3.1.1
   - System.Security.Cryptography.Xml from 7.0.0 to 7.0.1
   - NUnit3TestAdapter from 4.2.1 to 4.3.1
-
-
 
 ## [1.0.11](https://github.com/Bertk/arcade-light/compare/v1.0.0...v1.0.11) - 2022-12-12
 
