@@ -10,8 +10,8 @@
       <_TestRunnerAdditionalArguments>%(TestToRun.TestRunnerAdditionalArguments)</_TestRunnerAdditionalArguments>
 
       <_TestRunnerTargetFramework>$(NetMinimum)</_TestRunnerTargetFramework>
-      <_TestRunnerTargetFramework Condition="'$(NetCurrent)' != ''">$(NetCurrent)</_TestRunnerTargetFramework>
-      <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == $(NetFrameworkMinimum) or %(TestToRun.TargetFramework) == $(NetFrameworkCurrent)">$(NetFrameworkMinimum)</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework Condition="'$(_TestRuntime)' == 'Core'">$(NetCurrent)</_TestRunnerTargetFramework>
+      <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == 'netcoreapp1.1' or %(TestToRun.TargetFramework) == 'netcoreapp1.0'">$(NetFrameworkMinimum)</_TestRunnerTargetFramework>
 
       <_TargetDir>$([System.IO.Path]::GetDirectoryName('$(_TestAssembly)'))\</_TargetDir>
 
@@ -26,7 +26,7 @@
       <!-- 
         Redirect std output of the runner.
       -->
-      <_TestRunnerCommand Condition="'$(TestCaptureOutput)' != 'false'">$(_TestRunnerCommand) > "%(TestToRun.ResultsStdOutPath)" 2>&amp;1</_TestRunnerCommand>
+      <_TestRunnerCommand Condition="'$(TestCaptureOutput)' != 'false'">$(_TestRunnerCommand) >> "%(TestToRun.ResultsStdOutPath)" 2>&amp;1</_TestRunnerCommand>
     </PropertyGroup>
 
     <ItemGroup>
