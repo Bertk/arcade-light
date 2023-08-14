@@ -7,8 +7,25 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ## [Unreleased]
 
+### Added
+
 ### Changed
 
+### Deperecaded
+
+### Removed
+
+### Fixed
+
+### Security
+
+## [1.6.4](https://github.com/Bertk/arcade-light/compare/v1.6.3...v1.6.4) - 2023-08-14
+
+### Changed
+
+- update .NET Framework versions (#171)
+- Bump Moq from 4.20.2 to 4.20.69 (#193)
+- Bump dotnet-reportgenerator-globaltool from 5.1.23 to 5.1.24 (#192)
 - Bump Microsoft.NET.StringTools from 17.6.3 to 17.7.0 (#189)
 - Bump Microsoft.Build.Framework from 17.6.3 to 17.7.0 (#188)
 - Bump Microsoft.Build from 17.6.3 to 17.7.0 (#187)
@@ -26,7 +43,6 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 - Bump Moq from 4.18.4 to 4.20.1 (#175)
 - Bump SonarAnalyzer.CSharp from 9.5.0.73987 to 9.6.0.74858 (#174)
 - Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.22 to 5.1.23 (#173)
-
 
 ## [1.6.3](https://github.com/Bertk/arcade-light/compare/v1.6.2...v1.6.3) - 2023-07-15
 
