@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.7.0.75501" />
+    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.8.0.76515" />
     <GlobalPackageReference Include="AsyncFixer" Version="1.6.0" />
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
