@@ -31,8 +31,8 @@ build -bl
 
 Search properties or analyze errors
 
-<img src="images/MSBuildLogViewerSearchProperty.png">
+![MSBuildLogViewerSearchProperty.png](images/MSBuildLogViewerSearchProperty.png)
 
 View source files (targets and props files)
 
-<img src="images/MSBuildLogViewerDisplaySourceFile.png">
+![images/MSBuildLogViewerDisplaySourceFile.png](images/MSBuildLogViewerDisplaySourceFile.png)

@@ -2,8 +2,8 @@
 
 Arcade provides many templates which help consumers conform to Arcade standards and provide additional functionality (additional jobs or stages that provide features).  
 
-- [eng/commonlight/jobs/jobs.yml](#jobs.yml)
-- [eng/commonlight/job/job.yml](#job.yml)
+- [eng/commonlight/jobs/jobs.yml](#jobsyml)
+- [eng/commonlight/job/job.yml](#jobyml)
 
 ## Jobs.yml
 
