@@ -97,6 +97,7 @@ namespace DotNet.XUnitExtensions
         }
       }
 
+#pragma warning disable S2583 // Conditionally executed code should be reachable
       if (calleeType != null && conditionMemberNames != null)
       {
         if (DiscovererHelpers.Evaluate(calleeType, conditionMemberNames))
@@ -110,6 +111,7 @@ namespace DotNet.XUnitExtensions
       {
         yield return new KeyValuePair<string, string>(XunitConstants.Category, category);
       }
+#pragma warning restore S2583 // Conditionally executed code should be reachable
     }
 
     internal static string AppendAdditionalMessage(this string message, string additionalMessage)

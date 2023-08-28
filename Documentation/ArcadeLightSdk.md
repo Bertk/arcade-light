@@ -261,10 +261,10 @@ For example,
 ```json
 {
   "tools": {
-    "dotnet": "6.0.402"
+    "dotnet": "7.0.400"
   },
   "msbuild-sdks": {
-    "DotNetDev.ArcadeLight.Sdk": "1.4.14"
+    "DotNetDev.ArcadeLight.Sdk": "1.6.4"
   }
 }
 ```
