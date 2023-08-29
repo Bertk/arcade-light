@@ -23,7 +23,7 @@
     <PackageVersion Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="1.1.1" />
     <PackageVersion Include="Microsoft.TestPlatform" Version="17.7.1" />
-    <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.7.1" />
+    <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.7.2" />
     <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="17.7.1" />
     <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.6.2164" />
     <PackageVersion Include="NETStandard.Library" Version="2.0.3" />
