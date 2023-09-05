@@ -3,7 +3,10 @@
 
 name: .NET
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+  push:
+       branches: [ "main" ]
 
 # on:
 #   push:
@@ -95,9 +98,9 @@ jobs:
         uses: danielpalme/ReportGenerator-GitHub-Action@5.1.24
         with:
           reports: ./artifacts/TestResults/**/coverage.cobertura.xml
-          assemblyfilters: -xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing
+          assemblyfilters: -xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing;-DotNet.XUnitExtensions;
           targetdir: ./artifacts/CoverageReport
-          reporttypes: HtmlInline;Cobertura;MarkdownSummaryGithub
+          reporttypes: HtmlInline;Cobertura;MarkdownSummaryGithub;lcov
 
       - name: Add Coverage PR Comment
         uses: marocchino/sticky-pull-request-comment@v2
@@ -113,5 +116,5 @@ jobs:
       - name: Upload coverage report artifact
         uses: actions/upload-artifact@v3
         with:
-          name: CoverageReport.${{matrix.os}}.${{matrix.framework}} # Artifact name        
+          name: CoverageReport.${{matrix.os}}.${{matrix.framework}} # Artifact name
           path: ./artifacts/CoverageReport # Directory containing files to upload

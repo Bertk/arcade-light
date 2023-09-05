@@ -8,6 +8,8 @@ Arcade-light is inspired from dotnet/arcade but minimized and without Microsoft 
 ## CI status
 
 [![Build Status](https://dev.azure.com/bertk0374/arcade-light/_apis/build/status/Bertk.arcade-light?branchName=main)](https://dev.azure.com/bertk0374/arcade-light/_build/latest?definitionId=1&branchName=main)
+![coverage->main](https://img.shields.io/azure-devops/coverage/bertk0374/arcade-light/1/main?label=coverage-%3Emain
+)
 
 ## nuget.org status
 
