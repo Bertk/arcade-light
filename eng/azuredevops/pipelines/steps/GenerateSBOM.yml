@@ -37,10 +37,8 @@ steps:
             New-Item -Path "$(Build.SourcesDirectory)" -Name "${{parameters.targetFolder}}" -ItemType "directory"
             }
       }
-      # Write-Verbose -Message "run CycloneDX: 'dotnet dotnet-CycloneDX --exclude-test-projects --exclude-dev -dpr -o $($targetPath) $($outputPath) ${{parameters.projects}}'" -Verbose
-      # dotnet dotnet-CycloneDX --exclude-test-projects --exclude-dev -dpr -o "$($targetPath)" $($outputPath) ${{parameters.projects}}
-      Write-Verbose -Message "run CycloneDX: 'dotnet dotnet-CycloneDX --exclude-test-projects -dpr -o $($targetPath) $($outputPath) ${{parameters.projects}}'" -Verbose
-      dotnet dotnet-CycloneDX --exclude-test-projects -dpr -o "$($targetPath)" $($outputPath) ${{parameters.projects}}
+      Write-Verbose -Message "run CycloneDX: 'dotnet dotnet-CycloneDX --exclude-test-projects --exclude-dev -dpr -o $($targetPath) $($outputPath) ${{parameters.projects}}'" -Verbose
+      dotnet dotnet-CycloneDX --exclude-test-projects --exclude-dev -dpr -o "$($targetPath)" $($outputPath) ${{parameters.projects}}
       $projectFile = Split-Path ${{parameters.projects}} -Leaf
       # eliminate file extensions
       $projectName = "$projectFile".Replace(".sln", "").Replace(".csproj", "")
