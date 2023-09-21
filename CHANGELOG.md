@@ -11,13 +11,37 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ### Changed
 
-### Deperecaded
+### Deprecated
 
 ### Removed
 
 ### Fixed
 
 ### Security
+
+## [1.6.5](https://github.com/Bertk/arcade-light/compare/v1.6.4...v1.6.5) - 2023-09-21
+
+### Added
+
+- add standards (#206)
+
+### Changed
+
+- use SDK 7.0.401 (#219)
+- Bump Microsoft.TemplateEngine.Tasks from 7.0.110 to 7.0.111 (#216)
+- Bump dotnet-reportgenerator-globaltool from 5.1.24 to 5.1.25 (#214)
+- Bump SonarAnalyzer.CSharp from 9.8.0.76515 to 9.9.0.77355 (#215)
+- Bump Microsoft.VSSDK.BuildTools from 17.6.2164 to 17.7.2196 (#211)
+- Bump Microsoft.NET.Test.Sdk from 17.7.1 to 17.7.2 (#208)
+- Bump Microsoft.TestPlatform.TestHost from 17.7.1 to 17.7.2 (#209)
+- Bump Microsoft.TestPlatform from 17.7.1 to 17.7.2 (#210)
+- Bump Microsoft.TestPlatform.ObjectModel from 17.7.1 to 17.7.2 (#207)
+- Bump Microsoft.Build from 17.7.0 to 17.7.2 (#204)
+- Bump Microsoft.Build.Tasks.Core from 17.7.0 to 17.7.2 (#202)
+- Bump Microsoft.Build.Utilities.Core from 17.7.0 to 17.7.2 (#200)
+- Bump FluentAssertions from 6.11.0 to 6.12.0 (#205)
+- Bump Microsoft.Build.Framework from 17.7.0 to 17.7.2 (#201)
+- Bump Microsoft.NET.StringTools from 17.7.0 to 17.7.2 (#203)
 
 ## [1.6.4](https://github.com/Bertk/arcade-light/compare/v1.6.3...v1.6.4) - 2023-08-14
 
