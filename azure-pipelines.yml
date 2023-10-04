@@ -318,5 +318,5 @@ stages:
     - task: CmdLine@2
       displayName: 'dotnet push to feed public'
       inputs:
-        script: 'dotnet.exe nuget push --source "public" --api-key az --skip-duplicate $(System.ArtifactsDirectory)\**\*.nupkg'
+        script: 'dotnet.exe nuget push --source "intern" --api-key az --skip-duplicate $(System.ArtifactsDirectory)\**\*.nupkg'
       condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'))
