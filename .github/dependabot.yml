@@ -3,7 +3,7 @@ version: 2
 registries:
   nuget-azure-devops:
     type: nuget-feed
-    url: https://pkgs.dev.azure.com/bertk0374/_packaging/public/nuget/v3/index.json
+    url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
     token: '${{secrets.AZURE_DEVOPS_TOKEN}}:'
 
 updates:
