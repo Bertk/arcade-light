@@ -34,7 +34,7 @@ jobs:
           dotnet-version: |
              '6.0.x'
              '7.0.x'
-          source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
+          source-url: https://pkgs.dev.azure.com/bertk0374/arcade-light-public/_packaging/public/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
@@ -72,7 +72,7 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
-          source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
+          source-url: https://pkgs.dev.azure.com/bertk0374/arcade-light-public/_packaging/public/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
