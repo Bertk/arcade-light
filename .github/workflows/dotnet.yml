@@ -14,9 +14,6 @@ on:
 #   pull_request:
 #     branches: [ "main" ]
 
-env:
-  AZURE_ARTIFACTS_FEED_URL: https://pkgs.dev.azure.com/bertk0374/_packaging/public/nuget/v3/index.json
-
 jobs:
   # Fail if there are build warnings
   #
@@ -34,16 +31,10 @@ jobs:
       - name: Setup dotnet 6.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '6.0.x'
-          source-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
-
-      - name: Setup dotnet 7.0
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '7.0.x'
-          source-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
+          dotnet-version: |
+             '6.0.x'
+             '7.0.x'
+          source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
@@ -81,7 +72,7 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
-          source-url: ${{ env.AZURE_ARTIFACTS_FEED_URL }}
+          source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
