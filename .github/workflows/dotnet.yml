@@ -31,14 +31,21 @@ jobs:
       - name: Setup dotnet 6.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: |
-             '6.0.4xx'
-             '7.0.4xx'
+          dotnet-version: '6.0.4xx'
+          source-url: https://pkgs.dev.azure.com/bertk0374/arcade-light-public/_packaging/public/nuget/v3/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+
+      - name: Setup dotnet 7.0
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.4xx'
           source-url: https://pkgs.dev.azure.com/bertk0374/arcade-light-public/_packaging/public/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
 
       - run: |
+          dotnet --list-sdks
           echo "Run, Build Application using script"
           ./eng/commonlight/build.sh --build --restore
 
