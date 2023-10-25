@@ -11,6 +11,19 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ### Changed
 
+- use SDK 7.0.403
+- Bump SonarAnalyzer.CSharp from 9.11.0.78383 to 9.12.0.78982 (#232)
+- Bump xunit from 2.5.1 to 2.5.2 (#238)
+- Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.25 to 5.1.26 (#231)
+- Bump xunit.extensibility.execution from 2.5.1 to 2.5.2 (#235)
+- Bump Microsoft.TemplateEngine.Tasks from 7.0.111 to 7.0.112 (#233)
+- Bump xunit.extensibility.core from 2.5.1 to 2.5.2 (#234)
+- Bump xunit.runner.console from 2.5.1 to 2.5.2 (#236)
+- Bump xunit.runner.visualstudio from 2.5.1 to 2.5.3 (#239)
+- Update azure-pipelines.yml (#230)
+- Bump cyclonedx from 2.8.1 to 2.9.0 (#226)
+- Bump actions/checkout from 3 to 4 (#227)
+
 ### Deprecated
 
 ### Removed
