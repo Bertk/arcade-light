@@ -8,7 +8,7 @@
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Build" Version="17.7.2" />
     <PackageVersion Include="Microsoft.Build.Framework" Version="17.7.2" />
     <PackageVersion Include="Microsoft.Build.Tasks.Core" Version="17.7.2" />
