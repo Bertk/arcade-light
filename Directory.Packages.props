@@ -40,7 +40,7 @@
     <PackageVersion Include="xunit.extensibility.execution" Version="2.6.1" />
 
     <!-- https://dev.azure.com/tonerdo/coverlet/_artifacts/feed/coverlet-nightly/NuGet/coverlet.collector -->
-    <PackageVersion Include="coverlet.collector" Version="6.0.1-preview.23.gc309dab13c" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.1-preview.25.g21d3964f03" />
     
     <PackageVersion Include="MSTest" Version="2.2.10" />
     <PackageVersion Include="MSTest.TestAdapter" Version="2.2.10" />
