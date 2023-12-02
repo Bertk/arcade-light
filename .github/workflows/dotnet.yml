@@ -94,7 +94,7 @@ jobs:
         if: matrix.os  == 'windows-latest'
 
       - name: ReportGenerator
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.1.26
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
         with:
           reports: ./artifacts/TestResults/**/coverage.cobertura.xml
           assemblyfilters: -xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing;-DotNet.XUnitExtensions;
