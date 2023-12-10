@@ -8,7 +8,6 @@ registries:
   coverlet-azure-devops:
     type: nuget-feed
     url: https://pkgs.dev.azure.com/tonerdo/coverlet/_packaging/coverlet-nightly/nuget/v3/index.json
-    token: '${{secrets.AZURE_DEVOPS_TOKEN}}:'
 
 updates:
   - package-ecosystem: "nuget"
