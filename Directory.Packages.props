@@ -3,7 +3,7 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.12.0.78982" />
+    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="9.15.0.81779" />
     <GlobalPackageReference Include="AsyncFixer" Version="1.6.0" />
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
   </ItemGroup>
@@ -33,11 +33,11 @@
     <PackageVersion Include="FluentAssertions" Version="6.12.0" />
     <PackageVersion Include="Moq" Version="4.20.69" />
 
-    <PackageVersion Include="xunit" Version="2.6.2" />
+    <PackageVersion Include="xunit" Version="2.6.3" />
     <PackageVersion Include="xunit.runner.console" Version="2.6.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.4" />
-    <PackageVersion Include="xunit.extensibility.core" Version="2.6.2" />
-    <PackageVersion Include="xunit.extensibility.execution" Version="2.6.2" />
+    <PackageVersion Include="xunit.extensibility.core" Version="2.6.3" />
+    <PackageVersion Include="xunit.extensibility.execution" Version="2.6.3" />
 
     <!-- https://dev.azure.com/tonerdo/coverlet/_artifacts/feed/coverlet-nightly/NuGet/coverlet.collector -->
     <PackageVersion Include="coverlet.collector" Version="6.0.1-preview.25.g21d3964f03" />
