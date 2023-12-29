@@ -24,11 +24,11 @@ steps:
       dotnet tool restore
       dotnet tool list
       # build additional parameters
-      $targetPath = "$(Build.SourcesDirectory)/${{parameters.targetFolder}}"
+      $targetPath = Join-Path -Path $(Build.SourcesDirectory) -ChildPath ${{parameters.targetFolder}}
       if ("${{parameters.outputPath}}" -ne ""){
         Write-Verbose -Message "outputPath: '${{parameters.outputPath}}'" -Verbose
         $outputPath = "-biop ${{parameters.outputPath}}"
-        $targetPath = "${{parameters.outputPath}}/${{parameters.targetFolder}}"
+        $targetPath = Join-Path -Path ${{parameters.outputPath}} -ChildPath ${{parameters.targetFolder}}
         if ( ! ( Test-Path -Path $targetPath -PathType Container )) {
           New-Item -Path "${{parameters.outputPath}}" -Name "${{parameters.targetFolder}}" -ItemType "directory"
           }
@@ -37,8 +37,12 @@ steps:
             New-Item -Path "$(Build.SourcesDirectory)" -Name "${{parameters.targetFolder}}" -ItemType "directory"
             }
       }
-      Write-Verbose -Message "run CycloneDX: 'dotnet dotnet-CycloneDX --exclude-test-projects --exclude-dev -dpr -o $($targetPath) $($outputPath) ${{parameters.projects}}'" -Verbose
-      dotnet dotnet-CycloneDX --exclude-test-projects --exclude-dev -dpr -o "$($targetPath)" $($outputPath) ${{parameters.projects}}
+      Write-Verbose -Message "run CycloneDX: 'dotnet dotnet-CycloneDX ${{parameters.projects}} --exclude-test-projects --exclude-dev -dpr -o $($targetPath) $($outputPath)'" -Verbose
+      if ("${{parameters.outputPath}}" -ne ""){
+        dotnet dotnet-CycloneDX ${{parameters.projects}} --exclude-test-projects --exclude-dev -dpr -o "$($targetPath)" -biop ${{parameters.outputPath}}
+      } else {
+        dotnet dotnet-CycloneDX ${{parameters.projects}} --exclude-test-projects --exclude-dev -dpr -o "$($targetPath)"
+      }
       $projectFile = Split-Path ${{parameters.projects}} -Leaf
       # eliminate file extensions
       $projectName = "$projectFile".Replace(".sln", "").Replace(".csproj", "")
