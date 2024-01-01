@@ -113,7 +113,7 @@ jobs:
         shell: bash
 
       - name: Upload coverage report artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: CoverageReport.${{matrix.os}}.${{matrix.framework}} # Artifact name
           path: ./artifacts/CoverageReport # Directory containing files to upload
