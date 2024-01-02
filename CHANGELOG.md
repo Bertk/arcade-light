@@ -11,19 +11,6 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ### Changed
 
-- use SDK 7.0.403
-- Bump SonarAnalyzer.CSharp from 9.11.0.78383 to 9.12.0.78982 (#232)
-- Bump xunit from 2.5.1 to 2.5.2 (#238)
-- Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.25 to 5.1.26 (#231)
-- Bump xunit.extensibility.execution from 2.5.1 to 2.5.2 (#235)
-- Bump Microsoft.TemplateEngine.Tasks from 7.0.111 to 7.0.112 (#233)
-- Bump xunit.extensibility.core from 2.5.1 to 2.5.2 (#234)
-- Bump xunit.runner.console from 2.5.1 to 2.5.2 (#236)
-- Bump xunit.runner.visualstudio from 2.5.1 to 2.5.3 (#239)
-- Update azure-pipelines.yml (#230)
-- Bump cyclonedx from 2.8.1 to 2.9.0 (#226)
-- Bump actions/checkout from 3 to 4 (#227)
-
 ### Deprecated
 
 ### Removed
@@ -31,6 +18,44 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 ### Fixed
 
 ### Security
+
+## [1.6.6](https://github.com/Bertk/arcade-light/compare/v1.6.5...v1.6.6) - 2024-01-06
+
+### Changed
+
+- update coverlet.collector version (coverlet-nightly)(#241)(#289)
+- Bump Microsoft.Bcl.AsyncInterfaces from 7.0.0 to 8.0.0 (#263)
+- Bump Microsoft.Extensions.DependencyInjection from 7.0.0 to 8.0.0 (#249)
+- Bump Microsoft.SourceLink.AzureRepos.Git from 1.1.1 to 8.0.0 (#275)
+- Bump Microsoft.SourceLink.GitHub from 1.1.1 to 8.0.0 (#277)
+- Bump Microsoft.TemplateEngine.Tasks from 7.0.111 to 7.0.114 (#233)(#242) (#254)
+- Bump Microsoft.TestPlatform from 17.7.2 to 17.8.0 (#255)
+- Bump Microsoft.TestPlatform.ObjectModel from 17.7.2 to 17.8.0 (#248)
+- Bump Microsoft.TestPlatform.TestHost from 17.7.2 to 17.8.0 (#250)
+- Bump NUnit from 3.13.3 to 3.14.0 (#261)
+- Bump NuGet.Frameworks from 6.7.0 to 6.8.0 (#282)
+- Bump NuGet.Versioning from 6.7.0 to 6.8.0 (#280)
+- Bump SonarAnalyzer.CSharp from 9.11.0.78383 to 9.16.0.82469 (#232) (#286) (#294)
+- Bump System.Configuration.ConfigurationManager from 7.0.0 to 8.0.0 (#253)
+- Bump System.Reflection.Metadata from 7.0.2 to 8.0.0 (#251)
+- Bump System.Security.Cryptography.ProtectedData from 7.0.1 to 8.0.0 (#258)
+- Bump System.Security.Cryptography.Xml from 7.0.1 to 8.0.0 (#269)
+- Bump System.Security.Permissions from 7.0.0 to 8.0.0 (#262)
+- Bump System.Text.Json from 7.0.3 to 8.0.0 (#259)
+- Bump actions/checkout from 3 to 4 (#227)
+- Bump actions/github-script from 6 to 7 (#284)
+- Bump actions/setup-dotnet from 3 to 4 (#291)
+- Bump actions/stale from 8 to 9 (#290)
+- Bump actions/upload-artifact from 3 to 4 (#298)
+- Bump coverlet.collector (#243)(#260) (#279)
+- Bump cyclonedx from 2.10.0 to 3.0.2 (#226) (#281) (#295) (#297) 
+- Bump danielpalme/ReportGenerator-GitHub-Action from 5.1.25 to 5.2.0 (#231) (#285)
+- Bump dotnet-reportgenerator-globaltool from 5.1.26 to 5.2.0 (#270)
+- Bump github/codeql-action from 2 to 3 (#299)
+- Bump xunit from 2.5.1 to 2.6.4 (#238) (#245) (#256) (#278) (#287) (#293)
+- Bump xunit.extensibility.execution from 2.5.1 to 2.6.4 (#235) (#247) (#252) (#274)
+- Bump xunit.runner.console from 2.5.1 to 2.6.2 (#236) (#246) (#267) (#276)
+- Bump xunit.runner.visualstudio from 2.5.1 to 2.5.4 (#239) (#273)
 
 ## [1.6.5](https://github.com/Bertk/arcade-light/compare/v1.6.4...v1.6.5) - 2023-09-21
 
