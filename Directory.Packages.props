@@ -36,8 +36,8 @@
     <PackageVersion Include="xunit" Version="2.6.4" />
     <PackageVersion Include="xunit.runner.console" Version="2.6.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.4" />
-    <PackageVersion Include="xunit.extensibility.core" Version="2.6.4" />
-    <PackageVersion Include="xunit.extensibility.execution" Version="2.6.4" />
+    <PackageVersion Include="xunit.extensibility.core" Version="2.6.5" />
+    <PackageVersion Include="xunit.extensibility.execution" Version="2.6.5" />
 
     <!-- https://dev.azure.com/tonerdo/coverlet/_artifacts/feed/coverlet-nightly/NuGet/coverlet.collector -->
     <PackageVersion Include="coverlet.collector" Version="6.0.1-preview.25.g21d3964f03" />
