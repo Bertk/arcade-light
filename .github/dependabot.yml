@@ -18,6 +18,10 @@ updates:
     registries:
       - arcade-light-azure-devops
       - coverlet-azure-devops
+    labels:
+      - "type: maintenance"
+      - "type: dependencies"
+      - "chore"
 
   - package-ecosystem: "github-actions"
     directory: "/"
