@@ -16,6 +16,7 @@ categories:
     label: 'type: bug'
   - title: 'Maintenance'
     label: 'type: maintenance'
+    label: 'chore'
   - title: 'Documentation'
     label: 'type: docs'
   - title: 'Other changes'
@@ -37,6 +38,7 @@ version-resolver:
       - 'type: docs'
       - 'type: dependencies'
       - 'type: security'
+  default: patch
 
 exclude-labels:
   - 'skip-changelog'
