@@ -19,9 +19,8 @@ updates:
       - arcade-light-azure-devops
       - coverlet-azure-devops
     labels:
-      - "type: maintenance"
       - "type: dependencies"
-      - "chore"
+      - ".NET"
 
   - package-ecosystem: "github-actions"
     directory: "/"
