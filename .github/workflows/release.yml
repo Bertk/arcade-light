@@ -54,9 +54,7 @@ jobs:
           dotnet tool restore
           VERSION=`nbgv get-version --variable Version`
           NUGETVERSION=`nbgv get-version --variable NuGetPackageVersion`
-          echo "##[set-output name=version;]$VERSION"
-          echo "##[set-output name=package_name;]CycloneDX.$NUGETVERSION.nupkg"
-
+          echo "{version}={$VERSION}" >> $GITHUB_OUTPUT
 
 #      - name: Publish package to NuGet
 #        env:
