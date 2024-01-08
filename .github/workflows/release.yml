@@ -1,0 +1,74 @@
+# This workflow is used for publishing the NuGet package and Docker image.
+#
+# Before triggering a release the `version.json` file should be updated in the
+# relevant branch.
+#
+# When commiting the version change in `version.json` the commit message is
+# important as it will be used for the release in GitHub.
+#
+# Releases are triggered manually. This can be done by browsing to
+# https://github.com/Bertk/arcade-light/actions?query=workflow%3ARelease
+# and selecting "Run workflow". If releasing a patch for a previous version
+# make sure the correct branch is selected. It will default to the default branch
+
+name: Release
+
+on:
+  workflow_dispatch
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            6.0.x
+            7.0.x
+          source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
+        env:
+              NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+      # The tests should have already been run during the PR workflow, so this is really just a sanity check
+      - name: Tests
+        run: |
+          echo "Run, Build Application using script"
+          ./eng/commonlight/build.sh --build --restore --test
+
+      # Determine version with nbgv tool
+      - name: version
+        id: version
+        run: |
+          dotnet tool restore
+          VERSION=`nbgv get-version --variable Version`
+          NUGETVERSION=`nbgv get-version --variable NuGetPackageVersion`
+          echo "##[set-output name=version;]$VERSION"
+          echo "##[set-output name=package_name;]CycloneDX.$NUGETVERSION.nupkg"
+
+
+#      - name: Publish package to NuGet
+#        env:
+#          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+#        run: |
+#          dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_API_KEY" ${{ steps.version.outputs.package_filename }}
+
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - uses: release-drafter/release-drafter@v5
+        with:
+          version: ${{ steps.version.outputs.version }}
+          publish: false
+          prerelease: true
+          prerelease-identifier: beta
+          latest: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
