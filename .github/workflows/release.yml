@@ -1,7 +1,12 @@
-# This workflow is used for publishing the NuGet package and Docker image.
+# This workflow is used for publishing the NuGet package.
 #
 # Before triggering a release the `version.json` file should be updated in the
-# relevant branch.
+# relevant branch. The nbgv dotnet tool can be used with command "nbgv prepare-release"
+# or e.g. "nbgv set-version 3.0.6".
+#
+# CHANGELOG.md update shall be done before publish the release eg.
+# using "changelog-from-release -r https://github.com/Bertk/arcade-light > CHANGELOG.md"
+# Read https://github.com/rhysd/changelog-from-release for details.
 #
 # When commiting the version change in `version.json` the commit message is
 # important as it will be used for the release in GitHub.
@@ -53,22 +58,11 @@ jobs:
         run: |
           dotnet tool restore
           VERSION=`nbgv get-version --variable Version`
-          NUGETVERSION=`nbgv get-version --variable NuGetPackageVersion`
           echo "{version}={$VERSION}" >> $GITHUB_OUTPUT
 
 #      - name: Publish package to NuGet
 #        env:
 #          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
 #        run: |
-#          dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_API_KEY" ${{ steps.version.outputs.package_filename }}
+#          dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_API_KEY" artifacts/packages/release/Shipping/*.nupkg
 
-      # Drafts your next Release notes as Pull Requests are merged into "master"
-      - uses: release-drafter/release-drafter@v5
-        with:
-          version: ${{ steps.version.outputs.version }}
-          publish: false
-          prerelease: true
-          prerelease-identifier: beta
-          latest: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
