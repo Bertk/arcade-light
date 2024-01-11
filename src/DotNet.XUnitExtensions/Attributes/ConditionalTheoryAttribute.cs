@@ -11,12 +11,10 @@ namespace Xunit
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
   public sealed class ConditionalTheoryAttribute : TheoryAttribute
   {
-    [DynamicallyAccessedMembers(StaticReflectionConstants.ConditionalMemberKinds)]
     public Type CalleeType { get; private set; }
     public string[] ConditionMemberNames { get; private set; }
 
     public ConditionalTheoryAttribute(
-        [DynamicallyAccessedMembers(StaticReflectionConstants.ConditionalMemberKinds)]
             Type calleeType,
         params string[] conditionMemberNames)
     {
