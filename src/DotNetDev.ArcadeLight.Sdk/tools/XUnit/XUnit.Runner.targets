@@ -19,11 +19,13 @@
       <_TestRunnerTargetFramework Condition="'$(NetCurrent)' != ''">$(NetCurrent)</_TestRunnerTargetFramework>
       <_TestRunnerTargetFramework Condition="%(TestToRun.TargetFramework) == $(NetFrameworkMinimum) or %(TestToRun.TargetFramework) == $(NetFrameworkCurrent)">$(NetFrameworkMinimum)</_TestRunnerTargetFramework>
       <_TestPublishDir>%(TestToRun.TestPublishDir)</_TestPublishDir>
+      <_TestConfiguration Condition="$(_TestPublishDir.Contains('Debug'))">Debug</_TestConfiguration>
+      <_TestConfiguration Condition="$(_TestPublishDir.Contains('Release'))">Release</_TestConfiguration>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(_TestRuntime)' == 'Core' And !Exists($(_TestPublishDir))" >
       <_PublishCommand Condition="'$(_PublishCommand)'==''">$(DotNetTool)</_PublishCommand>
-      <_PublishCommandArgs>publish "$(MSBuildProjectFullPath)" --framework %(TestToRun.TargetFramework)</_PublishCommandArgs>
+      <_PublishCommandArgs>publish "$(MSBuildProjectFullPath)" --framework %(TestToRun.TargetFramework) --configuration $(_TestConfiguration)</_PublishCommandArgs>
       <_PublishTestCommand>"$(_PublishCommand)" $(_PublishCommandArgs)</_PublishTestCommand>
 
       <!--
