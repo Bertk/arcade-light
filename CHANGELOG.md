@@ -3,21 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelines.
 
-Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.132/doc/nbgv-cli.md#preparing-a-release)).
+Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.133/doc/nbgv-cli.md#preparing-a-release)).
 
-## [Unreleased]
+## [1.7.0](https://github.com/Bertk/arcade-light/compare/v1.6.6...v1.7.0) - 2024-01-11
 
-### Added
+### Maintenance
 
-### Changed
+- update .NET SDK (#311)
 
-### Deprecated
+### Other changes
 
-### Removed
+- add release-drafter (#307)
+- update DotNetDev.ArcadeLight.Sdk version (#301)
 
-### Fixed
+### Dependency Updates
 
-### Security
+- Bump cyclonedx from 3.0.4 to 3.0.5 (#312) @dependabot
+- Bump System.Text.Json from 8.0.0 to 8.0.1 (#310) @dependabot
+- Bump cyclonedx from 3.0.2 to 3.0.4 (#304) @dependabot
+- Bump xunit from 2.6.4 to 2.6.5 (#306) @dependabot
+- Bump xunit.extensibility.execution and xunit.extensibility.core (#302) @dependabot
 
 ## [1.6.6](https://github.com/Bertk/arcade-light/compare/v1.6.5...v1.6.6) - 2024-01-06
 
