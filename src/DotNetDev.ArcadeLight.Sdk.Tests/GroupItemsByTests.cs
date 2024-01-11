@@ -11,6 +11,13 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
   public class GroupItemsByTests
   {
+    private static readonly string[] expected = new[]
+      {
+                "A: X='A2.X' Y='A1.Y' Z='A1.Z;A2.Z' U='' W='A1.W'",
+                "B: X='' Y='' Z='B1.Z' U='' W=''",
+                "C: X='C1.X' Y='C2.Y' Z='C1.Z;C2.Z' U='' W=''",
+            };
+
     [Fact]
     public void GroupItemsBy()
     {
@@ -30,12 +37,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       bool result = task.Execute();
       string[] inspectMetadata = new[] { "X", "Y", "Z", "U", "W" };
 
-      AssertEx.Equal(new[]
-      {
-                "A: X='A2.X' Y='A1.Y' Z='A1.Z;A2.Z' U='' W='A1.W'",
-                "B: X='' Y='' Z='B1.Z' U='' W=''",
-                "C: X='C1.X' Y='C2.Y' Z='C1.Z;C2.Z' U='' W=''",
-            }, task.GroupedItems.Select(i => $"{i.ItemSpec}: {string.Join(" ", inspectMetadata.Select(m => $"{m}='{i.GetMetadata(m)}'"))}"));
+      AssertEx.Equal(expected, task.GroupedItems.Select(i => $"{i.ItemSpec}: {string.Join(" ", inspectMetadata.Select(m => $"{m}='{i.GetMetadata(m)}'"))}"));
 
       Assert.True(result);
     }

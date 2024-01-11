@@ -22,10 +22,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests.Utilities
       WorkingDirectory = workDir;
       _logOutputDir = Path.Combine(logOutputDir, Path.GetFileName(workDir));
 
-      if (sourceDirectories == null)
-      {
-        throw new ArgumentNullException(nameof(sourceDirectories));
-      }
+      ArgumentNullException.ThrowIfNull(sourceDirectories);
 
       Directory.CreateDirectory(workDir);
       Directory.CreateDirectory(_logOutputDir);
@@ -38,18 +35,17 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests.Utilities
 
     public string WorkingDirectory { get; }
 
+    private static readonly string[] first = new[] { "-bl" };
+
     public int ExecuteBuild(ITestOutputHelper output, params string[] scriptArgs)
     {
       string cmd = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
               ? @".\build.cmd"
               : "./build.sh";
 
-      if (output == null)
-      {
-        throw new ArgumentNullException(nameof(output));
-      }
+      ArgumentNullException.ThrowIfNull(output);
 
-      return ExecuteScript(output, cmd, new[] { "-bl" }.Concat(scriptArgs));
+      return ExecuteScript(output, cmd, first.Concat(scriptArgs));
     }
 
     private int ExecuteScript(ITestOutputHelper output, string fileName, IEnumerable<string> scriptArgs)
@@ -89,10 +85,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests.Utilities
         output.WriteLine(e.Data ?? string.Empty);
       }
 
-      if (psi == null)
-      {
-        throw new ArgumentNullException(nameof(psi));
-      }
+      ArgumentNullException.ThrowIfNull(psi);
       psi.UseShellExecute = false;
       psi.RedirectStandardError = true;
       psi.RedirectStandardOutput = true;

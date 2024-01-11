@@ -39,10 +39,7 @@ namespace Microsoft.DotNet.Internal.DependencyInjection.Testing
       allErrors.Append("The following types are not resolvable:");
 
       ServiceCollection services = new();
-      if (register == null)
-      {
-        throw new ArgumentNullException(nameof(register));
-      }
+      ArgumentNullException.ThrowIfNull(register);
 
       register(services);
 

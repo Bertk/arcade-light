@@ -33,6 +33,8 @@ namespace DotNetDev.ArcadeLight.Sdk
     [Output]
     public string DotNetPath { get; set; }
 
+    private static readonly char[] separator = new[] { ';' };
+
     public override bool Execute()
     {
       ExecuteImpl();
@@ -68,7 +70,7 @@ namespace DotNetDev.ArcadeLight.Sdk
 
       string fileName = (Path.DirectorySeparatorChar == '\\') ? "dotnet.exe" : "dotnet";
 #pragma warning disable S6602 // "Find" method should be used instead of the "FirstOrDefault" extension
-      string dotNetDir = paths.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(p => File.Exists(Path.Combine(p, fileName)));
+      string dotNetDir = paths.Split(separator, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(p => File.Exists(Path.Combine(p, fileName)));
 #pragma warning restore S6602 // "Find" method should be used instead of the "FirstOrDefault" extension
 
       if (dotNetDir == null || !Directory.Exists(Path.Combine(dotNetDir, "sdk", sdkVersion)))

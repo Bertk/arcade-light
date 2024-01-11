@@ -11,10 +11,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests.Utilities
   {
     public static Collection<T> AddRange<T>(this Collection<T> collection, IEnumerable<T> items)
     {
-      if (items == null)
-      {
-        throw new ArgumentNullException(nameof(items));
-      }
+      ArgumentNullException.ThrowIfNull(items);
       foreach (T item in items)
       {
         collection?.Add(item);

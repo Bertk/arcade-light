@@ -27,6 +27,8 @@ namespace DotNetDev.ArcadeLight.Sdk
 
     public string RuntimeSourceFeedKey { get; set; }
 
+    private static readonly char[] separator = new char[] { '/' };
+
     public override bool Execute()
     {
       if (!File.Exists(GlobalJsonPath))
@@ -51,9 +53,9 @@ namespace DotNetDev.ArcadeLight.Sdk
           foreach (JsonProperty runtime in dotnetLocalElement.EnumerateObject())
           {
             IEnumerable<KeyValuePair<string, string>> items = GetItemsFromJsonElementArray(runtime, out string runtimeName);
-            if (runtimeItems.ContainsKey(runtimeName))
+            if (runtimeItems.TryGetValue(runtimeName, out IEnumerable<KeyValuePair<string, string>> value))
             {
-              runtimeItems[runtimeName] = runtimeItems[runtimeName].Concat(items);
+              runtimeItems[runtimeName] = value.Concat(items);
             }
             else
             {
@@ -199,7 +201,7 @@ namespace DotNetDev.ArcadeLight.Sdk
       string architecture = string.Empty;
       if (runtime.Contains('/'))
       {
-        string[] parts = runtime.Split(new char[] { '/' }, 2);
+        string[] parts = runtime.Split(separator, 2);
         runtime = parts[0];
         architecture = parts[1];
       }
