@@ -28,10 +28,10 @@ jobs:
         with:
           fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
 
-      - name: Setup dotnet 6.0
+      - name: Setup dotnet 8.0
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '6.0.4xx'
+          dotnet-version: '8.0.1xx'
           source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
@@ -65,7 +65,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        framework: ['net6.0', 'net7.0']
+        framework: ['net8.0', 'net7.0']
     timeout-minutes: 30
     permissions:
       pull-requests: write
@@ -75,10 +75,10 @@ jobs:
         with:
           fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
 
-      - name: Setup dotnet 7.0
+      - name: Setup dotnet 8.0
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '7.0.4xx'
+          dotnet-version: '8.0.1xx'
           source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
