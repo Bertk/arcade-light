@@ -26,8 +26,8 @@ namespace DotNet.XUnitExtensions
                                                     ExceptionAggregator aggregator,
                                                     CancellationTokenSource cancellationTokenSource)
     {
-      SkippedTestMessageBus skipMessageBus = new SkippedTestMessageBus(messageBus);
-      var result = await base.RunAsync(diagnosticMessageSink, skipMessageBus, constructorArguments, aggregator, cancellationTokenSource);
+      using SkippedTestMessageBus skipMessageBus = new(messageBus);
+      var result = await base.RunAsync(diagnosticMessageSink, skipMessageBus, constructorArguments, aggregator, cancellationTokenSource).ConfigureAwait(false);
       if (skipMessageBus.SkippedTestCount > 0)
       {
         result.Failed -= skipMessageBus.SkippedTestCount;
