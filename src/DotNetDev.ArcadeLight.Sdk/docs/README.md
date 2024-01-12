@@ -11,10 +11,10 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 ```json
 {
   "tools": {
-    "dotnet": "8.0.100"
+    "dotnet": "8.0.101"
   },
   "msbuild-sdks": {
-    "DotNetDev.ArcadeLight.Sdk": "1.6.6"
+    "DotNetDev.ArcadeLight.Sdk": "1.7.0"
   }
 }
 ```
