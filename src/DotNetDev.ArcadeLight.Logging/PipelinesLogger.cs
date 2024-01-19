@@ -24,6 +24,7 @@ namespace DotNetDev.ArcadeLight.Logging
     public LoggerVerbosity Verbosity { get; set; }
     public string Parameters { get; set; }
     private const string s_TelemetryMarker = "NETCORE_ENGINEERING_TELEMETRY";
+    private static readonly char[] separator = new[] { ',' };
 
     public void Initialize(IEventSource eventSource)
     {
@@ -49,13 +50,10 @@ namespace DotNetDev.ArcadeLight.Logging
       string targetsNotLogged = parameters["TargetsNotLogged"];
       if (!string.IsNullOrEmpty(targetsNotLogged))
       {
-        _ignoredTargets.UnionWith(targetsNotLogged.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+        _ignoredTargets.UnionWith(targetsNotLogged.Split(separator, StringSplitOptions.RemoveEmptyEntries));
       }
 
-      if (eventSource == null)
-      {
-        throw new ArgumentNullException(nameof(eventSource));
-      }
+      ArgumentNullException.ThrowIfNull(eventSource);
 
       eventSource.ErrorRaised += OnErrorRaised;
       eventSource.WarningRaised += OnWarningRaised;
