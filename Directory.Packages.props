@@ -20,7 +20,7 @@
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
     <PackageVersion Include="Microsoft.SourceLink.AzureRepos.Git" Version="8.0.0" />
     <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.TestPlatform" Version="17.8.0" />
+    <PackageVersion Include="Microsoft.TestPlatform" Version="17.9.0" />
     <PackageVersion Include="Microsoft.TestPlatform.TestHost" Version="17.9.0" />
     <PackageVersion Include="Microsoft.TestPlatform.ObjectModel" Version="17.9.0" />
     <PackageVersion Include="Microsoft.VSSDK.BuildTools" Version="17.7.2196" />
@@ -62,7 +62,6 @@
     <PackageVersion Include="System.Text.RegularExpressions" Version="4.3.1" />
     <PackageVersion Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
-    <PackageVersion Include="Microsoft.TemplateEngine.Tasks" Version="7.0.114" />
     <PackageVersion Include="Microsoft.DiaSymReader.PortablePdb" Version="1.6.0" />
   </ItemGroup>
 </Project>
