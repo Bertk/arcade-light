@@ -11,7 +11,7 @@ namespace Xunit
   /// </summary>
   [TraitDiscoverer("DotNet.XUnitExtensions.ActiveIssueDiscoverer", "DotNet.XUnitExtensions")]
   [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
-  public class ActiveIssueAttribute : Attribute, ITraitAttribute
+  public sealed class ActiveIssueAttribute : Attribute, ITraitAttribute
   {
     public Type CalleeType { get; private set; }
     public string[] ConditionMemberNames { get; private set; }

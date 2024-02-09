@@ -9,15 +9,15 @@ namespace Xunit
 {
   public static class CoreClrConfigurationDetection
   {
-    public static bool IsJitStress => !string.Equals(GetEnvironmentVariableValue("JitStress"), "0", StringComparison.InvariantCulture);
-    public static bool IsJitStressRegs => !string.Equals(GetEnvironmentVariableValue("JitStressRegs"), "0", StringComparison.InvariantCulture);
-    public static bool IsJitMinOpts => string.Equals(GetEnvironmentVariableValue("JITMinOpts"), "1", StringComparison.InvariantCulture);
-    public static bool IsTailCallStress => string.Equals(GetEnvironmentVariableValue("TailcallStress"), "1", StringComparison.InvariantCulture);
-    public static bool IsZapDisable => string.Equals(GetEnvironmentVariableValue("ZapDisable"), "1", StringComparison.InvariantCulture);
+    public static bool IsJitStress => !string.Equals(GetEnvironmentVariableValue("JitStress"), "0", StringComparison.Ordinal);
+    public static bool IsJitStressRegs => !string.Equals(GetEnvironmentVariableValue("JitStressRegs"), "0", StringComparison.Ordinal);
+    public static bool IsJitMinOpts => string.Equals(GetEnvironmentVariableValue("JITMinOpts"), "1", StringComparison.Ordinal);
+    public static bool IsTailCallStress => string.Equals(GetEnvironmentVariableValue("TailcallStress"), "1", StringComparison.Ordinal);
+    public static bool IsZapDisable => string.Equals(GetEnvironmentVariableValue("ZapDisable"), "1", StringComparison.Ordinal);
     public static bool IsGCStress3 => CompareGCStressModeAsLower(GetEnvironmentVariableValue("GCStress"), "0x3", "3");
     public static bool IsGCStressC => CompareGCStressModeAsLower(GetEnvironmentVariableValue("GCStress"), "0xC", "C");
 
-    public static bool IsGCStress => !string.Equals(GetEnvironmentVariableValue("GCStress"), "0", StringComparison.InvariantCulture);
+    public static bool IsGCStress => !string.Equals(GetEnvironmentVariableValue("GCStress"), "0", StringComparison.Ordinal);
 
     public static bool IsCheckedRuntime => AssemblyConfigurationEquals("Checked");
     public static bool IsReleaseRuntime => AssemblyConfigurationEquals("Release");
@@ -41,16 +41,16 @@ namespace Xunit
       AssemblyConfigurationAttribute assemblyConfigurationAttribute = typeof(string).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>();
 
       return assemblyConfigurationAttribute != null &&
-          string.Equals(assemblyConfigurationAttribute.Configuration, configuration, StringComparison.InvariantCulture);
+          string.Equals(assemblyConfigurationAttribute.Configuration, configuration, StringComparison.Ordinal);
     }
 
     private static bool CompareGCStressModeAsLower(string value, string first, string second)
     {
       value = value.ToLowerInvariant();
-      return string.Equals(value, first.ToLowerInvariant(), StringComparison.InvariantCulture) ||
-          string.Equals(value, second.ToLowerInvariant(), StringComparison.InvariantCulture) ||
-          string.Equals(value, "0xf", StringComparison.InvariantCulture) ||
-          string.Equals(value, "f", StringComparison.InvariantCulture);
+      return string.Equals(value, first.ToLowerInvariant(), StringComparison.Ordinal) ||
+          string.Equals(value, second.ToLowerInvariant(), StringComparison.Ordinal) ||
+          string.Equals(value, "0xf", StringComparison.Ordinal) ||
+          string.Equals(value, "f", StringComparison.Ordinal);
     }
   }
 }
