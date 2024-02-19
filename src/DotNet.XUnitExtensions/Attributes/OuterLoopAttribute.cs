@@ -11,7 +11,7 @@ namespace Xunit
   /// </summary>
   [TraitDiscoverer("DotNet.XUnitExtensions.OuterLoopTestsDiscoverer", "DotNet.XUnitExtensions")]
   [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
-  public class OuterLoopAttribute : Attribute, ITraitAttribute
+  public sealed class OuterLoopAttribute : Attribute, ITraitAttribute
   {
     public Type CalleeType { get; private set; }
     public string[] ConditionMemberNames { get; private set; }
@@ -27,5 +27,10 @@ namespace Xunit
       CalleeType = calleeType;
       ConditionMemberNames = conditionMemberNames;
     }
+
+    public string Reason { get; }
+    public TestPlatforms? Platforms { get; }
+    public TargetFrameworkMonikers? Framework { get; }
+    public TestRuntimes? Runtime { get; }
   }
 }

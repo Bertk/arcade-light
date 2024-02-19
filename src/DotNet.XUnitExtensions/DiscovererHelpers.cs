@@ -65,6 +65,7 @@ namespace DotNet.XUnitExtensions
 
     internal static IEnumerable<KeyValuePair<string, string>> EvaluateArguments(IEnumerable<object> ctorArgs, string category, int skipFirst = 1)
     {
+#pragma warning disable CA1851
       Debug.Assert(ctorArgs.Count() >= 2);
 
       TestPlatforms platforms = TestPlatforms.Any;
@@ -95,6 +96,7 @@ namespace DotNet.XUnitExtensions
         {
           conditionMemberNames = (string[])arg;
         }
+#pragma warning restore CA1851
       }
 
 #pragma warning disable S2583 // Conditionally executed code should be reachable

@@ -21,11 +21,13 @@ namespace DotNet.XUnitExtensions
     /// <returns>The trait values.</returns>
     public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {
+#pragma warning disable CA1062
       IEnumerable<object> ctorArgs = traitAttribute.GetConstructorArguments();
       if (ctorArgs.Count() < 2)
       {
         return new[] { new KeyValuePair<string, string>(XunitConstants.Category, XunitConstants.OuterLoop) };
       }
+#pragma warning restore CA1062
       return DiscovererHelpers.EvaluateArguments(ctorArgs, XunitConstants.OuterLoop);
     }
   }

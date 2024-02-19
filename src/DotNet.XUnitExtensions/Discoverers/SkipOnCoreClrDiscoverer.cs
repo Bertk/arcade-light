@@ -31,6 +31,7 @@ namespace DotNet.XUnitExtensions
         TestPlatforms testPlatforms = TestPlatforms.Any;
         RuntimeTestModes stressMode = RuntimeTestModes.Any;
         RuntimeConfiguration runtimeConfigurations = RuntimeConfiguration.Any;
+#pragma warning disable CA1062 // Validate arguments of public methods
         foreach (object arg in traitAttribute.GetConstructorArguments().Skip(1)) // We skip the first one as it is the reason
         {
           if (arg is TestPlatforms tp)
@@ -46,6 +47,7 @@ namespace DotNet.XUnitExtensions
             runtimeConfigurations = rc;
           }
         }
+#pragma warning restore CA1062 // Validate arguments of public methods
 
         if (DiscovererHelpers.TestPlatformApplies(testPlatforms) && RuntimeConfigurationApplies(runtimeConfigurations) && StressModeApplies(stressMode))
         {

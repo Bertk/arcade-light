@@ -19,10 +19,12 @@ namespace DotNet.XUnitExtensions
         TestPlatforms testPlatforms = TestPlatforms.Any;
 
         // Last argument is either the TestPlatform or the test platform to skip the test on.
+#pragma warning disable CA1062 // Validate arguments of public methods
         if (traitAttribute.GetConstructorArguments().LastOrDefault() is TestPlatforms tp)
         {
           testPlatforms = tp;
         }
+#pragma warning restore CA1062 // Validate arguments of public methods
 
         if (DiscovererHelpers.TestPlatformApplies(testPlatforms))
         {

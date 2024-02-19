@@ -11,8 +11,10 @@ namespace Xunit
   /// </summary>
   [TraitDiscoverer("DotNet.XUnitExtensions.TestCategoryDiscoverer", "DotNet.XUnitExtensions")]
   [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true)]
-  public class TestCategoryAttribute : Attribute, ITraitAttribute
+  public sealed class TestCategoryAttribute : Attribute, ITraitAttribute
   {
     public TestCategoryAttribute(string category) { }
+
+    public string Category { get; }
   }
 }

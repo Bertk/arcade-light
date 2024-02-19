@@ -23,10 +23,24 @@ namespace DotNet.XUnitExtensions
       throw new DebugAssertException(message, detailMessage);
     }
 
+#pragma warning disable CA1064 // Exceptions should be public
     private sealed class DebugAssertException : Exception
+#pragma warning restore CA1064 // Exceptions should be public
     {
       internal DebugAssertException(string message, string detailMessage) :
           base(message + Environment.NewLine + detailMessage)
+      {
+      }
+
+      public DebugAssertException()
+      {
+      }
+
+      public DebugAssertException(string message) : base(message)
+      {
+      }
+
+      public DebugAssertException(string message, Exception innerException) : base(message, innerException)
       {
       }
     }

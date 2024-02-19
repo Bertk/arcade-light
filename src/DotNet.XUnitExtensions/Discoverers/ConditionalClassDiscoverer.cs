@@ -24,10 +24,12 @@ namespace DotNet.XUnitExtensions
     public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {
       // If evaluated to false, skip the test class entirely.
+#pragma warning disable CA1062 // Validate arguments of public methods
       if (!EvaluateParameterHelper(traitAttribute))
       {
         yield return new KeyValuePair<string, string>(XunitConstants.Category, XunitConstants.Failing);
       }
+#pragma warning restore CA1062 // Validate arguments of public methods
     }
 
     internal static bool EvaluateParameterHelper(IAttributeInfo traitAttribute)
@@ -35,7 +37,7 @@ namespace DotNet.XUnitExtensions
       // Parse the traitAttribute. We make sure it contains two parts:
       // 1. Type 2. nameof(conditionMemberName)
       object[] conditionArguments = traitAttribute.GetConstructorArguments().ToArray();
-      Debug.Assert(conditionArguments.Count() == 2);
+      Debug.Assert(conditionArguments.Length == 2);
 
       Type calleeType = null;
       string[] conditionMemberNames = null;

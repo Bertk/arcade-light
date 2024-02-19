@@ -25,5 +25,10 @@ namespace Xunit
       CalleeType = calleeType;
       ConditionMemberNames = conditionMemberNames;
     }
+
+    public string Issue { get; }
+    public TestPlatforms? Platforms { get; }
+    public TargetFrameworkMonikers? Framework { get; }
+    public TestRuntimes? Runtimes { get; }
   }
 }

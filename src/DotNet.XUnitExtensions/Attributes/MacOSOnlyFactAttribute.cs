@@ -11,7 +11,7 @@ namespace Xunit
   /// <summary>
   /// This test should be run only on OSX.
   /// </summary>
-  public class MacOSOnlyFactAttribute : FactAttribute
+  public sealed class MacOSOnlyFactAttribute : FactAttribute
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="MacOSOnlyFactAttribute"/> class.
@@ -24,5 +24,7 @@ namespace Xunit
         this.Skip = "This test requires macOS to run.".AppendAdditionalMessage(additionalMessage);
       }
     }
+
+    public string? AdditionalMessage { get; }
   }
 }

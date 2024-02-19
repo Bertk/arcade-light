@@ -22,7 +22,9 @@ namespace DotNet.XUnitExtensions
   {
     public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {
+#pragma warning disable CA1062 // Validate arguments of public methods
       List<object> ctorArgs = traitAttribute.GetConstructorArguments().ToList();
+#pragma warning restore CA1062 // Validate arguments of public methods
       yield return new KeyValuePair<string, string>("Category", ctorArgs[0].ToString());
     }
   }

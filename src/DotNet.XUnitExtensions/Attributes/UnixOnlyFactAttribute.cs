@@ -11,7 +11,7 @@ namespace Xunit
   /// <summary>
   /// This test should be run only on Unix (Linux, OSX platforms).
   /// </summary>
-  public class UnixOnlyFactAttribute : FactAttribute
+  public sealed class UnixOnlyFactAttribute : FactAttribute
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="UnixOnlyFactAttribute"/> class.
@@ -24,5 +24,7 @@ namespace Xunit
         this.Skip = "This test requires Unix to run.".AppendAdditionalMessage(additionalMessage);
       }
     }
+
+    public string? AdditionalMessage { get; }
   }
 }

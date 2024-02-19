@@ -3,7 +3,9 @@
 
 namespace DotNet.XUnitExtensions
 {
+#pragma warning disable CA1815 // Override equals and operator equals on value types
   public struct XunitConstants
+#pragma warning restore CA1815 // Override equals and operator equals on value types
   {
     internal const string Failing = "failing";
     internal const string OuterLoop = "outerloop";

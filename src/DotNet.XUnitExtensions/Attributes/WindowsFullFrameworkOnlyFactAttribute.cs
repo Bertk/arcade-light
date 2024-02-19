@@ -11,7 +11,7 @@ namespace Xunit
   /// <summary>
   ///  This test should be run only on Windows on .NET Framework.
   /// </summary>
-  public class WindowsFullFrameworkOnlyFactAttribute : FactAttribute
+  public sealed class WindowsFullFrameworkOnlyFactAttribute : FactAttribute
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="WindowsFullFrameworkOnlyFactAttribute"/> class.
@@ -29,5 +29,7 @@ namespace Xunit
         this.Skip = "This test only runs on .NET Framework.".AppendAdditionalMessage(additionalMessage);
       }
     }
+
+    public string? AdditionalMessage { get; }
   }
 }

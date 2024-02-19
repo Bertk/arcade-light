@@ -104,6 +104,8 @@ dotnet_diagnostic.CA1310.severity = warning
 dotnet_style_allow_multiple_blank_lines_experimental = true:silent
 dotnet_style_allow_statement_immediately_after_block_experimental = true:silent
 dotnet_code_quality_unused_parameters = all:suggestion
+dotnet_diagnostic.CA1308.severity = none
+dotnet_diagnostic.CA1031.severity = suggestion
 ###############################
 # C# Coding Conventions       #
 ###############################

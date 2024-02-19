@@ -193,7 +193,7 @@ namespace DotNetDev.ArcadeLight.Sdk
      * or this format
      * { (runtime/architecture): [(version), ..., (version)] }
      */
-    private static IEnumerable<KeyValuePair<string, string>> GetItemsFromJsonElementArray(JsonProperty token, out string runtime)
+    private static KeyValuePair<string, string>[] GetItemsFromJsonElementArray(JsonProperty token, out string runtime)
     {
       List<KeyValuePair<string, string>> items = new();
 

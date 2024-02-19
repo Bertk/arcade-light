@@ -23,7 +23,9 @@ namespace DotNet.XUnitExtensions
     /// <returns>The trait values.</returns>
     public IEnumerable<KeyValuePair<string, string>> GetTraits(IAttributeInfo traitAttribute)
     {
+#pragma warning disable CA1062 // Validate arguments of public methods
       TargetFrameworkMonikers frameworks = (TargetFrameworkMonikers)traitAttribute.GetConstructorArguments().First();
+#pragma warning restore CA1062 // Validate arguments of public methods
 
       return DiscovererHelpers.TestFrameworkApplies(frameworks) ?
           new[] { new KeyValuePair<string, string>(XunitConstants.Category, XunitConstants.Failing) } :
