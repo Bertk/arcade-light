@@ -10,7 +10,7 @@ namespace Xunit
   /// <summary>
   /// This test should be run only on .NET (.NET Core).
   /// </summary>
-  public class DotNetOnlyFactAttribute : FactAttribute
+  public sealed class DotNetOnlyFactAttribute : FactAttribute
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="DotNetOnlyFactAttribute"/> class.
@@ -23,5 +23,7 @@ namespace Xunit
         this.Skip = "This test only runs on .NET.".AppendAdditionalMessage(additionalMessage);
       }
     }
+
+    public string? AdditionalMessage { get; }
   }
 }

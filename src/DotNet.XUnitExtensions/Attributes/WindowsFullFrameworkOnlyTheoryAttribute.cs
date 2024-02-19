@@ -11,7 +11,7 @@ namespace Xunit
   /// <summary>
   ///  This test should be run only on Windows on full .NET Framework.
   /// </summary>
-  public class WindowsFullFrameworkOnlyTheoryAttribute : TheoryAttribute
+  public sealed class WindowsFullFrameworkOnlyTheoryAttribute : TheoryAttribute
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="WindowsFullFrameworkOnlyTheoryAttribute"/> class.
@@ -30,5 +30,7 @@ namespace Xunit
         this.Skip = "This test only runs on full framework.".AppendAdditionalMessage(additionalMessage);
       }
     }
+
+    public string? AdditionalMessage { get; }
   }
 }

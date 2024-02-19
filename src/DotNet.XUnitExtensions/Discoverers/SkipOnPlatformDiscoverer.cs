@@ -17,11 +17,12 @@ namespace DotNet.XUnitExtensions
       TestPlatforms testPlatforms = (TestPlatforms)0;
 
       // First argument is either the TestPlatform or the test platform to skip the test on.
+#pragma warning disable CA1062
       if (traitAttribute.GetConstructorArguments().FirstOrDefault() is TestPlatforms tp)
       {
         testPlatforms = tp;
       }
-
+#pragma warning restore CA1062
       if (DiscovererHelpers.TestPlatformApplies(testPlatforms))
       {
         return new[] { new KeyValuePair<string, string>(XunitConstants.Category, XunitConstants.Failing) };

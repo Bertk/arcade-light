@@ -8,7 +8,7 @@ namespace Xunit
 {
   [TraitDiscoverer("DotNet.XUnitExtensions.SkipOnCoreClrDiscoverer", "DotNet.XUnitExtensions")]
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-  public class SkipOnCoreClrAttribute : Attribute, ITraitAttribute
+  public sealed class SkipOnCoreClrAttribute : Attribute, ITraitAttribute
   {
     internal SkipOnCoreClrAttribute() { }
 
@@ -20,5 +20,11 @@ namespace Xunit
     public SkipOnCoreClrAttribute(string reason, TestPlatforms testPlatforms, RuntimeTestModes testMode) { }
     public SkipOnCoreClrAttribute(string reason, TestPlatforms testPlatforms, RuntimeConfiguration runtimeConfigurations, RuntimeTestModes testModes) { }
     public SkipOnCoreClrAttribute(string reason) { }
+
+    public string Reason { get; }
+    public TestPlatforms? TestPlatforms { get; }
+    public RuntimeTestModes? TestMode { get; }
+    public RuntimeConfiguration? RuntimeConfigurations { get; }
+    public RuntimeTestModes? TestModes { get; }
   }
 }

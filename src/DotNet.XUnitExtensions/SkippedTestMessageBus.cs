@@ -12,6 +12,14 @@ namespace DotNet.XUnitExtensions
   {
     public SkipTestException(string reason)
         : base(reason) { }
+
+    public SkipTestException()
+    {
+    }
+
+    public SkipTestException(string message, Exception innerException) : base(message, innerException)
+    {
+    }
   }
 
   /// <summary>Implements message bus to communicate tests skipped via SkipTestException.</summary>

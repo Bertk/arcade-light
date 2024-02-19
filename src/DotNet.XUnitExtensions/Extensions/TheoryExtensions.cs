@@ -21,7 +21,7 @@ namespace DotNet.XUnitExtensions
       return new TheoryDataAdapter(data.Select(d => new object[] { d }));
     }
 
-    private class TheoryDataAdapter : TheoryData, IEnumerable<object[]>
+    private sealed class TheoryDataAdapter : TheoryData, IEnumerable<object[]>
     {
       private readonly IEnumerable<object[]> _data;
 

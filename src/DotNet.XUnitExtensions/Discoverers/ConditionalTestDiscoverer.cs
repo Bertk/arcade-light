@@ -26,7 +26,7 @@ namespace DotNet.XUnitExtensions
 
       MethodInfo testMethodInfo = testMethod.Method.ToRuntimeMethod();
       Type testMethodDeclaringType = testMethodInfo.DeclaringType;
-      List<string> falseConditions = new List<string>(conditionMemberNames.Count());
+      List<string> falseConditions = new List<string>(conditionMemberNames.Length);
 
       foreach (string entry in conditionMemberNames)
       {
@@ -173,7 +173,7 @@ namespace DotNet.XUnitExtensions
       }
 
       // [ConditionalFact((string[]) null)]
-      if (conditionMemberNames == null || conditionMemberNames.Count() == 0) return true;
+      if (conditionMemberNames == null || conditionMemberNames.Length == 0) return true;
 
       return false;
     }

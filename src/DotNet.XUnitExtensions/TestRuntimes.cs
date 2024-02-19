@@ -6,7 +6,9 @@ using System;
 namespace Xunit
 {
   [Flags]
+#pragma warning disable CA2217 // Do not mark enums with FlagsAttribute
   public enum TestRuntimes
+#pragma warning restore CA2217 // Do not mark enums with FlagsAttribute
   {
     CoreCLR = 1,
     Mono = 2,

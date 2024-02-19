@@ -26,6 +26,8 @@ namespace DotNetDev.ArcadeLight.Sdk
     [Output]
     public string Path { get; private set; }
 
+    private static readonly string[] sourceArray = [".txt", ".md", ""];
+
     public override bool Execute()
     {
       ExecuteImpl();
@@ -58,7 +60,7 @@ namespace DotNetDev.ArcadeLight.Sdk
           System.IO.Directory.EnumerateFileSystemEntries(Directory, fileName + extension, options);
 #endif
       string[] matches =
-                (from extension in new[] { ".txt", ".md", "" }
+                (from extension in sourceArray
                  from path in enumerateFiles(extension)
                  select path).ToArray();
 

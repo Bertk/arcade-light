@@ -11,7 +11,7 @@ namespace Xunit
   /// <summary>
   /// This test should be run only on Windows.
   /// </summary>
-  public class WindowsOnlyTheoryAttribute : TheoryAttribute
+  public sealed class WindowsOnlyTheoryAttribute : TheoryAttribute
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="WindowsOnlyTheoryAttribute"/> class.
@@ -24,5 +24,7 @@ namespace Xunit
         this.Skip = "This test requires Windows to run.".AppendAdditionalMessage(additionalMessage);
       }
     }
+
+    public string? AdditionalMessage { get; }
   }
 }

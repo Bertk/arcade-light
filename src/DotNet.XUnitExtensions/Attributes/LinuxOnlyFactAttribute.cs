@@ -11,7 +11,7 @@ namespace Xunit
   /// <summary>
   /// This test should be run only on Linux.
   /// </summary>
-  public class LinuxOnlyFactAttribute : FactAttribute
+  public sealed class LinuxOnlyFactAttribute : FactAttribute
   {
     /// <summary>
     /// Initializes a new instance of the <see cref="LinuxOnlyFactAttribute"/> class.
@@ -24,5 +24,7 @@ namespace Xunit
         this.Skip = "This test requires Linux to run.".AppendAdditionalMessage(additionalMessage);
       }
     }
+
+    public string? AdditionalMessage { get; }
   }
 }

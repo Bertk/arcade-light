@@ -26,8 +26,12 @@ namespace DotNet.XUnitExtensions
                                                     ExceptionAggregator aggregator,
                                                     CancellationTokenSource cancellationTokenSource)
     {
-      SkippedTestMessageBus skipMessageBus = new SkippedTestMessageBus(messageBus);
+#pragma warning disable CA2000 // Dispose objects before losing scope
+      SkippedTestMessageBus skipMessageBus = new(messageBus);
+#pragma warning restore CA2000 // Dispose objects before losing scope
+#pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
       RunSummary result = await base.RunAsync(diagnosticMessageSink, skipMessageBus, constructorArguments, aggregator, cancellationTokenSource);
+#pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
       if (skipMessageBus.SkippedTestCount > 0)
       {
         result.Failed -= skipMessageBus.SkippedTestCount;

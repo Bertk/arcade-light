@@ -11,8 +11,10 @@ namespace Xunit
   /// </summary>
   [TraitDiscoverer("DotNet.XUnitExtensions.PlatformSpecificDiscoverer", "DotNet.XUnitExtensions")]
   [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false)]
-  public class PlatformSpecificAttribute : Attribute, ITraitAttribute
+  public sealed class PlatformSpecificAttribute : Attribute, ITraitAttribute
   {
     public PlatformSpecificAttribute(TestPlatforms platforms) { }
+
+    public TestPlatforms Platforms { get; }
   }
 }
