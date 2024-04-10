@@ -5,6 +5,27 @@ See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelin
 
 Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.133/doc/nbgv-cli.md#preparing-a-release)).
 
+## [1.7.2](https://github.com/Bertk/arcade-light/compare/v1.7.1...v1.7.2) - 2024-04-10
+
+### Maintenance
+
+* update .NET SDK version (#349) @Bertk
+
+### Dependency Updates
+
+* Bump SonarAnalyzer.CSharp from 9.23.0.88079 to 9.23.1.88495 (#357) @dependabot
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.2.2 to 5.2.4 (#356) @dependabot
+* Bump cyclonedx from 3.0.5 to 3.0.6 (#355) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.21.0.86780 to 9.23.0.88079 (#354) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.2.3 to 5.2.4 (#352) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.2.2 to 5.2.3 (#350) @dependabot
+* Bump System.Text.Json from 8.0.2 to 8.0.3 (#351) @dependabot
+* Bump release-drafter/release-drafter from 5 to 6 (#347) @dependabot
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.2.0 to 5.2.2 (#348) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.2.1 to 5.2.2 (#346) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.19.0.84025 to 9.20.0.85982 (#344) @dependabot
+* Bump coverlet.collector from 6.0.1-preview.43.g52ddde6e8d to 6.0.1 (#345) @dependabot
+
 ## [1.7.1](https://github.com/Bertk/arcade-light/compare/v1.7.0...v1.7.1) - 2024-02-19
 
 ### Maintenance
