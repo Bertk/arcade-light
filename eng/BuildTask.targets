@@ -27,9 +27,7 @@
     <None Include="$(RepoRoot)THIRD-PARTY-NOTICES.txt" PackagePath="THIRD-PARTY-NOTICES.txt" Pack="true"/>
   </ItemGroup>
 
-    <!--
-      Do not include assemblies that MSBuild ships with in the package.
-    -->
+  <!-- Don't include assemblies that MSBuild ships with. -->
   <ItemGroup>
     <PackageReference Update="System.Collections.Immutable" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
     <PackageReference Update="System.IO.Compression" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
