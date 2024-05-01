@@ -1,4 +1,4 @@
-﻿<!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. -->
+<!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. -->
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>$(NetMinimum);$(NetCurrent)</TargetFrameworks>
@@ -18,6 +18,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <DevelopmentDependency>true</DevelopmentDependency>
     <PackageType>MSBuildSdk</PackageType>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
 
     <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
     <EnableGeneratedPackageContent>false</EnableGeneratedPackageContent>
@@ -31,13 +32,13 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" PrivateAssets="all" Publish="false" ExcludeAssets="runtime"  />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
-    <PackageReference Include="Microsoft.Build" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Build" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
   </ItemGroup>
 
   
@@ -45,7 +46,7 @@
     <PackageReference Include="NuGet.Versioning" />
     <PackageReference Include="System.Net.Http" />
     <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="System.Reflection.Metadata" />
+    <PackageReference Include="System.Reflection.Metadata" Publish="false"  />
   </ItemGroup>
 
   <ItemGroup>
