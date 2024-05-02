@@ -11,10 +11,10 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 ```json
 {
   "tools": {
-    "dotnet": "8.0.101"
+    "dotnet": "8.0.204"
   },
   "msbuild-sdks": {
-    "DotNetDev.ArcadeLight.Sdk": "1.7.0"
+    "DotNetDev.ArcadeLight.Sdk": "1.7.3"
   }
 }
 ```
@@ -22,6 +22,8 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 #### 2) create `nuget.config` file with a source for the *DotNetDev.ArcadeLight.Sdk* nuget package
 
 #### 3) Add lines in Directory.Build.props
+
+_Please note: [Central Package Management](https://learn.microsoft.com/en-us/nuget/consume-packages/central-package-management) is optional_
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
