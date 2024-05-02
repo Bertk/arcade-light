@@ -3,17 +3,20 @@
   "version": "1.7.4-beta",
   "versionHeightOffset": 0,
   "nuGetPackageVersion": {
-    "semVer": 2.0
+    "semVer": 2.0,
+    "precision": "build"
   },
   "publicReleaseRefSpec": [
     "^refs/heads/main$"
   ],
   "cloudBuild": {
+    "setVersionVariables": true,
     "buildNumber": {
       "enabled": true,
       "includeCommitId": {
         "when": "nonPublicReleaseOnly",
         "where": "buildMetadata"
+      }
     }
   },
   "release": {
