@@ -55,6 +55,10 @@ stages:
             packageType: sdk
             useGlobalJson: true
         - task: NuGetAuthenticate@1
+        - script: |
+            dotnet tool restore
+            nbgv cloud
+          displayName: Set Version
         - task: DotNetCoreCLI@2
           displayName: 'dotnet restore'
           inputs:
