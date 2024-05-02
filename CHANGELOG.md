@@ -5,11 +5,23 @@ See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelin
 
 Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.133/doc/nbgv-cli.md#preparing-a-release)).
 
+## [1.7.3](https://github.com/Bertk/arcade-light/compare/v1.7.2...v1.7.3) - 2024-05-02
+
+### Maintenance
+
+* Don't include assemblies that MSBuild ships with (#362) 
+* update xunit version (#363) 
+* update tools version (#361) 
+
+### Dependency Updates
+
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.2.4 to 5.2.5 (#364) @dependabot
+
 ## [1.7.2](https://github.com/Bertk/arcade-light/compare/v1.7.1...v1.7.2) - 2024-04-10
 
 ### Maintenance
 
-* update .NET SDK version (#349) @Bertk
+* update .NET SDK version (#349) 
 
 ### Dependency Updates
 
