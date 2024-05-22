@@ -1,9 +1,9 @@
 {
   "sdk": {
-    "version": "8.0.204"
+    "version": "8.0.300"
   },
   "tools": {
-    "dotnet": "8.0.204"
+    "dotnet": "8.0.300"
   },
   "msbuild-sdks": {
     "DotNetDev.ArcadeLight.Sdk": "1.7.3"
