@@ -1,8 +1,8 @@
 {
   "tools": {
-    "dotnet": "7.x",
+    "dotnet": "8.x",
     "runtimes": {
-      "dotnet/x64": ["7.0.9", "7.0.8", "6.0.20"]
+      "dotnet/x64": [ "8.0.0", "6.0.30" ]
     }
   },
   "msbuild-sdks": {
