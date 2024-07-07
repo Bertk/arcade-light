@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build" VersionOverride="17.10.4" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
