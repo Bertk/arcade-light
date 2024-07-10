@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>$(NetCurrent)</TargetFrameworks>
-    <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
+    <NoWarn>$(NoWarn);NU1504</NoWarn>
     <Copyright>$(MyCopyright)</Copyright>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>

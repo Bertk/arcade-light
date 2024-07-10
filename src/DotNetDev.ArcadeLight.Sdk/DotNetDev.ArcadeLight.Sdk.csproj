@@ -31,12 +31,12 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.10.4" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.6.3" PrivateAssets="all" Publish="false" ExcludeAssets="runtime"  />
+  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
+    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" PrivateAssets="all" Publish="false" ExcludeAssets="runtime"  />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetCurrent)' ">
     <PackageReference Include="Microsoft.Build" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
     <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
   </ItemGroup>
