@@ -5,6 +5,54 @@ See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelin
 
 Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.133/doc/nbgv-cli.md#preparing-a-release)).
 
+## [1.7.4](https://github.com/Bertk/arcade-light/compare/v1.7.3...v1.7.4) - 2024-07-10
+
+### Maintenance
+
+* Update project files (#408)
+* update dotnet versions (#386)
+* add nuget package source mapping (#377)
+* use SDK 8.0.300 (#369)
+
+### Dependency Updates
+
+<details>
+<summary>32 changes</summary>
+
+* update versions (#396)
+* Bump Microsoft.Build and Microsoft.Build.Framework (#403) @dependabot
+* Bump Microsoft.NET.Test.Sdk from 17.9.0 to 17.10.0 (#400) @dependabot
+* Bump xunit.runner.visualstudio from 2.8.1 to 2.8.2 (#402) @dependabot
+* Bump xunit.runner.console from 2.8.1 to 2.9.0 (#405) @dependabot
+* Bump xunit from 2.8.1 to 2.9.0 (#404) @dependabot
+* Bump xunit.extensibility.execution and xunit.extensibility.core (#401) @dependabot
+* Bump xunit.extensibility.core from 2.8.1 to 2.9.0 (#407) @dependabot
+* Bump System.Text.Json from 8.0.3 to 8.0.4 (#406) @dependabot
+* Bump Microsoft.Build and Microsoft.Build.Framework (#397) @dependabot
+* Bump Microsoft.Build.Tasks.Core, Microsoft.Build.Framework and Microsoft.Build.Utilities.Core (#399) @dependabot
+* Bump Microsoft.TestPlatform.TestHost from 17.9.0 to 17.10.0 (#395) @dependabot
+* Bump Microsoft.NET.StringTools from 17.9.5 to 17.10.4 (#394) @dependabot
+* Bump System.Security.Cryptography.Xml from 8.0.0 to 8.0.1 (#393) @dependabot
+* Bump Microsoft.TestPlatform.ObjectModel from 17.9.0 to 17.10.0 (#392) @dependabot
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.3.5 to 5.3.7 (#387) @dependabot
+* Bump NuGet.Versioning from 6.10.0 to 6.10.1 (#385) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.27.0.93347 to 9.28.0.94264 (#383) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.3.6 to 5.3.7 (#384) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.26.0.92422 to 9.27.0.93347 (#379) @dependabot
+* Bump Nerdbank.GitVersioning from 3.6.133 to 3.6.139 (#381) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.3.5 to 5.3.6 (#382) @dependabot
+* Bump cyclonedx from 3.0.7 to 3.0.8 (#380) @dependabot
+* Bump nbgv from 3.6.133 to 3.6.139 (#378) @dependabot
+* Bump NuGet.Versioning from 6.9.1 to 6.10.0 (#373) @dependabot
+* Bump xunit from 2.8.0 to 2.8.1 (#374) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.25.0.90414 to 9.26.0.92422 (#370) @dependabot
+* Bump cyclonedx from 3.0.6 to 3.0.7 (#371) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.3.0 to 5.3.5 (#375) @dependabot
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.2.5 to 5.3.5 (#376) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.24.0.89429 to 9.25.0.90414 (#368) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.2.5 to 5.3.0 (#367) @dependabot
+</details>
+
 ## [1.7.3](https://github.com/Bertk/arcade-light/compare/v1.7.2...v1.7.3) - 2024-05-02
 
 ### Maintenance
@@ -25,6 +73,9 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ### Dependency Updates
 
+<details>
+<summary>12 changes</summary>
+
 * Bump SonarAnalyzer.CSharp from 9.23.0.88079 to 9.23.1.88495 (#357) @dependabot
 * Bump danielpalme/ReportGenerator-GitHub-Action from 5.2.2 to 5.2.4 (#356) @dependabot
 * Bump cyclonedx from 3.0.5 to 3.0.6 (#355) @dependabot
@@ -37,6 +88,7 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 * Bump dotnet-reportgenerator-globaltool from 5.2.1 to 5.2.2 (#346) @dependabot
 * Bump SonarAnalyzer.CSharp from 9.19.0.84025 to 9.20.0.85982 (#344) @dependabot
 * Bump coverlet.collector from 6.0.1-preview.43.g52ddde6e8d to 6.0.1 (#345) @dependabot
+</details>
 
 ## [1.7.1](https://github.com/Bertk/arcade-light/compare/v1.7.0...v1.7.1) - 2024-02-19
 
@@ -48,6 +100,8 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 
 ### Dependency Updates
 
+<details>
+<summary>18 changes</summary>
 * Bump Microsoft.Build.Framework from 17.3.2 to 17.9.5 (#336) @dependabot
 * Bump xunit from 2.6.6 to 2.7.0 (#339) @dependabot
 * Bump xunit.runner.visualstudio from 2.5.6 to 2.5.7 (#338) @dependabot
@@ -66,6 +120,7 @@ Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https:/
 * Bump SonarAnalyzer.CSharp from 9.17.0.82934 to 9.19.0.84025 (#322) @dependabot
 * Bump SonarAnalyzer.CSharp from 9.16.0.82469 to 9.17.0.82934 (#318) @dependabot
 * Bump xunit from 2.6.5 to 2.6.6 (#316) @dependabot
+</details>
 
 ## [1.7.0](https://github.com/Bertk/arcade-light/compare/v1.6.6...v1.7.0) - 2024-01-11
 
