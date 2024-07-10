@@ -5,15 +5,15 @@
     <IsTestProject>true</IsTestProject>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
 
-    <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
+    <NoWarn>$(NoWarn);NU1504</NoWarn>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.10.4" />
+  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
+    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetCurrent)' ">
     <PackageReference Include="Microsoft.Build" />
   </ItemGroup>
   

@@ -5,7 +5,7 @@
     <Description>This package provides things like various traits and discovers like OuterLoop/ActiveIssue that are used by .NET test projects.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
-    <NoWarn>$(NoWarn);3021;NU1701;NU5105;NU1507;NU1504;SYSLIB0013</NoWarn>
+    <NoWarn>$(NoWarn);NU1504</NoWarn>
     <IsPackable>true</IsPackable>
     <!-- Generate package during Build, rather than Pack, so that it can be used during Test. -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

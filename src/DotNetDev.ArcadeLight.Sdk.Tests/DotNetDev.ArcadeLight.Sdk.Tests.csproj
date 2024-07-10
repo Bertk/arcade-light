@@ -4,7 +4,7 @@
     <TargetFrameworks>$(NetCurrent)</TargetFrameworks>
     <DefaultItemExcludes>$(DefaultItemExcludes);testassets\**\*</DefaultItemExcludes>
     <EnableSourceLink>false</EnableSourceLink>
-    <NoWarn>$(NoWarn);NU1504;NU1507</NoWarn>
+    <NoWarn>$(NoWarn);NU1504</NoWarn>
     <Copyright>$(MyCopyright)</Copyright>
     <!--coverlet workaround -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -19,13 +19,13 @@
     <ProjectReference Include="..\DotNet.XUnitExtensions\DotNet.XUnitExtensions.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetMinimum)' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.10.4" />
-    <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.10.4" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.10.4" />
+  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
+    <PackageReference Include="Microsoft.Build" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.3.2" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetMinimum)' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetCurrent)' ">
     <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="Microsoft.Build.Utilities.Core" />
   </ItemGroup>
