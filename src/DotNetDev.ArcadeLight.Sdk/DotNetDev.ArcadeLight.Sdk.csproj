@@ -44,7 +44,6 @@
   
   <ItemGroup>
     <PackageReference Include="NuGet.Versioning" />
-    <PackageReference Include="System.Net.Http" />
     <PackageReference Include="System.Collections.Immutable" />
     <PackageReference Include="System.Reflection.Metadata" Publish="false"  />
   </ItemGroup>
