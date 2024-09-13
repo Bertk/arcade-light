@@ -31,7 +31,7 @@ jobs:
       - name: Setup dotnet 8.0
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.1xx'
+          dotnet-version: '8.0.4xx'
           source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
@@ -78,7 +78,7 @@ jobs:
       - name: Setup dotnet 8.0
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.1xx'
+          dotnet-version: '8.0.4xx'
           source-url: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
@@ -94,7 +94,7 @@ jobs:
         if: matrix.os  == 'windows-latest'
 
       - name: ReportGenerator
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.3.8
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.3.9
         with:
           reports: ./artifacts/TestResults/**/coverage.cobertura.xml
           assemblyfilters: -xunit*;-DotNet.ArcadeLight.Test.Common;-DotNet.Internal.DependencyInjection.Testing;-DotNet.XUnitExtensions;
