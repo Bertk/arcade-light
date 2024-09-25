@@ -5,7 +5,7 @@
     <IsTestProject>true</IsTestProject>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
 
-    <NoWarn>$(NoWarn);NU1504</NoWarn>
+    <NoWarn>$(NoWarn);NU1504;NU1506</NoWarn>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
@@ -19,9 +19,8 @@
   
   <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.extensibility.core" />
-    <PackageReference Include="xunit.extensibility.execution" />
+    <PackageReference Include="xunit.v3" />
+    <PackageReference Include="xunit.v3.extensibility.core" />
   </ItemGroup>
 
 </Project>

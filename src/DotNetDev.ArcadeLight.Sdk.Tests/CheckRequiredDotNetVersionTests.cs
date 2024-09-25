@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 using Moq;
 using Xunit;
@@ -13,6 +14,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     private readonly List<BuildErrorEventArgs> errors;
     private readonly string repositoryRoot;
 
+    public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     public CheckRequiredDotNetVersionTests()
     {
@@ -101,7 +103,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Equal("Invalid version: 7.0.a", errors[0].Message);
     }
 
-    [WindowsOnlyFact]
+    [Fact(SkipUnless = nameof(IsWindows))]
     public void CheckRequiredDotNetVersionInvalidFile()
     {
       // Arrange
@@ -121,7 +123,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     }
 
 
-    [WindowsOnlyFact]
+    [Fact(SkipUnless = nameof(IsWindows))]
     public void CheckRequiredDotNetVersionInvalidGlobalFileContent()
     {
 
@@ -142,7 +144,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Contains("Unable to determine dotnet version from file", errors[0].Message);
     }
 
-    [WindowsOnlyFact]
+    [Fact(SkipUnless = nameof(IsWindows))]
     public void CheckRequiredDotNetVersionInvalidDotnetVersion()
     {
 

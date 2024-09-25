@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit" PrivateAssets="all" Publish="true"/>
+    <PackageReference Include="xunit.v3" PrivateAssets="all" Publish="true"/>
     <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" Publish="true"/>
     <!--<PackageReference Include="coverlet.msbuild" PrivateAssets="all" Publish="true"/>-->
     <PackageReference Include="coverlet.collector" PrivateAssets="all" Publish="true"/>

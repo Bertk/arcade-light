@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 using Moq;
 using Xunit;
@@ -24,6 +25,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       repositoryEngineeringDir = Path.GetFullPath(Path.Combine(projectRootDir, "eng"));
     }
 
+    public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     [Fact]
     public void InstallDotNetCoreVerify()
@@ -76,7 +78,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.NotEmpty(errors);
       Assert.Contains("Unable to find dotnet install script", errors[0].Message);
     }
-    [WindowsOnlyFact]
+    [Fact(SkipUnless = nameof(IsWindows))]
     public void TryInstallDotNetRuntimeWithInstallScript()
     {
       //Arrange
@@ -92,7 +94,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Empty(errors);
     }
 
-    [WindowsOnlyFact]
+    [Fact(SkipUnless = nameof(IsWindows))]
     public void FailInstallDotNetRuntimeWithInstallScript()
     {
       //Arrange

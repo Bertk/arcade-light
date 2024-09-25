@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Build.Framework;
-using Xunit.Abstractions;
+using Xunit;
 using Xunit.Sdk;
 
 namespace DotNetDev.ArcadeLight.Test.Common

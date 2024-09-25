@@ -10,7 +10,7 @@
                       Condition="'$(TargetFrameworkIdentifier)' != '.NETStandard' and
                                  $([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netstandard2.0'))" />
   </ItemGroup>
-  
+
   <Target Name="VSTestIfTestProject">
     <CallTarget Targets="VSTest" Condition="'$(IsTestProject)' == 'true'" />
   </Target>

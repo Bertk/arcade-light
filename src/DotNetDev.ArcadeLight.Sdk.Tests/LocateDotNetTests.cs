@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 using Moq;
 using Xunit;
@@ -22,8 +23,9 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       repositoryRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../../../../"));
     }
 
+    public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-    [WindowsOnlyFact("Fails on Linux platform : line 42")]
+    [Fact(Skip = "Fails on Linux platform : line 42", SkipUnless = nameof(IsWindows))] 
     public void LocateDotNetVerify()
     {
       // Arrange
