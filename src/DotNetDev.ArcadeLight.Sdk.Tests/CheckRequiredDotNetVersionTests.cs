@@ -104,7 +104,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Equal("Invalid version: 7.0.a", errors[0].Message);
     }
 
-    [Fact(Explicit = true)]
+    [Fact]
     [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidFile()
     {
@@ -124,8 +124,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Contains("Error accessing file", errors[0].Message);
     }
 
-
-    [Fact(Explicit = true)]
+    [Fact]
     [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidGlobalFileContent()
     {
@@ -147,7 +146,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Contains("Unable to determine dotnet version from file", errors[0].Message);
     }
 
-    [Fact(Explicit = true)]
+    [Fact]
     [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidDotnetVersion()
     {

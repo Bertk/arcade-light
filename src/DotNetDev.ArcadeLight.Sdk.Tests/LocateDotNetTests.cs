@@ -26,7 +26,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
 
     public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-    [Fact(Explicit = true)]
+    [Fact]
     [SupportedOS(SupportedOS.Windows)]
     public void LocateDotNetVerify()
     {
