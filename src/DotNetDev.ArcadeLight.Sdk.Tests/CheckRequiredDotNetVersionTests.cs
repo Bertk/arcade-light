@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 using Moq;
 using Xunit;
+using static DotNetDev.ArcadeLight.Sdk.Tests.InstallDotNetCoreTests;
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
@@ -103,7 +104,8 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Equal("Invalid version: 7.0.a", errors[0].Message);
     }
 
-    [Fact(SkipUnless = nameof(IsWindows))]
+    [Fact(Explicit = true)]
+    [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidFile()
     {
       // Arrange
@@ -123,7 +125,8 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     }
 
 
-    [Fact(SkipUnless = nameof(IsWindows))]
+    [Fact(Explicit = true)]
+    [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidGlobalFileContent()
     {
 
@@ -144,7 +147,8 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Contains("Unable to determine dotnet version from file", errors[0].Message);
     }
 
-    [Fact(SkipUnless = nameof(IsWindows))]
+    [Fact(Explicit = true)]
+    [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidDotnetVersion()
     {
 
