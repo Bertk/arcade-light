@@ -49,6 +49,13 @@
     <PackageReference Update="Microsoft.Build.Utilities.Core" VersionOverride="17.6.3" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
   </ItemGroup>
 
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+    <PackageReference Update="Microsoft.Build" VersionOverride="17.11.4" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
+    <PackageReference Update="Microsoft.Build.Framework" VersionOverride="17.11.4" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
+    <PackageReference Update="Microsoft.Build.Tasks.Core" VersionOverride="17.11.4" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
+    <PackageReference Update="Microsoft.Build.Utilities.Core" VersionOverride="17.11.4" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
+  </ItemGroup>
+
     <!-- Don't include assemblies that are provided by the SDK, next to MSBuild. -->
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' and '$(SkipSDKInboxPublishExcludes)' != 'true'">
     <PackageReference Update="NuGet.Commands" Publish="false" />

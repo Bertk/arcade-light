@@ -74,4 +74,8 @@
     <VSTestLogger>@(VSTestLogger)</VSTestLogger>
   </PropertyGroup>-->
 
+
+  <!-- <PropertyGroup>
+    <RepositoryEngineeringDir>C:\GitHub\arcade-light\eng</RepositoryEngineeringDir>
+  </PropertyGroup> -->
 </Project>

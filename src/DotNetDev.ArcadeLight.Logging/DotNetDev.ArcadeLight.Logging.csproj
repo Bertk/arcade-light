@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>$(NetMinimum);$(NetCurrent)</TargetFrameworks>
     <IsPackable>true</IsPackable>
-    <NoWarn>$(NoWarn)</NoWarn>
+    <NoWarn>$(NoWarn);NU1506</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
     <DebugType>embedded</DebugType>
     <IsPublishable>false</IsPublishable>

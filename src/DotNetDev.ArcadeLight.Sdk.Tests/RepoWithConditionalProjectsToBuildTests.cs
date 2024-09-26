@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using DotNetDev.ArcadeLight.Sdk.Tests.Utilities;
 using Xunit;
-using Xunit.Abstractions;
+
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {

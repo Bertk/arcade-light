@@ -8,7 +8,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Xunit.Abstractions;
+using Xunit;
+
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests.Utilities
 {
