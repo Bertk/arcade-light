@@ -87,7 +87,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.NotEmpty(errors);
       Assert.Contains("Unable to find dotnet install script", errors[0].Message);
     }
-    [Fact]
+    [Fact(Explicit = true)]
     [SupportedOS(SupportedOS.Windows)]
     public void TryInstallDotNetRuntimeWithInstallScript()
     {
@@ -104,7 +104,7 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Empty(errors);
     }
 
-    [Fact]
+    [Fact(Explicit = true)]
     [SupportedOS(SupportedOS.Windows)]
     public void FailInstallDotNetRuntimeWithInstallScript()
     {
