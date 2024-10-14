@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
-    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.3.2" PrivateAssets="all"/>
+    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.10.4" PrivateAssets="all"/>
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == '$(NetCurrent)' ">
