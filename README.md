@@ -1,9 +1,12 @@
 # arcade-light
 
-Arcade-light is inspired from dotnet/arcade but minimized and without Microsoft proprietary tooling (see [ArcadeLightSdk.md](https://github.com/Bertk/arcade-light/blob/main/Documentation/ArcadeLightSdk.md))
+Arcade-light is inspired from [dotnet/arcade](https://github.com/dotnet/arcade) but minimized and without Microsoft proprietary tooling (see [ArcadeLightSdk.md](https://github.com/Bertk/arcade-light/blob/main/Documentation/ArcadeLightSdk.md))
 
 > [!NOTE]
 > .NET 8 supports also a [simplified output folder](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8#simplified-output-paths)
+
+> [!TIP]
+> Arcade-light is targeting.NET 6.0 or higher (uses Microsoft.Build V17.3.2)
 
 ## CI status
 
