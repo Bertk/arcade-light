@@ -36,9 +36,9 @@
     <PackageVersion Include="xunit.extensibility.execution" Version="2.9.2" />
     <!-- https://dev.azure.com/tonerdo/coverlet/_artifacts/feed/coverlet-nightly/NuGet/coverlet.collector -->
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
-    <PackageVersion Include="MSTest" Version="2.2.10" />
-    <PackageVersion Include="MSTest.TestAdapter" Version="2.2.10" />
-    <PackageVersion Include="MSTest.TestFramework" Version="2.2.10" />
+    <PackageVersion Include="MSTest" Version="3.6.2" />
+    <PackageVersion Include="MSTest.TestAdapter" Version="3.6.2" />
+    <PackageVersion Include="MSTest.TestFramework" Version="3.6.2" />
     <PackageVersion Include="NUnit" Version="4.2.2" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.6.0" />
     <PackageVersion Include="vswhere" Version="3.1.7" />
