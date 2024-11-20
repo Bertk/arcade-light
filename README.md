@@ -1,5 +1,3 @@
-[![Build Status](https://dev.azure.com/bertk0374/arcade-light/_apis/build/status%2FBertk.arcade-light?branchName=refs%2Fpull%2F475%2Fmerge)](https://dev.azure.com/bertk0374/arcade-light/_build/latest?definitionId=1&branchName=refs%2Fpull%2F475%2Fmerge)[![.NET](https://github.com/Bertk/arcade-light/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Bertk/arcade-light/actions/workflows/dotnet.yml)[![CodeQL](https://github.com/Bertk/arcade-light/actions/workflows/codeql.yml/badge.svg)](https://github.com/Bertk/arcade-light/actions/workflows/codeql.yml)
-
 # arcade-light
 
 Arcade-light is inspired from [dotnet/arcade](https://github.com/dotnet/arcade) but minimized and without Microsoft proprietary tooling (see [ArcadeLightSdk.md](https://github.com/Bertk/arcade-light/blob/main/Documentation/ArcadeLightSdk.md))
