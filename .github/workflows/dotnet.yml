@@ -117,3 +117,4 @@ jobs:
         with:
           name: CoverageReport.${{matrix.os}}.${{matrix.framework}} # Artifact name
           path: ./artifacts/CoverageReport # Directory containing files to upload
+          overwrite: true
