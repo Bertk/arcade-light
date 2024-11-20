@@ -23,3 +23,5 @@ Arcade-light is inspired from [dotnet/arcade](https://github.com/dotnet/arcade) 
 ![GitHub Workflow .NET Status (manual trigger)](https://img.shields.io/github/actions/workflow/status/Bertk/arcade-light/dotnet.yml?label=.NET)
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Bertk/arcade-light/dotnet.yml?label=CodeQL)
+
+[![Scorecard supply-chain security](https://github.com/Bertk/arcade-light/actions/workflows/scorecard.yml/badge.svg)](https://github.com/Bertk/arcade-light/actions/workflows/scorecard.yml)

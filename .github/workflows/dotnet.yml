@@ -14,6 +14,9 @@ on:
 #   pull_request:
 #     branches: [ "main" ]
 
+permissions:
+  contents: read
+
 jobs:
   # Fail if there are build warnings
   #
@@ -117,3 +120,4 @@ jobs:
         with:
           name: CoverageReport.${{matrix.os}}.${{matrix.framework}} # Artifact name
           path: ./artifacts/CoverageReport # Directory containing files to upload
+          overwrite: true
