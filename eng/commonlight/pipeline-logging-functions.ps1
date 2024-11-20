@@ -130,7 +130,7 @@ function Format-LoggingCommandData {
     param([string]$Value, [switch]$Reverse)
 
     if (!$Value) {
-        return ''
+        return
     }
 
     if (!$Reverse) {
