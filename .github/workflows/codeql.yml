@@ -23,6 +23,9 @@ on:
 env:
   AZURE_ARTIFACTS_FEED_URL: https://pkgs.dev.azure.com/bertk0374/_packaging/intern/nuget/v3/index.json
 
+permissions:
+  contents: read
+
 jobs:
   analyze:
     name: Analyze
