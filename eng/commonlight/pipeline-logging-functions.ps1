@@ -70,13 +70,13 @@ function Write-PipelineTaskError {
         Write-Host $Message
         return
     }
-    $PSBoundParameters.Remove('Force') | Out-Null      
+    $PSBoundParameters.Remove('Force') | Out-Null
     if (-not $PSBoundParameters.ContainsKey('Type')) {
         $PSBoundParameters.Add('Type', 'error')
     }
     Write-LogIssue @PSBoundParameters
 }
-  
+
 function Write-PipelineSetVariable {
     [CmdletBinding()]
     param(
@@ -95,7 +95,7 @@ function Write-PipelineSetVariable {
         } -AsOutput:$AsOutput
     }
 }
-  
+
 function Write-PipelinePrependPath {
     [CmdletBinding()]
     param(
