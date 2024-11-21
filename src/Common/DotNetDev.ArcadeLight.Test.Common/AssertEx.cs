@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Xml.Linq;
 using Xunit;
 
 namespace DotNetDev.ArcadeLight.Test.Common
@@ -199,7 +200,8 @@ namespace DotNetDev.ArcadeLight.Test.Common
     public static string NormalizeWhitespace(string input)
     {
       StringBuilder output = new();
-      string[] inputLines = input?.Split('\n', '\r');
+      ArgumentNullException.ThrowIfNull(input);
+      string[] inputLines = input.Split('\n', '\r');
       foreach (string line in inputLines)
       {
         string trimmedLine = line.Trim();

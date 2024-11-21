@@ -20,10 +20,10 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
 
     public enum SupportedOS
     {
-      FreeBSD = 1,
-      Linux = 2,
-      macOS = 3,
-      Windows = 4,
+      FreeBSD = 0,
+      Linux = 1,
+      macOS = 2,
+      Windows = 3,
     }
 
     public InstallDotNetCoreTests()

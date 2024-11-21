@@ -137,6 +137,10 @@ namespace Microsoft.DotNet.Internal.DependencyInjection.Testing
         msgBuilder.Append(ctor.DeclaringType.FullName);
         msgBuilder.Append(" could not find registered definition for parameter(s): ");
       }
+      else
+      {
+        msgBuilder = new StringBuilder();
+      }
 
       foreach (ParameterInfo p in ctor.GetParameters())
       {
