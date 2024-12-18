@@ -20,7 +20,7 @@
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
 
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 
@@ -74,4 +74,8 @@
     <VSTestLogger>@(VSTestLogger)</VSTestLogger>
   </PropertyGroup>-->
 
+
+  <!-- <PropertyGroup>
+    <RepositoryEngineeringDir>C:\GitHub\arcade-light\eng</RepositoryEngineeringDir>
+  </PropertyGroup> -->
 </Project>

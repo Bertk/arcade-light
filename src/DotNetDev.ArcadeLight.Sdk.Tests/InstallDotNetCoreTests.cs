@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 using Moq;
 using Xunit;
@@ -14,6 +15,14 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     private readonly string projectRootDir;
     private readonly string repositoryEngineeringDir;
 
+    public enum SupportedOS
+    {
+      FreeBSD = 0,
+      Linux = 1,
+      macOS = 2,
+      Windows = 3,
+    }
+
     public InstallDotNetCoreTests()
     {
       buildEngine = new Mock<IBuildEngine4>();
@@ -23,7 +32,6 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       projectRootDir = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../../../../"));
       repositoryEngineeringDir = Path.GetFullPath(Path.Combine(projectRootDir, "eng"));
     }
-
 
     [Fact]
     public void InstallDotNetCoreVerify()
@@ -76,9 +84,10 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.NotEmpty(errors);
       Assert.Contains("Unable to find dotnet install script", errors[0].Message);
     }
-    [WindowsOnlyFact]
+    [Fact]
     public void TryInstallDotNetRuntimeWithInstallScript()
     {
+      Assert.SkipUnless(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "Test requires Windows");
       //Arrange
       InstallDotNetCore customTask = new()
       {
@@ -92,9 +101,10 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.Empty(errors);
     }
 
-    [WindowsOnlyFact]
+    [Fact]
     public void FailInstallDotNetRuntimeWithInstallScript()
     {
+      Assert.SkipUnless(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "Test requires Windows");
       //Arrange
       InstallDotNetCore customTask = new()
       {
@@ -108,6 +118,5 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       Assert.NotEmpty(errors);
       Assert.Contains("dotnet-install failed", errors[0].Message);
     }
-
   }
 }

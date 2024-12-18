@@ -1,12 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>$(NetCurrent)</TargetFrameworks>
     <IsTestProject>true</IsTestProject>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
 
-    <NoWarn>$(NoWarn);NU1504</NoWarn>
+    <NoWarn>$(NoWarn);NU1504;NU1506</NoWarn>
     <IsTestProject>true</IsTestProject>
+    <LangVersion>12.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
@@ -19,9 +20,7 @@
   
   <ItemGroup>
     <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="xunit" />
-    <PackageReference Include="xunit.extensibility.core" />
-    <PackageReference Include="xunit.extensibility.execution" />
+    <PackageReference Include="xunit.v3" />
   </ItemGroup>
 
 </Project>

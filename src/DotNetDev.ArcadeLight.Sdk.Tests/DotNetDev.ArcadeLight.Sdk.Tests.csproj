@@ -1,22 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>$(NetCurrent)</TargetFrameworks>
     <DefaultItemExcludes>$(DefaultItemExcludes);testassets\**\*</DefaultItemExcludes>
     <EnableSourceLink>false</EnableSourceLink>
-    <NoWarn>$(NoWarn);NU1504</NoWarn>
+    <NoWarn>$(NoWarn);NU1504;NU1506</NoWarn>
     <Copyright>$(MyCopyright)</Copyright>
     <!--coverlet workaround -->
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <IsPublishable>true</IsPublishable>
     <IsTestProject>true</IsTestProject>
+    <OutputType>Exe</OutputType>
+    <LangVersion>12.0</LangVersion>
+    <NoWarn>$(NoWarn);CA2208</NoWarn>
   </PropertyGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\Common\DotNetDev.ArcadeLight.Test.Common\DotNetDev.ArcadeLight.Test.Common.csproj" />
     <ProjectReference Include="..\DotNetDev.ArcadeLight.Sdk\DotNetDev.ArcadeLight.Sdk.csproj" />
     <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
-    <ProjectReference Include="..\DotNet.XUnitExtensions\DotNet.XUnitExtensions.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
@@ -36,12 +38,12 @@
     <PackageReference Include="Moq" />
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="NuGet.Versioning" />
-    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.v3" />
     <PackageReference Include="xunit.runner.visualstudio">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="xunit.runner.console">
+    <PackageReference Include="xunit.v3.runner.console">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

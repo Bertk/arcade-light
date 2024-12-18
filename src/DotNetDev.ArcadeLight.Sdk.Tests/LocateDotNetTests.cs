@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 using Moq;
 using Xunit;
+using static DotNetDev.ArcadeLight.Sdk.Tests.InstallDotNetCoreTests;
 
 namespace DotNetDev.ArcadeLight.Sdk.Tests
 {
@@ -22,10 +24,12 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
       repositoryRoot = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../../../../"));
     }
 
+    public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-    [WindowsOnlyFact("Fails on Linux platform : line 42")]
+    [Fact]
     public void LocateDotNetVerify()
     {
+      Assert.SkipUnless(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "Test requires Windows");
       // Arrange
       LocateDotNet locateDotNet = new LocateDotNet();
       locateDotNet.BuildEngine = buildEngine.Object;

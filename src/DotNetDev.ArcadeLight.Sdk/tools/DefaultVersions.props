@@ -27,9 +27,9 @@
   -->
   <PropertyGroup>
     <CoverletCollectorVersion Condition="'$(CoverletCollectorVersion)' == ''">6.0.0</CoverletCollectorVersion>
-    <XUnitVersion Condition="'$(XUnitVersion)' == ''">2.5.0</XUnitVersion>
-    <XUnitRunnerConsoleVersion Condition="'$(XUnitRunnerConsoleVersion)' == ''">$(XUnitVersion)</XUnitRunnerConsoleVersion>
-    <XUnitRunnerVisualStudioVersion Condition="'$(XUnitRunnerVisualStudioVersion)' == ''">2.5.0</XUnitRunnerVisualStudioVersion>
+    <XUnitV3Version Condition="'$(XUnitV3Version)' == ''">1.0.0</XUnitV3Version>
+    <XUnitRunnerConsoleVersion Condition="'$(XUnitRunnerConsoleVersion)' == ''">$(XUnitV3Version)</XUnitRunnerConsoleVersion>
+    <XUnitRunnerVisualStudioVersion Condition="'$(XUnitRunnerVisualStudioVersion)' == ''">3.0.0</XUnitRunnerVisualStudioVersion>
   </PropertyGroup>
 
   <!-- RestoreSources overrides - defines DotNetRestoreSources variable if available -->
