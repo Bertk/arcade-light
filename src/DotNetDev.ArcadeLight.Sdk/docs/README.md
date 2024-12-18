@@ -11,10 +11,10 @@ Lightweight package of [dotnet Arcade](https://github.com/dotnet/arcade) without
 ```json
 {
   "tools": {
-    "dotnet": "8.0.204"
+    "dotnet": "8.0.404"
   },
   "msbuild-sdks": {
-    "DotNetDev.ArcadeLight.Sdk": "1.7.3"
+    "DotNetDev.ArcadeLight.Sdk": "1.8.0"
   }
 }
 ```
@@ -56,7 +56,7 @@ _Please note: [Central Package Management](https://learn.microsoft.com/en-us/nug
   </PropertyGroup>
 
   <ItemGroup>
-    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
+    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.7.112" />
   </ItemGroup>
   ...
 <\Project>
