@@ -1,4 +1,4 @@
-﻿# ArcadeLight SDK
+# ArcadeLight SDK
 
 ArcadeLight SDK is a reduced version of Microsoft .NET Arcade SDK. It is a set of msbuild props and targets files and packages that provide common build features used across multiple repos, such as CI integration, packaging, VSIX and VS setup authoring, testing.
 
@@ -261,10 +261,10 @@ For example,
 ```json
 {
   "tools": {
-    "dotnet": "7.0.400"
+    "dotnet": "6.0.427"
   },
   "msbuild-sdks": {
-    "DotNetDev.ArcadeLight.Sdk": "1.6.4"
+    "DotNetDev.ArcadeLight.Sdk": "1.7.4"
   }
 }
 ```

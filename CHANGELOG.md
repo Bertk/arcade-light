@@ -5,6 +5,57 @@ See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelin
 
 Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.133/doc/nbgv-cli.md#preparing-a-release)).
 
+## [1.7.5](https://github.com/Bertk/arcade-light/compare/v1.7.4...v1.7.5) - 2024-11-02
+
+### Maintenance
+
+* hamonize dependencies (#458) @Bertk
+* update MSTest version (#453) @Bertk
+* update nuget package versions (#452) @Bertk
+* Update nuget versions (#448) @Bertk
+* update SDK 8.0.401 (#421) @Bertk
+* remove netstandard2.0 system assemblies (#414) @Bertk
+
+## Dependency Updates
+
+<details>
+<summary>33 changes</summary>
+
+* Bump Microsoft.NET.Test.Sdk from 17.10.0 to 17.11.1 (#456) @dependabot
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.3.10 to 5.3.11 (#454) @dependabot
+* Bump Nerdbank.GitVersioning from 3.6.143 to 3.6.146 (#450) @dependabot
+* Bump Microsoft.Extensions.DependencyInjection from 8.0.0 to 8.0.1 (#451) @dependabot
+* Bump nbgv from 3.6.143 to 3.6.146 (#449) @dependabot
+* Bump Microsoft.Extensions.DependencyInjection.Abstractions from 8.0.1 to 8.0.2 (#445) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.3.10 to 5.3.11 (#446) @dependabot
+* Bump System.Reflection.Metadata from 8.0.0 to 8.0.1 (#447) @dependabot
+* Bump System.Text.Json from 8.0.4 to 8.0.5 (#443) @dependabot
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.3.9 to 5.3.10 (#440) @dependabot
+* Bump NuGet.Versioning from 6.11.0 to 6.11.1 (#441) @dependabot
+* Bump xunit.runner.console from 2.9.0 to 2.9.2 (#438) @dependabot
+* Bump xunit from 2.9.0 to 2.9.2 (#437) @dependabot
+* Bump xunit.extensibility.execution and xunit.extensibility.core (#436) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.3.9 to 5.3.10 (#439) @dependabot
+* Bump cyclonedx from 3.0.8 to 4.0.0 (#434) @dependabot
+* Bump FluentAssertions from 6.12.0 to 6.12.1 (#431) @dependabot
+* Bump Moq from 4.20.70 to 4.20.72 (#433) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.3.8 to 5.3.9 (#430) @dependabot
+* Bump Microsoft.Build.Framework from 17.3.2 to 17.11.4 (#425) @dependabot
+* Bump Microsoft.TestPlatform.TestHost and Microsoft.TestPlatform.ObjectModel (#422) @dependabot
+* Bump Microsoft.NET.StringTools from 17.10.4 to 17.11.4 (#424) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.31.0.96804 to 9.32.0.97167 (#423) @dependabot
+* Bump Nerdbank.GitVersioning from 3.6.141 to 3.6.143 (#426) @dependabot
+* Bump nbgv from 3.6.141 to 3.6.143 (#427) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.30.0.95878 to 9.31.0.96804 (#418) @dependabot
+* Bump nbgv from 3.6.139 to 3.6.141 (#417) @dependabot
+* Bump Nerdbank.GitVersioning from 3.6.139 to 3.6.141 (#419) @dependabot
+* Bump NuGet.Versioning from 6.10.1 to 6.11.0 (#420) @dependabot
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.3.7 to 5.3.8 (#416) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.29.0.95321 to 9.30.0.95878 (#415) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.3.7 to 5.3.8 (#412) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.28.0.94264 to 9.29.0.95321 (#413) @dependabot
+</details>
+
 ## [1.7.4](https://github.com/Bertk/arcade-light/compare/v1.7.3...v1.7.4) - 2024-07-10
 
 ### Maintenance

@@ -154,11 +154,6 @@ stages:
           inputs:
             packageType: 'sdk'
             useGlobalJson: true
-        # - task: UseDotNet@2
-        #   displayName: 'Use dotnet SDK 6.x'
-        #   inputs:
-        #     packageType: 'runtime'
-        #     version: 6.x
 
         - task: NuGetAuthenticate@1
 
@@ -256,12 +251,6 @@ stages:
       inputs:
         packageType: 'sdk'
         useGlobalJson: true
-
-    # - task: UseDotNet@2
-    #   displayName: 'Use dotnet SDK 6.x'
-    #   inputs:
-    #     packageType: 'runtime'
-    #     version: 6.x
 
     - task: NuGetAuthenticate@1
 
