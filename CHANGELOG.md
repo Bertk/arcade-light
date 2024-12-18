@@ -5,6 +5,36 @@ See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelin
 
 Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.133/doc/nbgv-cli.md#preparing-a-release)).
 
+## [1.8.0](https://github.com/Bertk/arcade-light/compare/v1.7.5...v1.8.0) - 2024-12-18
+
+### Maintenance
+
+* use xunit.v3 packages (#435)
+* Add security.md (#482) @Bertk
+* Update readme - add badge (#476)
+* Create scorecard.yml (#475)
+* use sdk 8.0.404 (#470)
+
+## Dependency Updates
+
+<details>
+<summary>13 changes</summary>
+
+* Bump cyclonedx from 4.0.0 to 4.2.0 (#490, #486) @dependabot
+* Bump Nerdbank.GitVersioning from 3.6.146 to 3.7.112 (#491) @dependabot
+* Bump nbgv from 3.6.146 to 3.7.112 (#492) @dependabot
+* Bump FluentAssertions from 6.12.12 to 7.0.0 (#487, #467) @dependabot
+* Bump dotnet-reportgenerator-globaltool from 5.3.11 to 5.4.1 (#488, #462) @dependabot
+* Bump SonarAnalyzer.CSharp from 9.32.0.97167 to 10.3.0.106239 (#485) @dependabot
+* Bump ossf/scorecard-action from 2.3.1 to 2.4.0 (#484) @dependabot
+* Bump danielpalme/ReportGenerator-GitHub-Action from 5.3.11 to 5.4.1 (#483, #471) @dependabot
+* Bump System.Security.Cryptography.Xml from 8.0.2 to 9.0.0 (#461) @dependabot
+* Bump NuGet.Versioning from 6.11.1 to 6.12.1 (#459) @dependabot
+* Bump Microsoft.Extensions.DependencyInjection.Abstractions from 8.0.2 to 9.0.0 (#466) @dependabot
+* Bump Microsoft.Build, System.Collections.Immutable, System.Reflection.Metadata, System.Reflection.MetadataLoadContext and System.Text.Json (#469) @dependabot
+* Bump System.Collections.Immutable from 8.0.0 to 9.0.0 (#465) @dependabot
+</details>
+
 ## [1.7.5](https://github.com/Bertk/arcade-light/compare/v1.7.4...v1.7.5) - 2024-11-02
 
 ### Maintenance
