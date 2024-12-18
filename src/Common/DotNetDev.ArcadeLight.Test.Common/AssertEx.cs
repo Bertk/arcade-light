@@ -8,7 +8,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Xml.Linq;
 using Xunit;
 
 namespace DotNetDev.ArcadeLight.Test.Common

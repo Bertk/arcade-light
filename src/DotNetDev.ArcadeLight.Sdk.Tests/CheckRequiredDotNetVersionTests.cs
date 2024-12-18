@@ -105,9 +105,9 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     }
 
     [Fact]
-    [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidFile()
     {
+      Assert.SkipUnless(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "Test requires Windows");
       // Arrange
 
       CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
@@ -125,10 +125,9 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     }
 
     [Fact]
-    [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidGlobalFileContent()
     {
-
+      Assert.SkipUnless(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "Test requires Windows");
       // Arrange
 
       CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()
@@ -147,10 +146,9 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     }
 
     [Fact]
-    [SupportedOS(SupportedOS.Windows)]
     public void CheckRequiredDotNetVersionInvalidDotnetVersion()
     {
-
+      Assert.SkipUnless(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "Test requires Windows");
       // Arrange
 
       CheckRequiredDotNetVersion checkRequiredDotNetVersion = new()

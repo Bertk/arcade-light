@@ -2,6 +2,6 @@
 <Project>
   <PropertyGroup>
     <!-- Libs -->
-    <XUnitVersion>1.0.0</XUnitVersion>
+    <XUnitV3Version>1.0.0</XUnitV3Version>
   </PropertyGroup>
 </Project>

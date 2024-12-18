@@ -27,9 +27,9 @@ namespace DotNetDev.ArcadeLight.Sdk.Tests
     public static bool IsWindows => RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
     [Fact]
-    [SupportedOS(SupportedOS.Windows)]
     public void LocateDotNetVerify()
     {
+      Assert.SkipUnless(RuntimeInformation.IsOSPlatform(OSPlatform.Windows), "Test requires Windows");
       // Arrange
       LocateDotNet locateDotNet = new LocateDotNet();
       locateDotNet.BuildEngine = buildEngine.Object;
