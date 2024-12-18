@@ -5,7 +5,7 @@ See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for format guidelin
 
 Use dotnet tool **nbgv** for release workflow (see [Preparing a release](https://github.com/dotnet/Nerdbank.GitVersioning/blob/v3.6.133/doc/nbgv-cli.md#preparing-a-release)).
 
-## [1.8.1](https://github.com/Bertk/arcade-light/compare/v1.7.5...v1.8.1) - 2024-12-18
+## [1.8.0](https://github.com/Bertk/arcade-light/compare/v1.7.5...v1.8.0) - 2024-12-18
 
 ### Maintenance
 
