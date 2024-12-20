@@ -176,6 +176,7 @@ stages:
           inputs:
             testRunner: VSTest
             testResultsFiles: '**/*.trx'
+            testRunTitle: $(Agent.OS)_$(_BuildConfig)
 
         - template: ../steps/CoverageResults.yml
           parameters:
@@ -232,6 +233,7 @@ stages:
           inputs:
             testRunner: VSTest
             testResultsFiles: '**/*.trx'
+            testRunTitle: $(Agent.OS)_$(_BuildConfig)
 
 - stage: Push
   dependsOn: test
