@@ -36,3 +36,5 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/artifacts/CoverageReport/Cobertura.xml'
     failIfCoverageEmpty: ${{parameters.breakBuild}}
+  env:
+    DISABLE_COVERAGE_AUTOGENERATE: 'true' # Local environment variable
