@@ -18,6 +18,7 @@ steps:
     reporttypes: Html;HtmlInline_AzurePipelines_Dark;Cobertura
     verbosity: 'Verbose'
     assemblyfilters: ${{parameters.assemblyfilters}}
+    publishCodeCoverageResults: true
 
 - publish: '$(Build.SourcesDirectory)/artifacts/TestResults'
   displayName: 'Publish TestResults Artifacts'
@@ -28,13 +29,3 @@ steps:
   displayName: 'Publish CoverageReport Artifact'
   artifact: CoverageResults_$(Agent.Os)_$(_BuildConfig)
   condition: ${{parameters.condition}}
-
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  condition: ${{parameters.condition}}
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(Build.SourcesDirectory)/artifacts/CoverageReport/Cobertura.xml'
-    failIfCoverageEmpty: ${{parameters.breakBuild}}
-  env:
-    DISABLE_COVERAGE_AUTOGENERATE: 'true' # Local environment variable
