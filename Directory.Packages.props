@@ -33,6 +33,7 @@
     <PackageVersion Include="xunit.runner.console" Version="2.9.0" />
     <PackageVersion Include="xunit.v3" Version="1.1.0" />
     <PackageVersion Include="xunit.v3.assert" Version="1.1.0" />
+    <PackageVersion Include="xunit.v3.common" Version="1.1.0" />
     <PackageVersion Include="xunit.v3.core" Version="1.0.1" />
     <PackageVersion Include="xunit.v3.runner.console" Version="1.0.1" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
