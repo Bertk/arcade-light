@@ -44,8 +44,10 @@
   
   <ItemGroup>
     <PackageReference Include="NuGet.Versioning" />
-    <PackageReference Include="System.Collections.Immutable" />
-    <PackageReference Include="System.Reflection.Metadata" Publish="false"  />
+    <PackageReference Include="System.Collections.Immutable">
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Reflection.Metadata" Publish="false" />
   </ItemGroup>
 
   <ItemGroup>
