@@ -52,11 +52,12 @@ namespace DotNetDev.ArcadeLight.Logging
       {
         _ignoredTargets.UnionWith(targetsNotLogged.Split(separator, StringSplitOptions.RemoveEmptyEntries));
       }
-
+#pragma warning disable CA1510
       if (eventSource == null)
       {
         throw new ArgumentNullException(nameof(eventSource));
       }
+#pragma warning restore CA1510
 
       eventSource.ErrorRaised += OnErrorRaised;
       eventSource.WarningRaised += OnWarningRaised;

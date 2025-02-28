@@ -105,11 +105,12 @@ namespace DotNetDev.ArcadeLight.Sdk
     private static string GetTargetsFileContent(string packageId, string sourceLinkUrl)
     {
       string hash;
+#pragma warning disable CA1850
       using (var hashAlg = SHA256.Create())
       {
         hash = BitConverter.ToString(hashAlg.ComputeHash(Encoding.UTF8.GetBytes(packageId)), 0, 20).Replace("-", "");
       }
-
+#pragma
       return $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <Target Name=""_AddSourcePackageSourceRoot_{hash}"" BeforeTargets=""InitializeSourceControlInformation"">

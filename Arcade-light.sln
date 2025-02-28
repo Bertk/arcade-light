@@ -5,9 +5,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Sdk", "src\DotNetDev.ArcadeLight.Sdk\DotNetDev.ArcadeLight.Sdk.csproj", "{747A5C75-6069-4C45-8049-AEAA1D864105}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C53DD924-C212-49EA-9BC4-1827421361EF}"
-	ProjectSection(SolutionItems) = preProject
-		DirectoryBuild.props = DirectoryBuild.props
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDev.ArcadeLight.Sdk.Tests", "src\DotNetDev.ArcadeLight.Sdk.Tests\DotNetDev.ArcadeLight.Sdk.Tests.csproj", "{BA4250FD-9258-4469-A16D-48A0CAF5A2F8}"
 EndProject
