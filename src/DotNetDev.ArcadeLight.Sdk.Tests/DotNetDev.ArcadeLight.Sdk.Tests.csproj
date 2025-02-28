@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(NetCurrent)</TargetFrameworks>
+    <TargetFrameworks>$(NetToolCurrent)</TargetFrameworks>
     <DefaultItemExcludes>$(DefaultItemExcludes);testassets\**\*</DefaultItemExcludes>
     <EnableSourceLink>false</EnableSourceLink>
     <NoWarn>$(NoWarn);NU1504;NU1506</NoWarn>
@@ -21,13 +21,7 @@
     <ProjectReference Include="..\DotNet.Internal.DependencyInjection.Testing\DotNet.Internal.DependencyInjection.Testing.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.8.3" />
-    <PackageReference Include="Microsoft.Build.Framework" VersionOverride="17.11.4" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.3.2" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetCurrent)' ">
+  <ItemGroup>
     <PackageReference Include="Microsoft.Build" />
     <PackageReference Include="Microsoft.Build.Utilities.Core" />
   </ItemGroup>

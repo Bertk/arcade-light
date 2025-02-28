@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(NetMinimum);$(NetCurrent)</TargetFrameworks>
+    <TargetFrameworks>$(NetToolCurrent);$(NetFrameworkToolCurrent)</TargetFrameworks>
     <IsPackable>true</IsPackable>
     <NoWarn>$(NoWarn);NU1506</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
@@ -9,12 +9,8 @@
     <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
-    <PackageReference Include="Microsoft.Build.Tasks.Core" VersionOverride="17.11.4" PrivateAssets="all"/>
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetCurrent)' ">
-    <PackageReference Include="Microsoft.Build.Tasks.Core" PrivateAssets="all" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Tasks.Core" />
   </ItemGroup>
 
 </Project>

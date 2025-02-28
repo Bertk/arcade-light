@@ -104,7 +104,11 @@ namespace DotNetDev.ArcadeLight.Sdk
 
     private static string GetTargetsFileContent(string packageId, string sourceLinkUrl)
     {
-      string hash = BitConverter.ToString(SHA256.HashData(Encoding.UTF8.GetBytes(packageId)), 0, 20).Replace("-", "");
+      string hash;
+      using (var hashAlg = SHA256.Create())
+      {
+        hash = BitConverter.ToString(hashAlg.ComputeHash(Encoding.UTF8.GetBytes(packageId)), 0, 20).Replace("-", "");
+      }
 
       return $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">

@@ -1,7 +1,7 @@
-<!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. -->
+﻿<!-- Licensed to the .NET Foundation under one or more agreements. The .NET Foundation licenses this file to you under the MIT license. -->
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>$(NetMinimum);$(NetCurrent)</TargetFrameworks>
+    <TargetFrameworks>$(NetToolCurrent);$(NetFrameworkToolCurrent)</TargetFrameworks>
     <LangVersion>preview</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ExcludeFromSourceBuild>false</ExcludeFromSourceBuild>
@@ -31,23 +31,15 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != '$(NetCurrent)' ">
-    <PackageReference Include="Microsoft.Build" VersionOverride="17.12.6" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.11.4" PrivateAssets="all" Publish="false" ExcludeAssets="runtime"  />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == '$(NetCurrent)' ">
-    <PackageReference Include="Microsoft.Build" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" PrivateAssets="all" Publish="false" ExcludeAssets="runtime" />
-  </ItemGroup>
-
-  
   <ItemGroup>
+    <PackageReference Include="Microsoft.Build" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" />
     <PackageReference Include="NuGet.Versioning" />
-    <PackageReference Include="System.Collections.Immutable">
-      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="System.Reflection.Metadata" Publish="false" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
+    <PackageReference Include="System.Reflection.Metadata" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
 
   <ItemGroup>

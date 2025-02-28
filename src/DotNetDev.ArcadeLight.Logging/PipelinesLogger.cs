@@ -53,7 +53,10 @@ namespace DotNetDev.ArcadeLight.Logging
         _ignoredTargets.UnionWith(targetsNotLogged.Split(separator, StringSplitOptions.RemoveEmptyEntries));
       }
 
-      ArgumentNullException.ThrowIfNull(eventSource);
+      if (eventSource == null)
+      {
+        throw new ArgumentNullException(nameof(eventSource));
+      }
 
       eventSource.ErrorRaised += OnErrorRaised;
       eventSource.WarningRaised += OnWarningRaised;
