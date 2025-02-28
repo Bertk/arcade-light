@@ -6,6 +6,13 @@
     <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.6.0.109712" />
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.7.115" />
   </ItemGroup>
+
+  <!-- Version properties used outside of PackageReference items -->
+  <PropertyGroup>
+    <!-- Libs -->
+    <XUnitV3Version>1.1.0</XUnitV3Version>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Build" Version="17.11.4" />
@@ -14,6 +21,7 @@
     <PackageVersion Include="Microsoft.Build.Utilities.Core" Version="17.11.4" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.IO.Redist" Version="6.1.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageVersion Include="Microsoft.NET.StringTools" Version="17.12.6" />
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
@@ -50,7 +58,7 @@
     <PackageVersion Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
     <PackageVersion Include="System.Formats.Asn1" Version="8.0.1" />
     <PackageVersion Include="System.Reflection.Metadata" Version="8.0.1" />
-    <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+    <PackageVersion Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
     <PackageVersion Include="System.Security.AccessControl" Version="6.0.1" />
     <PackageVersion Include="System.Security.Cryptography.Xml" Version="8.0.2" />
     <PackageVersion Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />

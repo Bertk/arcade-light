@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="Sdk.props" Sdk="DotNetDev.ArcadeLight.Sdk" />
-  <PropertyGroup>
 
-    <!-- TODO: Remove when a new Arcade.Sdk is consumed with the changes in TargetFrameworkDefaults.props. -->
-    <NetCurrent>net8.0</NetCurrent>
-    <NetPrevious>net7.0</NetPrevious>
-    <NetMinimum>net6.0</NetMinimum>
-    <TargetFrameworkForNETSDK>net8.0</TargetFrameworkForNETSDK>
+  <Import Project="src/DotNetDev.ArcadeLight.Sdk/tools/TargetFrameworkDefaults.props" />
+  <PropertyGroup>
 
     <!-- Do not consider items from obj or bin folder within the project folder -->
     <DefaultItemExcludes>$(DefaultItemExcludes);$(MSBuildProjectDirectory)/obj/**/*</DefaultItemExcludes>

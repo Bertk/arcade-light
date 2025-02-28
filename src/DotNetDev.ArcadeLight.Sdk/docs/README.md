@@ -64,9 +64,7 @@ _Please note: [Central Package Management](https://learn.microsoft.com/en-us/nug
 
 #### 6) Copy `eng\commonlight` from Arcade-light into repo
 
-#### 7) Add the Versions.props file to your eng\ folder
-
-#### 8) configure *Nerdbank.GitVersioning*
+#### 7) configure *Nerdbank.GitVersioning*
 
 Copy `version.json` to repository root folder and configure values (see [versionJson.md](https://github.com/dotnet/Nerdbank.GitVersioning/blob/main/doc/versionJson.md))
 
@@ -77,7 +75,7 @@ dotnet tool install -g nbgv
 nbgv install
 ```
 
-#### 9) optionally copy the scripts for `restore`, `build` and `test` to repository root folder
+#### 8) optionally copy the scripts for `restore`, `build` and `test` to repository root folder
 
 ### Use ArcadeLight with command shell or Visual Studio
 
