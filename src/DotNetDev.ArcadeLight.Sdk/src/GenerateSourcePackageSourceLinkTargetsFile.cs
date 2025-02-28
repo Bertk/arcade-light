@@ -110,7 +110,7 @@ namespace DotNetDev.ArcadeLight.Sdk
       {
         hash = BitConverter.ToString(hashAlg.ComputeHash(Encoding.UTF8.GetBytes(packageId)), 0, 20).Replace("-", "");
       }
-#pragma
+#pragma warning restore CA1850
       return $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <Target Name=""_AddSourcePackageSourceRoot_{hash}"" BeforeTargets=""InitializeSourceControlInformation"">

@@ -23,7 +23,7 @@
     <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
     <EnableGeneratedPackageContent>false</EnableGeneratedPackageContent>
     <_GeneratedVersionFilePath>$(IntermediateOutputPath)DefaultVersions.Generated.props</_GeneratedVersionFilePath>
-    <NoWarn>$(NoWarn);3021;NU5105;NU1505;NU1506;NU1507;SYSLIB0013</NoWarn>
+    <NoWarn>$(NoWarn);3021;NU5105;NU1505;NU1506;NU1507;SYSLIB0013;IDE0079</NoWarn>
     <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
     <DebugType>embedded</DebugType>
     <IncludeSymbols>false</IncludeSymbols>
