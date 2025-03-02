@@ -43,7 +43,7 @@
     <PackageVersion Include="xunit.v3.assert" Version="2.0.0" />
     <PackageVersion Include="xunit.v3.common" Version="2.0.0" />
     <PackageVersion Include="xunit.v3.core" Version="2.0.0" />
-    <PackageVersion Include="xunit.v3.runner.console" Version="1.1.0" />
+    <PackageVersion Include="xunit.v3.runner.console" Version="2.0.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
     <PackageVersion Include="xunit.v3.extensibility.core" Version="2.0.0" />
     <!-- https://dev.azure.com/tonerdo/coverlet/_artifacts/feed/coverlet-nightly/NuGet/coverlet.collector -->
