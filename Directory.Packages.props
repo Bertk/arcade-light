@@ -3,7 +3,7 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
-    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.6.0.109712" />
+    <GlobalPackageReference Include="SonarAnalyzer.CSharp" Version="10.7.0.110445" />
     <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.7.115" />
   </ItemGroup>
 
@@ -37,15 +37,15 @@
     <PackageVersion Include="FluentAssertions" Version="8.1.1" />
     <PackageVersion Include="Moq" Version="4.20.72" />
     <PackageVersion Include="xunit.analyzers" Version="1.20.0" />
-    <PackageVersion Include="xunit.v3" Version="1.1.0" />
+    <PackageVersion Include="xunit.v3" Version="2.0.0" />
     <PackageVersion Include="xunit.runner.console" Version="2.9.0" />
-    <PackageVersion Include="xunit.v3" Version="1.1.0" />
-    <PackageVersion Include="xunit.v3.assert" Version="1.1.0" />
-    <PackageVersion Include="xunit.v3.common" Version="1.1.0" />
-    <PackageVersion Include="xunit.v3.core" Version="1.1.0" />
-    <PackageVersion Include="xunit.v3.runner.console" Version="1.1.0" />
+    <PackageVersion Include="xunit.v3" Version="2.0.0" />
+    <PackageVersion Include="xunit.v3.assert" Version="2.0.0" />
+    <PackageVersion Include="xunit.v3.common" Version="2.0.0" />
+    <PackageVersion Include="xunit.v3.core" Version="2.0.0" />
+    <PackageVersion Include="xunit.v3.runner.console" Version="2.0.0" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.2" />
-    <PackageVersion Include="xunit.v3.extensibility.core" Version="1.1.0" />
+    <PackageVersion Include="xunit.v3.extensibility.core" Version="2.0.0" />
     <!-- https://dev.azure.com/tonerdo/coverlet/_artifacts/feed/coverlet-nightly/NuGet/coverlet.collector -->
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
     <PackageVersion Include="MSTest" Version="3.6.2" />
